@@ -1,0 +1,91 @@
+The models in our experiments are word-based, character-based, mixed word-character-based or several
+wordpiece models with varying vocabulary sizes.
+
+For the word model, we selected the most frequent 212K source words as the source vocabulary and the
+most popular 80k target words as the target vocabulary. Words not in the source vocabulary or the target
+vocabulary (unknown words) are converted into special <first_char>_UNK_<last_char> symbols. Note, in
+this case, there is more than one UNK (e.g., our production word models have roughly 5000 different UNKs
+in this case). We then use the attention mechanism to copy a corresponding word from the source to replace
+these unknown words during decoding [36].
+
+The mixed word-character model is similar to the word model, except the out-of-vocabulary (OOV) words
+
+15
+
+
+
+are converted into sequences of characters with special delimiters around them as described in section 4.2 in
+more detail. In our experiments, the vocabulary size for the mixed word-character model is 32K. For the pure
+character model, we simply split all words into constituent characters, resulting typically in a few hundred
+basic characters (including special symbols appearing in the data). For the wordpiece models, we train 3
+different models with vocabulary sizes of 8K, 16K, and 32K.
+
+Table 4 summarizes our results on the WMT En→Fr dataset. In this table, we also compare against other
+strong baselines without model ensembling. As can be seen from the table, “WPM-32K”, a wordpiece model
+with a shared source and target vocabulary of 32K wordpieces, performs well on this dataset and achieves the
+best quality as well as the fastest inference speed.
+
+The pure character model (char input, char output) works surprisingly well on this task, not much worse
+than the best wordpiece models in BLEU score. However, these models are rather slow to train and slow to
+use as the sequences are much longer.
+
+Our best model, WPM-32K, achieves a BLEU score of 38.95. Note that this BLEU score represents the
+averaged score of 8 models we trained. The maximum BLEU score of the 8 models is higher at 39.37. We
+point out that our models are completely self-contained, as opposed to previous models reported in [43],
+which depend on some external alignment models to achieve their best results.
+
+Table 4: Single model results on WMT En→Fr (newstest2014)
+Model BLEU Decoding time
+
+per sentence (s)
+Word 37.90 0.2226
+
+Character 38.01 1.0530
+WPM-8K 38.27 0.1919
+WPM-16K 37.60 0.1874
+WPM-32K 38.95 0.1146
+
+Mixed Word/Character 38.39 0.2774
+PBMT [15] 37.0
+
+LSTM (6 layers) [30] 31.5
+LSTM (6 layers + PosUnk) [30] 33.1
+
+Deep-Att [43] 37.7
+Deep-Att + PosUnk [43] 39.2
+
+Similarly, the results of WMT En→De are presented in Table 5. Again, we find that wordpiece models
+achieves the best BLEU scores. For the word and character models, each LSTM layer consists of 512 nodes.
+
+Table 5: Single model results on WMT En→De (newstest2014)
+Model BLEU Decoding time
+
+per sentence (s)
+Word (512 nodes) 22.54 0.1829
+
+Character (512 nodes) 22.62 0.8011
+WPM-8K 23.50 0.5387
+WPM-16K 24.36 0.4757
+WPM-32K 24.61 0.4581
+
+Mixed Word/Character 24.17 0.2959
+PBMT [6] 20.7
+
+RNNSearch [36] 16.5
+RNNSearch-LV [36] 16.9
+RNNSearch-LV [36] 16.9
+
+Deep-Att [43] 20.6
+
+WMT En→De is considered a more difficult task than WMT En→Fr as it has much less training data,
+and German, as a more morphologically rich language, needs a huge vocabulary for word models. Thus
+
+16
+
+
+
+it is more advantageous to use wordpiece or mixed word/character models, which provide a gain of more
+than 2 BLEU points on top of the word model and about 4 BLEU points on top of previously reported
+results in [6, 43]. Our best model, WPM-32K, achieves a BLEU score of 24.61, which is averaged over 8 runs.
+Consistently, on the production corpora, wordpiece models tend to be better than other models both in terms
+of speed and accuracy.

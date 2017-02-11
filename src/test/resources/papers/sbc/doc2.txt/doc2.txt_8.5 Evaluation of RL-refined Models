@@ -1,0 +1,17 @@
+The models trained in the previous section are optimized for log-likelihood of the next step prediction which
+may not correlate well with translation quality, as discussed in section 5. We use RL training to fine-tune
+sentence BLEU scores after normal maximum-likelihood training.
+
+The results of RL fine-tuning on the best En→Fr and En→De models are presented in Table 6, which
+show that fine-tuning the models with RL can improve BLEU scores. On WMT En→Fr, model refinement
+improves BLEU score by close to 1 point. On En→De, RL-refinement slightly hurts the test performance
+even though we observe about 0.4 BLEU points improvement on the development set. The results presented
+in Table 6 are the average of 8 independent models. We also note that there is an overlap between the
+wins from the RL refinement and the decoder fine-tuning (i.e., the introduction of length normalization and
+coverage penalty). On a less fine-tuned decoder (e.g., if the decoder does beam search by log-probability
+only), the win from RL would have been bigger (as is evident from comparing results in Table 2 and Table 3).
+
+Table 6: Single model test BLEU scores, averaged over 8 runs, on WMT En→Fr and En→De
+Dataset Trained with log-likelihood Refined with RL
+En→Fr 38.95 39.92
+En→De 24.67 24.60

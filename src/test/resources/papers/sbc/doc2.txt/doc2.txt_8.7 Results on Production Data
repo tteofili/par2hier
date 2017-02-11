@@ -1,0 +1,49 @@
+We have carried out extensive experiments on many Google-internal production data sets. As the experiments
+above cast doubt on whether RL improves the real translation quality or simply the BLEU metric, RL-based
+model refinement is not used during these experiments. Given the larger volume of training data available in
+the Google corpora, dropout is also not needed in these experiments.
+
+Table 10: Mean of side-by-side scores on production data
+PBMT GNMT Human Relative
+
+Improvement
+English → Spanish 4.885 5.428 5.550 87%
+English → French 4.932 5.295 5.496 64%
+English → Chinese 4.035 4.594 4.987 58%
+Spanish → English 4.872 5.187 5.372 63%
+French → English 5.046 5.343 5.404 83%
+Chinese → English 3.694 4.263 4.636 60%
+
+In this section we describe our experiments with human perception of the translation quality. We asked
+human raters to rate translations in a three-way side-by-side comparison. The three sides are from: 1)
+translations from the production phrase-based statistical translation system used by Google, 2) translations
+from our GNMT system, and 3) translations by humans fluent in both languages. Reported here in Table 10
+are averaged rated scores for English ↔ French, English ↔ Spanish and English ↔ Chinese. All the GNMT
+models are wordpiece models, without model ensembling, and use a shared source and target vocabulary with
+32K wordpieces. On each pair of languages, the evaluation data consist of 500 randomly sampled sentences
+from Wikipedia and news websites, and the corresponding human translations to the target language. The
+results show that our model reduces translation errors by more than 60% compared to the PBMT model on
+these major pairs of languages. A typical distribution of side-by-side scores is shown in Figure 6.
+
+As expected, on this metric the GNMT system improves also compared to the PBMT system. In some
+cases human and GNMT translations are nearly indistinguishable on the relatively simplistic and isolated
+sentences sampled from Wikipedia and news articles for this experiment. Note that we have observed that
+
+18
+
+
+
+Figure 6: Histogram of side-by-side scores on 500 sampled sentences from Wikipedia and news websites for a
+typical language pair, here English → Spanish (PBMT blue, GNMT red, Human orange). It can be seen that
+there is a wide distribution in scores, even for the human translation when rated by other humans, which
+shows how ambiguous the task is. It is clear that GNMT is much more accurate than PBMT.
+
+human raters, even though fluent in both languages, do not necessarily fully understand each randomly
+sampled sentence sufficiently and hence cannot necessarily generate the best possible translation or rate a
+given translation accurately. Also note that, although the scale for the scores goes from 0 (complete nonsense)
+to 6 (perfect translation) the human translations get an imperfect score of only around 5 in Table 10, which
+shows possible ambiguities in the translations and also possibly non-calibrated raters and translators with a
+varying level of proficiency.
+
+Testing our GNMT system on particularly difficult translation cases and longer inputs than just single
+sentences is the subject of future work.

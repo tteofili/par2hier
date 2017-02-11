@@ -1,0 +1,89 @@
+
+Our experiments are performed using the Stan-
+
+ford Phrasal phrase-based machine translation sys-
+
+tem (Cer et al., 2010). In addition to NIST08 train-
+
+ing data, we perform phrase extraction, filtering
+
+and phrase table learning with additional data from
+
+GALE MT evaluations in the past 5 years. In turn,
+
+our baseline is established at 30.01 BLEU and rea-
+
+sonably competitive relative to NIST08 results. We
+
+use NIST06 as the tuning set 6, and apply Minimum
+
+Error Rate Training (MERT) (Och, 2003) to tune
+
+the decoder.
+
+In the phrase-based MT system, we add one fea-
+
+ture to bilingual phrase-pairs. For each phrase, the
+
+word embeddings are averaged to obtain a feature
+
+vector. If a word is not found in the vocabulary, we
+
+disregard and assume it is not in the phrase; if no
+
+5This is evaluated on 10,000 randomly selected sentence
+
+pairs from the MT training set.
+6Updated to clarify the decoder tuning procedure.
+
+
+
+Table 4: NIST08 Chinese-English translation BLEU
+
+Method BLEU
+
+Our baseline 30.01
+
+Embeddings
+
+Random-Init Mono-trained 30.09
+
+Align-Init 30.31
+
+Mono-trained 30.40
+
+Biling-trained 30.49
+
+word is found in a phrase, a zero vector is assigned
+
+to it. We then compute the cosine distance between
+
+the feature vectors of a phrase pair to form a seman-
+
+tic similarity feature for the decoder.
+
+Results on NIST08 Chinese-English translation
+
+task are reported in Table 47. An increase of
+
+0.48 BLEU is obtained with semantic similarity
+
+with bilingual embeddings. The increase is modest,
+
+just surpassing a reference standard deviation 0.29
+
+BLEU Cer et al. (2010)8 evaluated on a similar sys-
+
+tem. We intend to publish further analysis on statis-
+
+tical significance of this result as an appendix. From
+
+these suggestive evidence in the MT results, random
+
+initialized monolingual trained embeddings add lit-
+
+tle gains to the baseline. Bilingual initialization and
+
+training seem to be offering relatively more consis-
+
+tent gains by introducing translational equivalence.

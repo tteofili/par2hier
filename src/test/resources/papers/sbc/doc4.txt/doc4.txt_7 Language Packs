@@ -1,0 +1,16 @@
+
+Even with the single-command pipeline invocation provided with Joshua, there
+are many impediments to building machine translation systems: one must select and
+obtain a large enough parallel dataset for training and tuning, have access to sufficient
+computing resources, and must have some familiarity with the steps of the pipeline
+should problems arise. These and other factors make it difficult for end users to in-
+stall their own machine translation systems, and inhibit the adoption of customized
+statistical MT systems as tools in larger applications.
+
+For this reason, the Joshua developers have released “language packs”: tuned
+models for particular language pairs that can be downloaded and run in a black-
+box fashion.4 Language packs include a tuned Joshua configuration file, all reference
+model files (the language model and the grammar or phrase table) in their respective
+compact, binarized formats, and scripts to perform source-side normalization and to-
+kenization consistent with those used during training. The user is responsible for
+sentence-level segmentation.

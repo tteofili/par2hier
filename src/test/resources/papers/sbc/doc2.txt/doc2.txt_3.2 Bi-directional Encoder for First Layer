@@ -1,0 +1,26 @@
+For translation systems, the information required to translate certain words on the output side can appear
+anywhere on the source side. Often the source side information is approximately left-to-right, similar to
+the target side, but depending on the language pair the information for a particular output word can be
+distributed and even be split up in certain regions of the input side.
+
+5
+
+
+
+To have the best possible context at each point in the encoder network it makes sense to use a bi-directional
+RNN [35] for the encoder, which was also used in [2]. To allow for maximum possible parallelization during
+computation (to be discussed in more detail in section 3.3), bi-directional connections are only used for the
+bottom encoder layer – all other encoder layers are uni-directional. Figure 3 illustrates our use of bi-directional
+LSTMs at the bottom encoder layer. The layer LSTMf processes the source sentence from left to right, while
+the layer LSTMb processes the source sentence from right to left. Outputs from LSTMf (
+
+−→
+xft) and LSTMb
+
+(
+←−
+xbt ) are first concatenated and then fed to the next layer LSTM1.
+
+Figure 3: The structure of bi-directional connections in the first layer of the encoder. LSTM layer LSTMf
+processes information from left to right, while LSTM layer LSTMb processes information from right to left.
+Output from LSTMf and LSTMb are first concatenated and then fed to the next LSTM layer LSTM1.

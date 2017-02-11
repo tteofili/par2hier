@@ -1,0 +1,48 @@
+
+Our method starts with embedding learning formu-
+
+lations in Collobert et al. (2008). Given a context
+
+window c in a document d, the optimization mini-
+
+mizes the following Context Objective for a word w
+
+in the vocabulary:
+
+J
+(c,d)
+CO =
+
+∑
+
+wr∈VR
+
+max(0, 1− f(cw, d) + f(cw
+r
+
+, d))
+
+(1)
+
+Here f is a function defined by a neural network.
+
+wr is a word chosen in a random subset VR of the
+
+vocabulary, and cw
+r
+
+is the context window contain-
+
+ing word wr. This unsupervised objective func-
+
+tion contrasts the score between when the correct
+
+word is placed in context with when a random word
+
+is placed in the same context. We incorporate the
+
+global context information as in Huang et al. (2012),
+
+shown to improve performance of word embed-
+
+dings.

@@ -1,0 +1,170 @@
+
+We have introduced the ByteNet, a neural translation model that has linear running time,
+decouples translation from memorization and has short signal propagation paths for tokens
+in sequences. We have shown that the ByteNet Decoder is a state-of-the-art character-level
+language model based on a convolutional neural network that significantly outperforms
+recurrent language models. We have also shown that the ByteNet generalizes the RNN Enc-
+Dec architecture and achieves promising results for raw character-level machine translation
+while maintaining linear running time complexity. We have revealed the latent structure
+learnt by the ByteNet and found it to mirror the expected alignment between the tokens in
+the sentences.
+
+References
+
+Ebru Arisoy, Tara N. Sainath, Brian Kingsbury, and Bhuvana Ramabhadran. Deep neural net-
+work language models. In Proceedings of the NAACL-HLT 2012 Workshop. Association for
+Computational Linguistics, 2012.
+
+Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. Neural machine translation by jointly
+learning to align and translate. CoRR, abs/1409.0473, 2014. URL http://arxiv.org/abs/1409.
+0473.
+
+Yoshua Bengio, Réjean Ducharme, Pascal Vincent, and Christian Jauvin. A neural probabilistic
+language model. Journal of Machine Learning Research, 3:1137–1155, 2003.
+
+Liang-Chieh Chen, George Papandreou, Iasonas Kokkinos, Kevin Murphy, and Alan L. Yuille.
+Semantic image segmentation with deep convolutional nets and fully connected crfs. CoRR,
+abs/1412.7062, 2014.
+
+Kyunghyun Cho, Bart van Merrienboer, Çaglar Gülçehre, Fethi Bougares, Holger Schwenk, and
+Yoshua Bengio. Learning phrase representations using RNN encoder-decoder for statistical
+machine translation. CoRR, abs/1406.1078, 2014. URL http://arxiv.org/abs/1406.1078.
+
+Junyoung Chung, Caglar Gülçehre, Kyunghyun Cho, and Yoshua Bengio. Gated feedback recurrent
+neural networks. CoRR, abs/1502.02367, 2015.
+
+Junyoung Chung, Sungjin Ahn, and Yoshua Bengio. Hierarchical multiscale recurrent neural
+networks. arXiv preprint arXiv:1609.01704, 2016a.
+
+Junyoung Chung, Kyunghyun Cho, and Yoshua Bengio. A character-level decoder without explicit
+segmentation for neural machine translation. In Proceedings of the 54th Annual Meeting of the
+Association for Computational Linguistics, ACL 2016, 2016b.
+
+Markus Freitag, Stephan Peitz, Joern Wuebker, Hermann Ney, Matthias Huck, Rico Sennrich, Nadir
+Durrani, Maria Nadejde, Philip Williams, Philipp Koehn, Teresa Herrmann, Eunah Cho, and
+Alex Waibel. Eu-bridge mt: Combined machine translation. In ACL 2014 Ninth Workshop on
+Statistical Machine Translation, 2014.
+
+Alex Graves. Generating sequences with recurrent neural networks. arXiv preprint arXiv:1308.0850,
+2013.
+
+D. Ha, A. Dai, and Q. V. Le. HyperNetworks. ArXiv e-prints, September 2016.
+
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image
+recognition. arXiv preprint arXiv:1512.03385, 2015.
+
+Sepp Hochreiter and Jürgen Schmidhuber. Long short-term memory. Neural computation, 1997.
+
+Sepp Hochreiter, Yoshua Bengio, and Paolo Frasconi. Gradient flow in recurrent nets: the difficulty
+of learning long-term dependencies. In J. Kolen and S. Kremer, editors, Field Guide to Dynamical
+Recurrent Networks. IEEE Press, 2001.
+
+9
+
+http://arxiv.org/abs/1409.0473
+http://arxiv.org/abs/1409.0473
+http://arxiv.org/abs/1406.1078
+
+
+Figure 6: Magnitude of gradients of the predicted outputs with respect to the source and
+target inputs. The gradients are summed for all the characters in a given word. In the
+bottom heatmap the magnitudes are nonzero on the diagonal, since the prediction of a target
+character depends highly on the preceding target character in the same word.
+
+10
+
+
+
+Sergey Ioffe and Christian Szegedy. Batch normalization: Accelerating deep network training by
+reducing internal covariate shift. In ICML, pages 448–456, 2015.
+
+ Lukasz Kaiser and Samy Bengio. Can active memory replace attention? Advances in Neural
+Information Processing Systems, 2016.
+
+Nal Kalchbrenner and Phil Blunsom. Recurrent continuous translation models. In Proceedings of
+the 2013 Conference on Empirical Methods in Natural Language Processing, 2013.
+
+Nal Kalchbrenner, Ivo Danihelka, and Alex Graves. Grid long short-term memory. International
+Conference on Learning Representations, 2016a.
+
+Nal Kalchbrenner, Aaron van den Oord, Karen Simonyan, Ivo Danihelka, Oriol Vinyals, Alex Graves,
+and Koray Kavukcuoglu. Video pixel networks. CoRR, abs/1610.00527, 2016b.
+
+Diederik P. Kingma and Jimmy Ba. Adam: A method for stochastic optimization. CoRR,
+abs/1412.6980, 2014. URL http://arxiv.org/abs/1412.6980.
+
+Minh-Thang Luong and Christopher D. Manning. Achieving open vocabulary neural machine
+translation with hybrid word-character models. 2016.
+
+Minh-Thang Luong, Hieu Pham, and Christopher D. Manning. Effective approaches to attention-
+based neural machine translation. In EMNLP, September 2015.
+
+Tomas Mikolov, Martin Karafiát, Lukás Burget, Jan Cernocký, and Sanjeev Khudanpur. Recurrent
+neural network based language model. In INTERSPEECH 2010, pages 1045–1048, 2010.
+
+Kamil Rocki. Recurrent memory array structures. arXiv preprint arXiv:1607.03085, 2016.
+
+Karen Simonyan, Andrea Vedaldi, and Andrew Zisserman. Deep inside convolutional networks:
+Visualising image classification models and saliency maps. 2013. URL http://arxiv.org/abs/
+1312.6034.
+
+Rupesh Kumar Srivastava, Klaus Greff, and Jürgen Schmidhuber. Highway networks. CoRR,
+abs/1505.00387, 2015.
+
+Ilya Sutskever, Oriol Vinyals, and Quoc V. Le. Sequence to sequence learning with neural networks.
+In Advances in Neural Information Processing Systems, pages 3104–3112, 2014.
+
+Aaron van den Oord, Sander Dieleman, Heiga Zen, Karen Simonyan, Oriol Vinyals, Alex Graves,
+Nal Kalchbrenner, Andrew Senior, and Koray Kavukcuoglu. Wavenet: A generative model for
+raw audio. CoRR, abs/1609.03499, 2016a.
+
+Aäron van den Oord, Nal Kalchbrenner, and Koray Kavukcuoglu. Pixel recurrent neural networks.
+In ICML, volume 48, pages 1747–1756, 2016b.
+
+Philip Williams, Rico Sennrich, Maria Nadejde, Matthias Huck, and Philipp Koehn. Edinburgh’s
+syntax-based systems at WMT 2015. In Proceedings of the Tenth Workshop on Statistical Machine
+Translation, 2015.
+
+Yonghui Wu, Mike Schuster, Zhifeng Chen, Quoc V. Le, Mohammad Norouzi, Wolfgang Macherey,
+Maxim Krikun, Yuan Cao, Qin Gao, Klaus Macherey, Jeff Klingner, Apurva Shah, Melvin Johnson,
+Xiaobing Liu,  Lukasz Kaiser, Stephan Gouws, Yoshikiyo Kato, Taku Kudo, Hideto Kazawa, Keith
+Stevens, George Kurian, Nishant Patil, Wei Wang, Cliff Young, Jason Smith, Jason Riesa, Alex
+Rudnick, Oriol Vinyals, Greg Corrado, Macduff Hughes, and Jeffrey Dean. Google’s neural
+machine translation system: Bridging the gap between human and machine translation. arXiv
+preprint arxiv:1609.08144, 2016a.
+
+Yuhuai Wu, Saizheng Zhang, Ying Zhang, Yoshua Bengio, and Ruslan Salakhutdinov. On multi-
+plicative integration with recurrent neural networks. arXiv preprint arXiv:1606.06630, 2016b.
+
+Fisher Yu and Vladlen Koltun. Multi-scale context aggregation by dilated convolutions. CoRR,
+abs/1511.07122, 2015.
+
+Jie Zhou, Ying Cao, Xuguang Wang, Peng Li, and Wei Xu. Deep recurrent models with fast-forward
+connections for neural machine translation. arXiv preprint arXiv:1606.04199, 2016.
+
+11
+
+http://arxiv.org/abs/1412.6980
+http://arxiv.org/abs/1312.6034
+http://arxiv.org/abs/1312.6034
+
+	1 Introduction
+	2 Neural Translation Model
+	2.1 Desiderata
+
+	3 ByteNet
+	3.1 Dynamic Unfolding
+	3.2 Masked One-dimensional Convolutions
+	3.3 Dilation
+	3.4 Residual Blocks
+	3.5 Sub-Batch Normalization
+	3.6 Bag of Character n-Grams
+
+	4 Model Comparison
+	4.1 Recurrent ByteNets
+	4.2 Comparison of Properties
+
+	5 Character Prediction
+	6 Character-Level Machine Translation
+	7 Conclusion
+

@@ -1,0 +1,81 @@
+
+x 10
+5
+
+0
+
+0.5
+
+1
+
+1.5
+
+2
+
+2.5
+
+3
+
+3.5
+
+4
+
+4.5
+
+5
+
+Steps
+
+L
+o
+g
+ p
+
+e
+rp
+
+le
+x
+it
+y
+
+ 
+
+ 
+
+Normal training
+
+Quantized training
+
+Figure 4: Log perplexity vs. steps for normal (non-quantized) training and quantization-aware training on
+WMT’14 English to French during maximum likelihood training. Notice the training losses are similar, with
+the quantization-aware loss being slightly better. Our conjecture for quantization-aware training being slightly
+better is that the clipping constraints act as additional regularization which improves the model quality.
+
+Table 1 also shows that decoding our model on CPU is actually 2.3 times faster than on GPU. Firstly,
+our dual-CPUs host machine offers a theoretical peak FLOP performance which is more than two thirds that
+of the GPU. Secondly, the beam search algorithm forces the decoder to incur a non-trivial amount of data
+transfer between the host and the GPU at every decoding step. Hence, our current decoder implementation
+is not fully utilizing the computation capacities that a GPU can theoretically offer during inference.
+
+Finally, Table 1 shows that decoding on TPUs is 3.4 times faster than decoding on CPUs, demonstrating
+that quantized arithmetics is much faster on TPUs than both CPUs or GPUs.
+
+Table 1: Model inference on CPU, GPU and TPU. The model used here for comparison is trained with
+the ML objective only with quantization constraints. Results are obtained by decoding the WMT En→Fr
+development set on CPU, GPU and TPU respectively.
+
+BLEU Log Perplexity Decoding time (s)
+CPU 31.20 1.4553 1322
+GPU 31.20 1.4553 3028
+TPU 31.21 1.4626 384
+
+11
+
+
+
+Unless otherwise noted, we always train and evaluate quantized models in our experiments. Because there
+is little difference from a quality perspective between a model decoded on CPUs and one decoded on TPUs,
+we use CPUs to decode for model evaluation during training and experimentation and use TPUs to serve
+production traffic. Therefore, in the rest of this paper we report quality metrics measured by the decoder
+running on CPUs and inference speed measured by the decoder running on TPUs.

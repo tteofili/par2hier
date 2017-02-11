@@ -1,0 +1,66 @@
+
+Using the alignment counts, we form alignment
+
+matrices Aen→zh and Azh→en. For Aen→zh, each
+
+row corresponds to a Chinese word, and each col-
+
+umn an English word. An element aij is first as-
+
+signed the counts of when the ith Chinese word is
+
+aligned with the jth English word in parallel text.
+
+After assignments, each row is normalized such that
+
+it sums to one. The matrix Azh→en is defined sim-
+
+ilarly. Denote the set of Chinese word embeddings
+
+as Vzh, with each row a word embedding, and the
+
+set of English word embeddings as Ven. With the
+
+two alignment matrices, we define the Translation
+
+Equivalence Objective:
+
+JTEO-en→zh = ‖Vzh −Aen→zhVen‖
+2 (3)
+
+JTEO-zh→en = ‖Ven −Azh→enVzh‖
+2 (4)
+
+We optimize for a combined objective during train-
+
+ing. For the Chinese embeddings we optimize for:
+
+JCO-zh + λJTEO-en→zh (5)
+
+For the English embeddings we optimize for:
+
+JCO-en + λJTEO-zh→en (6)
+
+During bilingual training, we chose the value of λ
+
+such that convergence is achieved for both JCO and
+
+JTEO. A small validation set of word similarities
+
+from (Jin and Wu, 2012) is used to ensure the em-
+
+beddings have reasonable semantics. 2
+
+In the next sections, ‘bilingual trained’ embed-
+
+dings refer to those initialized with MT alignments
+
+and trained with the objective defined by Equa-
+
+tion 5. ‘Monolingual trained’ embeddings refer to
+
+those intialized by alignment but trained without
+
+JTEO-en→zh.
+
+2In our experiments, λ = 50.

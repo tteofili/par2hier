@@ -1,0 +1,673 @@
+
+Neural Networks Classifier for Data Selection
+in Statistical Machine Translation
+
+Álvaro Peris, Mara Chinea-Rios, Francisco Casacuberta
+PRHLT Research Center
+
+Universitat Politècnica de València, Valencia (Spain)
+{lvapeab,machirio,fcn}@prhlt.upv.es
+
+Abstract
+
+We address the data selection problem in
+statistical machine translation (SMT) as a
+classification task. The new data selec-
+tion method is based on a neural network
+classifier. We present a new method de-
+scription and empirical results proving that
+our data selection method provides better
+translation quality, compared to a state-of-
+the-art method (i.e., Cross entropy). More-
+over, the empirical results reported are co-
+herent across different language pairs.
+
+1 Introduction
+
+The performance of a SMT system is dependent
+on the quantity and quality of the available training
+data. Typically, SMT systems are trained with all
+available data, assuming that the more data used
+to train the system, the better. This assumption is
+backed by the evidence that scaling to ever larger
+data shows continued improvements in quality,
+even when one trains models over billions of n-
+grams (Brants et al., 2007). In the SMT context, n-
+grams refers to sequences of n consecutive words.
+However, growing the amount of data available is
+only feasible to a certain extent. Moreover so,
+whenever it is critical that such data is related to
+the task at hand. In fact, translation quality is neg-
+atively affected when there is insufficient training
+data for the specific domain to be tackled in pro-
+duction conditions (Callison-Burch et al., 2007;
+Koehn, 2010).
+
+Data selection (DS) has the aim of selecting for
+training, the best subset of sentence pairs from
+an available pool, so that the translation quality
+achieved in the target domain is improved.
+
+State-of-the-art DS approaches rely on the idea
+of choosing those sentence pairs in an out-of-
+domain training corpus that are in some way sim-
+
+ilar to an in-domain training corpus in terms of
+some different metrics. Cross-entropy difference
+is a typical ranking function (Moore and Lewis,
+2010; Axelrod et al., 2011; Rousseau, 2013;
+Schwenk et al., 2012; Mansour et al., 2011).
+
+On the other hand, distributed representations
+of words have proliferated during the last years in
+the research community. Neural networks provide
+powerful tools for processing text, achieving suc-
+cess in text classification (Kim, 2014) or in ma-
+chine translation (Sutskever et al., 2014; Bahdanau
+et al., 2015). Furthermore, (Duh et al., 2013)
+leveraged neural language models to perform DS,
+reporting substantial gains over conventional n-
+gram language model-based DS.
+
+Recently, convolutional neural networks (CNN)
+have also been used in data selection (Chen and
+Huang, 2016; Chen et al., 2016). In these works,
+the authors used a similar strategy to the one pro-
+posed in Section 2.3, but in a different scenario:
+they have no in-domain training corpus; only a
+large out-of-domain pool and small sets of trans-
+lation instances. Their goal was to select, from the
+out-of-domain corpus, the more suitable samples
+for translating their in-domain corpora.
+
+This paper tackles DS by taking advantage of
+neural network as sentence classifiers with the ul-
+timate goal of obtaining corpus subsets that min-
+imize the training corpus size, while improving
+translation quality.
+
+The paper is structured as follows. Section 2,
+presents our DS method, featuring two differ-
+ent neural network architectures: a CNN (Le-
+Cun et al., 1998) and a bidirectional long short-
+term memory (BLSTM) network (Hochreiter and
+Schmidhuber, 1997; Schuster and Paliwal, 1997).
+In Section 3, the experimental design and results
+are detailed. Finally, the main results of the work
+and future work are discussed in Section 4.
+
+ar
+X
+
+iv
+:1
+
+61
+2.
+
+05
+55
+
+5v
+2 
+
+ [
+cs
+
+.C
+L
+
+] 
+ 2
+
+1 
+D
+
+ec
+ 2
+
+01
+6
+
+
+
+2 Data Selection
+
+The goal of DS methods consists in to select a sub-
+set S of source language sentences from an out-
+of-domain pool of sentences G based on a source
+in-domain corpus I .
+
+2.1 Data Selection using Cross-entropy
+
+As mentioned in Section 1, one well-established
+DS method consists in scoring the sentences in the
+out-of-domain corpus by their perplexity. Moore
+and Lewis (2010) used cross-entropy rather than
+perplexity, even though they are both monotoni-
+cally related. For selecting S, this technique re-
+lates the cross-entropy given by a language model
+trained over the I together with the out-of-domain
+(G) language model, computing a score for a sen-
+tence x:
+
+c(x) = HI(x)−HG(x) (1)
+
+where HI and HG are the in-domain and out-of-
+domain cross-entropy of sentence x, respectively.
+
+2.2 Data Selection using Neural Networks
+
+In this work, we tackle the DS problem as a classi-
+fication task. Let us consider a classifier model M
+that assigns a probability pM (I|x) to a sentence
+x, depending whether x belongs to the in-domain
+corpus I or not.
+
+In this case, to obtain the selection S, one could
+just apply M to each sentence from the out-of-
+domain pool G and select the most probable ones.
+
+CNN / BLSTM
+
+pM(I|x)
+
+Softmax
+
+FC
+
+w-emb w-emb w-emb
+
+x1 x2 x|x|
+
+Figure 1: Gen-
+eral architecture of
+the proposed classi-
+fier. w-emb stands
+for word-embedding
+and FC for fully-
+connected layer.
+
+We explored the use of
+CNN and BLSTM net-
+works as sentence en-
+coders. As shown in
+Fig. 1, the input sen-
+tence is fed to our sys-
+tem following a one-hot
+codification scheme and
+is projected to a continu-
+ous space by means of a
+word-embedding matrix.
+Next, the input sentence
+is processed either by a
+CNN or a BLSTM net-
+work. After this, we
+add one or more fully-
+connected (FC) layers.
+Finally, we apply a soft-
+max function, in order to obtain normalized prob-
+
+abilities. All elements from the neural classifier
+can be jointly trained by maximum likelihood.
+
+Convolutional Neural Networks. CNNs have
+proven their representation capacity, not only in
+computer vision tasks (Szegedy et al., 2015), but
+also representing text (Kalchbrenner and Blun-
+som, 2013; Kim, 2014). In this work, we used
+the non-static CNN proposed by Kim (2014).
+
+This CNN consists in the application of a set of
+filters to windows of different length. These filters
+apply a non-linear function (e.g. ReLU). Next, a
+max-pooling operation is applied to the set of con-
+volutional filters. As result, the CNN obtains a
+feature vector representing the input sentence.
+
+Recurrent Neural Networks. In recurrent neu-
+ral networks, connections form a directed cycle.
+This allows the network to maintain an internal
+state and be powerful sequence modelers. More-
+over, bidirectional networks have two indepen-
+dent recurrent layers, one processing the input se-
+quence in a forward manner and other processing
+it a backward manner. Therefore, they allow to
+exploit the full context at each time-step. Gated
+units, such as LSTM (Gers et al., 2000), mitigate
+the vanishing gradient problem and hence, they are
+able tp properly model long sequences.
+
+BLSTM networks can be used for effectively
+encoding a sentence by concatenating the last hid-
+den state of the forward and backward LSTM lay-
+ers. This provides a compact representation of the
+sentence, which takes into account relationships in
+both time directions.
+
+2.3 Semi-supervised Selection
+
+Properly training these neural classifiers may be
+a challenging task, since the in-domain data is
+scarce. Hence, for training them, we follow
+a semi-supervised iterative protocol (Yarowsky,
+1995).
+
+Since the data selection is a binary classifica-
+tion problem, we need a set of positive and nega-
+tive training samples. We start from an initial set
+of positive samples P0 and a set of negative sam-
+ples N0 and train an initial model M0. At each
+iteration i ≥ 0, we classify all sentences belong-
+ing to the out-of-domain pool (Gi). We extract
+a number r of top-scoring sentences and include
+them into the set of positive samples, producing
+a new set of positive samples Pi+1. Analogously,
+the r bottom-scoring sentences are included into
+
+
+
+a new negative samples set Ni+1. Hence, at each
+iteration, we remove 2r samples from the out-of-
+domain set, producing the pool Gi+1. Then, we
+start a new iteration, training a new model Mi+1
+with {Pi+1 ∪ Ni+1}. This is repeated until there
+are no more sentences in the out-of-domain pool.
+
+We set our in-domain corpus I as P0. We ran-
+domly extract |I| sentences from G for construct-
+ing N0. The initial out-of-domain pool G0 is de-
+fined as {G−N0}.
+
+3 Experiments in SMT
+
+In this section, we empirically evaluate the DS
+strategy proposed in Section 2. We conducted
+experiments with different language pairs with
+the purpose of evaluating whether the conclusions
+drawn from one single language pair hold in fur-
+ther scenarios.
+
+3.1 Corpora
+
+Two corpora are involved within the DS task: an
+out-of-domain corpus G and an in-domain corpus
+I . DS selects only a portion of the out-of-domain
+corpus, and leverages that subset together with
+the in-domain data to train a, hopefully improved,
+SMT system. As out-of-domain corpus, we used
+the Europarl corpus (Koehn, 2005). As in-domain
+data, we used the EMEA corpus (Tiedemann,
+2009). The Medical-Test and Medical-Mert cor-
+pora are partitions established in the 2014 Work-
+shop on SMT1 (Bojar et al., 2014). We focused
+on the English-French (En-Fr), French-English
+(Fr-En), German-English (De-En) and English-
+German (En-De) language pairs. The main figures
+of the corpora used are shown in Table 1.
+
+3.2 Experimental Setup
+
+All neural models were initialized using the word-
+embedding matrices from word2vec2. These ma-
+trices were fine-tuned during training. Following
+Kim (2014), we used filter windows of lengths 3,
+4, 5 with 100 features maps each for the CNN clas-
+sifier. For training it, we used Adadelta (Zeiler,
+2012) with its default parameters. The BLSTM
+network was trained with Adam (Kingma and Ba,
+2014), with a learning rate of 10−4. In order to
+have a similar number of parameters than in the
+CNN (48 million approximately), we used 300
+
+1www.statmt.org/wmt14/
+2code.google.com/archive/p/word2vec
+
+Table 1: Corpora main figures. (EMEA-Domain)
+is the in-domain corpus, (Medical-Test) is the
+evaluation data and (Medical-Mert) is the develop-
+ment set. (Europarl) is the out-of-domain corpus.
+M denotes millions of elements and k thousands of
+elements, |S| stands for number of sentences, |W |
+for number of words and |V | for vocabulary size.
+
+Corpus |S| |W | |V |
+
+EMEA-Domain EN 1.0M 12.1M 98.1kFR 14.1M 112k
+
+Medical-Test EN 1000 21.4k 1.8kFR 26.9k 1.9k
+
+Medical-Mert EN 501 9.9k 979FR 11.6k 1.0k
+
+Medical-Domain DE 1.1M 10.9M 141kEN 12.9M 98.8k
+
+Medical-Test DE 1000 18.2k 1.7kEN 19.2k 1.9k
+
+Medical-Mert DE 500 8.6k 874EN 9.2k 979
+
+Europarl EN 2.0M 50.2M 157kFR 52.5M 215k
+
+Europarl DE 1.9M 44.6M 290kEN 47.8M 153k
+
+units in each LSTM layer. 2 fully-connected lay-
+ers of size 200 and 100 were introduced after the
+CNN and BLSTM (see Section 1). All neural
+models3 were implemented using Theano (Theano
+Development Team, 2016). The number of sen-
+tences selected at each iteration (r) should be em-
+pirically determined. In our experiments, we set
+r = 50, 000.
+
+All SMT experiments were carried out us-
+ing the open-source phrase-based SMT toolkit
+Moses (Koehn et al., 2007). The language model
+used was a 5-gram, standard in SMT research,
+with modified Kneser-Ney smoothing (Kneser and
+Ney, 1995), built with the SRILM toolkit (Stol-
+cke, 2002). The phrase table was generated by
+means of symmetrised word alignments obtained
+with GIZA++ (Och and Ney, 2003). The log-
+lineal combination weights λ were optimized us-
+ing MERT (minimum error rate training) (Och,
+2003). Since MERT requires a random initialisa-
+tion of λ that often leads to different local optima
+being reached, every result of this paper consti-
+tutes the average of 10 repetitions, with the pur-
+pose of providing robustness to the results. In the
+
+3Source code available at https://github.com/
+lvapeab/sentence-selectioNN.
+
+code.google.com/archive/p/word2vec
+https://github.com/lvapeab/sentence-selectioNN
+https://github.com/lvapeab/sentence-selectioNN
+
+
+Table 2: Summary of best results obtained. Columns denote, from left to right: selection strategy, BLEU,
+number of sentences, given in terms of the in-domain corpus size, and (+) selected sentences.
+
+EN-FR FR-EN
+Strategy BLEU # Sentences BLEU # Sentences
+
+baseline-emea 28.6± 0.2 1.0M 29.9± 0.2 1.0M
+bsln-emea-euro 29.4± 0.1 1.0M+1.5M 32.4± 0.1 1.0M+1.5M
+Random 29.4± 0.4 1.0M+500k 32.3± 0.3 1.0M+500k
+
+Cross-Entropy 29.8± 0.1 1.0M+450k 31.8± 0.1 1.0M+600k
+BLSTM 29.9± 0.3 1.0M+300k 32.3± 0.1 1.0M+500k
+CNN 29.8± 0.2 1.0M+450k 32.3± 0.2 1.0M+350k
+
+DE-EN EN-DE
+Strategy BLEU # Sentences BLEU # Sentences
+
+baseline-emea 23.7± 0.2 1.0M 15.6± 0.1 1.0M
+bsln-emea-euro 26.2± 0.3 1.0M+1.5M 16.6± 0.2 1.0M+1.5M
+Random 25.5± 0.1 1.0M+600k 16.8± 0.1 1.0M+550k
+
+Cross-Entropy 25.5± 0.3 1.0M+600k 16.8± 0.2 1.0M+500k
+BLSTM 25.9± 0.1 1.0M+500k 17.1± 0.2 1.0M+400k
+CNN 25.9± 0.1 1.0M+400k 16.9± 0.1 1.0M+350k
+
+tables, 95% confidence intervals of these repeti-
+tions are shown. SMT output was evaluated by
+means of BLEU (Papineni et al., 2002).
+
+We compared the selection methods with two
+baseline systems. The first one was obtained by
+training the SMT system with in-domain training
+data (EMEA-Domain data). We will refer to this
+setup with the name of baseline-emea. A
+second baseline experiment has been carried out
+with the concatenation of the Europarl corpus and
+EMEA training data (i.e., all the data available).
+We will refer to this setup as bsln-emea-euro.
+In addition, we also included results for a purely
+random sentence selection without replacement.
+
+3.3 Experimental Results
+
+Table 2 shows the best results obtained with our
+data selection using the two neural network archi-
+tectures proposed (CNN and BLSTM) and cross-
+entropy method for each language pair (EN-FR,
+DE-EN, EN-DE).
+
+In EN-FR and EN-DE, FR-EN, translation qual-
+ity using DS improves over bsln-emea-euro,
+but using significantly less data (20%, 23% and
+26% of the total amount of out-of-domain data,
+respectively). In the case of DE-EN, translation
+quality results are similar, but using only a 23% of
+the data. According to these results, we can state
+that our DS strategy is able to deliver similar qual-
+ity than using all the data, but only with a rough
+quarter of the data.
+
+All proposed DS methods are mostly able to im-
+prove over random selection but in some cases dif-
+
+ferences are not significant. It should be noted that
+beating random is very hard, since all DS methods,
+including random, will eventually converge to the
+same point: adding all the data available. The key
+difference is the amount of data needed for achiev-
+ing the same translation quality.
+
+Results obtained in terms of BLEU with our DS
+method are slightly better than the ones obtained
+with cross-entropy. However, cross-entropy re-
+quires significantly more sentences to reach com-
+parable translation quality.
+
+Lastly, CNN and BLSTM networks seem to per-
+form similarly. Therefore, we conclude that both
+architectures are good options for this task.
+
+4 Conclusion and Future Work
+
+We developed a DS method, based on sentence
+classification techniques. The classifier is based
+on CNNs or BLSTM neural networks. We thor-
+oughly evaluated it over four language pairs.
+Our method yielded better translation performance
+than the cross-entropy DS technique, requiring a
+minor amount of data. Additionally, we found that
+both CNN and BLSTM networks performed simi-
+larly, thus being both suitable sentence encoders.
+
+As future work, we aim to delve into the usage
+of semi-supervised training strategies for the clas-
+sifier. Ladder networks (Rasmus et al., 2015) seem
+a promising tool. We should investigate how to in-
+clude them in our pipeline. We should also investi-
+gate the application of one-shot learning strategies
+to a similar scenario, where only the text to trans-
+late is available.
+
+
+
+References
+[Axelrod et al.2011] Amittai Axelrod, Xiaodong He,
+
+and Jianfeng Gao. 2011. Domain adaptation
+via pseudo in-domain data selection. In Proc. of
+EMNLP, pages 355–362.
+
+[Bahdanau et al.2015] Dzmitry Bahdanau, Kyunghyun
+Cho, and Yoshua Bengio. 2015. Neural machine
+translation by jointly learning to align and translate.
+In Proc. of ICLR.
+
+[Bojar et al.2014] Ondřej Bojar, Christian Buck, Chris-
+tian Federmann, Barry Haddow, Philipp Koehn,
+Christof Monz, Matt Post, and Lucia Specia, editors.
+2014. In Proc. of WMT. ACL.
+
+[Brants et al.2007] Thorsten Brants, Ashok C Popat,
+Peng Xu, Franz J Och, and Jeffrey Dean. 2007.
+Large language models in machine translation. In
+Proc. of EMNLP/CoNLL, pages 858–867.
+
+[Callison-Burch et al.2007] Chris Callison-Burch,
+Cameron Fordyce, Philipp Koehn, Christof Monz,
+and Josh Schroeder. 2007. (meta-) evaluation
+of machine translation. In Proc. of WMT, pages
+136–158.
+
+[Chen and Huang2016] Boxing Chen and Fei Huang.
+2016. Semi-supervised convolutional networks for
+translation adaptation with tiny amount of in-domain
+data. CoNLL 2016, page 314.
+
+[Chen et al.2016] Boxing Chen, Roland Kuhn, George
+Foster, Colin Cherry, and Fei Huang. 2016. Bilin-
+gual methods for adaptive training data selection for
+machine translation. AMTA 2016, Vol., page 93.
+
+[Duh et al.2013] Kevin Duh, Graham Neubig, Kat-
+suhito Sudoh, and Hajime Tsukada. 2013. Adap-
+tation data selection using neural language models:
+Experiments in machine translation. In Proc. of
+ACL, pages 678–683.
+
+[Gers et al.2000] Felix A Gers, Jürgen Schmidhuber,
+and Fred Cummins. 2000. Learning to forget: Con-
+tinual prediction with LSTM. Neural Computation,
+12(10):2451–2471.
+
+[Hochreiter and Schmidhuber1997] Sepp Hochreiter
+and Jürgen Schmidhuber. 1997. Long short-term
+memory. Neural Computation, 9(8):1735–1780.
+
+[Kalchbrenner and Blunsom2013] Nal Kalchbrenner
+and Phil Blunsom. 2013. Recurrent continuous
+translation models. In Proc. of EMNLP, pages
+1700–1709.
+
+[Kim2014] Yoon Kim. 2014. Convolutional neural
+networks for sentence classification. In Proc. of
+EMNLP, pages 1746–1751.
+
+[Kingma and Ba2014] Diederik P. Kingma and Jimmy
+Ba. 2014. Adam: A method for stochastic opti-
+mization. arXiv:1412.6980.
+
+[Kneser and Ney1995] Reinhard Kneser and Hermann
+Ney. 1995. Improved backing-off for m-gram lan-
+guage modeling. In Proc. of ICASSP, pages 181–
+184.
+
+[Koehn et al.2007] Philipp Koehn, Hieu Hoang,
+Alexandra Birch, Chris Callison-Burch, Marcello
+Federico, Nicola Bertoldi, Brooke Cowan, Wade
+Shen, Christine Moran, Richard Zens, et al. 2007.
+Moses: Open source toolkit for statistical machine
+translation. In Proc. of ACL, pages 177–180.
+
+[Koehn2005] Philipp Koehn. 2005. Europarl: A par-
+allel corpus for statistical machine translation. In
+Proc. of MT Summit, pages 79–86.
+
+[Koehn2010] Philipp Koehn. 2010. Statistical machine
+translation. Cambridge University Press.
+
+[LeCun et al.1998] Y. LeCun, L. Bottou, Y. Bengio, and
+P. Haffner. 1998. Gradient-based learning applied
+to document recognition. IEEE, 86(11):2278–2324,
+November.
+
+[Mansour et al.2011] Saab Mansour, Joern Wuebker,
+and Hermann Ney. 2011. Combining transla-
+tion and language model scoring for domain-specific
+data filtering. In Proc. of IWSLT, pages 222–229.
+
+[Moore and Lewis2010] Robert C Moore and William
+Lewis. 2010. Intelligent selection of language
+model training data. In Proc. of ACL, pages 220–
+224.
+
+[Och and Ney2003] Franz Josef Och and Hermann Ney.
+2003. A systematic comparison of various statisti-
+cal alignment models. Computational Linguistics,
+29(1):19–51.
+
+[Och2003] Franz Josef Och. 2003. Minimum error rate
+training in statistical machine translation. In Proc.
+of ACL, pages 160–167.
+
+[Papineni et al.2002] Kishore Papineni, Salim Roukos,
+Todd Ward, and Wei-Jing Zhu. 2002. Bleu: a
+method for automatic evaluation of machine trans-
+lation. In Proc. of ACL, pages 311–318.
+
+[Rasmus et al.2015] Antti Rasmus, Mathias Berglund,
+Mikko Honkala, Harri Valpola, and Tapani Raiko.
+2015. Semi-supervised learning with ladder net-
+works. In Proc. of NIPS, pages 3546–3554.
+
+[Rousseau2013] Anthony Rousseau. 2013. Xenc: An
+open-source tool for data selection in natural lan-
+guage processing. The Prague Bulletin of Mathe-
+matical Linguistics, 100:73–82.
+
+[Schuster and Paliwal1997] Mike Schuster and
+Kuldip K Paliwal. 1997. Bidirectional recur-
+rent neural networks. IEEE Transactions on Signal
+Processing, 45(11):2673–2681.
+
+[Schwenk et al.2012] Holger Schwenk, Anthony
+Rousseau, and Mohammed Attik. 2012. Large,
+pruned or continuous space language models on a
+gpu for statistical machine translation. In Proc. of
+NAACL-HLT, pages 11–19.
+
+
+
+[Stolcke2002] Andreas Stolcke. 2002. SRILM - an ex-
+tensible language modeling toolkit. In Proc. of IC-
+SLP, pages 901–904.
+
+[Sutskever et al.2014] Ilya Sutskever, Oriol Vinyals,
+and Quoc V. Le. 2014. Sequence to sequence learn-
+ing with neural networks. In Proc. of NIPS, pages
+3104–3112.
+
+[Szegedy et al.2015] Christian Szegedy, Wei Liu,
+Yangqing Jia, Pierre Sermanet, Scott Reed,
+Dragomir Anguelov, Dumitru Erhan, Vincent
+Vanhoucke, and Andrew Rabinovich. 2015. Going
+deeper with convolutions. In Proc. of CVRP, pages
+1–9.
+
+[Theano Development Team2016] Theano Develop-
+ment Team. 2016. Theano: A Python framework
+for fast computation of mathematical expressions.
+arXiv:1605.02688.
+
+[Tiedemann2009] Jörg Tiedemann. 2009. News from
+opus - a collection of multilingual parallel corpora
+with tools and interfaces. In Proc. of RANLP, pages
+237–248.
+
+[Yarowsky1995] David Yarowsky. 1995. Unsuper-
+vised word sense disambiguation rivaling supervised
+methods. In Proc. of ACL, pages 189–196.
+
+[Zeiler2012] Matthew D. Zeiler. 2012.
+ADADELTA: An adaptive learning rate method.
+arXiv:1212.5701.
+
+
+	1 Introduction
+	2 Data Selection
+	2.1 Data Selection using Cross-entropy
+	2.2 Data Selection using Neural Networks
+	2.3 Semi-supervised Selection
+
+	3 Experiments in SMT
+	3.1 Corpora
+	3.2 Experimental Setup
+	3.3 Experimental Results
+
+	4 Conclusion and Future Work
+

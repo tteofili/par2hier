@@ -1,0 +1,830 @@
+
+Neural Machine Translation in Linear Time
+
+Nal Kalchbrenner, Lasse Espeholt, Karen Simonyan
+
+Aäron van den Oord, Alex Graves, Koray Kavukcuoglu
+
+{nalk,lespeholt,simonyan,avdnoord,gravesa,korayk}@google.com
+
+Google DeepMind, London, UK
+
+Abstract
+
+We present a neural architecture for sequence processing. The ByteNet is
+a stack of two dilated convolutional neural networks, one to encode the
+source sequence and one to decode the target sequence, where the target
+network unfolds dynamically to generate variable length outputs. The
+ByteNet has two core properties: it runs in time that is linear in the length
+of the sequences and it preserves the sequences’ temporal resolution. The
+ByteNet decoder attains state-of-the-art performance on character-level
+language modelling and outperforms the previous best results obtained with
+recurrent neural networks. The ByteNet also achieves a performance on raw
+character-level machine translation that approaches that of the best neural
+translation models that run in quadratic time. The implicit structure learnt
+by the ByteNet mirrors the expected alignments between the sequences.
+
+1 Introduction
+
+In neural language modelling, a neural network estimates a distribution over sequences of
+words or characters that belong to a given language (Bengio et al., 2003). In neural machine
+translation, the network estimates a distribution over sequences in the target language
+conditioned on a given sequence in the source language. In the latter case the network can
+be thought of as composed of two sub-networks, a source network that processes the source
+sequence into a representation and a target network that uses the representation of the
+source to generate the target sequence (Kalchbrenner and Blunsom, 2013)
+
+Recurrent neural networks (RNN) are powerful sequence models (Hochreiter and Schmidhuber,
+1997) and are widely used in language modelling (Mikolov et al., 2010), yet they have a
+potential drawback. RNNs have an inherently serial structure that prevents them from being
+run in parallel along the sequence length. Forward and backward signals in a RNN also need
+to traverse the full distance of the serial path to reach from one point to another in the
+sequence. The larger the distance the harder it is to learn dependencies between the points
+(Hochreiter et al., 2001).
+
+A number of neural architectures have been proposed for modelling translation (Kalchbrenner
+and Blunsom, 2013; Sutskever et al., 2014; Cho et al., 2014; Bahdanau et al., 2014; Kalchbren-
+ner et al., 2016a; Kaiser and Bengio, 2016). These networks either have running time that
+is super linear in the length of the source and target sequences, or they process the source
+sequence into a constant size representation, burdening the model with a memorization step.
+Both of these drawbacks grow more severe as the length of the sequences increases.
+
+We present a neural translation model, the ByteNet, and a neural language model, the
+ByteNet Decoder, that aim at addressing these drawbacks. The ByteNet uses convolutional
+neural networks with dilation for both the source network and the target network. The
+ByteNet connects the source and target networks via stacking and unfolds the target network
+dynamically to generate variable length output sequences. We view the ByteNet as an
+instance of a wider family of sequence-mapping architectures that stack the sub-networks
+and use dynamic unfolding. The sub-networks themselves may be convolutional or recurrent.
+
+1
+
+ar
+X
+
+iv
+:1
+
+61
+0.
+
+10
+09
+
+9v
+1 
+
+ [
+cs
+
+.C
+L
+
+] 
+ 3
+
+1 
+O
+
+ct
+ 2
+
+01
+6
+
+
+
+t0 t1 t2 t3 t4 t5 t6 t7 t8 t9 t11 t12 t13 t14 t15 t16t10
+
+s0 s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 s12 s13 s14 s15 s16
+
+t11 t12 t13 t14 t15 t16 t17t10t9t8t7t6t5t4t3t2t1
+
+Figure 1: The architecture of the ByteNet. The target network (blue) is stacked on top of
+the source network (red). The target network generates the variable-length target sequence
+using dynamic unfolding. The ByteNet Decoder is the target network of the ByteNet.
+
+The ByteNet with recurrent sub-networks may be viewed as a strict generalization of the
+RNN Enc-Dec network (Sutskever et al., 2014; Cho et al., 2014) (Sect. 4). The ByteNet
+Decoder has the same architecture as the target network in the ByteNet. In contrast to neural
+language models based on RNNs (Mikolov et al., 2010) or on feed-forward networks (Bengio
+et al., 2003; Arisoy et al., 2012), the ByteNet Decoder is based on a novel convolutional
+structure designed to capture a very long range of past inputs.
+
+The ByteNet has a number of beneficial computational and learning properties. From a
+computational perspective, the network has a running time that is linear in the length of
+the source and target sequences (up to a constant c ≈ log d where d is the size of the desired
+dependency field). The computation in the source network during training and decoding and
+in the target network during training can also be run efficiently in parallel along the strings
+– by definition this is not possible for a target network during decoding (Sect. 2). From a
+learning perspective, the representation of the source string in the ByteNet is resolution
+preserving ; the representation sidesteps the need for memorization and allows for maximal
+bandwidth between the source and target networks. In addition, the distance traversed
+by forward and backward signals between any input and output tokens in the networks
+corresponds to the fixed depth of the networks and is largely independent of the distance
+between the tokens. Dependencies over large distances are connected by short paths and can
+be learnt more easily.
+
+We deploy ByteNets on raw sequences of characters. We evaluate the ByteNet Decoder on
+the Hutter Prize Wikipedia task; the model achieves 1.33 bits/character showing that the
+convolutional language model is able to outperform the previous best results obtained with
+recurrent neural networks. Furthermore, we evaluate the ByteNet on raw character-level
+machine translation on the English-German WMT benchmark. The ByteNet achieves a
+score of 18.9 and 21.7 BLEU points on, respectively, the 2014 and the 2015 test sets; these
+results approach the best results obtained with other neural translation models that have
+quadratic running time (Chung et al., 2016b; Wu et al., 2016a). We use gradient-based
+visualization (Simonyan et al., 2013) to reveal the latent structure that arises between the
+source and target sequences in the ByteNet. We find the structure to mirror the expected
+word alignments between the source and target sequences.
+
+2 Neural Translation Model
+
+Given a string s from a source language, a neural translation model estimates a distribution
+p(t|s) over strings t of a target language. The distribution indicates the probability of a
+
+2
+
+
+
+EOS EOSEOS
+
+Figure 2: Dynamic unfolding in the ByteNet architecture. At each step the target network
+is conditioned on the source representation for that step, or simply on no representation for
+steps beyond the source length. The decoding ends when the target network produces an
+end-of-sequence (EOS) symbol.
+
+string t being a translation of s. A product of conditionals over the tokens in the target
+t = t0, ..., tN leads to a tractable formulation of the distribution:
+
+p(t|s) =
+N∏
+i=0
+
+p(ti|t<i, s) (1)
+
+Each conditional factor expresses complex and long-range dependencies among the source
+and target tokens. The strings are usually sentences of the respective languages; the tokens
+are words or, as in the present case, characters. The network that models p(t|s) is composed
+of two sub-networks, a source network that processes the source string into a representation
+and a target network that uses the source representation to generate the target string
+(Kalchbrenner and Blunsom, 2013). The target network functions as a language model for
+the target language.
+
+A neural translation model has some basic properties. The target network is autoregressive
+in the target tokens and the network is sensitive to the ordering of the tokens in the source
+and target strings. It is also useful for the model to be able to assign a non-zero probability
+to any string in the target language and retain an open vocabulary.
+
+2.1 Desiderata
+
+Beyond these basic properties the definition of a neural translation model does not determine
+a unique neural architecture, so we aim at identifying some desiderata. (i) The running
+time of the network should be linear in the length of the source and target strings. This
+is more pressing the longer the strings or when using characters as tokens. The use of
+operations that run in parallel along the sequence length can also be beneficial for reducing
+computation time. (ii) The size of the source representation should be linear in the length of
+the source string, i.e. it should be resolution preserving, and not have constant size. This is
+to avoid burdening the model with an additional memorization step before translation. In
+more general terms, the size of a representation should be proportional to the amount of
+information it represents or predicts. A related desideratum concerns the path traversed by
+forward and backward signals in the network between a (source or target) input token and a
+predicted output token. Shorter paths whose length is decoupled from the sequence distance
+between the two tokens have the potential to better propagate the signals (Hochreiter et al.,
+2001) and to let the network learn long-range dependencies more easily.
+
+3 ByteNet
+
+We aim at building neural language and translation models that capture the desiderata
+set out in Sect. 2.1. The proposed ByteNet architecture is composed of a target network
+that is stacked on a source network and generates variable-length outputs via dynamic
+unfolding. The target network, referred to as the ByteNet Decoder, is a language model
+that is formed of one-dimensional convolutional layers that use dilation (Sect. 3.3) and are
+masked (Sect. 3.2). The source network processes the source string into a representation
+and is formed of one-dimensional convolutional layers that use dilation but are not masked.
+Figure 1 depicts the two networks and their combination in the ByteNet.
+
+3.1 Dynamic Unfolding
+
+To accommodate source and target sequences of different lengths, the ByteNet uses dynamic
+unfolding. The source network builds a representation that has the same width as the source
+
+3
+
+
+
+Sub-BN
+
+ReLU
+
+2d
+
+1⇥ 1
+
+Sub-BN
+
+ReLU
+
+Masked 1⇥ k
+
+d
+
+Sub-BN
+
+ReLU
+
+1⇥ 1
+
++
+2d
+
+Sub-BN
+
+ReLU
+
+2d
+
+1⇥ 1
+
+Sub-BN
+
+ReLU
+
+d
+
+1⇥ 1
+
++
+2d
+
+Masked 1⇥ k MU
+
+1⇥ 1 MU
+
++
+
+d
+
+d d d d
+
+�
+
+⇥
+
+⇥
+
++
+
+tanh
+
+Masked 1⇥ k
+
+⇥
+
+�� tanh
+
+d
+
+Sub-BN
+
+Figure 3: Left: Residual block with ReLUs (He et al., 2015) adapted for decoders. Right:
+Residual Multiplicative Block adapted for decoders and corresponding expansion of the MU
+(Kalchbrenner et al., 2016b).
+
+sequence. At each step the target network takes as input the corresponding column of the
+source representation until the target network produces the end-of-sequence symbol. The
+source representation is zero-padded on the fly: if the target network produces symbols
+beyond the length of the source sequence, the corresponding conditioning column is set to
+zero. In the latter case the predictions of the target network are conditioned on source
+and target representations from previous steps. Figure 2 represents the dynamic unfolding
+process.
+
+3.2 Masked One-dimensional Convolutions
+
+Given a target string t = t0, ..., tn the target network embeds each of the first n tokens
+t0, ..., tn−1 via a look-up table (the n tokens t1, ..., tn serve as targets for the predictions).
+The resulting embeddings are concatenated into a tensor of size 1× n× 2d where d is the
+number of inner channels in the network. The target network applies masked one-dimensional
+convolutions (van den Oord et al., 2016b) to the embedding tensor that have a masked
+kernel of size k. The masking ensures that information from future tokens does not affect
+the prediction of the current token. The operation can be implemented either by zeroing out
+some of the weights on a wider kernel of size 2k − 1 or by padding the output map.
+
+3.3 Dilation
+
+The masked convolutions use dilation to increase the receptive field of the target net-
+work (Chen et al., 2014; Yu and Koltun, 2015). Dilation makes the receptive field grow
+exponentially in terms of the depth of the networks, as opposed to linearly. We use a dilation
+scheme whereby the dilation rates are doubled every layer up to a maximum rate r (for our
+experiments r = 16). The scheme is repeated multiple times in the network always starting
+from a dilation rate of 1 (van den Oord et al., 2016a; Kalchbrenner et al., 2016b).
+
+3.4 Residual Blocks
+
+Each layer is wrapped in a residual block that contains additional convolutional layers with
+filters of size 1 (He et al., 2015). We adopt two variants of the residual blocks, one with
+ReLUs, which is used in the machine translation experiments, and one with Multiplicative
+Units (Kalchbrenner et al., 2016b), which is used in the language modelling experiments.
+Figure 3 diagrams the two variants of the blocks.
+
+3.5 Sub-Batch Normalization
+
+We introduce a modification to Batch Normalization (BN) (Ioffe and Szegedy, 2015) in order
+to make it applicable to target networks and decoders. Standard BN computes the mean
+and variance of the activations of a given convolutional layer along the batch, height, and
+width dimensions. In a decoder, the standard BN operation at training time would average
+
+4
+
+
+
+s0 s1 s2 s3 s4 s5
+
+t0 t1 t2 t3 t4 t5
+
+t1 t2 t3 t4 t5 t6
+
+s0 s1 s2 s3 s4 s5
+
+t0 t1 t2 t3 t4 t5
+
+t1 t2 t3 t4 t5 t6
+
+Figure 4: Recurrent ByteNet variants of the ByteNet architecture. Left: Recurrent ByteNet
+with convolutional source network and recurrent target network. Right: Recurrent ByteNet
+with bidirectional recurrent source network and recurrent target network. The latter archi-
+tecture is a strict generalization of the RNN Enc-Dec network.
+
+activations along all the tokens in the input target sequence, and the BN output for each
+target token would incorporate the information about the tokens that follow it. This breaks
+the conditioning structure of Eq. 1, since the succeeding tokens are yet to be predicted.
+
+To circumvent this issue, we present Sub-Batch Normalization (SubBN). It is a variant of
+BN, where a batch of training samples is split into two parts: the main batch and the
+auxiliary batch. For each layer, the mean and variance of its activations are computed over
+the auxiliary batch, but are used for the batch normalization of the main batch. At the
+same time, the loss is computed only on the predictions of the main batch, ignoring the
+predictions from the auxiliary batch.
+
+3.6 Bag of Character n-Grams
+
+The tokens that we adopt correspond to characters in the input sequences. An efficient way
+to increase the capacity of the models is to use input embeddings not just for single tokens,
+but also for n-grams of adjacent tokens. At each position we sum the embeddings of the
+respective n-grams for 1 ≤ n ≤ 5 component-wise into a single vector. Although the portion
+of seen n-grams decreases as the value of n increases – a cutoff threshold is chosen for each
+n – all characters (n-grams for n = 1) are seen during training. This fallback structure
+provided by the bag of character n-grams guarantees that at any position the input given to
+the network is always well defined. The length of the sequences corresponds to the number
+of characters and does not change when using bags of n-grams.
+
+4 Model Comparison
+
+In this section we analyze the properties of various previously and currently introduced
+neural translation models. For the sake of a more complete analysis, we also consider two
+recurrent variants in the ByteNet family of architectures, which we do not evaluate in the
+experiments.
+
+4.1 Recurrent ByteNets
+
+The ByteNet is composed of two stacked source and target networks where the top network
+dynamically adapts to the output length. This way of combining source and target networks
+is not tied to the networks being strictly convolutional. We may consider two variants of the
+ByteNet that use recurrent networks for one or both of the sub-networks (see Figure 4). The
+first variant replaces the convolutional target network with a recurrent one that is similarly
+stacked and dynamically unfolded. The second variant replaces the convolutional source
+network with a recurrent network, namely a bidirectional RNN. The target RNN is placed on
+top of the bidirectional source RNN. We can see that the RNN Enc-Dec network (Sutskever
+et al., 2014; Cho et al., 2014) is a Recurrent ByteNet where all connections between source
+and target – except for the first one that connects s0 and t0 – have been severed. The
+Recurrent ByteNet is thus a generalization of the RNN Enc-Dec and, modulo the type of
+sequential architecture, so is the ByteNet.
+
+5
+
+
+
+Model NetS NetT Time RP PathS PathT
+
+RCTM 1 CNN RNN |S||S| + |T | no |S| |T |
+RCTM 2 CNN RNN |S||S| + |T | yes |S| |T |
+RNN Enc-Dec RNN RNN |S| + |T | no |S| + |T | |T |
+RNN Enc-Dec Att RNN RNN |S||T | yes 1 |T |
+Grid LSTM RNN RNN |S||T | yes |S| + |T | |S| + |T |
+Extended Neural GPU cRNN cRNN |S||S| + |S||T | yes |S| |T |
+
+Recurrent ByteNet RNN RNN |S| + |T | yes max(|S|, |T |) |T |
+Recurrent ByteNet CNN RNN c|S| + |T | yes c |T |
+ByteNet CNN CNN c|S| + c|T | yes c c
+
+Table 1: Properties of various previously and presently introduced neural translation models.
+The ByteNet models have both linear running time and are resolution preserving.
+
+4.2 Comparison of Properties
+
+In our comparison we consider the following neural translation models: the Recurrent
+Continuous Translation Model (RCTM) 1 and 2 (Kalchbrenner and Blunsom, 2013); the
+RNN Enc-Dec (Sutskever et al., 2014; Cho et al., 2014); the RNN Enc-Dec Att with the
+attentional pooling mechanism (Bahdanau et al., 2014) of which there are a few variations
+(Luong et al., 2015; Chung et al., 2016a); the Grid LSTM translation model (Kalchbrenner
+et al., 2016a) that uses a multi-dimensional architecture; the Extended Neural GPU model
+(Kaiser and Bengio, 2016) that has a convolutional RNN architecture; the ByteNet and the
+two Recurrent ByteNet variants.
+
+The two grounds of comparison are the desiderata (i) and (ii) set out in Sect 2.1. We separate
+the computation time desideratum (i) into three columns. The first column indicates the
+time complexity of the network as a function of the length of the sequences and is denoted by
+Time. The other two columns NetS and NetT indicate, respectively, whether the source
+and the target network uses a convolutional structure (CNN) or a recurrent one (RNN);
+a CNN structure has the advantage that it can be run in parallel along the length of the
+sequence. We also break the learning desideratum (ii) into three columns. The first is
+denoted by RP and indicates whether the source representation in the network is resolution
+preserving. The second PathS column corresponds to the length in layer steps of the shortest
+path between a source token and any output target token. Similarly, the third PathT column
+corresponds to the length of the shortest path between an input target token and any output
+target token. Shorter paths lead to better forward and backward signal propagation.
+
+Table 1 summarizes the properties of the models. The ByteNet, the Recurrent ByteNets and
+the RNN Enc-Dec are the only networks that have linear running time (up to the constant c).
+The RNN Enc-Dec, however, does not preserve the source sequence resolution, a feature that
+aggravates learning for long sequences such as those in character-level machine translation
+(Luong and Manning, 2016). The RCTM 2, the RNN Enc-Dec Att, the Grid LSTM and
+the Extended Neural GPU do preserve the resolution, but at a cost of a quadratic running
+time. The ByteNet stands out also for its Path properties. The dilated structure of the
+convolutions connects any two source or target tokens in the sequences by way of a small
+number of network layers corresponding to the depth of the source or target networks. For
+character sequences where learning long-range dependencies is important, paths that are
+sub-linear in the distance are advantageous.
+
+5 Character Prediction
+
+We first evaluate the ByteNet Decoder separately on a character-level language modelling
+benchmark. We use the Hutter Prize version of the Wikipedia dataset and follow the standard
+split where the first 90 million bytes are used for training, the next 5 million bytes are used
+for validation and the last 5 million bytes are used for testing (Chung et al., 2015). The
+total number of characters in the vocabulary is 205.
+
+6
+
+
+
+Model Test
+
+Stacked LSTM (Graves, 2013) 1.67
+GF-LSTM (Chung et al., 2015) 1.58
+Grid-LSTM (Kalchbrenner et al., 2016a) 1.47
+Layer-normalized LSTM (Chung et al., 2016a) 1.46
+MI-LSTM (Wu et al., 2016b) 1.44
+Recurrent Highway Networks (Srivastava et al., 2015) 1.42
+Recurrent Memory Array Structures (Rocki, 2016) 1.40
+HM-LSTM (Chung et al., 2016a) 1.40
+Layer Norm HyperLSTM (Ha et al., 2016) 1.38
+Large Layer Norm HyperLSTM (Ha et al., 2016) 1.34
+ByteNet Decoder 1.33
+
+Table 2: Negative log-likelihood results in bits/byte on the Hutter Prize Wikipedia benchmark.
+
+Model WMT Test ’14 WMT Test ’15
+
+Phrase Based MT 20.7(1) 24.0(2)
+
+RNN Enc-Dec 11.3(3)
+
+RNN Enc-Dec + reverse 14.0(3)
+
+RNN Enc-Dec Att 16.9(3)
+
+RNN Enc-Dec Att + deep (Zhou et al., 2016) 20.6
+
+RNN Enc-Dec Att + local p + unk replace 20.9(3)
+
+RNN Enc-Dec Att + BPE in + BPE out 19.98(4) 21.72(4)
+
+RNN Enc-Dec Att + BPE in + char out 21.33(4) 23.45(4)
+
+GNMT + char in + char out (Wu et al., 2016a) 22.8
+ByteNet 18.9 21.7
+
+Table 3: BLEU scores on En-De WMT NewsTest 2014 and 2015 test sets. The ByteNet is
+character-level. The other models are word-level unless otherwise noted. Result (1) is from
+(Freitag et al., 2014), result (2) is from (Williams et al., 2015), results (3) are from (Luong
+et al., 2015) and results (4) are from (Chung et al., 2016b)
+
+The ByteNet Decoder that we use for the result has 25 residual blocks split into five sets of
+five blocks each; for the five blocks in each set the dilation rates are, respectively, 1,2,4,8 and
+16. The masked kernel has size 3. This gives a receptive field of 315 characters. The number
+of hidden units d is 892. For this task we use residual multiplicative blocks and Sub-BN
+(Fig. 3 Right); we do not use bags of character n-grams for the inputs. For the optimization
+we use Adam (Kingma and Ba, 2014) with a learning rate of 10−2 and a weight decay term
+of 10−5. We do not reduce the learning rate during training. At each step we sample a batch
+of sequences of 515 characters each, use the first 315 characters as context and predict only
+the latter 200 characters.
+
+Table 2 lists recent results of various neural sequence models on the Wikipedia dataset. All the
+results except for the ByteNet result are obtained using some variant of the LSTM recurrent
+neural network (Hochreiter and Schmidhuber, 1997). The ByteNet Decoder achieves 1.33
+bits/character on the test set.
+
+6 Character-Level Machine Translation
+
+We evaluate the full ByteNet on the WMT English to German translation task. We use
+NewsTest 2013 for development and NewsTest 2014 and 2015 for testing. The English and
+German strings are encoded as sequences of characters; no explicit segmentation into words
+or morphemes is applied to the strings. The outputs of the network are strings of characters
+in the target language. There are about 140 characters in each of the languages.
+
+The ByteNet used in the experiments has 15 residual blocks in the source network and
+15 residual blocks in the target network. As in the ByteNet Decoder, the residual blocks
+are arranged in sets of five with corresponding dilation rates of 1,2,4,8 and 16. For this
+task we use residual blocks with ReLUs and Sub-BN (Fig. 3 Left). The number of hidden
+
+7
+
+
+
+0 100 200 300 400 500
+German
+
+0
+
+100
+
+200
+
+300
+
+400
+
+500
+
+E
+ng
+
+lis
+h
+
+ρ = .968
+
+0 100 200 300 400 500
+Russian
+
+0
+
+100
+
+200
+
+300
+
+400
+
+500
+
+E
+ng
+
+lis
+h
+
+ρ = .963
+
+Figure 5: Lengths of sentences in characters and their correlation coefficient for the En-De
+and the En-Ru WMT NewsTest-2013 validation data. The correlation coefficient is similarly
+high (ρ > 0.96) for all other language pairs that we inspected.
+
+At the same time, around 3000 demonstrators attempted to reach the official residency of
+Prime Minister Nawaz Sharif.
+
+Gleichzeitig versuchten rund 3000 Demonstranten, zur Residenz von Premierminister
+Nawaz Sharif zu gelangen.
+
+Gleichzeitig haben etwa 3000 Demonstranten versucht, die offizielle Residenz des
+Premierministers Nawaz Sharif zu erreichen.
+
+Just try it: Laura, Lena, Lisa, Marie, Bettina, Emma and manager Lisa Neitzel
+(from left to right) are looking forward to new members.
+
+Einfach ausprobieren: Laura, Lena, Lisa, Marie, Bettina, Emma und Leiterin Lisa Neitzel
+(von links) freuen sich auf Mitstreiter.
+
+Probieren Sie es aus: Laura, Lena, Lisa, Marie, Bettina, Emma und Manager Lisa Neitzel
+(von links nach rechts) freuen sich auf neue Mitglieder.
+
+He could have said, “I love you,” but it was too soon for that.
+
+Er hätte sagen können “ich liebe dich”, aber dafür war es noch zu früh.
+
+Er hätte sagen können: “I love you”, aber es war zu früh.
+
+Table 4: Raw output translations generated from the ByteNet that highlight interesting
+reordering and transliteration phenomena. For each group, the first row is the English
+source, the second row is the ground truth German target, and the third row is the ByteNet
+translation.
+
+units d is 892. The size of the kernel in the source network is 1× 5, whereas the size of the
+masked kernel in the target network is 1× 3. We use bags of character n-grams as additional
+embeddings at the source and target inputs: for n > 2 we prune all n-grams that occur less
+than 500 times. For the optimization we use Adam with a learning rate of 0.003.
+
+Each sentence is padded with special characters to the nearest greater multiple of 25. Each
+pair of sentences is mapped to a bucket based on the pair of padded lengths for efficient
+batching during training. We find that Sub-BN learns bucket-specific statistics that cannot
+easily be merged across buckets. We circumvent this issue by simply searching over possible
+target intervals as a first step during decoding with a beam search; each hypothesis uses
+Sub-BN statistics that are specific to a target length interval. The hypotheses are ranked
+according to the average likelihood of each character.
+
+Table 3 contains the results of the experiments. We note that the lengths of the translations
+generated by the ByteNet are especially close to the lengths of the reference translations and
+do not tend to be too short; the brevity penalty in the BLEU scores is 0.995 and 1.0 for the
+two test sets, respectively. We also note that the ByteNet architecture seems particularly
+apt for machine translation. The correlation coefficient between the lengths of sentences
+from different languages is often very high (Fig. 5), an aspect that is compatible with the
+resolution preserving property of the architecture.
+
+Table 4 contains some of the unaltered generated translations from the ByteNet that highlight
+reordering and other phenomena such as transliteration. The character-level aspect of the
+model makes post-processing unnecessary in principle. We further visualize the sensitivity of
+the ByteNet’s predictions to specific source and target inputs. Figure 6 represents a heatmap
+of the magnitude of the gradients of source and target inputs with respect to the generated
+outputs. For visual clarity, we sum the gradients for all the characters that make up each
+
+8
+
+
+
+word and normalize the values along each column. In contrast with the attentional pooling
+mechanism (Bahdanau et al., 2014), this general technique allows us to inspect not just
+dependencies of the outputs on the source inputs, but also dependencies of the outputs on
+previous target inputs, or on any other neural network layers.
+
+7 Conclusion
+
+We have introduced the ByteNet, a neural translation model that has linear running time,
+decouples translation from memorization and has short signal propagation paths for tokens
+in sequences. We have shown that the ByteNet Decoder is a state-of-the-art character-level
+language model based on a convolutional neural network that significantly outperforms
+recurrent language models. We have also shown that the ByteNet generalizes the RNN Enc-
+Dec architecture and achieves promising results for raw character-level machine translation
+while maintaining linear running time complexity. We have revealed the latent structure
+learnt by the ByteNet and found it to mirror the expected alignment between the tokens in
+the sentences.
+
+References
+
+Ebru Arisoy, Tara N. Sainath, Brian Kingsbury, and Bhuvana Ramabhadran. Deep neural net-
+work language models. In Proceedings of the NAACL-HLT 2012 Workshop. Association for
+Computational Linguistics, 2012.
+
+Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. Neural machine translation by jointly
+learning to align and translate. CoRR, abs/1409.0473, 2014. URL http://arxiv.org/abs/1409.
+0473.
+
+Yoshua Bengio, Réjean Ducharme, Pascal Vincent, and Christian Jauvin. A neural probabilistic
+language model. Journal of Machine Learning Research, 3:1137–1155, 2003.
+
+Liang-Chieh Chen, George Papandreou, Iasonas Kokkinos, Kevin Murphy, and Alan L. Yuille.
+Semantic image segmentation with deep convolutional nets and fully connected crfs. CoRR,
+abs/1412.7062, 2014.
+
+Kyunghyun Cho, Bart van Merrienboer, Çaglar Gülçehre, Fethi Bougares, Holger Schwenk, and
+Yoshua Bengio. Learning phrase representations using RNN encoder-decoder for statistical
+machine translation. CoRR, abs/1406.1078, 2014. URL http://arxiv.org/abs/1406.1078.
+
+Junyoung Chung, Caglar Gülçehre, Kyunghyun Cho, and Yoshua Bengio. Gated feedback recurrent
+neural networks. CoRR, abs/1502.02367, 2015.
+
+Junyoung Chung, Sungjin Ahn, and Yoshua Bengio. Hierarchical multiscale recurrent neural
+networks. arXiv preprint arXiv:1609.01704, 2016a.
+
+Junyoung Chung, Kyunghyun Cho, and Yoshua Bengio. A character-level decoder without explicit
+segmentation for neural machine translation. In Proceedings of the 54th Annual Meeting of the
+Association for Computational Linguistics, ACL 2016, 2016b.
+
+Markus Freitag, Stephan Peitz, Joern Wuebker, Hermann Ney, Matthias Huck, Rico Sennrich, Nadir
+Durrani, Maria Nadejde, Philip Williams, Philipp Koehn, Teresa Herrmann, Eunah Cho, and
+Alex Waibel. Eu-bridge mt: Combined machine translation. In ACL 2014 Ninth Workshop on
+Statistical Machine Translation, 2014.
+
+Alex Graves. Generating sequences with recurrent neural networks. arXiv preprint arXiv:1308.0850,
+2013.
+
+D. Ha, A. Dai, and Q. V. Le. HyperNetworks. ArXiv e-prints, September 2016.
+
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image
+recognition. arXiv preprint arXiv:1512.03385, 2015.
+
+Sepp Hochreiter and Jürgen Schmidhuber. Long short-term memory. Neural computation, 1997.
+
+Sepp Hochreiter, Yoshua Bengio, and Paolo Frasconi. Gradient flow in recurrent nets: the difficulty
+of learning long-term dependencies. In J. Kolen and S. Kremer, editors, Field Guide to Dynamical
+Recurrent Networks. IEEE Press, 2001.
+
+9
+
+http://arxiv.org/abs/1409.0473
+http://arxiv.org/abs/1409.0473
+http://arxiv.org/abs/1406.1078
+
+
+Figure 6: Magnitude of gradients of the predicted outputs with respect to the source and
+target inputs. The gradients are summed for all the characters in a given word. In the
+bottom heatmap the magnitudes are nonzero on the diagonal, since the prediction of a target
+character depends highly on the preceding target character in the same word.
+
+10
+
+
+
+Sergey Ioffe and Christian Szegedy. Batch normalization: Accelerating deep network training by
+reducing internal covariate shift. In ICML, pages 448–456, 2015.
+
+ Lukasz Kaiser and Samy Bengio. Can active memory replace attention? Advances in Neural
+Information Processing Systems, 2016.
+
+Nal Kalchbrenner and Phil Blunsom. Recurrent continuous translation models. In Proceedings of
+the 2013 Conference on Empirical Methods in Natural Language Processing, 2013.
+
+Nal Kalchbrenner, Ivo Danihelka, and Alex Graves. Grid long short-term memory. International
+Conference on Learning Representations, 2016a.
+
+Nal Kalchbrenner, Aaron van den Oord, Karen Simonyan, Ivo Danihelka, Oriol Vinyals, Alex Graves,
+and Koray Kavukcuoglu. Video pixel networks. CoRR, abs/1610.00527, 2016b.
+
+Diederik P. Kingma and Jimmy Ba. Adam: A method for stochastic optimization. CoRR,
+abs/1412.6980, 2014. URL http://arxiv.org/abs/1412.6980.
+
+Minh-Thang Luong and Christopher D. Manning. Achieving open vocabulary neural machine
+translation with hybrid word-character models. 2016.
+
+Minh-Thang Luong, Hieu Pham, and Christopher D. Manning. Effective approaches to attention-
+based neural machine translation. In EMNLP, September 2015.
+
+Tomas Mikolov, Martin Karafiát, Lukás Burget, Jan Cernocký, and Sanjeev Khudanpur. Recurrent
+neural network based language model. In INTERSPEECH 2010, pages 1045–1048, 2010.
+
+Kamil Rocki. Recurrent memory array structures. arXiv preprint arXiv:1607.03085, 2016.
+
+Karen Simonyan, Andrea Vedaldi, and Andrew Zisserman. Deep inside convolutional networks:
+Visualising image classification models and saliency maps. 2013. URL http://arxiv.org/abs/
+1312.6034.
+
+Rupesh Kumar Srivastava, Klaus Greff, and Jürgen Schmidhuber. Highway networks. CoRR,
+abs/1505.00387, 2015.
+
+Ilya Sutskever, Oriol Vinyals, and Quoc V. Le. Sequence to sequence learning with neural networks.
+In Advances in Neural Information Processing Systems, pages 3104–3112, 2014.
+
+Aaron van den Oord, Sander Dieleman, Heiga Zen, Karen Simonyan, Oriol Vinyals, Alex Graves,
+Nal Kalchbrenner, Andrew Senior, and Koray Kavukcuoglu. Wavenet: A generative model for
+raw audio. CoRR, abs/1609.03499, 2016a.
+
+Aäron van den Oord, Nal Kalchbrenner, and Koray Kavukcuoglu. Pixel recurrent neural networks.
+In ICML, volume 48, pages 1747–1756, 2016b.
+
+Philip Williams, Rico Sennrich, Maria Nadejde, Matthias Huck, and Philipp Koehn. Edinburgh’s
+syntax-based systems at WMT 2015. In Proceedings of the Tenth Workshop on Statistical Machine
+Translation, 2015.
+
+Yonghui Wu, Mike Schuster, Zhifeng Chen, Quoc V. Le, Mohammad Norouzi, Wolfgang Macherey,
+Maxim Krikun, Yuan Cao, Qin Gao, Klaus Macherey, Jeff Klingner, Apurva Shah, Melvin Johnson,
+Xiaobing Liu,  Lukasz Kaiser, Stephan Gouws, Yoshikiyo Kato, Taku Kudo, Hideto Kazawa, Keith
+Stevens, George Kurian, Nishant Patil, Wei Wang, Cliff Young, Jason Smith, Jason Riesa, Alex
+Rudnick, Oriol Vinyals, Greg Corrado, Macduff Hughes, and Jeffrey Dean. Google’s neural
+machine translation system: Bridging the gap between human and machine translation. arXiv
+preprint arxiv:1609.08144, 2016a.
+
+Yuhuai Wu, Saizheng Zhang, Ying Zhang, Yoshua Bengio, and Ruslan Salakhutdinov. On multi-
+plicative integration with recurrent neural networks. arXiv preprint arXiv:1606.06630, 2016b.
+
+Fisher Yu and Vladlen Koltun. Multi-scale context aggregation by dilated convolutions. CoRR,
+abs/1511.07122, 2015.
+
+Jie Zhou, Ying Cao, Xuguang Wang, Peng Li, and Wei Xu. Deep recurrent models with fast-forward
+connections for neural machine translation. arXiv preprint arXiv:1606.04199, 2016.
+
+11
+
+http://arxiv.org/abs/1412.6980
+http://arxiv.org/abs/1312.6034
+http://arxiv.org/abs/1312.6034
+
+	1 Introduction
+	2 Neural Translation Model
+	2.1 Desiderata
+
+	3 ByteNet
+	3.1 Dynamic Unfolding
+	3.2 Masked One-dimensional Convolutions
+	3.3 Dilation
+	3.4 Residual Blocks
+	3.5 Sub-Batch Normalization
+	3.6 Bag of Character n-Grams
+
+	4 Model Comparison
+	4.1 Recurrent ByteNets
+	4.2 Comparison of Properties
+
+	5 Character Prediction
+	6 Character-Level Machine Translation
+	7 Conclusion
+

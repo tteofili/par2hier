@@ -1,0 +1,130 @@
+and Forgets
+
+In addition to a novel model architecture, we also
+propose a new type of hidden unit (f in Eq. (1))
+that has been motivated by the LSTM unit but is
+much simpler to compute and implement.1 Fig. 2
+shows the graphical depiction of the proposed hid-
+den unit.
+
+Let us describe how the activation of the j-th
+hidden unit is computed. First, the reset gate rj is
+computed by
+
+rj = σ
+(
+[Wrx]j +
+
+[
+Urh〈t−1〉
+
+]
+j
+
+)
+, (5)
+
+where σ is the logistic sigmoid function, and [.]j
+denotes the j-th element of a vector. x and ht−1
+are the input and the previous hidden state, respec-
+tively. Wr and Ur are weight matrices which are
+learned.
+
+Similarly, the update gate zj is computed by
+
+zj = σ
+(
+[Wzx]j +
+
+[
+Uzh〈t−1〉
+
+]
+j
+
+)
+. (6)
+
+The actual activation of the proposed unit hj is
+then computed by
+
+h
+〈t〉
+j = zjh
+
+〈t−1〉
+j + (1− zj)h̃
+
+〈t〉
+j , (7)
+
+where
+
+h̃
+〈t〉
+j = φ
+
+(
+[Wx]j +
+
+[
+U
+(
+r� h〈t−1〉
+
+)]
+j
+
+)
+. (8)
+
+In this formulation, when the reset gate is close
+to 0, the hidden state is forced to ignore the pre-
+vious hidden state and reset with the current input
+
+1 The LSTM unit, which has shown impressive results in
+several applications such as speech recognition, has a mem-
+ory cell and four gating units that adaptively control the in-
+formation flow inside the unit, compared to only two gating
+units in the proposed hidden unit. For details on LSTM net-
+works, see, e.g., (Graves, 2012).
+
+z
+
+rh h
+~ x
+
+Figure 2: An illustration of the proposed hidden
+activation function. The update gate z selects
+whether the hidden state is to be updated with
+a new hidden state h̃. The reset gate r decides
+whether the previous hidden state is ignored. See
+Eqs. (5)–(8) for the detailed equations of r, z, h
+and h̃.
+
+only. This effectively allows the hidden state to
+drop any information that is found to be irrelevant
+later in the future, thus, allowing a more compact
+representation.
+
+On the other hand, the update gate controls how
+much information from the previous hidden state
+will carry over to the current hidden state. This
+acts similarly to the memory cell in the LSTM
+network and helps the RNN to remember long-
+term information. Furthermore, this may be con-
+sidered an adaptive variant of a leaky-integration
+unit (Bengio et al., 2013).
+
+As each hidden unit has separate reset and up-
+date gates, each hidden unit will learn to capture
+dependencies over different time scales. Those
+units that learn to capture short-term dependencies
+will tend to have reset gates that are frequently ac-
+tive, but those that capture longer-term dependen-
+cies will have update gates that are mostly active.
+
+In our preliminary experiments, we found that
+it is crucial to use this new unit with gating units.
+We were not able to get meaningful result with an
+oft-used tanh unit without any gating.

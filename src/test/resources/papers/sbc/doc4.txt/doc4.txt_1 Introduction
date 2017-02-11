@@ -1,0 +1,35 @@
+
+Joshua1 is an open-source toolkit for statistical machine translation of human lan-
+guages. The Joshua 6 release introduces a phrase-based decoder that uses the stan-
+dard priority-queue-based decoding algorithm (Koehn et al., 2003) to construct a hy-
+pergraphwhose format is sharedwith the existingCKY+-based hierarchical decoding
+algorithms. This release also introduces a number of speed, memory, documentation,
+and infrastructure improvements designed tomaximize usability in both research and
+production environments. This paper highlights these improvements and provides a
+
+1http://joshua-decoder.org
+
+© 2015 PBML. Distributed under CC BY-NC-ND. Corresponding author: post@cs.jhu.edu
+Cite as: Matt Post, Yuan Cao, Gaurav Kumar. Joshua 6: A phrase-based and hierarchical statistical machine trans-
+lation system. The Prague Bulletin of Mathematical Linguistics No. 104, 2015, pp. 5–16.
+doi: 10.1515/pralin-2015-0009.
+
+http://joshua-decoder.org
+http://creativecommons.org/licenses/by-nc-nd/3.0/
+
+
+PBML 104 OCTOBER 2015
+
+examples and usage notes for both the decoder and the Joshua pipeline, which takes
+care of all the steps of building and testing machine translation systems.
+
+The original version of Joshua (Li et al., 2009) was a port from Python of the Hiero
+hierarchical machine translation system introduced by Chiang (2007). It was later
+extended (Li et al., 2010) to support grammars with rich syntactic labels, particu-
+larly “syntax-augmented” models (Zollmann and Venugopal, 2006) . Subsequent
+versions produced Thrax, the extensible Hadoop-based grammar extraction tool for
+synchronous context-free grammars (Weese et al., 2011), later extended to support
+pivoting-based paraphrase extraction (Ganitkevitch et al., 2012). Joshua 5 (Post et al.,
+2013) introduced a sparse feature representation, support for GHKM (Galley et al.,
+2004, 2006) model construction, and large-scale discriminative tuners, as well as a
+number of significant improvements to speed and memory requirements.
