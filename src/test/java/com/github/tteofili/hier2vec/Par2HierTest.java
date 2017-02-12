@@ -51,12 +51,12 @@ import org.nd4j.linalg.ops.transforms.Transforms;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Tests for hier2vec
+ * Tests for par2hier
  */
-public class Hier2VecTest {
+public class Par2HierTest {
 
   @Test
-  public void testHVOnMTPapers() throws Exception {
+  public void testP2HOnMTPapers() throws Exception {
     ParagraphVectors paragraphVectors;
     LabelAwareIterator iterator;
     TokenizerFactory tokenizerFactory;
@@ -113,7 +113,7 @@ public class Hier2VecTest {
 
 
     // create hierarchical vectors
-    Map<String, INDArray> hvs = Hier2VecUtils.getHier2Vec(iterator, lookupTable, labels, 3,
+    Map<String, INDArray> hvs = Hier2VecUtils.getPar2Hier(iterator, lookupTable, labels, 3,
         Hier2VecUtils.Method.CLUSTER);
 
     // check similarity between hierarchical and paragraph vectors

@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.apache.commons.collections4.Trie;
 import org.apache.commons.collections4.trie.PatriciaTrie;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -83,7 +82,7 @@ class Hier2VecUtils {
    * @param k the no. of centroids
    * @return a map doc->hierarchical vector
    */
-  static Map<String, INDArray> getHier2Vec(LabelAwareIterator iterator,
+  static Map<String, INDArray> getPar2Hier(LabelAwareIterator iterator,
                                            WeightLookupTable<VocabWord> lookupTable,
                                            List<String> labels, int k, Method method) {
     Collections.sort(labels);
@@ -96,7 +95,7 @@ class Hier2VecUtils {
     Map<String, INDArray> hvs = new TreeMap<>();
     // for each doc
     for (String node : labelsSource.getLabels()) {
-      Hier2VecUtils.getHv(lookupTable, trie, node, k, hvs, method);
+      Hier2VecUtils.getPar2HierVector(lookupTable, trie, node, k, hvs, method);
     }
     return hvs;
   }
@@ -105,8 +104,8 @@ class Hier2VecUtils {
    * base case: on a leave hv = pv (+ k centroids of wv)
    * on a non-leave node with n childs: hv = pv + k centroids of the n hv
    */
-  private static INDArray getHv(WeightLookupTable<VocabWord> lookupTable, PatriciaTrie<String> trie, String node,
-                                int k, Map<String, INDArray> hvs, Method method) {
+  private static INDArray getPar2HierVector(WeightLookupTable<VocabWord> lookupTable, PatriciaTrie<String> trie, String node,
+                                            int k, Map<String, INDArray> hvs, Method method) {
     if (hvs.containsKey(node)) {
       return hvs.get(node);
     }
@@ -130,7 +129,7 @@ class Hier2VecUtils {
       int i = 0;
       for (String desc : descendants) {
         // child hierarchical vector
-        INDArray chv = getHv(lookupTable, trie, desc, k, hvs, method);
+        INDArray chv = getPar2HierVector(lookupTable, trie, desc, k, hvs, method);
         chvs.putRow(i, chv);
         i++;
       }
