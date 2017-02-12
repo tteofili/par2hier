@@ -1,18 +1,3 @@
-/*
- * Copyright 2017 Tommaso Teofili
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
-*/
 package com.github.tteofili.hier2vec;
 
 import java.util.Collection;
@@ -25,7 +10,7 @@ import java.util.TreeSet;
  * <p/>
  * This is a simplified Trie version which holds keys in nodes.
  */
-class StringTrie {
+public class StringTrie {
 
   private static final char ROOT_CHAR = '_';
   private final CharTrieNode root;
@@ -84,6 +69,49 @@ class StringTrie {
     return foundSubTree != null ? toStrings(prefix, foundSubTree) : new LinkedList<String>();
   }
 
+  public String remove(String element) {
+    char[] characters = element.toCharArray();
+    StringBuilder stringBuilder = remove(characters, root);
+    return stringBuilder != null ? stringBuilder.toString() : null;
+  }
+
+  private StringBuilder remove(char[] characters, CharTrieNode root) {
+    StringBuilder elementBuilder = new StringBuilder();
+    if (characters != null && characters.length > 1) {
+      CharTrieNode affectedNode = getAffectedNode(root, characters[0], false);
+      if (affectedNode != null) {
+        elementBuilder.append(affectedNode.getKey());
+        StringBuilder removeBuilder = remove(createSubArray(characters), affectedNode);
+        if (removeBuilder != null) {
+          elementBuilder.append(removeBuilder);
+        } else {
+          elementBuilder = null;
+        }
+      }
+    } else if (characters != null && characters.length == 1) {
+      CharTrieNode affectedNode = getAffectedNode(root, characters[0], false);
+      if (affectedNode != null && affectedNode.isWord()) {
+        root.getChildren().remove(affectedNode);
+        elementBuilder.append(characters[0]);
+        // TODO : back compress the trie till a sibling node is found to avoid having orphan nodes
+      } else {
+        elementBuilder = null;
+      }
+    } else {
+      elementBuilder = null;
+    }
+    return elementBuilder;
+  }
+
+  /**
+   * transforming the whole trie into a collection of elements
+   *
+   * @return a collection of single elements in the sub tree
+   */
+  public Collection<String> toStrings() {
+    return toStrings("", root);
+  }
+
   /**
    * transforming a node and all its descendants to a collection of elements
    *
@@ -129,24 +157,24 @@ class StringTrie {
     private final Collection<CharTrieNode> children;
     private Boolean isWord = false;
 
-    CharTrieNode(Character key) {
+    public CharTrieNode(Character key) {
       this(key, new TreeSet<>());
     }
 
-    CharTrieNode(Character key, Collection<CharTrieNode> children) {
+    public CharTrieNode(Character key, Collection<CharTrieNode> children) {
       this.key = key;
       this.children = children;
     }
 
-    Character getKey() {
+    public Character getKey() {
       return key;
     }
 
-    Collection<CharTrieNode> getChildren() {
+    public Collection<CharTrieNode> getChildren() {
       return children;
     }
 
-    Boolean isWord() {
+    public Boolean isWord() {
       return isWord;
     }
 

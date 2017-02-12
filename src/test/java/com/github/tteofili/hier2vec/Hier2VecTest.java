@@ -114,7 +114,7 @@ public class Hier2VecTest {
 
     // create hierarchical vectors
     Map<String, INDArray> hvs = Hier2VecUtils.getHier2Vec(iterator, lookupTable, labels, 3,
-        Hier2VecUtils.Method.SUM);
+        Hier2VecUtils.Method.CLUSTER);
 
     // check similarity between hierarchical and paragraph vectors
 //    for (Map.Entry<String, INDArray> entry : hvs.entrySet()) {

@@ -19,8 +19,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
 import java.util.TreeMap;
 
+import org.apache.commons.collections4.Trie;
+import org.apache.commons.collections4.trie.PatriciaTrie;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.SingularValueDecomposition;
@@ -85,8 +88,10 @@ class Hier2VecUtils {
                                            List<String> labels, int k, Method method) {
     Collections.sort(labels);
     LabelsSource labelsSource = iterator.getLabelsSource();
-    StringTrie trie = new StringTrie();
-    trie.addAll(labels.toArray(new String[labels.size()]));
+    PatriciaTrie<String> trie = new PatriciaTrie<>();
+    for (String label : labels) {
+      trie.put(label,label);
+    }
 
     Map<String, INDArray> hvs = new TreeMap<>();
     // for each doc
@@ -100,7 +105,7 @@ class Hier2VecUtils {
    * base case: on a leave hv = pv (+ k centroids of wv)
    * on a non-leave node with n childs: hv = pv + k centroids of the n hv
    */
-  private static INDArray getHv(WeightLookupTable<VocabWord> lookupTable, StringTrie trie, String node,
+  private static INDArray getHv(WeightLookupTable<VocabWord> lookupTable, PatriciaTrie<String> trie, String node,
                                 int k, Map<String, INDArray> hvs, Method method) {
     if (hvs.containsKey(node)) {
       return hvs.get(node);
@@ -109,9 +114,10 @@ class Hier2VecUtils {
     String[] split = node.split("\\.txt\\_(\\d\\.?)+");
     Collection<String> descendants;
     if (split.length == 2) {
-      String prefix = node.substring(0, node.indexOf(split[1]));
+      String prefix = node.substring(0, node.indexOf(split[1]))+".";
 
-      descendants = trie.search(prefix);
+      SortedMap<String,String> sortedMap = trie.prefixMap(prefix);
+      descendants = sortedMap.values();
     } else {
       descendants = Collections.emptyList();
     }
@@ -120,12 +126,9 @@ class Hier2VecUtils {
       hvs.put(node, hv);
       return hv;
     } else {
-      INDArray chvs = Nd4j.zeros(descendants.size() - 1, hv.columns());
+      INDArray chvs = Nd4j.zeros(descendants.size(), hv.columns());
       int i = 0;
       for (String desc : descendants) {
-        if (node.equals(desc)) {
-          continue;
-        }
         // child hierarchical vector
         INDArray chv = getHv(lookupTable, trie, desc, k, hvs, method);
         chvs.putRow(i, chv);
