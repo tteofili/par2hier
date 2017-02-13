@@ -16,9 +16,8 @@
 package com.github.tteofili.hier2vec;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.nio.file.Path;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,8 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
 import org.datavec.api.util.ClassPathResource;
@@ -43,8 +40,9 @@ import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
 import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFactory;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.ops.transforms.Transforms;
 
@@ -53,7 +51,30 @@ import static org.junit.Assert.assertEquals;
 /**
  * Tests for par2hier
  */
+@RunWith(Parameterized.class)
 public class Par2HierTest {
+
+  private final Hier2VecUtils.Method method;
+  private int k;
+
+  public Par2HierTest(Hier2VecUtils.Method method, int k) {
+    this.method = method;
+    this.k = k;
+  }
+
+  @Parameterized.Parameters
+  public static Collection<Object[]> data() {
+    return Arrays.asList(new Object[][] {
+        {Hier2VecUtils.Method.CLUSTER, 5},
+        {Hier2VecUtils.Method.CLUSTER, 4},
+        {Hier2VecUtils.Method.CLUSTER, 3},
+        {Hier2VecUtils.Method.CLUSTER, 2},
+        {Hier2VecUtils.Method.SUM, 5},
+        {Hier2VecUtils.Method.SUM, 4},
+        {Hier2VecUtils.Method.SUM, 3},
+        {Hier2VecUtils.Method.SUM, 2},
+    });
+  }
 
   @Test
   public void testP2HOnMTPapers() throws Exception {
@@ -89,63 +110,35 @@ public class Par2HierTest {
 
     Map<String, String[]> comparison = new TreeMap<>();
 
-    // check similarities among paragraph vectors
+    // extract paragraph vectors similarities
+    Map<String, INDArray> pvs = new TreeMap<>();
     WeightLookupTable<VocabWord> lookupTable = paragraphVectors.getLookupTable();
     List<String> labels = paragraphVectors.getLabelsSource().getLabels();
-    Map<String, INDArray> pvs = new TreeMap<>();
     for (String label : labels) {
       INDArray vector = lookupTable.vector(label);
-      pvs.put(label, vector);
       Collection<String> strings = paragraphVectors.nearestLabels(vector, 2);
-//      System.out.println(label + ": " + strings);
       String[] stringsArray = new String[2];
       stringsArray[0] = new LinkedList<>(strings).get(1);
       comparison.put(label, stringsArray);
+      pvs.put(label, vector);
     }
 
-
-    System.out.println("****");
-    System.out.println("****");
-    System.out.println("****");
-    System.out.println("****");
-    System.out.println("****");
-    System.out.println("****");
-
-
     // create hierarchical vectors
-    Map<String, INDArray> hvs = Hier2VecUtils.getPar2Hier(iterator, lookupTable, labels, 3,
-        Hier2VecUtils.Method.CLUSTER);
+    Map<String, INDArray> hvs = Hier2VecUtils.getPar2Hier(iterator, lookupTable, labels, k, method);
 
-    // check similarity between hierarchical and paragraph vectors
-//    for (Map.Entry<String, INDArray> entry : hvs.entrySet()) {
-//      Collection<String> strings = paragraphVectors.nearestLabels(entry.getValue(), 2);
-//      System.out.println(entry.getKey() + ": " + strings);
-//    }
-
-//    System.out.println("****");
-//    System.out.println("****");
-//    System.out.println("****");
-//    System.out.println("****");
-//    System.out.println("****");
-//    System.out.println("****");
-
-
-    // check similarity among hierarchical vectors
+    // extract hierarchical vectors similarities
     for (Map.Entry<String, INDArray> entry : hvs.entrySet()) {
 
       INDArray vector = entry.getValue();
       Collection<String> strings = nearestVectors(hvs, vector);
       String label = entry.getKey();
-//      System.out.println(label + ": " + strings);
 
       String[] stringsArray = comparison.get(label);
       stringsArray[1] = new LinkedList<>(strings).get(1);
       comparison.put(label, stringsArray);
     }
 
-//    String pvCSV = asStrings(Hier2VecUtils.svdPCA(pvs, 2));
-//    String hvCSV = asStrings(Hier2VecUtils.svdPCA(hvs, 2));
-
+    System.out.println("comparison (" + k + "," + method + ")");
     // output comparison
     for (Map.Entry<String, String[]> c : comparison.entrySet()) {
       String[] values = c.getValue();
@@ -154,6 +147,7 @@ public class Par2HierTest {
       }
     }
 
+    System.out.println("indexes (" + k + "," + method + ")");
     // measure similarity indexes
     double[] intraDocumentSimilarity = getIntraDocumentSimilarity(comparison);
     System.out.println("ids:" + Arrays.toString(intraDocumentSimilarity));
@@ -161,6 +155,18 @@ public class Par2HierTest {
     System.out.println("ds:" + Arrays.toString(depthSimilarity));
 
     // TODO : add section classification accuracy measures
+
+    // persist 2 dimensional vectors
+    String pvCSV = asStrings(Hier2VecUtils.svdPCA(pvs, 2));
+    File pvFile = Files.createFile(Paths.get("target/pvs" + k + "-" + method + ".csv")).toFile();
+    FileOutputStream pvOutputStream = new FileOutputStream(pvFile);
+    IOUtils.write(pvCSV, pvOutputStream);
+
+    String hvCSV = asStrings(Hier2VecUtils.svdPCA(hvs, 2));
+    File hvFile = Files.createFile(Paths.get("target/hvs.csv" + k + "-" + method + ")")).toFile();
+    FileOutputStream hvOutputStream = new FileOutputStream(hvFile);
+    IOUtils.write(hvCSV, hvOutputStream);
+
   }
 
   private double[] getDepthSimilarity(Map<String, String[]> comparison) {
@@ -215,11 +221,10 @@ public class Par2HierTest {
   private String asStrings(Map<String, INDArray> vs) {
     StringBuilder builder = new StringBuilder();
     for (Map.Entry<String, INDArray> entry : vs.entrySet()) {
-      builder.append(entry.getKey()).append(", ").append(Arrays.toString(entry.getValue().data().asDouble()));
+      builder.append(entry.getKey()).append(", ").append(Arrays.toString(entry.getValue().data().asDouble())).append("\n");
     }
     return builder.toString();
   }
-
 
   @Test
   public void testTruncatedSVD() throws Exception {
@@ -237,68 +242,5 @@ public class Par2HierTest {
     assertEquals(data.length, truncatedSVD.length);
     assertEquals(data[0].length, truncatedSVD[0].length);
   }
-
-  @Ignore
-  @Test
-  public void testDataSplit() throws Exception {
-    String regex = "\\n\\d(\\.\\d)*\\.?\\u0020[\\w|\\-|\\|\\–:]+(\\u0020[\\w|\\-|\\:|\\–]+){0,10}\\n";
-    String prefix = "/path/to/h2v/";
-    Pattern pattern = Pattern.compile(regex);
-    Path path = Paths.get(getClass().getResource("/papers/raw/").getFile());
-    File file = path.toFile();
-    if (file.exists() && file.list() != null) {
-      for (File doc : file.listFiles()) {
-        String s = IOUtils.toString(new FileInputStream(doc));
-        String docName = doc.getName();
-        File fileDir = new File(prefix + docName);
-        assert fileDir.mkdir();
-        Matcher matcher = pattern.matcher(s);
-        int start = 0;
-        String sectionName = "abstract";
-        while (matcher.find(start)) {
-          String string = matcher.group(0);
-          if (isValid(string)) {
-
-            String content;
-
-            if (start == 0) {
-              // abstract
-              content = s.substring(0, matcher.start());
-            } else {
-              content = s.substring(start, matcher.start());
-            }
-
-            File f = new File(prefix + docName + "/" + docName + "_" + sectionName);
-            assert f.createNewFile() : "could not create file" + f.getAbsolutePath();
-            FileOutputStream outputStream = new FileOutputStream(f);
-            IOUtils.write(content, outputStream);
-
-            start = matcher.end();
-            sectionName = string.replaceAll("\n", "").trim();
-          } else {
-            start = matcher.end();
-          }
-        }
-        // remaining
-        File f = new File(prefix + docName + "/" + docName + "_" + sectionName);
-        assert f.createNewFile();
-        FileOutputStream outputStream = new FileOutputStream(f);
-
-        IOUtils.write(s.substring(start), outputStream);
-      }
-    }
-  }
-
-  private boolean isValid(String string) {
-    boolean result = false;
-    char[] chars = string.toCharArray();
-    for (char aChar : chars) {
-      if (result = Character.isLetter(aChar)) {
-        break;
-      }
-    }
-    return result;
-  }
-
 
 }
