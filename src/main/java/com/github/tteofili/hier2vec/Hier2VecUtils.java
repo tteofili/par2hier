@@ -185,27 +185,6 @@ class Hier2VecUtils {
     return approximatedSvdMatrix.getData();
   }
 
-  public static double[][] getTruncatedSVD(INDArray matrix, final int k) {
-
-    double[][] data = getDoubles(matrix);
-
-    SingularValueDecomposition svd = new SingularValueDecomposition(MatrixUtils.createRealMatrix(data));
-
-    double[][] truncatedU = new double[svd.getU().getRowDimension()][k];
-    svd.getU().copySubMatrix(0, truncatedU.length - 1, 0, k - 1, truncatedU);
-
-    double[][] truncatedS = new double[k][k];
-    svd.getS().copySubMatrix(0, k - 1, 0, k - 1, truncatedS);
-
-    double[][] truncatedVT = new double[k][svd.getVT().getColumnDimension()];
-    svd.getVT().copySubMatrix(0, k - 1, 0, truncatedVT[0].length - 1, truncatedVT);
-
-    RealMatrix approximatedSvdMatrix = (MatrixUtils.createRealMatrix(truncatedU)).multiply(
-        MatrixUtils.createRealMatrix(truncatedS)).multiply(MatrixUtils.createRealMatrix(truncatedVT));
-
-    return approximatedSvdMatrix.getData();
-  }
-
   private static double[][] getTruncatedVT(INDArray matrix, int k) {
     double[][] data = getDoubles(matrix);
 
