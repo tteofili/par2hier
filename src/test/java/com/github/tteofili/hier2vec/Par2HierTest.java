@@ -15,10 +15,7 @@
 */
 package com.github.tteofili.hier2vec;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -29,14 +26,20 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
-import org.apache.commons.io.IOUtils;
+import com.github.tteofili.hier2vec.utils.LabelSeeker;
+import com.github.tteofili.hier2vec.utils.MeansBuilder;
 import org.datavec.api.util.ClassPathResource;
+import org.deeplearning4j.berkeley.Pair;
 import org.deeplearning4j.models.embeddings.WeightLookupTable;
+import org.deeplearning4j.models.embeddings.inmemory.InMemoryLookupTable;
 import org.deeplearning4j.models.embeddings.reader.impl.BasicModelUtils;
 import org.deeplearning4j.models.paragraphvectors.ParagraphVectors;
 import org.deeplearning4j.models.word2vec.VocabWord;
+import org.deeplearning4j.models.word2vec.Word2Vec;
+import org.deeplearning4j.text.documentiterator.FileLabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.FilenamesLabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
+import org.deeplearning4j.text.documentiterator.LabelledDocument;
 import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFactory;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
@@ -91,7 +94,7 @@ public class Par2HierTest {
     tokenizerFactory = new DefaultTokenizerFactory();
     tokenizerFactory.setTokenPreProcessor(new CommonPreprocessor());
 
-    // ParagraphVectors training configuration
+    // paragraph vectors training configuration
     paragraphVectors = new ParagraphVectors.Builder()
         .minWordFrequency(1)
         .iterations(5)
@@ -108,6 +111,24 @@ public class Par2HierTest {
     // fit model
     paragraphVectors.fit();
 
+    Par2Hier par2Hier = new Par2Hier.Builder()
+        .minWordFrequency(1)
+        .iterations(5)
+        .epochs(1)
+        .layerSize(100)
+        .learningRate(0.025)
+        .windowSize(5)
+        .iterate(iterator)
+        .trainWordVectors(true)
+        .tokenizerFactory(tokenizerFactory)
+        .sampling(0)
+        .centroids(k)
+        .smoothing(method)
+        .build();
+
+    // fit model
+    par2Hier.fit();
+
     Map<String, String[]> comparison = new TreeMap<>();
 
     // extract paragraph vectors similarities
@@ -117,25 +138,12 @@ public class Par2HierTest {
     for (String label : labels) {
       INDArray vector = lookupTable.vector(label);
       Collection<String> strings = paragraphVectors.nearestLabels(vector, 2);
+      Collection<String> hstrings = par2Hier.nearestLabels(vector, 2);
       String[] stringsArray = new String[2];
       stringsArray[0] = new LinkedList<>(strings).get(1);
+      stringsArray[1] = new LinkedList<>(hstrings).get(1);
       comparison.put(label, stringsArray);
       pvs.put(label, vector);
-    }
-
-    // create hierarchical vectors
-    Map<String, INDArray> hvs = Hier2VecUtils.getPar2Hier(iterator, lookupTable, labels, k, method);
-
-    // extract hierarchical vectors similarities
-    for (Map.Entry<String, INDArray> entry : hvs.entrySet()) {
-
-      INDArray vector = entry.getValue();
-      Collection<String> strings = nearestVectors(hvs, vector);
-      String label = entry.getKey();
-
-      String[] stringsArray = comparison.get(label);
-      stringsArray[1] = new LinkedList<>(strings).get(1);
-      comparison.put(label, stringsArray);
     }
 
     System.out.println("comparison (" + k + "," + method + ")");
@@ -154,18 +162,16 @@ public class Par2HierTest {
     double[] depthSimilarity = getDepthSimilarity(comparison);
     System.out.println("ds:" + Arrays.toString(depthSimilarity));
 
-    // TODO : add section classification accuracy measures
-
     // persist 2 dimensional vectors
-    String pvCSV = asStrings(Hier2VecUtils.svdPCA(pvs, 2));
-    File pvFile = Files.createFile(Paths.get("target/pvs" + k + "-" + method + ".csv")).toFile();
-    FileOutputStream pvOutputStream = new FileOutputStream(pvFile);
-    IOUtils.write(pvCSV, pvOutputStream);
-
-    String hvCSV = asStrings(Hier2VecUtils.svdPCA(hvs, 2));
-    File hvFile = Files.createFile(Paths.get("target/hvs.csv" + k + "-" + method + ")")).toFile();
-    FileOutputStream hvOutputStream = new FileOutputStream(hvFile);
-    IOUtils.write(hvCSV, hvOutputStream);
+//    String pvCSV = asStrings(Hier2VecUtils.svdPCA(pvs, 2));
+//    File pvFile = Files.createFile(Paths.get("target/pvs" + k + "-" + method + ".csv")).toFile();
+//    FileOutputStream pvOutputStream = new FileOutputStream(pvFile);
+//    IOUtils.write(pvCSV, pvOutputStream);
+//
+//    String hvCSV = asStrings(Hier2VecUtils.svdPCA(hvs, 2));
+//    File hvFile = Files.createFile(Paths.get("target/hvs.csv" + k + "-" + method + ")")).toFile();
+//    FileOutputStream hvOutputStream = new FileOutputStream(hvFile);
+//    IOUtils.write(hvCSV, hvOutputStream);
 
   }
 
@@ -241,6 +247,80 @@ public class Par2HierTest {
 
     assertEquals(data.length, truncatedSVD.length);
     assertEquals(data[0].length, truncatedSVD[0].length);
+  }
+
+  @Test
+  public void testClassification() throws Exception {
+    ClassPathResource resource = new ClassPathResource("classification/labeled");
+    LabelAwareIterator iterator;
+    TokenizerFactory tokenizerFactory;
+
+    // build a iterator for our dataset
+    iterator = new FileLabelAwareIterator.Builder()
+        .addSourceFolder(resource.getFile())
+        .build();
+
+    tokenizerFactory = new DefaultTokenizerFactory();
+    tokenizerFactory.setTokenPreProcessor(new CommonPreprocessor());
+
+    // ParagraphVectors training configuration
+    ParagraphVectors paragraphVectors = new ParagraphVectors.Builder()
+        .learningRate(0.025)
+        .minLearningRate(0.001)
+        .batchSize(1000)
+        .epochs(20)
+        .iterate(iterator)
+        .trainWordVectors(true)
+        .tokenizerFactory(tokenizerFactory)
+        .build();
+
+    // Start model training
+    paragraphVectors.fit();
+
+    // par2hier training configuration
+    Par2Hier par2Hier = new Par2Hier.Builder()
+        .learningRate(0.025)
+        .minLearningRate(0.001)
+        .batchSize(1000)
+        .epochs(20)
+        .iterate(iterator)
+        .trainWordVectors(true)
+        .tokenizerFactory(tokenizerFactory)
+        .smoothing(method)
+        .centroids(k)
+        .build();
+
+    // Start model training
+    par2Hier.fit();
+
+    ClassPathResource unClassifiedResource = new ClassPathResource("classification/unlabeled");
+    checkClassification(iterator, tokenizerFactory, paragraphVectors, unClassifiedResource);
+    checkClassification(iterator, tokenizerFactory, par2Hier, unClassifiedResource);
+
+  }
+
+  private void checkClassification(LabelAwareIterator iterator, TokenizerFactory tokenizerFactory,
+                                   Word2Vec vectors, ClassPathResource unClassifiedResource) throws FileNotFoundException {
+    FileLabelAwareIterator unClassifiedIterator = new FileLabelAwareIterator.Builder()
+        .addSourceFolder(unClassifiedResource.getFile())
+        .build();
+
+    MeansBuilder meansBuilder = new MeansBuilder(
+        (InMemoryLookupTable<VocabWord>) vectors.getLookupTable(),
+        tokenizerFactory);
+    LabelSeeker seeker = new LabelSeeker(iterator.getLabelsSource().getLabels(),
+        (InMemoryLookupTable<VocabWord>) vectors.getLookupTable());
+
+    while (unClassifiedIterator.hasNextDocument()) {
+      LabelledDocument document = unClassifiedIterator.nextDocument();
+      INDArray documentAsCentroid = meansBuilder.documentAsVector(document);
+      List<Pair<String, Double>> scores = seeker.getScores(documentAsCentroid);
+
+      System.out.println(vectors.getClass() + "-> Document '" + document.getLabel() + "' falls into the following categories: ");
+      for (Pair<String, Double> score : scores) {
+        System.out.println("        " + score.getFirst() + ": " + score.getSecond());
+      }
+    }
   }
 
 }

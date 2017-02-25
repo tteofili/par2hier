@@ -1,0 +1,13 @@
+
+AdaGrad is one of the best-performing online learning algorithms that has re-
+cently been applied to many NLP and deep learning tasks (Socher et al., 2013; Mnih
+and Kavukcuoglu, 2013; Chen andManning, 2014) and to machine translation (Green
+et al., 2012). Our implementation includes the choice of using either L1 and L2 reg-
+ularization. In the latter case, no closed-form solution to the update equation can be
+found (Duchi et al., 2011). However, we used a squared regularization term instead,
+which permits a closed-form update. We also use the structured hinge-loss as the ob-
+jective, just like in the MIRA case, and mini-batch estimation of the gradient is also
+supported. Since when a large number of sparse features are defined, only a small
+part of them are active in each training sample, we use lazy update strategy in both
+the L1 and L2 regularization cases for those features that do not fire in each training
+sample.

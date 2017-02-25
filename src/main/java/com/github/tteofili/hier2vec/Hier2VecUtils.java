@@ -89,7 +89,7 @@ class Hier2VecUtils {
     LabelsSource labelsSource = iterator.getLabelsSource();
     PatriciaTrie<String> trie = new PatriciaTrie<>();
     for (String label : labels) {
-      trie.put(label,label);
+      trie.put(label, label);
     }
 
     Map<String, INDArray> hvs = new TreeMap<>();
@@ -113,9 +113,9 @@ class Hier2VecUtils {
     String[] split = node.split("\\.txt\\_(\\d\\.?)+");
     Collection<String> descendants;
     if (split.length == 2) {
-      String prefix = node.substring(0, node.indexOf(split[1]))+".";
+      String prefix = node.substring(0, node.indexOf(split[1])) + ".";
 
-      SortedMap<String,String> sortedMap = trie.prefixMap(prefix);
+      SortedMap<String, String> sortedMap = trie.prefixMap(prefix);
       descendants = sortedMap.values();
     } else {
       descendants = Collections.emptyList();

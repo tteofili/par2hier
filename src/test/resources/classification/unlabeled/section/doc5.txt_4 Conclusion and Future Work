@@ -1,0 +1,207 @@
+
+We developed a DS method, based on sentence
+classification techniques. The classifier is based
+on CNNs or BLSTM neural networks. We thor-
+oughly evaluated it over four language pairs.
+Our method yielded better translation performance
+than the cross-entropy DS technique, requiring a
+minor amount of data. Additionally, we found that
+both CNN and BLSTM networks performed simi-
+larly, thus being both suitable sentence encoders.
+
+As future work, we aim to delve into the usage
+of semi-supervised training strategies for the clas-
+sifier. Ladder networks (Rasmus et al., 2015) seem
+a promising tool. We should investigate how to in-
+clude them in our pipeline. We should also investi-
+gate the application of one-shot learning strategies
+to a similar scenario, where only the text to trans-
+late is available.
+
+
+
+References
+[Axelrod et al.2011] Amittai Axelrod, Xiaodong He,
+
+and Jianfeng Gao. 2011. Domain adaptation
+via pseudo in-domain data selection. In Proc. of
+EMNLP, pages 355–362.
+
+[Bahdanau et al.2015] Dzmitry Bahdanau, Kyunghyun
+Cho, and Yoshua Bengio. 2015. Neural machine
+translation by jointly learning to align and translate.
+In Proc. of ICLR.
+
+[Bojar et al.2014] Ondřej Bojar, Christian Buck, Chris-
+tian Federmann, Barry Haddow, Philipp Koehn,
+Christof Monz, Matt Post, and Lucia Specia, editors.
+2014. In Proc. of WMT. ACL.
+
+[Brants et al.2007] Thorsten Brants, Ashok C Popat,
+Peng Xu, Franz J Och, and Jeffrey Dean. 2007.
+Large language models in machine translation. In
+Proc. of EMNLP/CoNLL, pages 858–867.
+
+[Callison-Burch et al.2007] Chris Callison-Burch,
+Cameron Fordyce, Philipp Koehn, Christof Monz,
+and Josh Schroeder. 2007. (meta-) evaluation
+of machine translation. In Proc. of WMT, pages
+136–158.
+
+[Chen and Huang2016] Boxing Chen and Fei Huang.
+2016. Semi-supervised convolutional networks for
+translation adaptation with tiny amount of in-domain
+data. CoNLL 2016, page 314.
+
+[Chen et al.2016] Boxing Chen, Roland Kuhn, George
+Foster, Colin Cherry, and Fei Huang. 2016. Bilin-
+gual methods for adaptive training data selection for
+machine translation. AMTA 2016, Vol., page 93.
+
+[Duh et al.2013] Kevin Duh, Graham Neubig, Kat-
+suhito Sudoh, and Hajime Tsukada. 2013. Adap-
+tation data selection using neural language models:
+Experiments in machine translation. In Proc. of
+ACL, pages 678–683.
+
+[Gers et al.2000] Felix A Gers, Jürgen Schmidhuber,
+and Fred Cummins. 2000. Learning to forget: Con-
+tinual prediction with LSTM. Neural Computation,
+12(10):2451–2471.
+
+[Hochreiter and Schmidhuber1997] Sepp Hochreiter
+and Jürgen Schmidhuber. 1997. Long short-term
+memory. Neural Computation, 9(8):1735–1780.
+
+[Kalchbrenner and Blunsom2013] Nal Kalchbrenner
+and Phil Blunsom. 2013. Recurrent continuous
+translation models. In Proc. of EMNLP, pages
+1700–1709.
+
+[Kim2014] Yoon Kim. 2014. Convolutional neural
+networks for sentence classification. In Proc. of
+EMNLP, pages 1746–1751.
+
+[Kingma and Ba2014] Diederik P. Kingma and Jimmy
+Ba. 2014. Adam: A method for stochastic opti-
+mization. arXiv:1412.6980.
+
+[Kneser and Ney1995] Reinhard Kneser and Hermann
+Ney. 1995. Improved backing-off for m-gram lan-
+guage modeling. In Proc. of ICASSP, pages 181–
+184.
+
+[Koehn et al.2007] Philipp Koehn, Hieu Hoang,
+Alexandra Birch, Chris Callison-Burch, Marcello
+Federico, Nicola Bertoldi, Brooke Cowan, Wade
+Shen, Christine Moran, Richard Zens, et al. 2007.
+Moses: Open source toolkit for statistical machine
+translation. In Proc. of ACL, pages 177–180.
+
+[Koehn2005] Philipp Koehn. 2005. Europarl: A par-
+allel corpus for statistical machine translation. In
+Proc. of MT Summit, pages 79–86.
+
+[Koehn2010] Philipp Koehn. 2010. Statistical machine
+translation. Cambridge University Press.
+
+[LeCun et al.1998] Y. LeCun, L. Bottou, Y. Bengio, and
+P. Haffner. 1998. Gradient-based learning applied
+to document recognition. IEEE, 86(11):2278–2324,
+November.
+
+[Mansour et al.2011] Saab Mansour, Joern Wuebker,
+and Hermann Ney. 2011. Combining transla-
+tion and language model scoring for domain-specific
+data filtering. In Proc. of IWSLT, pages 222–229.
+
+[Moore and Lewis2010] Robert C Moore and William
+Lewis. 2010. Intelligent selection of language
+model training data. In Proc. of ACL, pages 220–
+224.
+
+[Och and Ney2003] Franz Josef Och and Hermann Ney.
+2003. A systematic comparison of various statisti-
+cal alignment models. Computational Linguistics,
+29(1):19–51.
+
+[Och2003] Franz Josef Och. 2003. Minimum error rate
+training in statistical machine translation. In Proc.
+of ACL, pages 160–167.
+
+[Papineni et al.2002] Kishore Papineni, Salim Roukos,
+Todd Ward, and Wei-Jing Zhu. 2002. Bleu: a
+method for automatic evaluation of machine trans-
+lation. In Proc. of ACL, pages 311–318.
+
+[Rasmus et al.2015] Antti Rasmus, Mathias Berglund,
+Mikko Honkala, Harri Valpola, and Tapani Raiko.
+2015. Semi-supervised learning with ladder net-
+works. In Proc. of NIPS, pages 3546–3554.
+
+[Rousseau2013] Anthony Rousseau. 2013. Xenc: An
+open-source tool for data selection in natural lan-
+guage processing. The Prague Bulletin of Mathe-
+matical Linguistics, 100:73–82.
+
+[Schuster and Paliwal1997] Mike Schuster and
+Kuldip K Paliwal. 1997. Bidirectional recur-
+rent neural networks. IEEE Transactions on Signal
+Processing, 45(11):2673–2681.
+
+[Schwenk et al.2012] Holger Schwenk, Anthony
+Rousseau, and Mohammed Attik. 2012. Large,
+pruned or continuous space language models on a
+gpu for statistical machine translation. In Proc. of
+NAACL-HLT, pages 11–19.
+
+
+
+[Stolcke2002] Andreas Stolcke. 2002. SRILM - an ex-
+tensible language modeling toolkit. In Proc. of IC-
+SLP, pages 901–904.
+
+[Sutskever et al.2014] Ilya Sutskever, Oriol Vinyals,
+and Quoc V. Le. 2014. Sequence to sequence learn-
+ing with neural networks. In Proc. of NIPS, pages
+3104–3112.
+
+[Szegedy et al.2015] Christian Szegedy, Wei Liu,
+Yangqing Jia, Pierre Sermanet, Scott Reed,
+Dragomir Anguelov, Dumitru Erhan, Vincent
+Vanhoucke, and Andrew Rabinovich. 2015. Going
+deeper with convolutions. In Proc. of CVRP, pages
+1–9.
+
+[Theano Development Team2016] Theano Develop-
+ment Team. 2016. Theano: A Python framework
+for fast computation of mathematical expressions.
+arXiv:1605.02688.
+
+[Tiedemann2009] Jörg Tiedemann. 2009. News from
+opus - a collection of multilingual parallel corpora
+with tools and interfaces. In Proc. of RANLP, pages
+237–248.
+
+[Yarowsky1995] David Yarowsky. 1995. Unsuper-
+vised word sense disambiguation rivaling supervised
+methods. In Proc. of ACL, pages 189–196.
+
+[Zeiler2012] Matthew D. Zeiler. 2012.
+ADADELTA: An adaptive learning rate method.
+arXiv:1212.5701.
+
+
+	1 Introduction
+	2 Data Selection
+	2.1 Data Selection using Cross-entropy
+	2.2 Data Selection using Neural Networks
+	2.3 Semi-supervised Selection
+
+	3 Experiments in SMT
+	3.1 Corpora
+	3.2 Experimental Setup
+	3.3 Experimental Results
+
+	4 Conclusion and Future Work
+

@@ -1,0 +1,36 @@
+
+Given a string s from a source language, a neural translation model estimates a distribution
+p(t|s) over strings t of a target language. The distribution indicates the probability of a
+
+2
+
+
+
+EOS EOSEOS
+
+Figure 2: Dynamic unfolding in the ByteNet architecture. At each step the target network
+is conditioned on the source representation for that step, or simply on no representation for
+steps beyond the source length. The decoding ends when the target network produces an
+end-of-sequence (EOS) symbol.
+
+string t being a translation of s. A product of conditionals over the tokens in the target
+t = t0, ..., tN leads to a tractable formulation of the distribution:
+
+p(t|s) =
+N∏
+i=0
+
+p(ti|t<i, s) (1)
+
+Each conditional factor expresses complex and long-range dependencies among the source
+and target tokens. The strings are usually sentences of the respective languages; the tokens
+are words or, as in the present case, characters. The network that models p(t|s) is composed
+of two sub-networks, a source network that processes the source string into a representation
+and a target network that uses the source representation to generate the target string
+(Kalchbrenner and Blunsom, 2013). The target network functions as a language model for
+the target language.
+
+A neural translation model has some basic properties. The target network is autoregressive
+in the target tokens and the network is sensitive to the ordering of the tokens in the source
+and target strings. It is also useful for the model to be able to assign a non-zero probability
+to any string in the target language and retain an open vocabulary.

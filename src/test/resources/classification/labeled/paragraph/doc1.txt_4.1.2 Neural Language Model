@@ -1,0 +1,76 @@
+In order to assess the effectiveness of scoring
+phrase pairs with the proposed RNN Encoder–
+Decoder, we also tried a more traditional approach
+of using a neural network for learning a target
+language model (CSLM) (Schwenk, 2007). Espe-
+cially, the comparison between the SMT system
+using CSLM and that using the proposed approach
+of phrase scoring by RNN Encoder–Decoder will
+clarify whether the contributions from multiple
+neural networks in different parts of the SMT sys-
+
+tem add up or are redundant.
+We trained the CSLM model on 7-grams
+
+from the target corpus. Each input word
+was projected into the embedding space R512,
+and they were concatenated to form a 3072-
+dimensional vector. The concatenated vector was
+fed through two rectified layers (of size 1536 and
+1024) (Glorot et al., 2011). The output layer was
+a simple softmax layer (see Eq. (2)). All the
+weight parameters were initialized uniformly be-
+tween −0.01 and 0.01, and the model was trained
+until the validation perplexity did not improve for
+10 epochs. After training, the language model
+achieved a perplexity of 45.80. The validation set
+was a random selection of 0.1% of the corpus. The
+model was used to score partial translations dur-
+ing the decoding process, which generally leads to
+higher gains in BLEU score than n-best list rescor-
+ing (Vaswani et al., 2013).
+
+To address the computational complexity of
+using a CSLM in the decoder a buffer was
+used to aggregate n-grams during the stack-
+search performed by the decoder. Only when
+the buffer is full, or a stack is about to
+be pruned, the n-grams are scored by the
+CSLM. This allows us to perform fast matrix-
+matrix multiplication on GPU using Theano
+(Bergstra et al., 2010; Bastien et al., 2012).
+
+−60 −50 −40 −30 −20 −10 0
+−14
+
+−12
+
+−10
+
+−8
+
+−6
+
+−4
+
+−2
+
+0
+
+RNN Scores (log)
+
+T
+M
+
+ S
+co
+
+re
+s
+
+(lo
+g)
+
+Figure 3: The visualization of phrase pairs accord-
+ing to their scores (log-probabilities) by the RNN
+Encoder–Decoder and the translation model.

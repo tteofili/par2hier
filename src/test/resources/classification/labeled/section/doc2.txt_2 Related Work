@@ -1,0 +1,29 @@
+Statistical Machine Translation (SMT) has been the dominant translation paradigm for decades [3, 4, 5].
+Practical implementations of SMT are generally phrase-based systems (PBMT) which translate sequences of
+words or phrases where the lengths may differ [25].
+
+Even prior to the advent of direct Neural Machine Translation, neural networks have been used as a
+component within SMT systems with some success. Perhaps one of the most notable attempts involved the use
+of a joint language model to learn phrase representations [13] which yielded an impressive improvement when
+combined with phrase-based translation. This approach, however, still makes use of phrase-based translation
+systems at its core, and therefore inherits their shortcomings. Other proposed approaches for learning phrase
+representations [7] or learning end-to-end translation with neural networks [23] offered encouraging hints, but
+ultimately delivered worse overall accuracy compared to standard phrase-based systems.
+
+The concept of end-to-end learning for machine translation has been attempted in the past (e.g., [8]) with
+
+2
+
+
+
+limited success. Following seminal papers in the area [39, 2], NMT translation quality has crept closer to
+the level of phrase-based translation systems for common research benchmarks. Perhaps the first successful
+attempt at surpassing phrase-based translation was described in [30]. On WMT’14 English-to-French, this
+system achieved a 0.5 BLEU improvement compared to a state-of-the-art phrase-based system.
+
+Since then, many novel techniques have been proposed to further improve NMT: using an attention
+mechanism to deal with rare words [36], a mechanism to model translation coverage [40], multi-task and
+semi-supervised training to incorporate more data [14, 28], a character decoder [9], a character encoder [11],
+subword units [37] also to deal with rare word outputs, different kinds of attention mechanisms [29], and
+sentence-level loss minimization [38, 33]. While the translation accuracy of these systems has been encouraging,
+systematic comparison with large scale, production quality phrase-based translation systems has been lacking.

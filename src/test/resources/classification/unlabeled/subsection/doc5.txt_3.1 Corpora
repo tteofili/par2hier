@@ -1,0 +1,16 @@
+
+Two corpora are involved within the DS task: an
+out-of-domain corpus G and an in-domain corpus
+I . DS selects only a portion of the out-of-domain
+corpus, and leverages that subset together with
+the in-domain data to train a, hopefully improved,
+SMT system. As out-of-domain corpus, we used
+the Europarl corpus (Koehn, 2005). As in-domain
+data, we used the EMEA corpus (Tiedemann,
+2009). The Medical-Test and Medical-Mert cor-
+pora are partitions established in the 2014 Work-
+shop on SMT1 (Bojar et al., 2014). We focused
+on the English-French (En-Fr), French-English
+(Fr-En), German-English (De-En) and English-
+German (En-De) language pairs. The main figures
+of the corpora used are shown in Table 1.

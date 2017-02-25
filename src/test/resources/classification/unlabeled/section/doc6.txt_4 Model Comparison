@@ -1,0 +1,5 @@
+
+In this section we analyze the properties of various previously and currently introduced
+neural translation models. For the sake of a more complete analysis, we also consider two
+recurrent variants in the ByteNet family of architectures, which we do not evaluate in the
+experiments.

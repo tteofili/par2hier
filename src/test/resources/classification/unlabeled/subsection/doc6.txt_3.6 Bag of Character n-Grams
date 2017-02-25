@@ -1,0 +1,10 @@
+
+The tokens that we adopt correspond to characters in the input sequences. An efficient way
+to increase the capacity of the models is to use input embeddings not just for single tokens,
+but also for n-grams of adjacent tokens. At each position we sum the embeddings of the
+respective n-grams for 1 ≤ n ≤ 5 component-wise into a single vector. Although the portion
+of seen n-grams decreases as the value of n increases – a cutoff threshold is chosen for each
+n – all characters (n-grams for n = 1) are seen during training. This fallback structure
+provided by the bag of character n-grams guarantees that at any position the input given to
+the network is always well defined. The length of the sequences corresponds to the number
+of characters and does not change when using bags of n-grams.

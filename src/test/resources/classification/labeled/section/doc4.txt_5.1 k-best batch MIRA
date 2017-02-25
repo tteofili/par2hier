@@ -1,0 +1,10 @@
+
+k-best batchMIRA is a variant of the “hope-fear”MIRA (Chiang et al., 2008) which
+uses k-best translations as approximate search spaces, and has been implemented in
+the Moses decoder (Cherry and Foster, 2012). In our implementation, in addition to
+the “hope-fear” pair (which balance themodel andmetric scores), we provide flexibil-
+ity for also including the oracle (metric-best) and anti-oracle (metric-worst), similar to
+the hypothesis selection procedure proposed in Eidelman (2012). What is more, since
+MIRA is just like stochastic gradient descent (SGD) butwith an adaptive learning rate,
+our implementation also allows usingmini-batches for loss gradient estimationwhich
+reduces the estimation variance.

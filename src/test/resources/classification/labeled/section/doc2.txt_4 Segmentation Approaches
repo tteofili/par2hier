@@ -1,0 +1,7 @@
+Neural Machine Translation models often operate with fixed word vocabularies even though translation is
+fundamentally an open vocabulary problem (names, numbers, dates etc.). There are two broad categories of
+approaches to address the translation of out-of-vocabulary (OOV) words. One approach is to simply copy
+rare words from source to target (as most rare words are names or numbers where the correct translation is
+just a copy), either based on the attention model [36], using an external alignment model [30], or even using
+a more complicated special purpose pointing network [17]. Another broad category of approaches is to use
+sub-word units, e.g., chararacters [10], mixed word/characters [27], or more intelligent sub-words [37].
