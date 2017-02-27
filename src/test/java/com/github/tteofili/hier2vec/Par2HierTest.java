@@ -16,10 +16,8 @@
 package com.github.tteofili.hier2vec;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +30,6 @@ import org.datavec.api.util.ClassPathResource;
 import org.deeplearning4j.berkeley.Pair;
 import org.deeplearning4j.models.embeddings.WeightLookupTable;
 import org.deeplearning4j.models.embeddings.inmemory.InMemoryLookupTable;
-import org.deeplearning4j.models.embeddings.reader.impl.BasicModelUtils;
 import org.deeplearning4j.models.paragraphvectors.ParagraphVectors;
 import org.deeplearning4j.models.word2vec.VocabWord;
 import org.deeplearning4j.models.word2vec.Word2Vec;
@@ -47,7 +44,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.ops.transforms.Transforms;
 
 import static org.junit.Assert.assertEquals;
 
@@ -72,10 +68,12 @@ public class Par2HierTest {
         {Hier2VecUtils.Method.CLUSTER, 4},
         {Hier2VecUtils.Method.CLUSTER, 3},
         {Hier2VecUtils.Method.CLUSTER, 2},
+        {Hier2VecUtils.Method.CLUSTER, 1},
         {Hier2VecUtils.Method.SUM, 5},
         {Hier2VecUtils.Method.SUM, 4},
         {Hier2VecUtils.Method.SUM, 3},
         {Hier2VecUtils.Method.SUM, 2},
+        {Hier2VecUtils.Method.SUM, 1},
     });
   }
 
@@ -132,7 +130,6 @@ public class Par2HierTest {
     Map<String, String[]> comparison = new TreeMap<>();
 
     // extract paragraph vectors similarities
-    Map<String, INDArray> pvs = new TreeMap<>();
     WeightLookupTable<VocabWord> lookupTable = paragraphVectors.getLookupTable();
     List<String> labels = paragraphVectors.getLabelsSource().getLabels();
     for (String label : labels) {
@@ -143,36 +140,13 @@ public class Par2HierTest {
       stringsArray[0] = new LinkedList<>(strings).get(1);
       stringsArray[1] = new LinkedList<>(hstrings).get(1);
       comparison.put(label, stringsArray);
-      pvs.put(label, vector);
     }
 
-    System.out.println("comparison (" + k + "," + method + ")");
-    // output comparison
-    for (Map.Entry<String, String[]> c : comparison.entrySet()) {
-      String[] values = c.getValue();
-      if (!values[0].equals(values[1])) {
-        System.out.println(c.getKey() + ": " + Arrays.toString(values));
-      }
-    }
-
-    System.out.println("indexes (" + k + "," + method + ")");
     // measure similarity indexes
     double[] intraDocumentSimilarity = getIntraDocumentSimilarity(comparison);
-    System.out.println("ids:" + Arrays.toString(intraDocumentSimilarity));
+    System.out.println("ids(" + k + "," + method + "):" + Arrays.toString(intraDocumentSimilarity));
     double[] depthSimilarity = getDepthSimilarity(comparison);
-    System.out.println("ds:" + Arrays.toString(depthSimilarity));
-
-    // persist 2 dimensional vectors
-//    String pvCSV = asStrings(Hier2VecUtils.svdPCA(pvs, 2));
-//    File pvFile = Files.createFile(Paths.get("target/pvs" + k + "-" + method + ".csv")).toFile();
-//    FileOutputStream pvOutputStream = new FileOutputStream(pvFile);
-//    IOUtils.write(pvCSV, pvOutputStream);
-//
-//    String hvCSV = asStrings(Hier2VecUtils.svdPCA(hvs, 2));
-//    File hvFile = Files.createFile(Paths.get("target/hvs.csv" + k + "-" + method + ")")).toFile();
-//    FileOutputStream hvOutputStream = new FileOutputStream(hvFile);
-//    IOUtils.write(hvCSV, hvOutputStream);
-
+    System.out.println("ds(" + k + "," + method + "):" + Arrays.toString(depthSimilarity));
   }
 
   private double[] getDepthSimilarity(Map<String, String[]> comparison) {
@@ -213,25 +187,6 @@ public class Par2HierTest {
     return new double[] {pvSimilarity, hvSimilarity};
   }
 
-  private Collection<String> nearestVectors(Map<String, INDArray> hvs, INDArray vector) {
-    List<BasicModelUtils.WordSimilarity> result = new ArrayList<>();
-
-    for (Map.Entry<String, INDArray> current : hvs.entrySet()) {
-      double sim = Transforms.cosineSim(vector, current.getValue());
-      result.add(new BasicModelUtils.WordSimilarity(current.getKey(), sim));
-    }
-    Collections.sort(result, new BasicModelUtils.SimilarityComparator());
-    return BasicModelUtils.getLabels(result, 2);
-  }
-
-  private String asStrings(Map<String, INDArray> vs) {
-    StringBuilder builder = new StringBuilder();
-    for (Map.Entry<String, INDArray> entry : vs.entrySet()) {
-      builder.append(entry.getKey()).append(", ").append(Arrays.toString(entry.getValue().data().asDouble())).append("\n");
-    }
-    return builder.toString();
-  }
-
   @Test
   public void testTruncatedSVD() throws Exception {
     Random random = new Random();
@@ -263,44 +218,96 @@ public class Par2HierTest {
     tokenizerFactory = new DefaultTokenizerFactory();
     tokenizerFactory.setTokenPreProcessor(new CommonPreprocessor());
 
-    // ParagraphVectors training configuration
+    // training configuration
+    double learningRate = 0.025;
+    double minLearningRate = 0.001;
+    int batchSize = 5;
+    int numEpochs = 5;
+    boolean trainElements = true;
+    int windowSize = 4;
+    int layerSize = 60;
+    int iterations = 10;
+    int minWordFrequency = 1;
+
     ParagraphVectors paragraphVectors = new ParagraphVectors.Builder()
-        .learningRate(0.025)
-        .minLearningRate(0.001)
-        .batchSize(1000)
-        .epochs(20)
+        .minWordFrequency(minWordFrequency)
+        .iterations(iterations)
+        .layerSize(layerSize)
+        .windowSize(windowSize)
+        .learningRate(learningRate)
+        .minLearningRate(minLearningRate)
+        .batchSize(batchSize)
+        .epochs(numEpochs)
         .iterate(iterator)
-        .trainWordVectors(true)
+        .trainWordVectors(trainElements)
         .tokenizerFactory(tokenizerFactory)
         .build();
 
-    // Start model training
+    // Start pv training
     paragraphVectors.fit();
 
-    // par2hier training configuration
-    Par2Hier par2Hier = new Par2Hier.Builder()
-        .learningRate(0.025)
-        .minLearningRate(0.001)
-        .batchSize(1000)
-        .epochs(20)
+    ParagraphVectors paragraphVectors2 = new ParagraphVectors.Builder()
+        .minWordFrequency(minWordFrequency)
+        .iterations(iterations)
+        .layerSize(layerSize)
+        .windowSize(windowSize)
+        .learningRate(learningRate)
+        .minLearningRate(minLearningRate)
+        .batchSize(batchSize)
+        .epochs(numEpochs)
         .iterate(iterator)
-        .trainWordVectors(true)
+        .trainWordVectors(trainElements)
+        .tokenizerFactory(tokenizerFactory)
+        .build();
+
+    // Start pv training
+    paragraphVectors2.fit();
+
+    Par2Hier par2Hier = new Par2Hier.Builder()
+        .minWordFrequency(minWordFrequency)
+        .iterations(iterations)
+        .layerSize(layerSize)
+        .windowSize(windowSize)
+        .learningRate(learningRate)
+        .minLearningRate(minLearningRate)
+        .batchSize(batchSize)
+        .epochs(numEpochs)
+        .iterate(iterator)
+        .trainWordVectors(trainElements)
         .tokenizerFactory(tokenizerFactory)
         .smoothing(method)
         .centroids(k)
         .build();
 
-    // Start model training
+    // Start p2h training
     par2Hier.fit();
 
     ClassPathResource unClassifiedResource = new ClassPathResource("classification/unlabeled");
-    checkClassification(iterator, tokenizerFactory, paragraphVectors, unClassifiedResource);
-    checkClassification(iterator, tokenizerFactory, par2Hier, unClassifiedResource);
+    List<String[]> map1 = checkClassification(iterator, tokenizerFactory, paragraphVectors, unClassifiedResource);
 
+    List<String[]> map2 = checkClassification(iterator, tokenizerFactory, par2Hier, unClassifiedResource);
+
+    double p2hacc = 0;
+    double pvacc = 0;
+    for (int i = 0; i < map1.size(); i++) {
+      String[] pvRes = map1.get(i);
+      String[] p2hRes = map2.get(i);
+      if (pvRes[0].equals(pvRes[1])) {
+        pvacc++;
+      }
+      if (p2hRes[0].equals(p2hRes[1])) {
+        p2hacc++;
+      }
+    }
+    p2hacc /= map1.size();
+    pvacc /= map1.size();
+    System.out.println("accuracy(" + k + "," + method + ") --> pv: " + pvacc + ", p2h: " + p2hacc);
   }
 
-  private void checkClassification(LabelAwareIterator iterator, TokenizerFactory tokenizerFactory,
-                                   Word2Vec vectors, ClassPathResource unClassifiedResource) throws FileNotFoundException {
+  private List<String[]> checkClassification(LabelAwareIterator iterator, TokenizerFactory tokenizerFactory,
+                                             Word2Vec vectors, ClassPathResource unClassifiedResource) throws FileNotFoundException {
+
+    List<String[]> result = new LinkedList<>();
     FileLabelAwareIterator unClassifiedIterator = new FileLabelAwareIterator.Builder()
         .addSourceFolder(unClassifiedResource.getFile())
         .build();
@@ -316,11 +323,17 @@ public class Par2HierTest {
       INDArray documentAsCentroid = meansBuilder.documentAsVector(document);
       List<Pair<String, Double>> scores = seeker.getScores(documentAsCentroid);
 
-      System.out.println(vectors.getClass() + "-> Document '" + document.getLabel() + "' falls into the following categories: ");
+      double max = 0;
+      String res = null;
       for (Pair<String, Double> score : scores) {
-        System.out.println("        " + score.getFirst() + ": " + score.getSecond());
+        if (score.getSecond() > max) {
+          max = score.getSecond();
+          res = score.getFirst();
+        }
       }
+      result.add(new String[] {document.getLabel(), res});
     }
+    return result;
   }
 
 }

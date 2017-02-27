@@ -15,6 +15,8 @@
 */
 package com.github.tteofili.hier2vec;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -27,11 +29,13 @@ import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.SingularValueDecomposition;
 import org.deeplearning4j.models.embeddings.WeightLookupTable;
+import org.deeplearning4j.models.embeddings.reader.impl.BasicModelUtils;
 import org.deeplearning4j.models.word2vec.VocabWord;
 import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelsSource;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
+import org.nd4j.linalg.ops.transforms.Transforms;
 
 /**
  * Utility class to implement hier2vec
@@ -213,5 +217,24 @@ class Hier2VecUtils {
       }
     }
     return data;
+  }
+
+  private static Collection<String> nearestVectors(Map<String, INDArray> hvs, INDArray vector) {
+    List<BasicModelUtils.WordSimilarity> result = new ArrayList<>();
+
+    for (Map.Entry<String, INDArray> current : hvs.entrySet()) {
+      double sim = Transforms.cosineSim(vector, current.getValue());
+      result.add(new BasicModelUtils.WordSimilarity(current.getKey(), sim));
+    }
+    Collections.sort(result, new BasicModelUtils.SimilarityComparator());
+    return BasicModelUtils.getLabels(result, 2);
+  }
+
+  private static String asStrings(Map<String, INDArray> vs) {
+    StringBuilder builder = new StringBuilder();
+    for (Map.Entry<String, INDArray> entry : vs.entrySet()) {
+      builder.append(entry.getKey()).append(", ").append(Arrays.toString(entry.getValue().data().asDouble())).append("\n");
+    }
+    return builder.toString();
   }
 }
