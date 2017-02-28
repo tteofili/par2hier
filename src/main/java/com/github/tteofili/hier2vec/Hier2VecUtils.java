@@ -15,10 +15,9 @@
 */
 package com.github.tteofili.hier2vec;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
@@ -29,18 +28,18 @@ import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.SingularValueDecomposition;
 import org.deeplearning4j.models.embeddings.WeightLookupTable;
-import org.deeplearning4j.models.embeddings.reader.impl.BasicModelUtils;
 import org.deeplearning4j.models.word2vec.VocabWord;
 import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelsSource;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
-import org.nd4j.linalg.ops.transforms.Transforms;
 
 /**
- * Utility class to implement hier2vec
+ * Utility class for hierarchical vector algorithms
  */
 class Hier2VecUtils {
+
+  private static final String REGEX = "\\.txt\\_(\\d\\.?)+";
 
   enum Method {
     CLUSTER,
@@ -114,12 +113,19 @@ class Hier2VecUtils {
       return hvs.get(node);
     }
     INDArray hv = lookupTable.vector(node);
-    String[] split = node.split("\\.txt\\_(\\d\\.?)+");
+    String[] split = node.split(REGEX);
     Collection<String> descendants;
     if (split.length == 2) {
-      String prefix = node.substring(0, node.indexOf(split[1])) + ".";
+      String separator = ".";
+      String prefix = node.substring(0, node.indexOf(split[1])) + separator;
 
       SortedMap<String, String> sortedMap = trie.prefixMap(prefix);
+      descendants = new HashSet<>();
+      for (Map.Entry<String, String> entry : sortedMap.entrySet()) {
+        if (prefix.lastIndexOf(separator) == entry.getKey().lastIndexOf(separator)) {
+          descendants.add(entry.getValue());
+        }
+      }
       descendants = sortedMap.values();
     } else {
       descendants = Collections.emptyList();
@@ -147,7 +153,6 @@ class Hier2VecUtils {
         centroids = Hier2VecUtils.getTruncatedVT(chvs, 1);
       }
       switch (method) {
-
         case CLUSTER:
           INDArray matrix = Nd4j.zeros(centroids.length + 1, hv.columns());
           matrix.putRow(0, hv);
@@ -189,7 +194,7 @@ class Hier2VecUtils {
     return approximatedSvdMatrix.getData();
   }
 
-  private static double[][] getTruncatedVT(INDArray matrix, int k) {
+  static double[][] getTruncatedVT(INDArray matrix, int k) {
     double[][] data = getDoubles(matrix);
 
     SingularValueDecomposition svd = new SingularValueDecomposition(MatrixUtils.createRealMatrix(data));
@@ -199,7 +204,7 @@ class Hier2VecUtils {
     return truncatedVT;
   }
 
-  private static double[][] getTruncatedUT(INDArray matrix, int k) {
+  static double[][] getTruncatedUT(INDArray matrix, int k) {
     double[][] data = getDoubles(matrix);
 
     SingularValueDecomposition svd = new SingularValueDecomposition(MatrixUtils.createRealMatrix(data));
@@ -219,22 +224,4 @@ class Hier2VecUtils {
     return data;
   }
 
-  private static Collection<String> nearestVectors(Map<String, INDArray> hvs, INDArray vector) {
-    List<BasicModelUtils.WordSimilarity> result = new ArrayList<>();
-
-    for (Map.Entry<String, INDArray> current : hvs.entrySet()) {
-      double sim = Transforms.cosineSim(vector, current.getValue());
-      result.add(new BasicModelUtils.WordSimilarity(current.getKey(), sim));
-    }
-    Collections.sort(result, new BasicModelUtils.SimilarityComparator());
-    return BasicModelUtils.getLabels(result, 2);
-  }
-
-  private static String asStrings(Map<String, INDArray> vs) {
-    StringBuilder builder = new StringBuilder();
-    for (Map.Entry<String, INDArray> entry : vs.entrySet()) {
-      builder.append(entry.getKey()).append(", ").append(Arrays.toString(entry.getValue().data().asDouble())).append("\n");
-    }
-    return builder.toString();
-  }
 }
