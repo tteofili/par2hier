@@ -20,7 +20,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.TreeMap;
 
 import org.datavec.api.util.ClassPathResource;
@@ -37,8 +36,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Tests for par2hier
  */
@@ -47,115 +44,111 @@ public class Par2HierTest {
 
   private final Hier2VecUtils.Method method;
   private int k;
-  private int iterations;
 
-  public Par2HierTest(Hier2VecUtils.Method method, int k, int iterations) {
+  public Par2HierTest(Hier2VecUtils.Method method, int k) {
     this.method = method;
     this.k = k;
-    this.iterations = iterations;
   }
 
   @Parameterized.Parameters
   public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][] {
-        {Hier2VecUtils.Method.CLUSTER, 4, 5},
-        {Hier2VecUtils.Method.CLUSTER, 3, 5},
-        {Hier2VecUtils.Method.CLUSTER, 2, 5},
-        {Hier2VecUtils.Method.CLUSTER, 1, 5},
-        {Hier2VecUtils.Method.SUM, 4, 5},
-        {Hier2VecUtils.Method.SUM, 3, 5},
-        {Hier2VecUtils.Method.SUM, 2, 5},
-        {Hier2VecUtils.Method.SUM, 1, 5},
+        {Hier2VecUtils.Method.CLUSTER, 4},
+        {Hier2VecUtils.Method.CLUSTER, 3},
+        {Hier2VecUtils.Method.CLUSTER, 2},
+        {Hier2VecUtils.Method.CLUSTER, 1},
+        {Hier2VecUtils.Method.SUM, 4},
+        {Hier2VecUtils.Method.SUM, 3},
+        {Hier2VecUtils.Method.SUM, 2},
+        {Hier2VecUtils.Method.SUM, 1},
     });
   }
 
   @Test
   public void testP2HOnMTPapers() throws Exception {
-    for (int it = 0; it < iterations; it++) {
-      ParagraphVectors paragraphVectors;
-      LabelAwareIterator iterator;
-      TokenizerFactory tokenizerFactory;
-      ClassPathResource resource = new ClassPathResource("papers/sbc");
+    ParagraphVectors paragraphVectors;
+    LabelAwareIterator iterator;
+    TokenizerFactory tokenizerFactory;
+    ClassPathResource resource = new ClassPathResource("papers/sbc");
 
-      // build a iterator for our MT papers dataset
-      iterator = new FilenamesLabelAwareIterator.Builder()
-          .addSourceFolder(resource.getFile())
-          .build();
+    // build a iterator for our MT papers dataset
+    iterator = new FilenamesLabelAwareIterator.Builder()
+        .addSourceFolder(resource.getFile())
+        .build();
 
-      tokenizerFactory = new DefaultTokenizerFactory();
-      tokenizerFactory.setTokenPreProcessor(new CommonPreprocessor());
+    tokenizerFactory = new DefaultTokenizerFactory();
+    tokenizerFactory.setTokenPreProcessor(new CommonPreprocessor());
 
-      // paragraph vectors training configuration
-      double learningRate = 0.025;
-      int iterations = 5;
-      int windowSize = 5;
-      int layerSize = 60;
-      int numEpochs = 10;
-      int minWordFrequency = 1;
-      double minLearningRate = 0.001;
-      int batchSize = 5;
+    // paragraph vectors training configuration
+    double learningRate = 0.025;
+    int iterations = 5;
+    int windowSize = 5;
+    int layerSize = 60;
+    int numEpochs = 10;
+    int minWordFrequency = 1;
+    double minLearningRate = 0.001;
+    int batchSize = 5;
 
-      paragraphVectors = new ParagraphVectors.Builder()
-          .minWordFrequency(minWordFrequency)
-          .iterations(iterations)
-          .epochs(numEpochs)
-          .layerSize(layerSize)
-          .minLearningRate(minLearningRate)
-          .batchSize(batchSize)
-          .learningRate(learningRate)
-          .windowSize(windowSize)
-          .iterate(iterator)
-          .trainWordVectors(true)
-          .tokenizerFactory(tokenizerFactory)
-          .build();
+    paragraphVectors = new ParagraphVectors.Builder()
+        .minWordFrequency(minWordFrequency)
+        .iterations(iterations)
+        .epochs(numEpochs)
+        .layerSize(layerSize)
+        .minLearningRate(minLearningRate)
+        .batchSize(batchSize)
+        .learningRate(learningRate)
+        .windowSize(windowSize)
+        .iterate(iterator)
+        .trainWordVectors(true)
+        .tokenizerFactory(tokenizerFactory)
+        .build();
 
-      // fit model
-      paragraphVectors.fit();
+    // fit model
+    paragraphVectors.fit();
 
-      Par2Hier par2Hier = new Par2Hier.Builder()
-          .minWordFrequency(minWordFrequency)
-          .iterations(iterations)
-          .epochs(numEpochs)
-          .layerSize(layerSize)
-          .learningRate(learningRate)
-          .minLearningRate(minLearningRate)
-          .batchSize(batchSize)
-          .windowSize(windowSize)
-          .iterate(iterator)
-          .trainWordVectors(true)
-          .tokenizerFactory(tokenizerFactory)
-          .centroids(k)
-          .smoothing(method)
-          .useExistingWordVectors(paragraphVectors) // enhance existing vectors rather than creating new ones, for more appropriate comparison
-          .build();
+    Par2Hier par2Hier = new Par2Hier.Builder()
+        .minWordFrequency(minWordFrequency)
+        .iterations(iterations)
+        .epochs(numEpochs)
+        .layerSize(layerSize)
+        .learningRate(learningRate)
+        .minLearningRate(minLearningRate)
+        .batchSize(batchSize)
+        .windowSize(windowSize)
+        .iterate(iterator)
+        .trainWordVectors(true)
+        .tokenizerFactory(tokenizerFactory)
+        .centroids(k)
+        .smoothing(method)
+        .useExistingWordVectors(paragraphVectors) // enhance existing vectors rather than creating new ones, for more appropriate comparison
+        .build();
 
-      // fit model
-      par2Hier.fit();
+    // fit model
+    par2Hier.fit();
 
-      Map<String, String[]> comparison = new TreeMap<>();
+    Map<String, String[]> comparison = new TreeMap<>();
 
-      // extract paragraph vectors similarities
-      WeightLookupTable<VocabWord> lookupTable = paragraphVectors.getLookupTable();
-      List<String> labels = paragraphVectors.getLabelsSource().getLabels();
-      for (String label : labels) {
-        INDArray vector = lookupTable.vector(label);
-        Collection<String> strings = paragraphVectors.nearestLabels(vector, 2);
-        Collection<String> hstrings = par2Hier.nearestLabels(vector, 2);
-        String[] stringsArray = new String[2];
-        stringsArray[0] = new LinkedList<>(strings).get(1);
-        stringsArray[1] = new LinkedList<>(hstrings).get(1);
-        comparison.put(label, stringsArray);
-      }
-
-      System.out.println("--->func(args):pv,p2h");
-      // measure similarity indexes
-      double[] intraDocumentSimilarity = getIntraDocumentSimilarity(comparison);
-      System.out.println("ids(" + k + "," + method + "):" + Arrays.toString(intraDocumentSimilarity));
-      double[] depthSimilarity = getDepthSimilarity(comparison);
-      System.out.println("ds(" + k + "," + method + "):" + Arrays.toString(depthSimilarity));
-      double[] accuracies = getDepthSimilarityAccuracy(comparison);
-      System.out.println("acc(" + k + "," + method + "):" + Arrays.toString(accuracies));
+    // extract paragraph vectors similarities
+    WeightLookupTable<VocabWord> lookupTable = paragraphVectors.getLookupTable();
+    List<String> labels = paragraphVectors.getLabelsSource().getLabels();
+    for (String label : labels) {
+      INDArray vector = lookupTable.vector(label);
+      Collection<String> strings = paragraphVectors.nearestLabels(vector, 2);
+      Collection<String> hstrings = par2Hier.nearestLabels(vector, 2);
+      String[] stringsArray = new String[2];
+      stringsArray[0] = new LinkedList<>(strings).get(1);
+      stringsArray[1] = new LinkedList<>(hstrings).get(1);
+      comparison.put(label, stringsArray);
     }
+
+    System.out.println("--->func(args):pv,p2h");
+    // measure similarity indexes
+    double[] intraDocumentSimilarity = getIntraDocumentSimilarity(comparison);
+    System.out.println("ids(" + k + "," + method + "):" + Arrays.toString(intraDocumentSimilarity));
+    double[] depthSimilarity = getDepthSimilarity(comparison);
+    System.out.println("ds(" + k + "," + method + "):" + Arrays.toString(depthSimilarity));
+    double[] accuracies = getDepthSimilarityAccuracy(comparison);
+    System.out.println("acc(" + k + "," + method + "):" + Arrays.toString(accuracies));
   }
 
   private double[] getDepthSimilarityAccuracy(Map<String, String[]> comparison) {

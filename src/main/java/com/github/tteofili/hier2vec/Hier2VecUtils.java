@@ -126,7 +126,6 @@ class Hier2VecUtils {
           descendants.add(entry.getValue());
         }
       }
-      descendants = sortedMap.values();
     } else {
       descendants = Collections.emptyList();
     }
