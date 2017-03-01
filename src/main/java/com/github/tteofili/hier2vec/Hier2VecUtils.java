@@ -114,13 +114,13 @@ class Hier2VecUtils {
     }
     INDArray hv = lookupTable.vector(node);
     String[] split = node.split(REGEX);
-    Collection<String> descendants;
+    Collection<String> descendants = new HashSet<>();
     if (split.length == 2) {
       String separator = ".";
       String prefix = node.substring(0, node.indexOf(split[1])) + separator;
 
       SortedMap<String, String> sortedMap = trie.prefixMap(prefix);
-      descendants = new HashSet<>();
+
       for (Map.Entry<String, String> entry : sortedMap.entrySet()) {
         if (prefix.lastIndexOf(separator) == entry.getKey().lastIndexOf(separator)) {
           descendants.add(entry.getValue());

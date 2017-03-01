@@ -56,11 +56,9 @@ public class Par2HierTest {
         {Hier2VecUtils.Method.CLUSTER, 4},
         {Hier2VecUtils.Method.CLUSTER, 3},
         {Hier2VecUtils.Method.CLUSTER, 2},
-        {Hier2VecUtils.Method.CLUSTER, 1},
         {Hier2VecUtils.Method.SUM, 4},
         {Hier2VecUtils.Method.SUM, 3},
         {Hier2VecUtils.Method.SUM, 2},
-        {Hier2VecUtils.Method.SUM, 1},
     });
   }
 
@@ -165,8 +163,8 @@ public class Par2HierTest {
         pvAcc++;
       }
     }
-    pvAcc /= (comparison.keySet().size());
-    hvAcc /= (comparison.keySet().size());
+    pvAcc /= comparison.keySet().size();
+    hvAcc /= comparison.keySet().size();
     return new double[] {pvAcc, hvAcc};
   }
 
@@ -184,8 +182,8 @@ public class Par2HierTest {
         pvSimilarity++;
       }
     }
-    pvSimilarity /= (comparison.keySet().size() * 6);
-    hvSimilarity /= (comparison.keySet().size() * 6);
+    pvSimilarity /= comparison.keySet().size();
+    hvSimilarity /= comparison.keySet().size();
     return new double[] {pvSimilarity, hvSimilarity};
   }
 
@@ -203,8 +201,8 @@ public class Par2HierTest {
         pvSimilarity++;
       }
     }
-    pvSimilarity /= (comparison.keySet().size() * 6);
-    hvSimilarity /= (comparison.keySet().size() * 6);
+    pvSimilarity /= comparison.keySet().size();
+    hvSimilarity /= comparison.keySet().size();
     return new double[] {pvSimilarity, hvSimilarity};
   }
 
