@@ -14,7 +14,6 @@ import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import org.deeplearning4j.berkeley.Counter;
 import org.deeplearning4j.models.embeddings.WeightLookupTable;
 import org.deeplearning4j.models.embeddings.inmemory.InMemoryLookupTable;
 import org.deeplearning4j.models.embeddings.learning.ElementsLearningAlgorithm;
@@ -64,44 +63,6 @@ public class Par2Hier extends Word2Vec {
   private Hier2VecUtils.Method smoothing;
   private Integer k;
 
-  /**
-   * This method takes raw text, applies tokenizer, and returns most probable label
-   *
-   * @param rawText
-   * @return
-   */
-  @Deprecated
-  public String predict(String rawText) {
-    if (tokenizerFactory == null) {
-      throw new IllegalStateException("TokenizerFactory should be defined, prior to predict() call");
-    }
-
-    List<String> tokens = tokenizerFactory.create(rawText).getTokens();
-    List<VocabWord> document = new ArrayList<>();
-    for (String token : tokens) {
-      if (vocab.containsWord(token)) {
-        document.add(vocab.wordFor(token));
-      }
-    }
-
-    return predict(document);
-  }
-
-  /**
-   * This method predicts label of the document.
-   * Computes a similarity wrt the mean of the
-   * representation of words in the document
-   * @param document the document
-   * @return the word distances for each label
-   */
-  @Deprecated
-  public String predict(LabelledDocument document) {
-    if (document.getReferencedContent() != null) {
-      return predict(document.getReferencedContent());
-    } else {
-      return predict(document.getContent());
-    }
-  }
 
   public void extractLabels() {
     Collection<VocabWord> vocabWordCollection = vocab.vocabWords();
@@ -226,112 +187,6 @@ public class Par2Hier extends Word2Vec {
     return inferVector(document, this.learningRate.get(), this.minLearningRate, this.numEpochs * this.numIterations);
   }
 
-  /**
-   * This method predicts label of the document.
-   * Computes a similarity wrt the mean of the
-   * representation of words in the document
-   * @param document the document
-   * @return the word distances for each label
-   */
-  @Deprecated
-  public String predict(List<VocabWord> document) {
-        /*
-            This code was transferred from original Par2Hier DL4j implementation, and yet to be tested
-         */
-    if (document.isEmpty()) {
-      throw new IllegalStateException("Document has no words inside");
-    }
-
-    INDArray arr = Nd4j.create(document.size(), this.layerSize);
-    for (int i = 0; i < document.size(); i++) {
-      arr.putRow(i, getWordVectorMatrix(document.get(i).getWord()));
-    }
-
-    INDArray docMean = arr.mean(0);
-    Counter<String> distances = new Counter<>();
-
-    for (String s : labelsSource.getLabels()) {
-      INDArray otherVec = getWordVectorMatrix(s);
-      double sim = Transforms.cosineSim(docMean, otherVec);
-      distances.incrementCount(s, sim);
-    }
-
-    return distances.argMax();
-  }
-
-  /**
-   * Predict several labels based on the document.
-   * Computes a similarity wrt the mean of the
-   * representation of words in the document
-   * @param document raw text of the document
-   * @return possible labels in descending order
-   */
-  @Deprecated
-  public Collection<String> predictSeveral(@NonNull LabelledDocument document, int limit) {
-    if (document.getReferencedContent() != null) {
-      return predictSeveral(document.getReferencedContent(), limit);
-    } else {
-      return predictSeveral(document.getContent(), limit);
-    }
-  }
-
-  /**
-   * Predict several labels based on the document.
-   * Computes a similarity wrt the mean of the
-   * representation of words in the document
-   * @param rawText raw text of the document
-   * @return possible labels in descending order
-   */
-  @Deprecated
-  public Collection<String> predictSeveral(String rawText, int limit) {
-    if (tokenizerFactory == null) {
-      throw new IllegalStateException("TokenizerFactory should be defined, prior to predict() call");
-    }
-
-    List<String> tokens = tokenizerFactory.create(rawText).getTokens();
-    List<VocabWord> document = new ArrayList<>();
-    for (String token : tokens) {
-      if (vocab.containsWord(token)) {
-        document.add(vocab.wordFor(token));
-      }
-    }
-
-    return predictSeveral(document, limit);
-  }
-
-  /**
-   * Predict several labels based on the document.
-   * Computes a similarity wrt the mean of the
-   * representation of words in the document
-   * @param document the document
-   * @return possible labels in descending order
-   */
-  @Deprecated
-  public Collection<String> predictSeveral(List<VocabWord> document, int limit) {
-        /*
-            This code was transferred from original Par2Hier DL4j implementation, and yet to be tested
-         */
-    if (document.isEmpty()) {
-      throw new IllegalStateException("Document has no words inside");
-    }
-
-    INDArray arr = Nd4j.create(document.size(), this.layerSize);
-    for (int i = 0; i < document.size(); i++) {
-      arr.putRow(i, getWordVectorMatrix(document.get(i).getWord()));
-    }
-
-    INDArray docMean = arr.mean(0);
-    Counter<String> distances = new Counter<>();
-
-    for (String s : labelsSource.getLabels()) {
-      INDArray otherVec = getWordVectorMatrix(s);
-      double sim = Transforms.cosineSim(docMean, otherVec);
-      log.debug("Similarity inside: [" + s + "] -> " + sim);
-      distances.incrementCount(s, sim);
-    }
-
-    return distances.getSortedKeys().subList(0, limit);
-  }
 
   /**
    * This method returns top N labels nearest to specified document
@@ -459,29 +314,6 @@ public class Par2Hier extends Word2Vec {
     return Lists.reverse(lowToHighSimLst);
   }
 
-  /**
-   * This method returns similarity of the document to specific label, based on mean value
-   *
-   * @param rawText
-   * @param label
-   * @return
-   */
-  @Deprecated
-  public double similarityToLabel(String rawText, String label) {
-    if (tokenizerFactory == null) {
-      throw new IllegalStateException("TokenizerFactory should be defined, prior to predict() call");
-    }
-
-    List<String> tokens = tokenizerFactory.create(rawText).getTokens();
-    List<VocabWord> document = new ArrayList<>();
-    for (String token : tokens) {
-      if (vocab.containsWord(token)) {
-        document.add(vocab.wordFor(token));
-      }
-    }
-    return similarityToLabel(document, label);
-  }
-
   @Override
   public void fit() {
     super.fit();
@@ -493,48 +325,6 @@ public class Par2Hier extends Word2Vec {
 
     extractLabels();
   }
-
-  /**
-   * This method returns similarity of the document to specific label, based on mean value
-   *
-   * @param document
-   * @param label
-   * @return
-   */
-  @Deprecated
-  public double similarityToLabel(LabelledDocument document, String label) {
-    if (document.getReferencedContent() != null) {
-      return similarityToLabel(document.getReferencedContent(), label);
-    } else {
-      return similarityToLabel(document.getContent(), label);
-    }
-  }
-
-  /**
-   * This method returns similarity of the document to specific label, based on mean value
-   *
-   * @param document
-   * @param label
-   * @return
-   */
-  @Deprecated
-  public double similarityToLabel(List<VocabWord> document, String label) {
-    if (document.isEmpty()) {
-      throw new IllegalStateException("Document has no words inside");
-    }
-
-    INDArray arr = Nd4j.create(document.size(), this.layerSize);
-    for (int i = 0; i < document.size(); i++) {
-      arr.putRow(i, getWordVectorMatrix(document.get(i).getWord()));
-    }
-
-    INDArray docMean = arr.mean(0);
-
-    INDArray otherVec = getWordVectorMatrix(label);
-    double sim = Transforms.cosineSim(docMean, otherVec);
-    return sim;
-  }
-
 
   public static class Builder extends Word2Vec.Builder {
     protected LabelAwareIterator labelAwareIterator;
