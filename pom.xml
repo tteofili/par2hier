@@ -22,7 +22,7 @@
     <artifactId>hier2vec</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <properties>
-        <dl4j.version>0.7.2</dl4j.version>
+        <dl4j.version>0.8.0</dl4j.version>
     </properties>
     <dependencies>
         <dependency>

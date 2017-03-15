@@ -15,6 +15,10 @@
 */
 package com.github.tteofili.hier2vec;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -22,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.apache.commons.io.IOUtils;
 import org.datavec.api.util.ClassPathResource;
 import org.deeplearning4j.models.embeddings.WeightLookupTable;
 import org.deeplearning4j.models.paragraphvectors.ParagraphVectors;
@@ -77,6 +82,9 @@ public class Par2HierTest {
     tokenizerFactory = new DefaultTokenizerFactory();
     tokenizerFactory.setTokenPreProcessor(new CommonPreprocessor());
 
+    Map<String, INDArray> hvs = new TreeMap<>();
+    Map<String, INDArray> pvs = new TreeMap<>();
+
     // paragraph vectors training configuration
     double learningRate = 0.025;
     int iterations = 5;
@@ -131,12 +139,14 @@ public class Par2HierTest {
     List<String> labels = paragraphVectors.getLabelsSource().getLabels();
     for (String label : labels) {
       INDArray vector = lookupTable.vector(label);
+      pvs.put(label, vector);
       Collection<String> strings = paragraphVectors.nearestLabels(vector, 2);
       Collection<String> hstrings = par2Hier.nearestLabels(vector, 2);
       String[] stringsArray = new String[2];
       stringsArray[0] = new LinkedList<>(strings).get(1);
       stringsArray[1] = new LinkedList<>(hstrings).get(1);
       comparison.put(label, stringsArray);
+      hvs.put(label, par2Hier.getLookupTable().vector(label));
     }
 
     System.out.println("--->func(args):pv,p2h");
@@ -147,6 +157,18 @@ public class Par2HierTest {
     System.out.println("ds(" + k + "," + method + "):" + Arrays.toString(depthSimilarity));
     double[] accuracies = getDepthSimilarityAccuracy(comparison);
     System.out.println("acc(" + k + "," + method + "):" + Arrays.toString(accuracies));
+
+    // persist 2 dimensional vectors
+
+    String pvCSV = asStrings(Hier2VecUtils.svdPCA(pvs, 2));
+    File pvFile = Files.createFile(Paths.get("target/pvs-" + k + "-" + method + ".csv")).toFile();
+    FileOutputStream pvOutputStream = new FileOutputStream(pvFile);
+    IOUtils.write(pvCSV, pvOutputStream);
+
+    String hvCSV = asStrings(Hier2VecUtils.svdPCA(hvs, 2));
+    File hvFile = Files.createFile(Paths.get("target/hvs-" + k + "-" + method + ".csv")).toFile();
+    FileOutputStream hvOutputStream = new FileOutputStream(hvFile);
+    IOUtils.write(hvCSV, hvOutputStream);
   }
 
   private double[] getDepthSimilarityAccuracy(Map<String, String[]> comparison) {
@@ -166,6 +188,14 @@ public class Par2HierTest {
     pvAcc /= comparison.keySet().size();
     hvAcc /= comparison.keySet().size();
     return new double[] {pvAcc, hvAcc};
+  }
+
+  private String asStrings(Map<String, INDArray> vs) {
+    StringBuilder builder = new StringBuilder();
+    for (Map.Entry<String, INDArray> entry : vs.entrySet()) {
+      builder.append(", ").append(entry.toString().replace("=[", ",").replace("]", ",")).append("\n");
+    }
+    return builder.toString();
   }
 
   private double[] getDepthSimilarity(Map<String, String[]> comparison) {
