@@ -158,17 +158,19 @@ public class Par2HierTest {
     double[] accuracies = getDepthSimilarityAccuracy(comparison);
     System.out.println("acc(" + k + "," + method + "):" + Arrays.toString(accuracies));
 
-    // persist 2 dimensional vectors
-
-    String pvCSV = asStrings(Hier2VecUtils.svdPCA(pvs, 2));
-    File pvFile = Files.createFile(Paths.get("target/pvs-" + k + "-" + method + ".csv")).toFile();
+    // create a CSV with a raw comparison
+    File pvFile = Files.createFile(Paths.get("target/comparison-" + k + "-" + method + ".csv")).toFile();
     FileOutputStream pvOutputStream = new FileOutputStream(pvFile);
-    IOUtils.write(pvCSV, pvOutputStream);
 
-    String hvCSV = asStrings(Hier2VecUtils.svdPCA(hvs, 2));
-    File hvFile = Files.createFile(Paths.get("target/hvs-" + k + "-" + method + ".csv")).toFile();
-    FileOutputStream hvOutputStream = new FileOutputStream(hvFile);
-    IOUtils.write(hvCSV, hvOutputStream);
+    try {
+      Map<String, INDArray> pvs2 = Hier2VecUtils.svdPCA(pvs, 2);
+      Map<String, INDArray> hvs2 = Hier2VecUtils.svdPCA(hvs, 2);
+      String pvCSV = asStrings(pvs2, hvs2);
+      IOUtils.write(pvCSV, pvOutputStream);
+    } finally {
+      pvOutputStream.flush();
+      pvOutputStream.close();
+    }
   }
 
   private double[] getDepthSimilarityAccuracy(Map<String, String[]> comparison) {
@@ -190,10 +192,16 @@ public class Par2HierTest {
     return new double[] {pvAcc, hvAcc};
   }
 
-  private String asStrings(Map<String, INDArray> vs) {
+  private String asStrings(Map<String, INDArray> pvs, Map<String, INDArray> hvs) {
     StringBuilder builder = new StringBuilder();
-    for (Map.Entry<String, INDArray> entry : vs.entrySet()) {
-      builder.append(", ").append(entry.toString().replace("=[", ",").replace("]", ",")).append("\n");
+    builder.append("doc, depth, Paragraph, PV x, PV y, HV x, HV y\n");
+    for (Map.Entry<String, INDArray> entry : pvs.entrySet()) {
+      String key = entry.getKey();
+      String depth = String.valueOf(key.split("\\.").length - 1);
+      String doc = String.valueOf(key.charAt(3));
+      builder.append(doc).append(',').append(depth).append(", ").append(entry.toString().replace("=[", ",").replace("]", ","));
+      String s = hvs.get(key).toString();
+      builder.append(s.replace("[", "").replace("]", "")).append("\n");
     }
     return builder.toString();
   }
