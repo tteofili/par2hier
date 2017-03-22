@@ -1,0 +1,33 @@
+
+The ByteNet is composed of two stacked source and target networks where the top network
+dynamically adapts to the output length. This way of combining source and target networks
+is not tied to the networks being strictly convolutional. We may consider two variants of the
+ByteNet that use recurrent networks for one or both of the sub-networks (see Figure 4). The
+first variant replaces the convolutional target network with a recurrent one that is similarly
+stacked and dynamically unfolded. The second variant replaces the convolutional source
+network with a recurrent network, namely a bidirectional RNN. The target RNN is placed on
+top of the bidirectional source RNN. We can see that the RNN Enc-Dec network (Sutskever
+et al., 2014; Cho et al., 2014) is a Recurrent ByteNet where all connections between source
+and target – except for the first one that connects s0 and t0 – have been severed. The
+Recurrent ByteNet is thus a generalization of the RNN Enc-Dec and, modulo the type of
+sequential architecture, so is the ByteNet.
+
+5
+
+
+
+Model NetS NetT Time RP PathS PathT
+
+RCTM 1 CNN RNN |S||S| + |T | no |S| |T |
+RCTM 2 CNN RNN |S||S| + |T | yes |S| |T |
+RNN Enc-Dec RNN RNN |S| + |T | no |S| + |T | |T |
+RNN Enc-Dec Att RNN RNN |S||T | yes 1 |T |
+Grid LSTM RNN RNN |S||T | yes |S| + |T | |S| + |T |
+Extended Neural GPU cRNN cRNN |S||S| + |S||T | yes |S| |T |
+
+Recurrent ByteNet RNN RNN |S| + |T | yes max(|S|, |T |) |T |
+Recurrent ByteNet CNN RNN c|S| + |T | yes c |T |
+ByteNet CNN CNN c|S| + c|T | yes c c
+
+Table 1: Properties of various previously and presently introduced neural translation models.
+The ByteNet models have both linear running time and are resolution preserving.

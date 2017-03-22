@@ -266,8 +266,8 @@ public class Par2Hier extends Word2Vec {
     INDArray similarity = Transforms.unitVec(labelVector).mmul(labelsMatrix.transpose());
     List<Double> highToLowSimList = getTopN(similarity, topN + 20);
 
-    for (int i = 0; i < highToLowSimList.size(); i++) {
-      String word = labelsList.get(highToLowSimList.get(i).intValue()).getLabel();
+    for (Double aHighToLowSimList : highToLowSimList) {
+      String word = labelsList.get(aHighToLowSimList.intValue()).getLabel();
       if (word != null && !word.equals("UNK") && !word.equals("STOP")) {
         INDArray otherVec = lookupTable.vector(word);
         double sim = Transforms.cosineSim(labelVector, otherVec);
@@ -653,12 +653,6 @@ public class Par2Hier extends Word2Vec {
     @Override
     public Builder tokenizerFactory(@NonNull TokenizerFactory tokenizerFactory) {
       super.tokenizerFactory(tokenizerFactory);
-      return this;
-    }
-
-    @Override
-    public Builder index(@NonNull InvertedIndex<VocabWord> index) {
-      super.index(index);
       return this;
     }
 

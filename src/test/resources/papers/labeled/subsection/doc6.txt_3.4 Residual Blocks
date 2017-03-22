@@ -1,0 +1,6 @@
+
+Each layer is wrapped in a residual block that contains additional convolutional layers with
+filters of size 1 (He et al., 2015). We adopt two variants of the residual blocks, one with
+ReLUs, which is used in the machine translation experiments, and one with Multiplicative
+Units (Kalchbrenner et al., 2016b), which is used in the language modelling experiments.
+Figure 3 diagrams the two variants of the blocks.

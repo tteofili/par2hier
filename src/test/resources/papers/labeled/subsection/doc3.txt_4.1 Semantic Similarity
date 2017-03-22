@@ -1,0 +1,76 @@
+
+We evaluate the Mandarin Chinese embeddings with
+
+the semantic similarity test-set provided by the or-
+
+3Fifth Edition. LDC catelog number LDC2011T13. We only
+
+exclude cna cmn, the Traditional Chinese segment of the cor-
+
+pus.
+
+
+
+Table 1: Results on Chinese Semantic Similarity
+
+Method Sp. Corr. K. Tau
+
+(×100) (×100)
+Prior work (Jin and Wu, 2012) 5.0
+
+Tf-idf
+
+Naive tf-idf 41.5 28.7
+
+Pruned tf-idf 46.7 32.3
+
+Word Embeddings
+
+Align-Init 52.9 37.6
+
+Mono-trained 59.3 42.1
+
+Biling-trained 60.8 43.3
+
+ganizers of SemEval-2012 Task 4. This test-set con-
+
+tains 297 Chinese word pairs with similarity scores
+
+estimated by humans.
+
+The results for semantic similarity are shown in
+
+Table 1. We show two evaluation metrics: Spear-
+
+man Correlation and Kendall’s Tau. For both, bilin-
+
+gual embeddings trained with the combined objec-
+
+tive defined by Equation 5 perform best. For pruned
+
+tf-idf, we follow Reisinger et al. (2010; Huang et
+
+al. (2012) and count word co-occurrences in a 10-
+
+word window. We use the best results from a
+
+range of pruning and feature thresholds to compare
+
+against our method. The bilingual and monolingual
+
+trained embeddings4 out-perform pruned tf-idf by
+
+14.1 and 12.6 Spearman Correlation (×100), respec-
+tively. Further, they out-perform embeddings initial-
+
+ized from alignment by 7.9 and 6.4. Both our tf-idf
+
+implementation and the word embeddings have sig-
+
+nificantly higher Kendall’s Tau value compared to
+
+Prior work (Jin and Wu, 2012). We verified Tau cal-
+
+culations with original submissions provided by the
+
+authors.

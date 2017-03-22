@@ -1,0 +1,9 @@
+We evaluate our model on the WMT En→Fr dataset, the WMT En→De dataset, as well as many Google-
+internal production datasets. On WMT En→Fr, the training set contains 36M sentence pairs. On WMT
+En→De, the training set contains 5M sentence pairs. In both cases, we use newstest2014 as the test sets to
+compare against previous work [30, 36, 43]. The combination of newstest2012 and newstest2013 is used as
+the development set.
+
+In addition to WMT, we also evaluate our model on some Google-internal datasets representing a wider
+spectrum of languages with distinct linguistic properties: English ↔ French, English ↔ Spanish and English
+↔ Chinese.

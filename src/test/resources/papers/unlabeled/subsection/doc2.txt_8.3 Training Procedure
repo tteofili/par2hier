@@ -1,0 +1,60 @@
+
+x 10
+5
+
+0
+
+0.5
+
+1
+
+1.5
+
+2
+
+2.5
+
+3
+
+3.5
+
+4
+
+4.5
+
+5
+
+Steps
+
+L
+o
+g
+ p
+
+e
+rp
+
+le
+x
+it
+y
+
+ 
+
+ 
+
+SGD only
+
+Adam only
+
+Adam then SGD
+
+Figure 5: Log perplexity vs. steps for Adam, SGD and Adam-then-SGD on WMT En→Fr during maximum
+likelihood training. Adam converges much faster than SGD at the beginning. Towards the end, however,
+Adam-then-SGD is gradually better. Notice the bump in the red curve (Adam-then-SGD) at around 60k
+steps where we switch from Adam to SGD. We suspect that this bump occurs due to different optimization
+trajectories of Adam vs. SGD. When we switch from Adam to SGD, the model first suffers a little, but is
+able to quickly recover afterwards.
+
+probability, and also train smaller models for fewer steps overall. On the production data sets, we typically
+do not use dropout, and we train the models for more steps.

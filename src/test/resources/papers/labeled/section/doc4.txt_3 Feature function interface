@@ -1,0 +1,46 @@
+
+Joshua’s feature functions are templates that contribute features to the global names-
+pace. Whenever an edge is formed in the hypergraph, each feature function is asked
+to score it. During decoding, these are immediately scored against the weight vec-
+tor to produce a scalar score; the individual feature values are then discarded, so as
+to avoid the overhead of storing the vectors. These values can be recovered later if
+desired (such as for parameter tuning) by replaying the feature functions.
+
+Feature functions are written by extending the FeatureFunction class and over-
+loading compute(...). For example, the following WordCounter feature counts the
+number of times each target word is used:
+package joshua.decoder.ff;
+
+class WordCounter extends FeatureFunction {
+public DPState compute(Rule rule, List<HGNode> tails, int i, int j,
+
+Sentence sentence, Accumulator acc) {
+
+for (int id: rule.getEnglish())
+if (id > 0) // skip nonterminals
+
+acc.add(String.format("WordCounter_%s", Vocab.word(id)), 1);
+
+return null;
+}
+
+}
+
+8
+
+http://joshua-decoder.org/6.0/
+
+
+Matt Post, Yuan Cao, and Gaurav Kumar Joshua 6 (5–16)
+
+By convention, fired features are prefixed with the template name, so as to avoid
+clashes in the global namespace. The Accumulator object increments feature values
+and transparently handles either computing the feature dot product against theweight
+vector (during decoding) or retaining the actual feature values (during tuning). The
+null return value indicates that this function contributes no state.3
+
+Features can be activated from the config file or command line:
+$JOSHUA/bin/joshua-decoder -feature-function WordPenalty -key1 value ...
+Joshua’s features are loaded by reflection, so after compiling, there is no need to add
+stub code for recognizing and activating them. They also include a generic key-value
+argument-processing framework for passing parameters to the feature functions.

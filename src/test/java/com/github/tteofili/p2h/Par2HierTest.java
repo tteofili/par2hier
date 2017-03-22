@@ -90,10 +90,10 @@ public class Par2HierTest {
     int iterations = 5;
     int windowSize = 5;
     int layerSize = 60;
-    int numEpochs = 10;
+    int numEpochs = 20;
     int minWordFrequency = 1;
     double minLearningRate = 0.001;
-    int batchSize = 5;
+    int batchSize = 10;
 
     paragraphVectors = new ParagraphVectors.Builder()
         .minWordFrequency(minWordFrequency)

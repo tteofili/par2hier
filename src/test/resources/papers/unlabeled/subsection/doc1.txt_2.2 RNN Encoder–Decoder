@@ -1,0 +1,99 @@
+In this paper, we propose a novel neural network
+architecture that learns to encode a variable-length
+sequence into a fixed-length vector representation
+and to decode a given fixed-length vector rep-
+resentation back into a variable-length sequence.
+From a probabilistic perspective, this new model
+is a general method to learn the conditional dis-
+tribution over a variable-length sequence condi-
+tioned on yet another variable-length sequence,
+e.g. p(y1, . . . , yT ′ | x1, . . . , xT ), where one
+
+x1 x2 xT
+
+yT' y2 y1
+
+c
+
+Decoder
+
+Encoder
+Figure 1: An illustration of the proposed RNN
+Encoder–Decoder.
+
+should note that the input and output sequence
+lengths T and T ′ may differ.
+
+The encoder is an RNN that reads each symbol
+of an input sequence x sequentially. As it reads
+each symbol, the hidden state of the RNN changes
+according to Eq. (1). After reading the end of
+the sequence (marked by an end-of-sequence sym-
+bol), the hidden state of the RNN is a summary c
+of the whole input sequence.
+
+The decoder of the proposed model is another
+RNN which is trained to generate the output se-
+quence by predicting the next symbol yt given the
+hidden state h〈t〉. However, unlike the RNN de-
+scribed in Sec. 2.1, both yt and h〈t〉 are also con-
+ditioned on yt−1 and on the summary c of the input
+sequence. Hence, the hidden state of the decoder
+at time t is computed by,
+
+h〈t〉 = f
+(
+h〈t−1〉, yt−1, c
+
+)
+,
+
+and similarly, the conditional distribution of the
+next symbol is
+
+P (yt|yt−1, yt−2, . . . , y1, c) = g
+(
+h〈t〉, yt−1, c
+
+)
+.
+
+for given activation functions f and g (the latter
+must produce valid probabilities, e.g. with a soft-
+max).
+
+See Fig. 1 for a graphical depiction of the pro-
+posed model architecture.
+
+The two components of the proposed RNN
+Encoder–Decoder are jointly trained to maximize
+the conditional log-likelihood
+
+max
+θ
+
+1
+
+N
+
+N∑
+n=1
+
+log pθ(yn | xn), (4)
+
+
+
+where θ is the set of the model parameters and
+each (xn,yn) is an (input sequence, output se-
+quence) pair from the training set. In our case,
+as the output of the decoder, starting from the in-
+put, is differentiable, we can use a gradient-based
+algorithm to estimate the model parameters.
+
+Once the RNN Encoder–Decoder is trained, the
+model can be used in two ways. One way is to use
+the model to generate a target sequence given an
+input sequence. On the other hand, the model can
+be used to score a given pair of input and output
+sequences, where the score is simply a probability
+pθ(y | x) from Eqs. (3) and (4).

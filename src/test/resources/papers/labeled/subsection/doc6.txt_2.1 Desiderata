@@ -1,0 +1,15 @@
+
+Beyond these basic properties the definition of a neural translation model does not determine
+a unique neural architecture, so we aim at identifying some desiderata. (i) The running
+time of the network should be linear in the length of the source and target strings. This
+is more pressing the longer the strings or when using characters as tokens. The use of
+operations that run in parallel along the sequence length can also be beneficial for reducing
+computation time. (ii) The size of the source representation should be linear in the length of
+the source string, i.e. it should be resolution preserving, and not have constant size. This is
+to avoid burdening the model with an additional memorization step before translation. In
+more general terms, the size of a representation should be proportional to the amount of
+information it represents or predicts. A related desideratum concerns the path traversed by
+forward and backward signals in the network between a (source or target) input token and a
+predicted output token. Shorter paths whose length is decoupled from the sequence distance
+between the two tokens have the potential to better propagate the signals (Hochreiter et al.,
+2001) and to let the network learn long-range dependencies more easily.

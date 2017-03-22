@@ -1,0 +1,101 @@
+
+It is difficult to recognize and quantify semantic sim-
+
+ilarities across languages. The Fr-En phrase-pair
+
+{‘un cas de force majeure’, ‘case of absolute neces-
+sity’}, Zh-En phrase pair {‘依然故我’,‘persist in a
+stubborn manner’} are similar in semantics. If co-
+occurrences of exact word combinations are rare in
+
+the training parallel text, it can be difficult for classi-
+
+cal statistical MT methods to identify this similarity,
+
+or produce a reasonable translation given the source
+
+phrase.
+
+We introduce an unsupervised neural model
+
+to learn bilingual semantic embedding for words
+
+across two languages. As an extension to their
+
+monolingual counter-part (Turian et al., 2010;
+
+Huang et al., 2012; Bengio et al., 2003), bilin-
+
+gual embeddings capture not only semantic infor-
+
+mation of monolingual words, but also semantic re-
+
+lationships across different languages. This prop-
+
+erty allows them to define semantic similarity met-
+
+rics across phrase-pairs, making them perfect fea-
+
+tures for machine translation.
+
+To learn bilingual embeddings, we use a new ob-
+
+jective function which embodies both monolingual
+
+semantics and bilingual translation equivalence. The
+
+latter utilizes word alignments, a natural sub-task
+
+in the machine translation pipeline. Through large-
+
+scale curriculum training (Bengio et al., 2009), we
+
+obtain bilingual distributed representations which
+
+lie in the same feature space. Embeddings of di-
+
+rect translations overlap, and semantic relationships
+
+across bilingual embeddings were further improved
+
+through unsupervised learning on a large unlabeled
+
+corpus.
+
+Consequently, we produce for the research com-
+
+munity a first set of Mandarin Chinese word embed-
+
+dings with 100,000 words trained on the Chinese
+
+Gigaword corpus. We evaluate these embedding
+
+on Chinese word semantic similarity from SemEval-
+
+2012 (Jin and Wu, 2012). The embeddings sig-
+
+nificantly out-perform prior work and pruned tf-idf
+
+base-lines. In addition, the learned embeddings
+
+give rise to 0.11 F1 improvement in Named Entity
+
+Recognition on the OntoNotes dataset (Hovy et al.,
+
+2006) with a neural network model.
+
+We apply the bilingual embeddings in an end-to-
+
+end phrase-based MT system by computing seman-
+
+tic similarities between phrase pairs. On NIST08
+
+Chinese-English translation task, we obtain an im-
+
+provement of 0.48 BLEU from a competitive base-
+
+line (30.01 BLEU to 30.49 BLEU) with the Stanford
+
+Phrasal MT system.
+
+

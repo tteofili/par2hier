@@ -1,0 +1,16 @@
+
+As mentioned in Section 1, one well-established
+DS method consists in scoring the sentences in the
+out-of-domain corpus by their perplexity. Moore
+and Lewis (2010) used cross-entropy rather than
+perplexity, even though they are both monotoni-
+cally related. For selecting S, this technique re-
+lates the cross-entropy given by a language model
+trained over the I together with the out-of-domain
+(G) language model, computing a score for a sen-
+tence x:
+
+c(x) = HI(x)−HG(x) (1)
+
+where HI and HG are the in-domain and out-of-
+domain cross-entropy of sentence x, respectively.

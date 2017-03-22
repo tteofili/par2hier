@@ -1,0 +1,46 @@
+
+Large amounts of resources are available to build
+an English/French SMT system in the framework
+of the WMT’14 translation task. The bilingual
+corpora include Europarl (61M words), news com-
+mentary (5.5M), UN (421M), and two crawled
+corpora of 90M and 780M words respectively.
+The last two corpora are quite noisy. To train
+the French language model, about 712M words of
+crawled newspaper material is available in addi-
+tion to the target side of the bitexts. All the word
+counts refer to French words after tokenization.
+
+It is commonly acknowledged that training sta-
+tistical models on the concatenation of all this
+data does not necessarily lead to optimal per-
+formance, and results in extremely large mod-
+els which are difficult to handle. Instead, one
+should focus on the most relevant subset of the
+data for a given task. We have done so by
+applying the data selection method proposed in
+(Moore and Lewis, 2010), and its extension to bi-
+texts (Axelrod et al., 2011). By these means we
+selected a subset of 418M words out of more
+than 2G words for language modeling and a
+subset of 348M out of 850M words for train-
+ing the RNN Encoder–Decoder. We used the
+test set newstest2012 and 2013 for data
+selection and weight tuning with MERT, and
+newstest2014 as our test set. Each set has
+more than 70 thousand words and a single refer-
+ence translation.
+
+For training the neural networks, including the
+proposed RNN Encoder–Decoder, we limited the
+source and target vocabulary to the most frequent
+15,000 words for both English and French. This
+covers approximately 93% of the dataset. All the
+out-of-vocabulary words were mapped to a special
+token ([UNK]).
+
+The baseline phrase-based SMT system was
+built using Moses with default settings. This sys-
+tem achieves a BLEU score of 30.64 and 33.3 on
+the development and test sets, respectively (see Ta-
+ble 1).

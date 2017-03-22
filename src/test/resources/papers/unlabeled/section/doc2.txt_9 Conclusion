@@ -1,0 +1,27 @@
+In this paper, we describe in detail the implementation of Google’s Neural Machine Translation (GNMT)
+system, including all the techniques that are critical to its accuracy, speed, and robustness. On the public
+WMT’14 translation benchmark, our system’s translation quality approaches or surpasses all currently
+published results. More importantly, we also show that our approach carries over to much larger production
+data sets, which have several orders of magnitude more data, to deliver high quality translations.
+
+Our key findings are: 1) that wordpiece modeling effectively handles open vocabularies and the challenge
+of morphologically rich languages for translation quality and inference speed, 2) that a combination of model
+and data parallelism can be used to efficiently train state-of-the-art sequence-to-sequence NMT models
+in roughly a week, 3) that model quantization drastically accelerates translation inference, allowing the
+use of these large models in a deployed production environment, and 4) that many additional details like
+length-normalization, coverage penalties, and similar are essential to making NMT systems work well on real
+data.
+
+Using human-rated side-by-side comparison as a metric, we show that our GNMT system approaches the
+
+19
+
+
+
+accuracy achieved by average bilingual human translators on some of our test sets. In particular, compared
+to the previous phrase-based production system, this GNMT system delivers roughly a 60% reduction in
+translation errors on several popular language pairs.
+
+Acknowledgements
+We would like to thank the entire Google Brain Team and Google Translate Team for their foundational
+contributions to this project.

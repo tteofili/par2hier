@@ -1,0 +1,23 @@
+
+Neural Networks Classifier for Data Selection
+in Statistical Machine Translation
+
+Álvaro Peris, Mara Chinea-Rios, Francisco Casacuberta
+PRHLT Research Center
+
+Universitat Politècnica de València, Valencia (Spain)
+{lvapeab,machirio,fcn}@prhlt.upv.es
+
+Abstract
+
+We address the data selection problem in
+statistical machine translation (SMT) as a
+classification task. The new data selec-
+tion method is based on a neural network
+classifier. We present a new method de-
+scription and empirical results proving that
+our data selection method provides better
+translation quality, compared to a state-of-
+the-art method (i.e., Cross entropy). More-
+over, the empirical results reported are co-
+herent across different language pairs.

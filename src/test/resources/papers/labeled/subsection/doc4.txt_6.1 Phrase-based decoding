@@ -1,0 +1,17 @@
+5 18 15 7 5
+10 21 20 10 7
+20 25 31 14 11
+50 40 56 25 21
+100 58 100 41 36
+200 95 178 70 67
+500 176 393 151 154
+1000 355 775 293 294
+
+Figure 2. Decoding speeds for the 3,000-sentence newstest2013, varying the pop limits.
+
+computed runtime for decoding all sentences in our ES-EN test set in single-threaded
+mode, not counting themodel load time (except formtplz, which includes it). Figure 2
+plots run times as a function of the decoder pop limit. Joshua is mostly faster than
+Moses 2 except at the lowest two pop limits, but Moses 3 and mtplz are then about
+twice as fast again as Joshua at very low pop limits, which advantage disappears as
+the beam size is increased.

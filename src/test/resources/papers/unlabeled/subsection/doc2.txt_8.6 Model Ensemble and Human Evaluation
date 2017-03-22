@@ -1,0 +1,57 @@
+We ensemble 8 RL-refined models to obtain a state-of-the-art result of 41.16 BLEU points on the WMT
+En→Fr dataset. Our results are reported in Table 7.
+
+Table 7: Model ensemble results on WMT En→Fr (newstest2014)
+Model BLEU
+
+WPM-32K (8 models) 40.35
+RL-refined WPM-32K (8 models) 41.16
+
+LSTM (6 layers) [30] 35.6
+LSTM (6 layers + PosUnk) [30] 37.5
+
+Deep-Att + PosUnk (8 models) [43] 40.4
+
+We ensemble 8 RL-refined models to obtain a state-of-the-art result of 26.30 BLEU points on the WMT
+En→De dataset. Our results are reported in Table 8.
+
+Table 8: Model ensemble results on WMT En→De (newstest2014). See Table 5 for a comparison against
+non-ensemble models.
+
+Model BLEU
+WPM-32K (8 models) 26.20
+
+RL-refined WPM-32K (8 models) 26.30
+
+Finally, to better understand the quality of our models and the effect of RL refinement, we carried out a
+four-way side-by-side human evaluation to compare our NMT translations against the reference translations
+and the best phrase-based statistical machine translations. During the side-by-side comparison, humans
+
+17
+
+
+
+are asked to rate four translations given a source sentence. The four translations are: 1) the best phrase-
+based translations as downloaded from http://matrix.statmt.org/systems/show/2065, 2) an ensemble of 8
+ML-trained models, 3) an ensemble of 8 ML-trained and then RL-refined models, and 4) reference human
+translations as taken directly from newstest2014, Our results are presented in Table 9.
+
+Table 9: Human side-by-side evaluation scores of WMT En→Fr models.
+Model BLEU Side-by-side
+
+averaged score
+PBMT [15] 37.0 3.87
+
+NMT before RL 40.35 4.46
+NMT after RL 41.16 4.44
+
+Human 4.82
+
+The results show that even though RL refinement can achieve better BLEU scores, it barely improves the
+human impression of the translation quality. This could be due to a combination of factors including: 1) the
+relatively small sample size for the experiment (only 500 examples for side-by-side), 2) the improvement in
+BLEU score by RL is relatively small after model ensembling (0.81), which may be at a scale that human
+side-by-side evaluations are insensitive to, and 3) the possible mismatch between BLEU as a metric and
+real translation quality as perceived by human raters. Table 11 contains some example translations from
+PBMT, "NMT before RL" and "Human", along with the side-by-side scores that human raters assigned to
+each translation (some of which we disagree with, see the table caption).

@@ -1,0 +1,57 @@
+
+We compare the performance of all the tuners implemented in Joshua (MERT,
+PRO, MIRA, AdaGrad) on the Spanish–English and Chinese–English systems. For
+each tuner, we repeated experiments five times with the training samples randomly
+shuffled. We compared systems with dense features only and dense+sparse features.
+The ten dense features are the regular MT features including phrase translation prob-
+abilities, the language model, word penalties, etc. The sparse features we use are the
+bigrams on the translation hypotheses. For the Spanish–English system, there are
+about 270k such features and for the Chinese–English system the number is about
+60k. We ran each tuner 10 epochs on the tuning data set with a k-best list of size 300.
+
+For PRO, we used the built-in binary Perceptron as the classifier. We sampled
+8k training pairs from each k-best list and extracted the top 50 pairs to the classifier
+training set. For MIRA, the parameter C is set to 0.01, and we used mini-batch of size
+10. For AdaGrad, we set λ = 0.05 and η=0.1 for both L1 and L2 regularizations, and
+also used mini-batch of size 10.
+
+The experimental results on the test sets are given in Table 1. With only the small
+(dense) feature sets, all tuning algorithms in general give similar results, suggesting
+that they have probably found near-optimal solutions. When the bigram sparse fea-
+tures are added, AdaGrad and PRO performed very well on the Spanish–English and
+
+11
+
+
+
+PBML 104 OCTOBER 2015
+
+Tuner and Feature Spanish–English Chinese–EnglishAvg Stdev Avg Stdev
+MERT (dense) 24.26 0.21 21.55 0.42
+PRO (dense) 23.93 0.03 21.59 0.15
+PRO (dense+sparse) 24.22 0.02 22.11 0.13
+MIRA (dense) 24.22 0.05 21.81 0.07
+MIRA (dense+sparse) 23.83 0.05 21.65 0.09
+AG-1 (dense) 24.30 0.04 21.33 0.29
+AG-2 (dense) 24.29 0.06 20.69 0.14
+AG-1 (dense+sparse) 24.73 0.11 20.68 0.07
+AG-2 (dense+sparse) 24.68 0.04 21.11 0.19
+
+Table 1. A comparison of tuning algorithms implemented in Joshua. Here we show the
+average BLEU scores on the test set and their standard deviations of five repeated
+
+experiments on the Spanish–English and Chinese–English systems. AG-1, AG-2 means
+AdaGrad with L1 and L2 regularization respectively. The best average scores for each
+
+system are marked in bold.
+
+Chinese–English systems, and yielded the best results. Although MIRA performed
+reasonably well when only dense features were present, it seems to suffer from over-
+fitting when a large number of sparse features were added—we observed very good
+results on the tuning set but failed to see improvements on the test set. Finally, while
+AdaGrad gave the best results on the Spanish–English system, it did not perform as
+well on the Chinese–English system. Since AdaGrad makes use of the gradient infor-
+mation to scale the learing step in each dimension, it is very sensitive to magnitudes
+of gradient vectors (see the theoretical analysis in Duchi et al. (2011)). We therefore
+suspect that for the Chinese–English system, the loss gradients are very noisy and
+misguided AdaGrad to find inappropriate descent directions.

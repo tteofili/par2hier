@@ -1,0 +1,43 @@
+As mentioned above, deep stacked LSTMs often give better accuracy over shallower models. However, simply
+stacking more layers of LSTM works only to a certain number of layers, beyond which the network becomes
+too slow and difficult to train, likely due to exploding and vanishing gradient problems [32, 21]. In our
+
+4
+
+
+
+experience with large-scale translation tasks, simple stacked LSTM layers work well up to 4 layers, barely
+with 6 layers, and very poorly beyond 8 layers.
+
+Figure 2: The difference between normal stacked LSTM and our stacked LSTM with residual connections.
+On the left: simple stacked LSTM layers [39]. On the right: our implementation of stacked LSTM layers
+with residual connections. With residual connections, input to the bottom LSTM layer (x0i ’s to LSTM1) is
+element-wise added to the output from the bottom layer (x1i ’s). This sum is then fed to the top LSTM layer
+(LSTM2) as the new input.
+
+Motivated by [20], we introduce residual connections among the LSTM layers in a stack (see Figure 2).
+More concretely, let LSTMi and LSTMi+1 be the i-th and (i+1)-th LSTM layers in a stack, whose parameters
+are Wi and Wi+1 respectively. At the t-th time step, for the stacked LSTM without residual connections,
+we have:
+
+cit,mit = LSTMi(cit−1,mit−1,xi−1t ; Wi)
+xit = mit
+
+ci+1t ,mi+1t = LSTMi+1(ci+1t−1,mi+1t−1,xit; Wi+1)
+(5)
+
+where xit is the input to LSTMi at time step t, and mit and cit are the hidden states and memory states of
+LSTMi at time step t, respectively.
+
+With residual connections between LSTMi and LSTMi+1, the above equations become:
+
+cit,mit = LSTMi(cit−1,mit−1,xi−1t ; Wi)
+xit = mit + xi−1t
+
+ci+1t ,mi+1t = LSTMi+1(ci+1t−1,mi+1t−1,xit; Wi+1)
+(6)
+
+Residual connections greatly improve the gradient flow in the backward pass, which allows us to train very
+deep encoder and decoder networks. In most of our experiments, we use 8 LSTM layers for the encoder and
+decoder, though residual connections can allow us to train substantially deeper networks (similar to what
+was observed in [43]).

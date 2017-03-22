@@ -1,0 +1,28 @@
+Due to the complexity of our model, we make use of both model parallelism and data parallelism to speed
+up training. Data parallelism is straightforward: we train n model replicas concurrently using a Downpour
+SGD algorithm [12]. The n replicas all share one copy of model parameters, with each replica asynchronously
+updating the parameters using a combination of Adam [24] and SGD algorithms. In our experiments, n is
+often around 10. Each replica works on a mini-batch of m sentence pairs at a time, which is often 128 in our
+experiments.
+
+In addition to data parallelism, model parallelism is used to improve the speed of the gradient computation
+on each replica. The encoder and decoder networks are partitioned along the depth dimension and are placed
+on multiple GPUs, effectively running each layer on a different GPU. Since all but the first encoder layer are
+uni-directional, layer i+ 1 can start its computation before layer i is fully finished, which improves training
+speed. The softmax layer is also partitioned, with each partition responsible for a subset of symbols in the
+output vocabulary. Figure 1 shows more details of how partitioning is done.
+
+Model parallelism places certain constraints on the model architectures we can use. For example, we
+cannot afford to have bi-directional LSTM layers for all the encoder layers, since doing so would reduce
+parallelism among subsequent layers, as each layer would have to wait until both forward and backward
+directions of the previous layer have finished. This would effectively constrain us to make use of only 2 GPUs
+in parallel (one for the forward direction and one for the backward direction). For the attention portion of
+the model, we chose to align the bottom decoder output to the top encoder output to maximize parallelism
+
+6
+
+
+
+when running the decoder network. Had we aligned the top decoder layer to the top encoder layer, we would
+have removed all parallelism in the decoder network and would not benefit from using more than one GPU
+for decoding.

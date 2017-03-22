@@ -1,0 +1,14 @@
+
+Translation equivalence of the bilingual embeddings
+
+is evaluated by naive word alignment to match word
+
+embeddings by cosine distance.5 The Alignment Er-
+
+ror Rates (AER) reported in Table 3 suggest that
+
+bilingual training using Equation 5 produces embed-
+
+dings with better translation equivalence compared
+
+to those produced by monolingual training.
