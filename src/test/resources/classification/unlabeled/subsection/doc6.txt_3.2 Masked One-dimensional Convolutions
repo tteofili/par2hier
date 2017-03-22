@@ -1,9 +1,0 @@
-
-Given a target string t = t0, ..., tn the target network embeds each of the first n tokens
-t0, ..., tn−1 via a look-up table (the n tokens t1, ..., tn serve as targets for the predictions).
-The resulting embeddings are concatenated into a tensor of size 1× n× 2d where d is the
-number of inner channels in the network. The target network applies masked one-dimensional
-convolutions (van den Oord et al., 2016b) to the embedding tensor that have a masked
-kernel of size k. The masking ensures that information from future tokens does not affect
-the prediction of the current token. The operation can be implemented either by zeroing out
-some of the weights on a wider kernel of size 2k − 1 or by padding the output map.

@@ -1,9 +1,0 @@
-
-We aim at building neural language and translation models that capture the desiderata
-set out in Sect. 2.1. The proposed ByteNet architecture is composed of a target network
-that is stacked on a source network and generates variable-length outputs via dynamic
-unfolding. The target network, referred to as the ByteNet Decoder, is a language model
-that is formed of one-dimensional convolutional layers that use dilation (Sect. 3.3) and are
-masked (Sect. 3.2). The source network processes the source string into a representation
-and is formed of one-dimensional convolutional layers that use dilation but are not masked.
-Figure 1 depicts the two networks and their combination in the ByteNet.

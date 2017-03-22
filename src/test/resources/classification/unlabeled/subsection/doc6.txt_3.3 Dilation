@@ -1,7 +1,0 @@
-
-The masked convolutions use dilation to increase the receptive field of the target net-
-work (Chen et al., 2014; Yu and Koltun, 2015). Dilation makes the receptive field grow
-exponentially in terms of the depth of the networks, as opposed to linearly. We use a dilation
-scheme whereby the dilation rates are doubled every layer up to a maximum rate r (for our
-experiments r = 16). The scheme is repeated multiple times in the network always starting
-from a dilation rate of 1 (van den Oord et al., 2016a; Kalchbrenner et al., 2016b).

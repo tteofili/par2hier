@@ -1,9 +1,0 @@
-
-Joshua’s phrase-based decoder is currently a “bare-bones” decoder, lacking state-
-of-the-art features such as lexicalized distortion and the operation sequence model
-(Durrani et al., 2011). We believe, however, that many of these gains can be imple-
-mented using the sparse feature framework (cf. Cherry (2013); Green et al. (2013))
-rather than with hard-coded specialized modules.
-
-We also plan to add a lattice decoding feature, which currently only works for the
-CKY+-based hierarchical system (where the implementation is simpler).

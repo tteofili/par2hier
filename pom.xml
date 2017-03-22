@@ -19,7 +19,7 @@
         xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.tteofili</groupId>
-    <artifactId>hier2vec</artifactId>
+    <artifactId>par2hier</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <properties>
         <dl4j.version>0.8.0</dl4j.version>
@@ -98,27 +98,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <!--<plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>appassembler-maven-plugin</artifactId>
-                <version>1.1.1</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>assemble</goal>
-                        </goals>
-                        <configuration>
-                            <programs>
-                                <program>
-                                    <mainClass></mainClass>
-                                    <name>h2v</name>
-                                </program>
-                            </programs>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>-->
         </plugins>
     </build>
 </project>
