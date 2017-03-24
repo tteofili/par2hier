@@ -19,7 +19,6 @@ import org.deeplearning4j.text.documentiterator.LabelledDocument;
 import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFactory;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -28,7 +27,6 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 /**
  * Tests for classification based on {@link Par2Hier}
  */
-@Ignore
 @RunWith(Parameterized.class)
 public class Par2HierClassificationTest {
 
@@ -69,14 +67,14 @@ public class Par2HierClassificationTest {
     tokenizerFactory.setTokenPreProcessor(new CommonPreprocessor());
 
     // ParagraphVectors training configuration
-    double learningRate = 0.025;
+    double learningRate = 0.1;
     int iterations = 5;
     int windowSize = 5;
     int layerSize = 60;
-    int numEpochs = 20;
-    int minWordFrequency = 1;
+    int numEpochs = 5;
+    int minWordFrequency = 2;
     double minLearningRate = 0.001;
-    int batchSize = 10;
+    int batchSize = 5;
 
     paragraphVectors = new ParagraphVectors.Builder()
         .minWordFrequency(minWordFrequency)
@@ -115,10 +113,8 @@ public class Par2HierClassificationTest {
     // fit model
     par2Hier.fit();
 
-    System.out.println("pv classification");
     checkUnlabelledData(paragraphVectors, iterator, tokenizerFactory);
 
-    System.out.println("p2h classification");
     checkUnlabelledData(par2Hier, iterator, tokenizerFactory);
 
   }
@@ -135,13 +131,29 @@ public class Par2HierClassificationTest {
     LabelSeeker seeker = new LabelSeeker(iterator.getLabelsSource().getLabels(),
         (InMemoryLookupTable<VocabWord>) paragraphVectors.getLookupTable());
 
+    System.out.println(paragraphVectors + " classification results");
+    double cc = 0;
+    double size = 0;
     while (unClassifiedIterator.hasNextDocument()) {
       LabelledDocument document = unClassifiedIterator.nextDocument();
       INDArray documentAsCentroid = meansBuilder.documentAsVector(document);
       List<Pair<String, Double>> scores = seeker.getScores(documentAsCentroid);
 
-      System.out.println("Document '" + document.getLabels() + "' falls into the following categories: " + scores);
+      double max = -Integer.MAX_VALUE;
+      String cat = null;
+      for (Pair<String, Double> p : scores) {
+        if (p.getSecond() > max) {
+          max = p.getSecond();
+          cat = p.getFirst();
+        }
+      }
+      if (document.getLabels().contains(cat)) {
+        cc++;
+      }
+      size++;
+
     }
+    System.out.println("acc:" + (cc / size));
 
   }
 }

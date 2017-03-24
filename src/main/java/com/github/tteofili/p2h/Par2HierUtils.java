@@ -104,8 +104,8 @@ class Par2HierUtils {
   }
 
   /**
-   * base case: on a leave hv = pv (+ k centroids of wv)
-   * on a non-leave node with n childs: hv = pv + k centroids of the n hv
+   * base case: on a leaf hv = pv
+   * on a non-leaf node with n childs: hv = pv + k centroids of the n hv
    */
   private static INDArray getPar2HierVector(WeightLookupTable<VocabWord> lookupTable, PatriciaTrie<String> trie, String node,
                                             int k, Map<String, INDArray> hvs, Method method) {
@@ -129,7 +129,7 @@ class Par2HierUtils {
     } else {
       descendants = Collections.emptyList();
     }
-    if (descendants.size() <= 1) {
+    if (descendants.size() == 0) {
       // just the pv
       hvs.put(node, hv);
       return hv;

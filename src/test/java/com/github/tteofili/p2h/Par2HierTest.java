@@ -87,23 +87,15 @@ public class Par2HierTest {
 
     // paragraph vectors training configuration
     double learningRate = 0.025;
-    int iterations = 5;
-    int windowSize = 5;
-    int layerSize = 60;
-    int numEpochs = 20;
-    int minWordFrequency = 1;
     double minLearningRate = 0.001;
-    int batchSize = 10;
+    int batchSize = 1000;
+    int numEpochs = 20;
 
     paragraphVectors = new ParagraphVectors.Builder()
-        .minWordFrequency(minWordFrequency)
-        .iterations(iterations)
         .epochs(numEpochs)
-        .layerSize(layerSize)
         .minLearningRate(minLearningRate)
         .batchSize(batchSize)
         .learningRate(learningRate)
-        .windowSize(windowSize)
         .iterate(iterator)
         .trainWordVectors(true)
         .tokenizerFactory(tokenizerFactory)
@@ -113,14 +105,10 @@ public class Par2HierTest {
     paragraphVectors.fit();
 
     Par2Hier par2Hier = new Par2Hier.Builder()
-        .minWordFrequency(minWordFrequency)
-        .iterations(iterations)
         .epochs(numEpochs)
-        .layerSize(layerSize)
         .learningRate(learningRate)
         .minLearningRate(minLearningRate)
         .batchSize(batchSize)
-        .windowSize(windowSize)
         .iterate(iterator)
         .trainWordVectors(true)
         .tokenizerFactory(tokenizerFactory)

@@ -63,13 +63,19 @@ public class Par2Hier extends Word2Vec {
   private Par2HierUtils.Method smoothing;
   private Integer k;
 
+  @Override
+  public String toString() {
+    return "Par2Hier{" +
+        "smoothing=" + smoothing +
+        ", k=" + k +
+        '}';
+  }
 
   public void extractLabels() {
     Collection<VocabWord> vocabWordCollection = vocab.vocabWords();
     List<VocabWord> vocabWordList = new ArrayList<>();
     int[] indexArray;
 
-    //INDArray pulledArray;
     //Check if word has label and build a list out of the collection
     for (VocabWord vWord : vocabWordCollection) {
       if (vWord.isLabel()) {
