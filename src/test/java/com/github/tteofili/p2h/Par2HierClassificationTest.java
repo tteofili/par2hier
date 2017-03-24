@@ -19,6 +19,7 @@ import org.deeplearning4j.text.documentiterator.LabelledDocument;
 import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFactory;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -27,6 +28,7 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 /**
  * Tests for classification based on {@link Par2Hier}
  */
+@Ignore
 @RunWith(Parameterized.class)
 public class Par2HierClassificationTest {
 
@@ -67,7 +69,7 @@ public class Par2HierClassificationTest {
     tokenizerFactory.setTokenPreProcessor(new CommonPreprocessor());
 
     // ParagraphVectors training configuration
-    double learningRate = 0.1;
+    double learningRate = 0.05;
     int iterations = 5;
     int windowSize = 5;
     int layerSize = 60;

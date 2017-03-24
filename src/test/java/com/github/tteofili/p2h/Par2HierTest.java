@@ -86,13 +86,21 @@ public class Par2HierTest {
     Map<String, INDArray> pvs = new TreeMap<>();
 
     // paragraph vectors training configuration
-    double learningRate = 0.025;
+    double learningRate = 0.05;
+    int iterations = 5;
+    int windowSize = 5;
+    int layerSize = 60;
+    int numEpochs = 5;
+    int minWordFrequency = 2;
     double minLearningRate = 0.001;
-    int batchSize = 1000;
-    int numEpochs = 20;
+    int batchSize = 5;
 
     paragraphVectors = new ParagraphVectors.Builder()
         .epochs(numEpochs)
+        .iterations(iterations)
+        .windowSize(windowSize)
+        .layerSize(layerSize)
+        .minWordFrequency(minWordFrequency)
         .minLearningRate(minLearningRate)
         .batchSize(batchSize)
         .learningRate(learningRate)
@@ -105,6 +113,10 @@ public class Par2HierTest {
     paragraphVectors.fit();
 
     Par2Hier par2Hier = new Par2Hier.Builder()
+        .iterations(iterations)
+        .windowSize(windowSize)
+        .layerSize(layerSize)
+        .minWordFrequency(minWordFrequency)
         .epochs(numEpochs)
         .learningRate(learningRate)
         .minLearningRate(minLearningRate)
