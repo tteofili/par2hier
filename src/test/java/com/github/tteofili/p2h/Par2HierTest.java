@@ -21,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -87,9 +88,9 @@ public class Par2HierTest {
 
     // paragraph vectors training configuration
     double learningRate = 0.05;
-    int iterations = 5;
+    int iterations = 1;
     int windowSize = 5;
-    int layerSize = 60;
+    int layerSize = 30;
     int numEpochs = 5;
     int minWordFrequency = 2;
     double minLearningRate = 0.001;
@@ -112,22 +113,7 @@ public class Par2HierTest {
     // fit model
     paragraphVectors.fit();
 
-    Par2Hier par2Hier = new Par2Hier.Builder()
-        .iterations(iterations)
-        .windowSize(windowSize)
-        .layerSize(layerSize)
-        .minWordFrequency(minWordFrequency)
-        .epochs(numEpochs)
-        .learningRate(learningRate)
-        .minLearningRate(minLearningRate)
-        .batchSize(batchSize)
-        .iterate(iterator)
-        .trainWordVectors(true)
-        .tokenizerFactory(tokenizerFactory)
-        .centroids(k)
-        .smoothing(method)
-        .useExistingWordVectors(paragraphVectors) // enhance existing vectors rather than creating new ones, for more appropriate comparison
-        .build();
+    Par2Hier par2Hier = new Par2Hier(paragraphVectors, method, k);
 
     // fit model
     par2Hier.fit();
@@ -150,6 +136,7 @@ public class Par2HierTest {
     }
 
     System.out.println("--->func(args):pv,p2h");
+
     // measure similarity indexes
     double[] intraDocumentSimilarity = getIntraDocumentSimilarity(comparison);
     System.out.println("ids(" + k + "," + method + "):" + Arrays.toString(intraDocumentSimilarity));
@@ -169,6 +156,49 @@ public class Par2HierTest {
       pvOutputStream.flush();
       pvOutputStream.close();
     }
+
+    // classification
+    double cpv = 0;
+    double cp2h = 0;
+    for (String label : labels) {
+      INDArray vector = lookupTable.vector(label);
+      pvs.put(label, vector);
+      Collection<String> strings = paragraphVectors.nearestLabels(vector, 3);
+      Collection<String> hstrings = par2Hier.nearestLabels(vector, 3);
+
+      int labelDepth = label.split("\\.").length;
+
+      int stringDepth = getDepth(strings);
+      int hstringDepth = getDepth(hstrings);
+
+      if (labelDepth == stringDepth) {
+        cpv++;
+      }
+      if (labelDepth == hstringDepth) {
+        cp2h++;
+      }
+
+    }
+    cp2h /= (double) labels.size();
+    cpv /= (double) labels.size();
+    System.out.println("acc(" + k + "," + method + "):" + cpv + "," + cp2h);
+  }
+
+  private int getDepth(Collection<String> strings) {
+    Map<Integer, Integer> m = new HashMap<>();
+    for (String s : strings) {
+      int depth = s.split("\\.").length;
+      m.put(depth, m.containsKey(depth) ? m.get(depth) + 1 : 1);
+    }
+    int max = 0;
+    int md = 0;
+    for (Map.Entry<Integer, Integer> e : m.entrySet()) {
+      if (e.getValue() > max) {
+        md = e.getKey();
+        max = e.getValue();
+      }
+    }
+    return md;
   }
 
   private String asStrings(Map<String, INDArray> pvs, Map<String, INDArray> hvs) {
@@ -216,10 +246,10 @@ public class Par2HierTest {
       String label = c.getKey();
       String nearestPV = c.getValue()[0];
       String nearestHV = c.getValue()[1];
-      if (label.charAt(3) == nearestHV.charAt(3)) {
+      if (label.charAt(3) == nearestHV.charAt(3) && label.charAt(4) == nearestHV.charAt(4)) {
         hvSimilarity++;
       }
-      if (label.charAt(3) == nearestPV.charAt(3)) {
+      if (label.charAt(3) == nearestPV.charAt(3) && label.charAt(4) == nearestPV.charAt(4)) {
         pvSimilarity++;
       }
     }

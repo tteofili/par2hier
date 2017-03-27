@@ -23,6 +23,7 @@ import org.deeplearning4j.models.embeddings.loader.VectorsConfiguration;
 import org.deeplearning4j.models.embeddings.reader.ModelUtils;
 import org.deeplearning4j.models.embeddings.reader.impl.BasicModelUtils;
 import org.deeplearning4j.models.embeddings.wordvectors.WordVectors;
+import org.deeplearning4j.models.paragraphvectors.ParagraphVectors;
 import org.deeplearning4j.models.sequencevectors.interfaces.SequenceIterator;
 import org.deeplearning4j.models.sequencevectors.interfaces.VectorsListener;
 import org.deeplearning4j.models.sequencevectors.iterators.AbstractSequenceIterator;
@@ -62,6 +63,21 @@ public class Par2Hier extends Word2Vec {
   protected boolean normalizedLabels = false;
   private Par2HierUtils.Method smoothing;
   private Integer k;
+
+  private Par2Hier() {
+  }
+
+  public Par2Hier(ParagraphVectors paragraphVectors, Par2HierUtils.Method smoothing, int k) {
+    this.smoothing = smoothing;
+    this.k = k;
+
+    this.labelsSource = paragraphVectors.getLabelsSource();
+    this.labelAwareIterator = paragraphVectors.getLabelAwareIterator();
+    this.lookupTable = paragraphVectors.getLookupTable();
+    this.vocab = paragraphVectors.getVocab();
+    this.tokenizerFactory = paragraphVectors.getTokenizerFactory();
+
+  }
 
   @Override
   public String toString() {
@@ -322,7 +338,9 @@ public class Par2Hier extends Word2Vec {
 
   @Override
   public void fit() {
-    super.fit();
+    if (lookupTable == null) {
+      super.fit();
+    }
 
     Map<String, INDArray> hvs = Par2HierUtils.getPar2Hier(labelAwareIterator, lookupTable, labelsSource.getLabels(), k, smoothing);
     for (Map.Entry<String, INDArray> entry : hvs.entrySet()) {

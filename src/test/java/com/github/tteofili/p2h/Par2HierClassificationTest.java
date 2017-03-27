@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.github.tteofili.p2h.tools.LabelSeeker;
 import com.github.tteofili.p2h.tools.MeansBuilder;
+import org.apache.commons.collections4.trie.PatriciaTrie;
 import org.datavec.api.util.ClassPathResource;
 import org.deeplearning4j.berkeley.Pair;
 import org.deeplearning4j.models.embeddings.inmemory.InMemoryLookupTable;
@@ -28,7 +29,7 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 /**
  * Tests for classification based on {@link Par2Hier}
  */
-@Ignore
+@Ignore("for this to be meaningful we need to encode more info about the class hierarchy in our p2h impl")
 @RunWith(Parameterized.class)
 public class Par2HierClassificationTest {
 
@@ -70,13 +71,13 @@ public class Par2HierClassificationTest {
 
     // ParagraphVectors training configuration
     double learningRate = 0.05;
-    int iterations = 5;
+    int iterations = 1;
     int windowSize = 5;
-    int layerSize = 60;
-    int numEpochs = 5;
-    int minWordFrequency = 2;
+    int layerSize = 30;
+    int numEpochs = 1;
+    int minWordFrequency = 1;
     double minLearningRate = 0.001;
-    int batchSize = 5;
+    int batchSize = 1;
 
     paragraphVectors = new ParagraphVectors.Builder()
         .minWordFrequency(minWordFrequency)
@@ -95,22 +96,7 @@ public class Par2HierClassificationTest {
     // fit model
     paragraphVectors.fit();
 
-    Par2Hier par2Hier = new Par2Hier.Builder()
-        .minWordFrequency(minWordFrequency)
-        .iterations(iterations)
-        .epochs(numEpochs)
-        .layerSize(layerSize)
-        .learningRate(learningRate)
-        .minLearningRate(minLearningRate)
-        .batchSize(batchSize)
-        .windowSize(windowSize)
-        .iterate(iterator)
-        .trainWordVectors(true)
-        .tokenizerFactory(tokenizerFactory)
-        .centroids(k)
-        .smoothing(method)
-        .useExistingWordVectors(paragraphVectors) // enhance existing vectors rather than creating new ones, for more appropriate comparison
-        .build();
+    Par2Hier par2Hier = new Par2Hier(paragraphVectors, method, k);
 
     // fit model
     par2Hier.fit();
