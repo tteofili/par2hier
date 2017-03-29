@@ -38,7 +38,6 @@ import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelledDocument;
 import org.deeplearning4j.text.documentiterator.LabelsSource;
 import org.deeplearning4j.text.documentiterator.interoperability.DocumentIteratorConverter;
-import org.deeplearning4j.text.invertedindex.InvertedIndex;
 import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
 import org.deeplearning4j.text.sentenceiterator.interoperability.SentenceIteratorConverter;
 import org.deeplearning4j.text.sentenceiterator.labelaware.LabelAwareSentenceIterator;
@@ -136,9 +135,11 @@ public class Par2Hier extends Word2Vec {
 
   /**
    * This method calculates inferred vector for given document
-   *
-   * @param document
-   * @return
+   * @param document the document to extract the vector for
+   * @param iterations the no. of iterations used to infer the sequence
+   * @param learningRate the start learning rate
+   * @param minLearningRate the minimum learning rate
+   * @return a vector representation of the document
    */
   public INDArray inferVector(LabelledDocument document, double learningRate, double minLearningRate, int iterations) {
     if (document.getReferencedContent() != null) {
@@ -149,10 +150,13 @@ public class Par2Hier extends Word2Vec {
   }
 
   /**
-   * This method calculates inferred vector for given document
+   * This method calculates inferred vector for given document represented as a list of words
    *
-   * @param document
-   * @return
+   * @param document the document to extract the vector for
+   * @param iterations the no. of iterations used to infer the sequence
+   * @param learningRate the start learning rate
+   * @param minLearningRate the minimum learning rate
+   * @return a vector representation of the document
    */
   public INDArray inferVector(List<VocabWord> document, double learningRate, double minLearningRate, int iterations) {
     SequenceLearningAlgorithm<VocabWord> learner = sequenceLearningAlgorithm;
@@ -174,16 +178,14 @@ public class Par2Hier extends Word2Vec {
 
     initLearners();
 
-    INDArray inf = learner.inferSequence(sequence, 119, learningRate, minLearningRate, iterations);
-
-    return inf;
+    return learner.inferSequence(sequence, 119, learningRate, minLearningRate, iterations);
   }
 
   /**
    * This method calculates inferred vector for given text, with default parameters for learning rate and iterations
    *
-   * @param text
-   * @return
+   * @param text the text to extract the vector for
+   * @return a vector representation for the given text
    */
   public INDArray inferVector(String text) {
     return inferVector(text, this.learningRate.get(), this.minLearningRate, this.numEpochs * this.numIterations);
@@ -192,8 +194,8 @@ public class Par2Hier extends Word2Vec {
   /**
    * This method calculates inferred vector for given document, with default parameters for learning rate and iterations
    *
-   * @param document
-   * @return
+   * @param document a document to extract the vector for
+   * @return a vector representation of the given document
    */
   public INDArray inferVector(LabelledDocument document) {
     return inferVector(document, this.learningRate.get(), this.minLearningRate, this.numEpochs * this.numIterations);
@@ -202,8 +204,8 @@ public class Par2Hier extends Word2Vec {
   /**
    * This method calculates inferred vector for given list of words, with default parameters for learning rate and iterations
    *
-   * @param document
-   * @return
+   * @param document a document to extract the vector for
+   * @return a vector representation of the given document
    */
   public INDArray inferVector(List<VocabWord> document) {
     return inferVector(document, this.learningRate.get(), this.minLearningRate, this.numEpochs * this.numIterations);
@@ -213,9 +215,9 @@ public class Par2Hier extends Word2Vec {
   /**
    * This method returns top N labels nearest to specified document
    *
-   * @param document
-   * @param topN
-   * @return
+   * @param document a document
+   * @param topN no. of nearest labels to find
+   * @return a {@code Collection} of the nearest labels to the given document
    */
   public Collection<String> nearestLabels(LabelledDocument document, int topN) {
     if (document.getReferencedContent() != null) {
@@ -228,9 +230,9 @@ public class Par2Hier extends Word2Vec {
   /**
    * This method returns top N labels nearest to specified text
    *
-   * @param rawText
-   * @param topN
-   * @return
+   * @param rawText a raw text
+   * @param topN no. of nearest labels to find
+   * @return a {@code Collection} of the nearest labels to the given text
    */
   public Collection<String> nearestLabels(String rawText, int topN) {
     List<String> tokens = tokenizerFactory.create(rawText).getTokens();
@@ -246,9 +248,9 @@ public class Par2Hier extends Word2Vec {
   /**
    * This method returns top N labels nearest to specified set of vocab words
    *
-   * @param document
-   * @param topN
-   * @return
+   * @param document a document
+   * @param topN no. of nearest labels to find
+   * @return a {@code Collection} of the nearest labels to the given document
    */
   public Collection<String> nearestLabels(Collection<VocabWord> document, int topN) {
     // TODO: to be implemented
@@ -259,9 +261,9 @@ public class Par2Hier extends Word2Vec {
   /**
    * This method returns top N labels nearest to specified features vector
    *
-   * @param labelVector
-   * @param topN
-   * @return
+   * @param labelVector a vector for the source label
+   * @param topN no. of nearest labels to find
+   * @return a {@code Collection} of the nearest labels to the given document
    */
   public Collection<String> nearestLabels(INDArray labelVector, int topN) {
     if (labelsMatrix == null || labelsList == null || labelsList.isEmpty()) {
@@ -365,7 +367,7 @@ public class Par2Hier extends Word2Vec {
      * PLEASE NOTE: Non-normalized model is recommended to use here.
      *
      * @param vec existing WordVectors model
-     * @return
+     * @return a builder
      */
     @Override
     @SuppressWarnings("unchecked")
@@ -382,8 +384,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method defines, if words representations should be build together with documents representations.
      *
-     * @param trainElements
-     * @return
      */
     public Builder trainWordVectors(boolean trainElements) {
       this.trainElementsRepresentation(trainElements);
@@ -393,8 +393,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method attaches pre-defined labels source to Par2Hier
      *
-     * @param source
-     * @return
      */
     public Builder labelsSource(@NonNull LabelsSource source) {
       this.labelsSource = source;
@@ -407,8 +405,6 @@ public class Par2Hier extends Word2Vec {
      * PLEASE NOTE: Order synchro between labels and input documents delegated to end-user.
      * PLEASE NOTE: Due to order issues it's recommended to use label aware iterators instead.
      *
-     * @param labels
-     * @return
      */
     @Deprecated
     public Builder labels(@NonNull List<String> labels) {
@@ -419,8 +415,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method used to feed LabelAwareDocumentIterator, that contains training corpus, into Par2Hier
      *
-     * @param iterator
-     * @return
      */
     public Builder iterate(@NonNull LabelAwareDocumentIterator iterator) {
       this.docIter = iterator;
@@ -430,8 +424,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method used to feed LabelAwareSentenceIterator, that contains training corpus, into Par2Hier
      *
-     * @param iterator
-     * @return
      */
     public Builder iterate(@NonNull LabelAwareSentenceIterator iterator) {
       this.sentenceIterator = iterator;
@@ -441,8 +433,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method used to feed LabelAwareIterator, that contains training corpus, into Par2Hier
      *
-     * @param iterator
-     * @return
      */
     public Builder iterate(@NonNull LabelAwareIterator iterator) {
       this.labelAwareIterator = iterator;
@@ -452,8 +442,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method used to feed DocumentIterator, that contains training corpus, into Par2Hier
      *
-     * @param iterator
-     * @return
      */
     @Override
     public Builder iterate(@NonNull DocumentIterator iterator) {
@@ -464,8 +452,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method used to feed SentenceIterator, that contains training corpus, into Par2Hier
      *
-     * @param iterator
-     * @return
      */
     @Override
     public Builder iterate(@NonNull SentenceIterator iterator) {
@@ -477,7 +463,7 @@ public class Par2Hier extends Word2Vec {
      * Sets ModelUtils that gonna be used as provider for utility methods: similarity(), wordsNearest(), accuracy(), etc
      *
      * @param modelUtils model utils to be used
-     * @return
+     * @return the builder
      */
     @Override
     public Builder modelUtils(@NonNull ModelUtils<VocabWord> modelUtils) {
@@ -488,8 +474,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method allows you to specify SequenceElement that will be used as UNK element, if UNK is used
      *
-     * @param element
-     * @return
      */
     @Override
     public Builder unknownElement(VocabWord element) {
@@ -501,8 +485,6 @@ public class Par2Hier extends Word2Vec {
      * This method enables/disables parallel tokenization.
      *
      * Default value: TRUE
-     * @param allow
-     * @return
      */
     @Override
     public Builder allowParallelTokenization(boolean allow) {
@@ -513,8 +495,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method allows you to specify, if UNK word should be used internally
      *
-     * @param reallyUse
-     * @return
      */
     @Override
     public Builder useUnknown(boolean reallyUse) {
@@ -671,8 +651,6 @@ public class Par2Hier extends Word2Vec {
      * This method defines TokenizerFactory to be used for strings tokenization during training
      * PLEASE NOTE: If external VocabCache is used, the same TokenizerFactory should be used to keep derived tokens equal.
      *
-     * @param tokenizerFactory
-     * @return
      */
     @Override
     public Builder tokenizerFactory(@NonNull TokenizerFactory tokenizerFactory) {
@@ -683,8 +661,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method used to feed SequenceIterator, that contains training corpus, into Par2Hier
      *
-     * @param iterator
-     * @return
      */
     @Override
     public Builder iterate(@NonNull SequenceIterator<VocabWord> iterator) {
@@ -694,8 +670,6 @@ public class Par2Hier extends Word2Vec {
 
     /**
      * This method defines mini-batch size
-     * @param batchSize
-     * @return
      */
     @Override
     public Builder batchSize(int batchSize) {
@@ -705,8 +679,6 @@ public class Par2Hier extends Word2Vec {
 
     /**
      * This method defines number of iterations done for each mini-batch during training
-     * @param iterations
-     * @return
      */
     @Override
     public Builder iterations(int iterations) {
@@ -716,8 +688,6 @@ public class Par2Hier extends Word2Vec {
 
     /**
      * This method defines number of epochs (iterations over whole training corpus) for training
-     * @param numEpochs
-     * @return
      */
     @Override
     public Builder epochs(int numEpochs) {
@@ -727,8 +697,6 @@ public class Par2Hier extends Word2Vec {
 
     /**
      * This method defines number of dimensions for output vectors
-     * @param layerSize
-     * @return
      */
     @Override
     public Builder layerSize(int layerSize) {
@@ -739,8 +707,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method sets VectorsListeners for this SequenceVectors model
      *
-     * @param vectorsListeners
-     * @return
      */
     @Override
     public Builder setVectorsListeners(@NonNull Collection<VectorsListener<VocabWord>> vectorsListeners) {
@@ -751,8 +717,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method defines initial learning rate for model training
      *
-     * @param learningRate
-     * @return
      */
     @Override
     public Builder learningRate(double learningRate) {
@@ -763,8 +727,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method defines minimal word frequency in training corpus. All words below this threshold will be removed prior model training
      *
-     * @param minWordFrequency
-     * @return
      */
     @Override
     public Builder minWordFrequency(int minWordFrequency) {
@@ -775,8 +737,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method defines minimal learning rate value for training
      *
-     * @param minLearningRate
-     * @return
      */
     @Override
     public Builder minLearningRate(double minLearningRate) {
@@ -787,8 +747,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method defines whether model should be totally wiped out prior building, or not
      *
-     * @param reallyReset
-     * @return
      */
     @Override
     public Builder resetModel(boolean reallyReset) {
@@ -799,8 +757,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method allows to define external VocabCache to be used
      *
-     * @param vocabCache
-     * @return
      */
     @Override
     public Builder vocabCache(@NonNull VocabCache<VocabWord> vocabCache) {
@@ -811,8 +767,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method allows to define external WeightLookupTable to be used
      *
-     * @param lookupTable
-     * @return
      */
     @Override
     public Builder lookupTable(@NonNull WeightLookupTable<VocabWord> lookupTable) {
@@ -824,7 +778,7 @@ public class Par2Hier extends Word2Vec {
      * This method defines whether subsampling should be used or not
      *
      * @param sampling set > 0 to subsampling argument, or 0 to disable
-     * @return
+     * @return the builder
      */
     @Override
     public Builder sampling(double sampling) {
@@ -835,8 +789,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method defines whether adaptive gradients should be used or not
      *
-     * @param reallyUse
-     * @return
      */
     @Override
     public Builder useAdaGrad(boolean reallyUse) {
@@ -848,7 +800,7 @@ public class Par2Hier extends Word2Vec {
      * This method defines whether negative sampling should be used or not
      *
      * @param negative set > 0 as negative sampling argument, or 0 to disable
-     * @return
+     * @return the builder
      */
     @Override
     public Builder negativeSample(double negative) {
@@ -858,8 +810,6 @@ public class Par2Hier extends Word2Vec {
 
     /**
      * This method defines stop words that should be ignored during training
-     * @param stopList
-     * @return
      */
     @Override
     public Builder stopWords(@NonNull List<String> stopList) {
@@ -870,8 +820,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method defines, if words representation should be build together with documents representations.
      *
-     * @param trainElements
-     * @return
      */
     @Override
     public Builder trainElementsRepresentation(boolean trainElements) {
@@ -882,8 +830,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method is hardcoded to TRUE, since that's whole point of Par2Hier
      *
-     * @param trainSequences
-     * @return
      */
     @Override
     public Builder trainSequencesRepresentation(boolean trainSequences) {
@@ -894,8 +840,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method defines stop words that should be ignored during training
      *
-     * @param stopList
-     * @return
      */
     @Override
     public Builder stopWords(@NonNull Collection<VocabWord> stopList) {
@@ -906,8 +850,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method defines context window size
      *
-     * @param windowSize
-     * @return
      */
     @Override
     public Builder windowSize(int windowSize) {
@@ -918,8 +860,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method defines maximum number of concurrent threads available for training
      *
-     * @param numWorkers
-     * @return
      */
     @Override
     public Builder workers(int numWorkers) {
@@ -948,8 +888,6 @@ public class Par2Hier extends Word2Vec {
     /**
      * This method has no effect for Par2Hier
      *
-     * @param windows
-     * @return
      */
     @Override
     public Builder useVariableWindow(int... windows) {
@@ -977,8 +915,6 @@ public class Par2Hier extends Word2Vec {
 
     /**
      * This method defines random seed for random numbers generator
-     * @param randomSeed
-     * @return
      */
     @Override
     public Builder seed(long randomSeed) {
