@@ -1,0 +1,308 @@
+
+We built a hierarchical phrase-based system for
+translation of news texts from English into Roma-
+nian. By enhancing the system with non-standard
+components, we have been able to achieve an over-
+all improvement over a plain hierarchical baseline
+of +2.9 BLEU points on the newstest2016 set.
+
+Our Moses reimplementation of the phrase ori-
+entation model for hierarchical machine transla-
+tion (Huck et al., 2013) has been released as part
+of Moses on GitHub.9
+
+9https://github.com/moses-smt/
+mosesdecoder
+
+315
+
+
+
+Acknowledgments
+
+This project has received funding from the Euro-
+pean Union’s Horizon 2020 research and innova-
+tion programme under grant agreement№ 644402
+(HimL).
+
+We thank Franck Burlot and Lauriane Aufrant
+from LIMSI-CNRS in Orsay, France, for provid-
+ing preprocessed corpora and sharing their Roma-
+nian tokenizer in the framework of a QT21/HimL
+cross-project collaboration.
+
+References
+Alexandre Allauzen, Lauriane Aufrant, Franck Burlot,
+
+Elena Knyazeva, Thomas Lavergne, and François
+Yvon. 2016. LIMSI@WMT’16: Machine Trans-
+lation of News. In Proc. of the ACL 2016 First
+Conf. on Machine Translation (WMT16), Berlin,
+Germany, August.
+
+Arianna Bisazza, Nick Ruiz, and Marcello Federico.
+2011. Fill-up versus Interpolation Methods for
+Phrase-based SMT Adaptation. In Proc. of the
+Int. Workshop on Spoken Language Translation
+(IWSLT), pages 136–143, San Francisco, CA, USA,
+December.
+
+Peter F. Brown, Stephen A. Della Pietra, Vincent J.
+Della Pietra, and Robert L. Mercer. 1993. The
+Mathematics of Statistical Machine Translation: Pa-
+rameter Estimation. Computational Linguistics,
+19(2):263–311, June.
+
+Christian Buck, Kenneth Heafield, and Bas van Ooyen.
+2014. N-gram Counts and Language Models from
+the Common Crawl. In Proc. of the Language Re-
+sources and Evaluation Conference, Reykjavík, Ice-
+land, May.
+
+Jean-Cédric Chappelier and Martin Rajman. 1998. A
+Generalized CYK Algorithm for Parsing Stochas-
+tic CFG. In Proc. of the First Workshop on Tab-
+ulation in Parsing and Deduction, pages 133–137,
+Paris, France, April.
+
+Stanley F. Chen and Joshua Goodman. 1998. An
+Empirical Study of Smoothing Techniques for Lan-
+guage Modeling. Technical Report TR-10-98, Com-
+puter Science Group, Harvard University, Cam-
+bridge, MA, USA, August.
+
+Colin Cherry and George Foster. 2012. Batch Tun-
+ing Strategies for Statistical Machine Translation. In
+Proc. of the Conf. of the North American Chapter of
+the Assoc. for Computational Linguistics: Human
+Language Technologies (NAACL-HLT), pages 427–
+436, Montréal, Canada, June.
+
+David Chiang. 2005. A Hierarchical Phrase-Based
+Model for Statistical Machine Translation. In Proc.
+
+of the Annual Meeting of the Assoc. for Computa-
+tional Linguistics (ACL), pages 263–270, Ann Ar-
+bor, MI, USA, June.
+
+David Chiang. 2007. Hierarchical Phrase-Based
+Translation. Computational Linguistics, 33(2):201–
+228, June.
+
+Arthur P. Dempster, Nan M. Laird, and Donald B. Ru-
+bin. 1977. Maximum Likelihood from Incomplete
+Data via the EM Algorithm. J. Royal Statist. Soc.
+Ser. B, 39(1):1–22.
+
+George Foster, Roland Kuhn, and Howard Johnson.
+2006. Phrasetable Smoothing for Statistical Ma-
+chine Translation. In Proc. of the Conf. on Em-
+pirical Methods for Natural Language Processing
+(EMNLP), pages 53–61, Sydney, Australia, July.
+
+Markus Freitag, Stephan Peitz, Joern Wuebker, Her-
+mann Ney, Nadir Durrani, Matthias Huck, Philipp
+Koehn, Thanh-Le Ha, Jan Niehues, Mohammed
+Mediani, Teresa Herrmann, Alex Waibel, Nicola
+Bertoldi, Mauro Cettolo, and Marcello Federico.
+2013. EU-BRIDGE MT: Text Translation of Talks
+in the EU-BRIDGE Project. In Proc. of the
+Int. Workshop on Spoken Language Translation
+(IWSLT), pages 128–135, Heidelberg, Germany, De-
+cember.
+
+Markus Freitag, Matthias Huck, and Hermann Ney.
+2014a. Jane: Open Source Machine Translation
+System Combination. In Proc. of the Conf. of the
+Europ. Chapter of the Assoc. for Computational Lin-
+guistics (EACL), pages 29–32, Gothenburg, Sweden,
+April.
+
+Markus Freitag, Stephan Peitz, Joern Wuebker, Her-
+mann Ney, Matthias Huck, Rico Sennrich, Nadir
+Durrani, Maria Nadejde, Philip Williams, Philipp
+Koehn, Teresa Herrmann, Eunah Cho, and Alex
+Waibel. 2014b. EU-BRIDGE MT: Combined Ma-
+chine Translation. In Proc. of the Workshop on
+Statistical Machine Translation (WMT), pages 105–
+113, Baltimore, MD, USA, June.
+
+Markus Freitag, Joern Wuebker, Stephan Peitz, Her-
+mann Ney, Matthias Huck, Alexandra Birch, Nadir
+Durrani, Philipp Koehn, Mohammed Mediani, Is-
+abel Slawik, Jan Niehues, Eunah Cho, Alex Waibel,
+Nicola Bertoldi, Mauro Cettolo, and Marcello Fed-
+erico. 2014c. Combined Spoken Language Trans-
+lation. In Proc. of the Int. Workshop on Spoken
+Language Translation (IWSLT), pages 57–64, Lake
+Tahoe, CA, USA, December.
+
+Michel Galley and Christopher D. Manning. 2008. A
+Simple and Effective Hierarchical Phrase Reorder-
+ing Model. In Proc. of the Conf. on Empirical Meth-
+ods for Natural Language Processing (EMNLP),
+pages 847–855, Honolulu, HI, USA, October.
+
+Qin Gao and Stephan Vogel. 2008. Parallel Implemen-
+tations of Word Alignment Tool. In Software Engi-
+neering, Testing, and Quality Assurance for Natural
+
+316
+
+
+
+Language Processing, SETQA-NLP ’08, pages 49–
+57, Columbus, OH, USA, June.
+
+Barry Haddow, Matthias Huck, Alexandra Birch, Niko-
+lay Bogoychev, and Philipp Koehn. 2015. The
+Edinburgh/JHU Phrase-based Machine Translation
+Systems for WMT 2015. In Proc. of the Workshop
+on Statistical Machine Translation (WMT), pages
+126–133, Lisbon, Portugal, September.
+
+Kenneth Heafield. 2011. KenLM: Faster and Smaller
+Language Model Queries. In Proc. of the Workshop
+on Statistical Machine Translation (WMT), pages
+187–197, Edinburgh, Scotland, UK, July.
+
+Hieu Hoang, Philipp Koehn, and Adam Lopez. 2009.
+A Unified Framework for Phrase-Based, Hierarchi-
+cal, and Syntax-Based Statistical Machine Transla-
+tion. In Proc. of the Int. Workshop on Spoken Lan-
+guage Translation (IWSLT), pages 152–159, Tokyo,
+Japan, December.
+
+Matthias Huck and Hermann Ney. 2012. Pivot
+Lightly-Supervised Training for Statistical Machine
+Translation. In Proc. of the Conf. of the Assoc. for
+Machine Translation in the Americas (AMTA), San
+Diego, CA, USA, October.
+
+Matthias Huck, David Vilar, Daniel Stein, and Her-
+mann Ney. 2011. Lightly-Supervised Training for
+Hierarchical Phrase-Based Machine Translation. In
+Proc. of the EMNLP 2011 Workshop on Unsuper-
+vised Learning in NLP, pages 91–96, Edinburgh,
+Scotland, UK, July.
+
+Matthias Huck, Jan-Thorsten Peter, Markus Freitag,
+Stephan Peitz, and Hermann Ney. 2012. Hi-
+erarchical Phrase-Based Translation with Jane 2.
+The Prague Bulletin of Mathematical Linguistics
+(PBML), 98:37–50, October.
+
+Matthias Huck, Joern Wuebker, Felix Rietig, and Her-
+mann Ney. 2013. A Phrase Orientation Model
+for Hierarchical Machine Translation. In Proc. of
+the Workshop on Statistical Machine Translation
+(WMT), pages 452–463, Sofia, Bulgaria, August.
+
+Matthias Huck, Alexandra Birch, and Barry Haddow.
+2015. Mixed-Domain vs. Multi-Domain Statistical
+Machine Translation. In Proc. of MT Summit XV,
+vol.1: MT Researchers’ Track, pages 240–255, Mi-
+ami, FL, USA, October.
+
+Reinhard Kneser and Hermann Ney. 1995. Improved
+Backing-Off for M-gram Language Modeling. In
+Proceedings of the Int. Conf. on Acoustics, Speech,
+and Signal Processing, volume 1, pages 181–184,
+Detroit, MI, USA, May.
+
+Philipp Koehn, Franz Joseph Och, and Daniel Marcu.
+2003. Statistical Phrase-Based Translation. In Proc.
+of the Conf. of the North American Chapter of the
+Assoc. for Computational Linguistics: Human Lan-
+guage Technologies (NAACL-HLT), pages 127–133,
+Edmonton, Canada, May/June.
+
+Philipp Koehn. 2005. Europarl: A Parallel Corpus for
+Statistical Machine Translation. In Proc. of the MT
+Summit X, Phuket, Thailand, September.
+
+Philipp Koehn. 2010. An Experimental Management
+System. The Prague Bulletin of Mathematical Lin-
+guistics (PBML), 94:87–96, September.
+
+Franz Josef Och and Hermann Ney. 2002. Discrimina-
+tive Training and Maximum Entropy Models for Sta-
+tistical Machine Translation. In Proc. of the Annual
+Meeting of the Assoc. for Computational Linguistics
+(ACL), pages 295–302, Philadelphia, PA, USA, July.
+
+Franz Josef Och and Hermann Ney. 2003. A System-
+atic Comparison of Various Statistical Alignment
+Models. Computational Linguistics, 29(1):19–51,
+March.
+
+Kishore Papineni, Salim Roukos, Todd Ward, and Wei-
+Jing Zhu. 2002. Bleu: a Method for Automatic
+Evaluation of Machine Translation. In Proc. of the
+Annual Meeting of the Assoc. for Computational
+Linguistics (ACL), pages 311–318, Philadelphia, PA,
+USA, July.
+
+Jan-Thorsten Peter, Tamer Alkhouli, Hermann Ney,
+Matthias Huck, Fabienne Braune, Alexander Fraser,
+Aleš Tamchyna, Ondřej Bojar, Barry Haddow,
+Rico Sennrich, Frédéric Blain, Lucia Specia, Jan
+Niehues, Alex Waibel, Alexandre Allauzen, Lau-
+riane Aufrant, Franck Burlot, Elena Knyazeva,
+Thomas Lavergne, François Yvon, Stella Frank, and
+Mārcis Pinnis. 2016. The QT21/HimL Combined
+Machine Translation System. In Proc. of the ACL
+2016 First Conf. on Machine Translation (WMT16),
+Berlin, Germany, August.
+
+Holger Schwenk and Jean Senellart. 2009. Transla-
+tion Model Adaptation for an Arabic/French News
+Translation System by Lightly-Supervised Training.
+In Proc. of the MT Summit XII, Ottawa, Canada, Au-
+gust.
+
+Holger Schwenk. 2008. Investigations on Large-Scale
+Lightly-Supervised Training for Statistical Machine
+Translation. In Proc. of the Int. Workshop on Spo-
+ken Language Translation (IWSLT), pages 182–189,
+Waikiki, HI, USA, October.
+
+Andreas Stolcke. 2002. SRILM – an Extensible Lan-
+guage Modeling Toolkit. In Proc. of the Int. Conf.
+on Spoken Language Processing (ICSLP), volume 3,
+Denver, CO, USA, September.
+
+Francis M. Tyers and Murat Serdar Alperen. 2010.
+South-East European Times: A parallel corpus of
+Balkan languages. In Proc. of the LREC Work-
+shop on Exploitation of Multilingual Resources and
+Tools for Central and (South-) Eastern European
+Languages, pages 49–53, Malta, May.
+
+David Vilar, Daniel Stein, Matthias Huck, and Her-
+mann Ney. 2010. Jane: Open Source Hierarchical
+Translation, Extended with Reordering and Lexicon
+
+317
+
+
+
+Models. In Proc. of the Workshop on Statistical Ma-
+chine Translation (WMT), pages 262–270, Uppsala,
+Sweden, July.
+
+David Vilar, Daniel Stein, Matthias Huck, and Her-
+mann Ney. 2012. Jane: an advanced freely avail-
+able hierarchical machine translation toolkit. Ma-
+chine Translation, 26(3):197–216, September.
+
+Philip Williams, Rico Sennrich, Maria Nădejde,
+Matthias Huck, Barry Haddow, and Ondřej Bojar.
+2016. Edinburgh’s Statistical Machine Translation
+Systems for WMT16. In Proc. of the ACL 2016 First
+Conf. on Machine Translation (WMT16), Berlin,
+Germany, August.
+
+318
+
+

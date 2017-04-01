@@ -1,0 +1,22 @@
+
+Phrase-based statistical machine translation (PB-SMT) systems, which have been the state-of-the-art
+approach to machine translation (MT) for many years, are known to contain very little explicit linguistic
+knowledge. While this characteristic has been at the core of their success, enabling fast development,
+training and tuning of the systems (as long as sufficient amounts of parallel data are available), it becomes
+a double-edged sword in many cases, e.g., when translating into a morphologically-rich language with
+frequent long-range dependencies, such as Czech.
+
+It has been shown that many language phenomena hard to handle for the PB-SMT systems can be
+easily dealt with by linguistically motivated MT systems – although these systems often have other
+shortcomings, such as a tendency to translate very lexically, in a one-to-one fashion, due to lacking the
+(non-linguistic) phrase-based representation employed in PB-SMT systems.
+
+This situation invites researchers to attempt to combine these conceptually different systems in a clever
+way so that their strengths combine and their shortcomings cancel out. In our paper, we review a set of
+such attempts, performed with Moses, a prominent representative of the PB-SMT systems, and Treex,
+a linguistically motivated NLP framework, featuring, among other, a full-fledged deep syntactic MT
+system, TectoMT.
+
+As Treex and TectoMT have been primarily developed to process Czech language and to perform
+English-to-Czech translation, most of the existing system combination experiments have been performed
+on the English-to-Czech language pair.1 Therefore, we limit ourselves to this setting in our work.

@@ -1,0 +1,435 @@
+
+As an extension of the word-level task, we intro-
+duced a new task: phrase-level prediction. For this
+task, given a “phrase” (segmentation as given by
+the SMT decoder), participants are asked to label it
+as ‘OK’ or ‘BAD’. Errors made by MT engines are
+interdependent and one incorrectly chosen word
+can cause more errors, especially in its local con-
+text. Phrases as produced by SMT decoders can be
+seen as a representation of this local context and
+in this task we ask participants to consider them as
+atomic units, using phrase-specific information to
+
+166
+
+
+
+System ID F1-mult ↑ F1-BAD F1-OK
+English-German
+
+• UNBABEL/ensemble 0.495 0.560 0.885
+UNBABEL/linear 0.463 0.529 0.875
+
+UGENT-LT3/SCATE-RF 0.411 0.492 0.836
+UGENT-LT3/SCATE-ENS 0.381 0.464 0.821
+
+POSTECH/WORD-RNN-QV3 0.380 0.447 0.850
+POSTECH/WORD-RNN-QV2 0.376 0.454 0.828
+UAlacant/SBI-Online-baseline 0.367 0.456 0.805
+
+CDACM/RNN 0.353 0.419 0.842
+SHEF/SHEF-MIME-1 0.338 0.403 0.839
+
+SHEF/SHEF-MIME-0.3 0.330 0.391 0.845
+BASELINE 0.324 0.368 0.880
+
+RTM/s5-RTM-GLMd 0.308 0.349 0.882
+UAlacant/SBI-Online 0.290 0.406 0.715
+RTM/s4-RTM-GLMd 0.273 0.307 0.888
+
+Table 21: Official results for the WMT16 Quality Estimation Task 2. The winning submissions are indicated by a •. These
+are the top-scoring submission and those that are not significantly worse according to approximate randomisation tests with
+95% confidence intervals. The grey area indicates the submissions whose results are not statistically different from the baseline
+according to the same test.
+
+improve upon the results of the word-level task.
+
+Data The data to be used is exactly the same as
+for Task 1 and the word-level task. The labelling
+of this data was adapted from word-level labelling
+by assigning the ‘BAD’ tag to any phrase that con-
+tains at least one ‘BAD’ word. The phrase seg-
+mentation used in this dataset is the original seg-
+mentation of sentences produced by the SMT de-
+coder during translation.
+
+The dataset statistics are outlined in Table 23
+(this is similar to Table 20, but shows the percent-
+age of incorrect phrases instead of words).
+
+Evaluation Although the QE was produced at
+the level of phrases, we used word-level metrics
+to evaluate the performance of participating sys-
+tems. This choice was motivated by the fact that
+the length of phrases can vary significantly, and
+an incorrectly labelled phrase can actually mean 1
+to 5 incorrectly labelled words, while phrase-level
+metrics do not weigh incorrect labels by the length
+of the phrases. We decided to use word-level eval-
+uation to make the results of this task more intu-
+itive. We used the same metric as the one used
+in task 2: multiplication of word-level F1-OK and
+word-level F1-BAD (F1-mult). However, the test
+set was re-labelled in order to agree with phrase
+boundaries: if a phrase had at least one BAD word,
+all its labels were replaced with BAD.
+
+Thus, the sequence
+OK ‖ BAD OK OK ‖ OK ‖ BAD OK ‖ OK OK
+was converted to:
+OK ‖ BAD BAD BAD ‖ OK ‖ BAD BAD ‖ OK OK
+As in Task 2, statistical significance was com-
+
+puted using randomisation tests with Bonferroni
+correction.
+
+Results The results of the phrase-level task are
+represented in Table 24. Here, unlike the word-
+level task, we cannot find a single winner: al-
+though the F1-mult scores of the top five systems
+vary from 0.379 to 0.364, this difference is not
+significant. However, all the winning submissions
+outperform the baseline.
+
+Analogously to the previous task, we provide
+the F1-BAD and F1-OK scores in order to bet-
+ter understand the differences between the models.
+We can see that some models have very close F1-
+mult scores, although their per class components
+scores can differ. For example, the F1-mult scores
+of two submissions by the USFD team are very
+close (0.367 and 0.364). However, if we decom-
+pose these scores, we will see that both F1-BAD
+and F1-OK scores of the two models have around
+2% of absolute difference: the W&SLP4PT model
+is more “pessimistic” (i.e. it is better at labelling
+BAD words), while the CONTEXT model identi-
+fies the correct words more accurately. However,
+the combinations of these scores lead to very sim-
+ilar F1-mult. The situation is the same with all
+top five submissions: the differences in F1-BAD
+are levelled off by the F1-OK component, and the
+values of the F1-mult are closer than those of F1-
+BAD.
+
+This suggests that the F1-mult score might not
+be an best metric for the phrase-level task. While
+in the phrase-level models phrases of different
+length are treated in the same way, the word-level
+metric unfolds each phrase-level label to a set of
+
+167
+
+
+
+U
+N
+
+B
+A
+
+B
+E
+
+L
+/e
+
+ns
+em
+
+bl
+e
+
+U
+N
+
+B
+A
+
+B
+E
+
+L
+/li
+
+ne
+ar
+
+U
+G
+
+E
+N
+
+T
+/L
+
+T
+3-
+
+R
+F
+
+U
+G
+
+E
+N
+
+T
+/L
+
+T
+3-
+
+E
+N
+
+S
+
+PO
+ST
+
+E
+C
+
+H
+/W
+
+O
+R
+
+D
+-R
+
+N
+N
+
+-Q
+V
+
+3
+
+PO
+ST
+
+E
+C
+
+H
+/W
+
+O
+R
+
+D
+-R
+
+N
+N
+
+-Q
+V
+
+2
+
+U
+A
+
+la
+ca
+
+nt
+/S
+
+B
+I-
+
+O
+nl
+
+in
+e-
+
+ba
+se
+
+lin
+e
+
+C
+D
+
+A
+C
+
+M
+/R
+
+N
+N
+
+SH
+E
+
+F/
+SH
+
+E
+F-
+
+M
+IM
+
+E
+-1
+
+SH
+E
+
+F/
+SH
+
+E
+F-
+
+M
+IM
+
+E
+-0
+
+.3
+
+B
+A
+
+SE
+L
+
+IN
+E
+
+R
+T
+
+M
+/s
+
+5-
+R
+
+T
+M
+
+-G
+L
+
+M
+d
+
+U
+A
+
+la
+ca
+
+nt
+/S
+
+B
+I-
+
+O
+nl
+
+in
+e
+
+R
+T
+
+M
+/s
+
+4-
+R
+
+T
+M
+
+-G
+L
+
+M
+d
+
+UNBABEL/ensemble
+
+UNBABEL/linear
+
+UGENT/LT3-RF
+
+UGENT/LT3-ENS
+
+POSTECH/WORD-RNN-QV3
+
+POSTECH/WORD-RNN-QV2
+
+UAlacant/SBI-Online-baseline
+
+CDACM/RNN
+
+SHEF/SHEF-MIME-1
+
+SHEF/SHEF-MIME-0.3
+
+BASELINE
+
+RTM/s5-RTM-GLMd
+
+UAlacant/SBI-Online
+
+RTM/s4-RTM-GLMd
+
+Table 22: Randomised significance test for the word-level task with Bonfferroni correction. The darker the cell, the lower the
+significance level of the difference between the scores of the corresponding systems. The coloured frames denote groups of
+submissions which are not significantly different. The blue row shows the baseline system.
+
+168
+
+
+
+Sentences Words % of BADwords
+Training 12,000 210,958 29.84
+Development 1,000 19,487 30.21
+Test 2,000 34,531 29.53
+
+Table 23: Datasets for Task 2p.
+
+word-level labels, thus giving different importance
+to phrases of different lengths. In order to find a
+more suitable metric we tested another evaluation
+strategy. We evaluated the submissions in terms
+of phrase-level F1-scores: here all phrases were
+considered as uniform atomic units regardless of
+their lengths, and F1-BAD and F1-OK were com-
+puted as harmonic means of precision and recall
+for phrase-level of OK and BAD labels.
+
+Table 25 shows the performance of phrase-level
+QE models measured in terms of multiplication of
+phrase-level F1-scores. Except for some changes
+in the order of models, this ranking is very similar
+to the official one represented in Table 24. Here,
+the order of submissions by the POSTECH and
+CDACM teams is different from the ranking pro-
+duced with the primary metric, but they are still
+not significantly different. On the other hand, the
+USFD team models are no longer best-performing
+under the phrase-level F1-score. This evaluation
+shows that phrase-level F1-mult is slightly better
+at discriminating between models, although they
+are still considered too close and no single best-
+performing approach can be identified.

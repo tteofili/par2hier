@@ -1,0 +1,9 @@
+We used the Berkeley parser to obtain source language syntax. We used the following Moses configura-
+tion for the baseline tree-to-string syntax-based SMT system.
+
+• max-chart-span = 1000
+• Phrase score option: GoodTuring
+• Phrase extraction options: MaxSpan = 1000, MinHoleSource = 1, MinWords = 0, NonTermCon-
+secSource, and AllowOnlyUnalignedWords.
+
+The default values were used for the other system parameters.

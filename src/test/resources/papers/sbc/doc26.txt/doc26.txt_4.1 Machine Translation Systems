@@ -1,0 +1,18 @@
+
+A key advantage of the MT framework is that, un-
+like with classifiers, error confusions are learned
+from parallel data automatically, without further
+(linguistic) input. We build two MT systems that
+differ only in the use of parallel data: the CoNLL-
+2014 training data and Lang-8. Our MT systems
+are trained using Moses (Koehn et al., 2007) and
+follow the standard approach (Junczys-Dowmunt
+and Grundkiewicz, 2014; Susanto et al., 2014).
+Both systems use two 5-gram language models
+– English Wikipedia and the corrected side of
+CoNLL-train – trained with KenLM (Heafield et
+al., 2013). Table 9 reports the performance of
+the systems. As shown, performance increases by
+more than 11 points when a larger parallel corpus
+is used. The best MT system outperforms the top
+CoNLL system by 2 points.

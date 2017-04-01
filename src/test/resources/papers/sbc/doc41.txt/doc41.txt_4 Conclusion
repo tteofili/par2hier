@@ -1,0 +1,179 @@
+
+We reviewed a range of existing methods of combining the linguistically poor Moses phrase-based ma-
+chine translation system with linguistically rich systems implemented in the Treex NLP framework, most
+notably the TectoMT system, including their automatic evaluation via BLEU as reported in the literature.
+Some of the methods have been shown to achieve significant improvements in the translation quality,
+as measured by BLEU as well as by human evaluation. The most successful are the Chimera methods,
+which constituted the state-of-the-art in English-to-Czech machine translation in several WMT transla-
+tion shared tasks.
+
+On the other hand, many other methods have not brought any significant improvement, or have even
+lead to a deterioration of the translation quality. However, we believe these methods to be worth consid-
+ering as well, as they bring more insight into the problematics of hybrid translation. Moreover, some of
+them might be further modified or combined in future, and may eventually become useful, possibly for a
+different language pair or for a specific domain.
+
+Acknowledgements
+
+This research was supported by the grants FP7-ICT-2013-10-610516 (QTLeap), GAUK 1572314,
+GAUK 2058214, and SVV 260 333. This work has been using language resources and tools devel-
+oped, stored and distributed by the LINDAT/CLARIN project of the Ministry of Education, Youth and
+Sports of the Czech Republic (project LM2015071).
+
+8
+
+
+
+References
+Ondřej Bojar and Kamil Kos. 2010. 2010 failures in English-Czech phrase-based MT. In Proceedings of the Joint
+
+Fifth WMT and MetricsMATR, pages 60–66, Uppsala, Sweden. Uppsala Universitet, ACL.
+
+Ondřej Bojar and Aleš Tamchyna. 2015. CUNI in WMT15: Chimera strikes again. In Proceedings of the 10th
+WMT, pages 79–83, Stroudsburg, PA, USA. ACL.
+
+Ondřej Bojar and Zdeněk Žabokrtský. 2009. CzEng 0.9, building a large Czech-English automatic parallel tree-
+bank. PBML, (92):63–83.
+
+Ondřej Bojar, Bushra Jawaid, and Amir Kamran. 2012. Probes in a taxonomy of factored phrase-based models.
+In Proceedings of the Seventh WMT, pages 253–260, Montréal, Canada. ACL.
+
+Ondřej Bojar, Christian Buck, Chris Callison-Burch, Christian Federmann, Barry Haddow, Philipp Koehn, Christof
+Monz, Matt Post, Radu Soricut, and Lucia Specia. 2013a. Findings of the 2013 WMT. In Proceedings of the
+Eight WMT, pages 1–44, Sofija, Bulgaria. Bălgarska akademija na naukite, ACL.
+
+Ondřej Bojar, Rudolf Rosa, and Aleš Tamchyna. 2013b. Chimera – three heads for English-to-Czech translation.
+In Proceedings of the Eight WMT, pages 92–98, Sofija, Bulgaria. Bălgarska akademija na naukite, ACL.
+
+Ondřej Bojar, Christian Buck, Christian Federmann, Barry Haddow, Philipp Koehn, Johannes Leveling, Christof
+Monz, Pavel Pecina, Matt Post, Herve Saint-Amand, Radu Soricut, Lucia Specia, and Aleš Tamchyna. 2014.
+Findings of the 2014 WMT. In Proceedings of the Ninth WMT, pages 12–58, Baltimore, MD, USA. ACL.
+
+Ondřej Bojar, Rajen Chatterjee, Christian Federmann, Barry Haddow, Matthias Huck, Chris Hokamp, Philipp
+Koehn, Varvara Logacheva, Christof Monz, Matteo Negri, Matt Post, Carolina Scarton, Lucia Specia, and
+Marco Turchi. 2015. Findings of the 2015 WMT. In Proceedings of the 10th WMT, pages 1–46, Stroudsburg,
+PA, USA. ACL.
+
+Ondřej Bojar, Rajen Chatterjee, Christian Federmann, Yvette Graham, Barry Haddow, Matthias Huck, Antonio
+Yepes, Philipp Koehn, Varvara Logacheva, Christof Monz, Matteo Negri, Aurelie Névéol, Mariana Neves,
+Martin Popel, Matt Post, Raphael Rubino, Carolina Scarton, Lucia Specia, Marco Turchi, Karin Verspoor, and
+Marcos Zampieri. 2016. Findings of the 2016 conference on machine translation (WMT16). In Ondřej Bojar
+and et al ., editors, Proceedings of the First Conference on Machine Translation (WMT). Volume 2: Shared Task
+Papers, volume 2, pages 131–198, Stroudsburg, PA, USA. ACL.
+
+Ondřej Dušek, Luís Gomes, Michal Novák, Martin Popel, and Rudolf Rosa. 2015. New language pairs in Tec-
+toMT. In Proceedings of the 10th WMT, pages 98–104, Stroudsburg, PA, USA. ACL.
+
+Ondřej Dušek, Zdeněk Žabokrtský, Martin Popel, Martin Majliš, Michal Novák, and David Mareček. 2012.
+Formemes in English-Czech deep syntactic MT. In Proceedings of the Seventh WMT, page 267–274.
+
+Petra Galuščáková, Martin Popel, and Ondřej Bojar. 2013. PhraseFix: Statistical post-editing of tectoMT. In
+Proceedings of the Eight WMT, pages 141–147, Sofija, Bulgaria. Bălgarska akademija na naukite, ACL.
+
+Jan Hajič. 1998. Building a Syntactically Annotated Corpus: The Prague Dependency Treebank. In Eva Hajičová,
+editor, Issues of Valency and Meaning. Studies in Honor of Jarmila Panevová, pages 12–19. Prague Karolinum,
+Charles University Press.
+
+Philipp Koehn, Hieu Hoang, Alexandra Birch, Chris Callison-Burch, Marcello Federico, Nicola Bertoldi, Brooke
+Cowan, Wade Shen, Christine Moran, Richard Zens, Chris Dyer, Ondřej Bojar, Alexandra Constantin, and Evan
+Herbst. 2007. Moses: Open source toolkit for statistical machine translation. In ACL 2007, Proceedings of
+the 45th Annual Meeting of the ACL Companion Volume Proceedings of the Demo and Poster Sessions, pages
+177–180, Prague, Czech Republic, June. ACL.
+
+Zhifei Li, Chris Callison-Burch, Sanjeev Khudanpur, and Wren Thornton. 2009. Decoding in Joshua: Open
+source, parsing-based machine translation. PBML, 91:47–56.
+
+Martin Majliš. 2009. Google Translate + TectoMT. http://www.slideshare.net/martin.majlis/
+google-translate-tectomt, May. Oral talk.
+
+David Mareček, Rudolf Rosa, Petra Galuščáková, and Ondřej Bojar. 2011. Two-step translation with grammatical
+post-processing. In Chris Callison-Burch, Philipp Koehn, Christof Monz, and Omar Zaidan, editors, Proceed-
+ings of the Sixth WMT, pages 426–432, Edinburgh, UK. University of Edinburgh, ACL.
+
+Franz Josef Och and Hermann Ney. 2003. A systematic comparison of various statistical alignment models.
+Computational Linguistics, 29(1):19–51.
+
+9
+
+
+
+Kemail Oflazer and Ilknur Durgar El-Kahlout. 2007. Exploring different representational units in English-to-
+Turkish statistical machine translation. In Proceedings of the Second WMT, pages 25–32. ACL.
+
+Martin Popel and Zdeněk Žabokrtský. 2010. TectoMT: Modular NLP framework. In Hrafn Loftsson, Eirikur
+Rögnvaldsson, and Sigrun Helgadottir, editors, LNAI, Proceedings of the 7th International Conference on Ad-
+vances in NLP (IceTAL 2010), volume 6233 of LNCS, pages 293–304, Berlin / Heidelberg. Iceland Centre for
+Language Technology (ICLT), Springer.
+
+Martin Popel. 2013. Machine translation zoo: Tree-to-tree transfer and discriminative learning. https://ufal.
+mff.cuni.cz/~popel/papers/2013_05_06_zoo.pdf, May. Oral talk.
+
+Martin Popel. 2015. Machine translation and discriminative models: Tree-to-tree transfer and discrimi-
+native learning. http://ufal.mff.cuni.cz/~popel/papers/2015_03_23_discriminative_tectomt.
+pdf, March. Oral talk.
+
+Rudolf Rosa, David Mareček, and Ondřej Dušek. 2012. DEPFIX: A system for automatic correction of Czech
+MT outputs. In Proceedings of the Seventh WMT, pages 362–368, Montréal, Canada. ACL.
+
+Rudolf Rosa, Roman Sudarikov, Michal Novák, Martin Popel, and Ondřej Bojar. 2016. Dictionary-based domain
+adaptation of MT systems without retraining. In Ondřej Bojar and et al ., editors, Proceedings of the First Con-
+ference on Machine Translation (WMT). Volume 2: Shared Task Papers, volume 2, pages 449–455, Stroudsburg,
+PA, USA. ACL.
+
+Rudolf Rosa. 2013. Automatic post-editing of phrase-based machine translation outputs. Master’s thesis, Charles
+University in Prague, Faculty of Mathematics and Physics, Praha, Czechia.
+
+Rudolf Rosa. 2014. Depfix, a tool for automatic rule-based post-editing of SMT. PBML, 102:47–56.
+
+Michel Simard, Cyril Goutte, and Pierre Isabelle. 2007. Statistical phrase-based post-editing. In HLT 2007: The
+Conference of the North American Chapter of the ACL; Proceedings of the Main Conference, pages 508–515,
+Rochester, New York, April. ACL.
+
+Drahomíra Spoustová, Jan Hajič, Jan Votrubec, Pavel Krbec, and Pavel Květoň. 2007. The best of two worlds:
+Cooperation of statistical and rule-based taggers for Czech. In Proceedings of the Workshop on Balto-Slavonic
+NLP 2007, pages 67–74, Praha, Czechia. Univerzita Karlova v Praze, ACL.
+
+Aleš Tamchyna, Roman Sudarikov, Ondřej Bojar, and Alexander Fraser. 2016. CUNI-LMU submissions in
+WMT2016: Chimera constrained and beaten. In Ondřej Bojar and et al ., editors, Proceedings of the First Con-
+ference on Machine Translation (WMT). Volume 2: Shared Task Papers, volume 2, pages 385–390, Stroudsburg,
+PA, USA. ACL, ACL.
+
+Zdeněk Žabokrtský. 2011. Treex – an open-source framework for natural language processing. In Markéta
+Lopatková, editor, Information Technologies – Applications and Theory, volume 788, pages 7–14, Košice, Slo-
+vakia. Univerzita Pavla Jozefa Šafárika v Košiciach.
+
+Zdeněk Žabokrtský, Jan Ptáček, and Petr Pajas. 2008. TectoMT: highly modular MT system with tectogrammatics
+used as transfer layer. In Proceedings of the Third WMT, pages 167–170. ACL.
+
+Daniel Zeman. 2010. Using TectoMT as a preprocessing tool for phrase-based statistical machine translation.
+In Petr Sojka, Aleš Horák, Ivan Kopeček, and Karel Pala, editors, Text, Speech and Dialogue, volume 6231 of
+LNCS, pages 216–223, Berlin / Heidelberg. Masarykova univerzita, Springer.
+
+10
+
+
+
+Factoring Adjunction in Hierarchical Phrase-Based SMT
+
+Sophie Arnoult
+ILLC
+
+University of Amsterdam
+s.i.arnoult@uva.nl
+
+Khalil Sima’an
+ILLC
+
+University of Amsterdam
+k.simaan@uva.nl
+
+Abstract
+
+While much work has been done to inform Hierarchical Phrase-Based SMT (Chiang, 2005)
+models linguistically, the adjunct/argument distinction has generally not been exploited for these
+models. But as Shieber (2007) points out, capturing this distinction allows to abstract over ‘in-
+tervening’ adjuncts, and is thus relevant for (machine) translation in general. We contribute an
+adjunction-driven approach to hierarchical phrase-based modelling that uses source-side adjuncts
+to relax extraction constraints–allowing to capturing long-distance dependencies–, and to guide
+translation through labelling. The labelling scheme can be reduced to two adjunct/non-adjunct
+labels, and improves translation over Hiero by up to 0.6 BLEU points for English-Chinese.

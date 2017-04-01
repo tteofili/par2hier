@@ -1,0 +1,120 @@
+
+We present NRC’s submission to the Russian-
+English news translation task of WMT 2016.
+Russian-English is a challenging language pair for
+statistical machine translation because Russian is
+a highly inflectional and free word order language.
+Case information is encoded by modifying the
+Russian words, which makes the number of word
+types present in the Russian side of a Russian-
+English parallel corpus much higher than in the
+English side, introducing a data sparsity problem.
+
+Lemmatization is one of the possible solutions
+for handling data sparsity when translating highly
+inflectional languages. However, Russian is a free
+word order language, meaning that case informa-
+tion conveyed through inflection plays an impor-
+tant role in disambiguating the meaning of a sen-
+tence. The MT system would be unable to recover
+this case information if we were to blindly lemma-
+tize all the Russian words to their root form.
+
+Instead, we rely most heavily on lemmatiza-
+tion only when the missing inflections are un-
+likely to cause ambiguity. For example, in au-
+tomatic word alignment, the missing case infor-
+mation should not confuse the system as compet-
+ing inflections are unlikely to appear in the same
+sentence (El Kholy and Habash, 2012). There-
+fore, we build automatic word alignments with
+lemmatized Russian, but then restore the Russian
+lemmas to their inflected forms before estimat-
+ing our other model parameters. The end result
+is a system with higher-quality word alignments,
+but which can still use case information to drive
+its translation and reordering models. Similarly,
+our bilingual language models have large source
+context windows that allow them to resolve ambi-
+guities introduced by lemmatization, so we build
+these based on lemmatized versions of the source
+by default. These include neural network joint
+models (NNJMs) and lexical translation models
+(NNLTMs) (Devlin et al., 2014).
+
+We have found that blind lemmatization of
+phrase tables is actually quite harmful to transla-
+tion, but Russian morphology still causes a signif-
+icant increase in the number of OOVs. Therefore,
+we built a fallback Russian lemma phrase table for
+the OOVs in the Russian input, implemented as
+an interpolated phrase table. For any remaining
+Russian OOVs, we use a semi-supervised translit-
+eration system to translate the word orthograph-
+ically. This character-level subsystem is trained
+
+326
+
+
+
+Train
+
+Input to decoder
+r1       r2     r3      r4
+
+l(r1)  l(r2) l(r3)  l(r4)
+
+l(r1)  l(r2)   l(r3)   l(r4)
+
+e1      e2      e3       e4
+
+Paste alignments
+
+NNJM#1phrasetable#2
+
+Components that use
+
+Russian lemmas
+
+All other components use 
+
+Russian words, including:
+
+Train
+
+decoder
+
+r1       r2     r3       r4
+
+e1      e2      e3       e4
+
+phrasetable#1 NNJM#2
+
+transliterator NNLTM sparse feature reordering
+
+Figure 1: System diagram for the NRC Russian-English submission, highlighting our use of two different
+views of the Russian source. In this figure, Russian words in their inflected surface form are denoted as
+r1, r2, . . ., while their automatically lemmatized root forms are denoted l(r1), l(r2), . . .
+
+on a transliteration corpus mined from our paral-
+lel training corpus, where the mining process is
+seeded by the name-pair corpora provided by the
+competition.
+
+Figure 1 summarizes our lemmatization strat-
+egy. In this figure, phrasetable#1 corresponds to
+the phrase table given the highest weight in our in-
+terpolation (see Section 3.2), while NNJM#1 sim-
+ply denotes that NNJM we found empirically to be
+the most informative. We did not have time to try
+duplicating all the models in this way; for instance,
+it might have been interesting to try lemma-based
+reordering models and an NNLTM based on Rus-
+sian words rather than Russian lemmas, but we
+will leave this for future work.
+
+The NRC submission achieved the highest un-
+cased BLEU, the second highest cased BLEU and
+the lowest TER scores among the eight partici-
+pants in the task, and ranked third out of ten sys-
+tems in the human evaluation.

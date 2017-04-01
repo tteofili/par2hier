@@ -1,0 +1,119 @@
+
+In statistical machine translation (SMT) (Brown et
+al., 1993), large quantities of high-quality bilingual
+data are essential to achieve high translation accu-
+racy. While in many cases large corpora can be col-
+lected, for example by crawling the web (Resnik and
+
+1Code to replicate the experiments can be found at
+https://github.com/akivajp/naacl2016
+
+any one of the preceding claims
+
+(a) Conventional n-gram selection method (n = 4)
+
+any  one  of  the  preceding  claims
+
+(b) Proposed maximal phrase selection method
+
+any one  of  the preceding claims
+
+DT	 CD	 IN	 DT	 NNS	JJ	
+
+NP	
+
+PP	
+
+NP	
+
+NP	
+
+(c) Proposed parse subtree selection method
+
+Figure 1: Conventional and proposed data selection methods
+
+Smith, 2003), in many domains or language pairs it
+is still necessarily to create data by hand, either by
+hiring professionals or crowdsourcing (Zaidan and
+Callison-Burch, 2011). In these cases, active learn-
+ing (§2), which selects which data to annotate based
+on their potential benefit to the translation system,
+has been shown to be effective for improving SMT
+systems while keeping the required amount of an-
+notation to a minimum (Eck et al., 2005; Turchi et
+al., 2008; Haffari et al., 2009; Haffari and Sarkar,
+2009; Ananthakrishnan et al., 2010; Bloodgood and
+Callison-Burch, 2010; González-Rubio et al., 2012;
+Green et al., 2014).
+Most work on active learning for SMT, and natu-
+
+ral language tasks in general, has focused on choos-
+ing which sentences to give to annotators. These
+
+20
+
+
+
+methods generally assign priority to sentences that
+contain data that is potentially useful to the MT sys-
+tem according to a number of criteria. For exam-
+ple, there are methods to select sentences that con-
+tain phrases that are frequent in monolingual data
+but not in bilingual data (Eck et al., 2005), have low
+confidence according to the MT system (Haffari et
+al., 2009), or are predicted to be poor translations by
+an MT quality estimation system (Ananthakrishnan
+et al., 2010). However, while the selected sentences
+may contain useful phrases, they will also generally
+contain many already covered phrases that nonethe-
+less cost time and money to translate.
+To solve the problem of wastefulness in full-
+
+sentence annotation for active learning, there have
+been a number of methods proposed to perform
+sub-sentential annotation of short phrases for nat-
+ural language tasks (Settles and Craven, 2008;
+Bloodgood and Callison-Burch, 2010; Tomanek and
+Hahn, 2009; Sperber et al., 2014). For MT in par-
+ticular, Bloodgood and Callison-Burch (2010) have
+proposed a method that selects poorly covered n-
+grams to show to translators, allowing them to focus
+directly on poorly covered parts without including
+unnecessary words (§3). Nevertheless, our experi-
+ments identified two major practical problems with
+this method. First, as shown in Figure 1 (a), many of
+the selected phrases overlap with each other, caus-
+ing translation of redundant phrases, damaging ef-
+ficiency. Second, it is common to see fragments
+of complex phrases such as “one of the preceding,”
+which may be difficult for workers to translate into
+a contiguous phrase in the target language.
+In this work, we propose two methods that aim to
+
+solve these two problems and improve the efficiency
+and reliability of segment-based active learning for
+SMT (§4). For the problem of overlapping phrases,
+we note that by merging overlapping phrases, as
+shown in Figure 1 (b), we can reduce the number of
+redundant words annotated and improve training ef-
+ficiency. We adopt the idea of maximal substrings
+(Okanohara and Tsujii, 2009) which both encode
+this idea of redundancy, and can be calculated to ar-
+bitrary length in linear time using enhanced suffix
+arrays. For the problem of phrase structure fragmen-
+tation, we propose a simple heuristic to count only
+well-formed syntactic constituents in a parse tree, as
+shown in Figure 1 (c).
+
+To investigate the effect of our proposed meth-
+ods on learning efficiency, we perform experiments
+on English-French and English-Japanese translation
+tasks in which we incrementally add new parallel
+data, update models and evaluate translation accu-
+racy. Results from both simulation experiments (§5)
+and 120 hours of work by professional translators
+(§6) demonstrate improved efficiency with respect to
+the number of words annotated. We also found that
+human translators took more time, but were more
+confident in their results on segments selected by the
+proposed method.

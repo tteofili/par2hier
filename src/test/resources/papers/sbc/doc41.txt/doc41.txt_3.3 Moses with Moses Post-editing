@@ -1,0 +1,30 @@
+
+In case one does not have two different systems to combine, the simple approach of Oflazer and El-
+Kahlout (2007) can always be tried, who were the first to report translation quality improvements by
+
+8PhraseFix (Section 3.2) also allows non-isomorphic translation, but only as post-processing. All other Moses-based sys-
+tems (including Chimera, Section 3.7 & Section 3.8) allow non-isomorphic translations, but their transfer is on the t-layer.
+
+4
+
+
+
+Figure 4: Simple post-editing of Moses by Moses
+
+Figure 5: TwoStep Moses translation
+
+training Moses to post-edit its own output. The setup, shown in Figure 4, is generally identical to that
+described in Section 3.2, except for using a standard bilingual Moses as the first-stage system, and then
+again Moses, this time in a monolingual setting, as the second-stage system. This setup was implemented
+and evaluated for English-to-Czech translation in (Rosa, 2013, section 7.4.1), but no improvements were
+found; based on a review of previous papers reporting positive results, the authors noted that this ap-
+proach is probably only useful in cases where the available parallel training corpus is very small.
+
+A more elaborate attempt in the same direction was presented as the TwoStep setup of Bojar and Kos
+(2010), this time bringing in Treex as well. TwoStep uses a first-stage Moses to translate from English
+into intermediate Czech, where each word is represented by a tuple of its lemma and a label marking
+several morphological features (such as detailed PoS, morphological number, grade, and negation). The
+second-stage Moses then translates from intermediate Czech into Czech (see Figure 5). The conversion
+of Czech into intermediate Czech is performed by a Treex pipeline described by Bojar and Žabokrtský
+(2009), with the main component being the Morče tagger of Spoustová et al. (2007). Unfortunately, this
+complex setup has not been found to have any benefit either.

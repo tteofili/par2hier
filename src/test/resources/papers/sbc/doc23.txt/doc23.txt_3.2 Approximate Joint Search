@@ -1,0 +1,18 @@
+
+Given a source sentence x and model parameters
+〈θ1, θ2〉, decoding can be formalized as follows:
+
+ŷ = argmax
+y
+
+p(y | x; θ1)× p(yr | x; θ2)
+
+As pointed out by (Liu et al., 2016), it is NP-hard
+to perform an exact search, and so we adapt one of
+their approximate search methods for the machine
+translation scenario. The basic idea consists of two
+steps: 1) run beam search for forward and reverse
+models independently to obtain two k-best lists; 2)
+re-score the union of two k-best lists using the joint
+model to find the best candidate. We refer to the
+reader to (Liu et al., 2016) for further details.

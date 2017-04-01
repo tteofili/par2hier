@@ -1,0 +1,39 @@
+The training objective function for our agreement
+(or joint) model is formalized as follows:
+
+` =
+∑
+〈x,y〉
+
+log p(y | x; θ1) + log p(yr | x; θ2) (2)
+
+where yr = 〈yn, yn−1 · · · , y1〉 is the reverse of se-
+quence y; p(y | x; θ1) denotes the left-to-right
+model with parameters θ1, while p(yr | x; θ2) de-
+notes the right-to-left model with parameters θ2, as
+defined in Eq.(1); and 〈x,y〉 ranges over a given
+training dataset. Following (Bahdanau et al., 2014),
+we employ AdaDelta (Zeiler, 2012) to minimize the
+loss `.
+
+Note that, in parallel to our efforts, Cheng et al.
+(2016) has explored the agreement idea for NMT
+close to ours. However, unlike their work on the
+agreement between source and target sides in the
+spirit of the general idea in (Liang et al., 2006), we
+focus on the agreement between left and right di-
+rections on the target side oriented to the natural is-
+sue of NMT itself. Although our model is orthogo-
+nal to theirs, one of our advantage is that our model
+does not rely on any additional hyperparameters to
+
+3Both hidden states and context vectors are dependent on the
+model parameter θ, but we remove it from the expressions here
+for simplicity.
+
+412
+
+
+
+encourage agreement, given that tuning such hyper-
+parameters for NMT is too costly.

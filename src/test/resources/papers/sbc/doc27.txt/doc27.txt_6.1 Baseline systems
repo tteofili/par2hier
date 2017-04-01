@@ -1,0 +1,249 @@
+Sentence-level baseline system: For Task 1,
+QuEst++13 (Specia et al., 2015) was used to ex-
+tract 17 features from the SMT source/target lan-
+guage training corpus:
+
+• Number of tokens in source & target sen-
+tences.
+
+• Average source token length.
+
+• Average number of occurrences of the target
+word within the target sentence.
+
+• Number of punctuation marks in source and
+target sentences.
+
+• Language model probability of source and
+target sentences based on models built from
+the SMT training corpus.
+
+• Average number of translations per source
+word in the sentence as given by IBM Model
+1 extracted from the SMT training corpus.
+
+• Percentage of unigrams, bigrams and tri-
+grams in frequency quartiles 1 (lower fre-
+quency words) and 4 (higher frequency
+words) in the source language extracted from
+the source SMT training corpus.
+
+• Percentage of unigrams in the source sen-
+tence seen in the source SMT training corpus.
+
+These features were used to train a Support
+Vector Regression (SVR) algorithm using a Ra-
+dial Basis Function (RBF) kernel within the
+scikit-learn toolkit (Pedregosa et al., 2011).14
+
+13https://github.com/ghpaetzold/
+questplusplus
+
+14http://scikit-learn.org/
+
+The γ, � and C parameters were optimised via grid
+search with 5-fold cross validation on the training
+set.
+
+Word-level baseline system: For Tasks 2 and
+2p, the baseline features were extracted with the
+Marmot tool (Logacheva et al., 2016b).
+
+For the baseline system we used a number of
+features that have been found the most informa-
+tive in previous research on word-level QE. Our
+baseline set of features is loosely based on the one
+described in (Luong et al., 2014). It contains the
+following 22 features:
+
+• Word count in the source and target sen-
+tences, source and target token count ratio.
+Although these features are sentence-level
+(i.e. their values will be the same for all
+words in a sentence), the length of a sentence
+might influence the probability of a word be-
+ing wrong.
+
+• Target token, its left and right contexts of one
+word.
+
+• Source word aligned to the target token, its
+left and right contexts of one word. The
+alignments were taken from the SMT system
+that produced the automatic translations.
+
+• Binary dictionary features: whether target to-
+ken is a stopword, a punctuation mark, a
+proper noun, a number.
+
+• Target language model features:
+– The order of the highest order ngram
+
+which starts and end with the target to-
+ken.
+
+– Backoff behaviour of the ngrams
+(ti−2, ti−1, ti), (ti−1, ti, ti+1),
+(ti, ti+1, ti+2), where ti is the tar-
+get token (the backoff behaviour was
+computed as described in (Raybaud
+et al., 2011)).
+
+• The order of the highest order ngram which
+starts and ends with the source token.
+
+• The Part-of-speech tags of the target and
+source tokens.
+
+This set of baseline features is similar to the
+one used at WMT15 QE shared task (Bojar et al.,
+2015). We excluded three features used the last
+
+159
+
+
+
+year: pseudo-reference features and number of
+WordNet senses for the source and target tokens.
+
+We model the task as a sequence prediction
+problem, and train our baseline system using the
+Linear-Chain Conditional Random Fields (CRF)
+algorithm with the CRFSuite tool (Okazaki,
+2007). The model was trained using the passive-
+aggressive optimisation algorithm.
+
+Phrase-level baseline system: The phrase-level
+features were also extracted with Marmot, but they
+are different from the word-level features. The
+baseline set of phrase-level features is based on a
+list of features which were used for sentence-level
+QE in QuEst++ toolkit. These so-called “black-
+box” features do not use the internal information
+from the MT system. We use the following fea-
+ture set consisting of 72 features, using the SMT
+source/target language training corpus:
+
+• Source phrase frequency features:
+– average frequency of ngrams (unigrams,
+
+bigrams, trigrams) from different quar-
+tiles of frequency (from the low fre-
+quency to high frequency ngrams);
+
+– percentage of distinct source ngrams
+(unigrams, bigrams, trigrams) seen in a
+corpus of the source language.
+
+• Translation probability features:
+– average number of translations per
+
+source word in the sentence (with dif-
+ferent translation probability thresholds:
+0.01, 0.05, 0.1, 0.2, 0.5);
+
+– average number of translations per
+source word in the sentence (with dif-
+ferent translation probability thresholds:
+0.01, 0.05, 0.1, 0.2, 0.5) weighted by
+the frequency of each word in the source
+corpus.
+
+• Punctuation features:
+– difference between numbers of various
+
+punctuation marks (periods, commas,
+colons, semicolons, question and excla-
+mation marks) in the source and the tar-
+get phrases;
+
+– difference between numbers of various
+punctuation marks normalised by the
+length of the target phrase;
+
+– percentage of punctuation marks in the
+target and the source.
+
+• Language model features:
+– log probability of the source and the tar-
+
+get phrases;
+– perplexity of the source and the target
+
+phrases.
+
+• Phrase statistics:
+– lengths of the source and target phrases;
+– ratio of the source and the target phrase
+
+lengths;
+– average length of tokens in source and
+
+target phrases;
+– average occurrence of target word
+
+within the phrase.
+
+• Alignment features:
+– Number of unaligned target words;
+– Number of target words aligned to more
+
+than one word;
+– Average number of alignments per word
+
+in the target phrase.
+
+• Part-of-speech features:
+– percentage of content words in the
+
+source and target phrases;
+– percentage of words of a particular part-
+
+of-speech (verb, noun, pronoun) in the
+source and the target phrases;
+
+– ratio of numbers of words of a particular
+part-of-speech (verb, noun, pronoun) in
+the source and the target phrases;
+
+– percentage of numbers and alphanu-
+meric tokens in the source and the target
+phrases;
+
+– ratio of the percentage of numbers and
+alphanumeric tokens in the source and
+the target phrases;
+
+This feature set was originally designed for sen-
+tences. We expect that since phrases are sequences
+of words of varied length, they can be treated
+analogously for QE. However, unlike sentences,
+which are translated independently, phrases are re-
+lated to their neighbouring phrases in a sentence,
+and in this respect they are similar to words in
+the context of QE. Therefore, as in the baseline
+word-level system, we treat phrase-level QE as a
+sequence labelling task and model it using Con-
+ditional Random Fields. The phrase-level base-
+line system is trained with CRFSuite using the
+passive-aggressive optimisation algorithm.
+
+160
+
+
+
+Document-level baseline system: For Task 3,
+17 baseline features equivalent to those for sen-
+tence level were extracted at document level us-
+ing QuEst++. These features are aggregations of
+sentence-level baseline features. Some sentence-
+level features were summed (number of tokens
+in the source and target sentences and number of
+punctuation marks in source and target sentences),
+while all remaining were averaged.
+
+The model was trained with a SVR algorithm
+with RBF kernel using the scikit-learn toolkit.
+The γ, � and C parameters were optimised via grid
+search with 5-fold cross validation on the training
+set.

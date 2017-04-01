@@ -1,0 +1,16 @@
+We calculated automatic evaluation scores for the translation results by applying three metrics: BLEU
+(Papineni et al., 2002), RIBES (Isozaki et al., 2010) and AMFM (Banchs et al., 2015). BLEU scores were
+calculated using multi-bleu.perl distributed with the Moses toolkit (Koehn et al., 2007); RIBES scores
+were calculated using RIBES.py version 1.02.4 12; AMFM scores were calculated using scripts created
+by technical collaborators of WAT2016. All scores for each task were calculated using one reference.
+Before the calculation of the automatic evaluation scores, the translation results were tokenized with
+word segmentation tools for each language.
+For Japanese segmentation, we used three different tools: Juman version 7.0 (Kurohashi et al., 1994),
+
+KyTea 0.4.6 (Neubig et al., 2011) with Full SVM model 13 and MeCab 0.996 (Kudo, 2005) with IPA
+dictionary 2.7.0 14. For Chinese segmentation we used two different tools: KyTea 0.4.6 with Full SVM
+Model in MSR model and Stanford Word Segmenter version 2014-06-16 with Chinese Penn Treebank
+(CTB) and Peking University (PKU) model 15 (Tseng, 2005). For Korean segmentation we used mecab-
+ko 16. For English and Indonesian segmentations we used tokenizer.perl 17 in the Moses toolkit. For
+Hindi segmentation we used Indic NLP Library 18.
+Detailed procedures for the automatic evaluation are shown on the WAT2016 evaluation web page 19.

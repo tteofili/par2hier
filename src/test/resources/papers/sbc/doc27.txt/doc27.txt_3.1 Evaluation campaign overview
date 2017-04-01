@@ -1,0 +1,189 @@
+
+Following the trend from previous years, WMT16
+ended up being the largest evaluation campaign to
+date. Similar to last year, we collected researcher-
+based judgments only (as opposed to crowd-
+sourcing annotations from a tool like Mechanical
+Turk). For the News translation task, a total of
+150 individual annotator accounts were involved.
+Users came from 33 different research groups and
+contributed judgments on 10,833 HITs.
+
+Each HIT comprises three 5-way ranking tasks
+for a total of 32,499 such tasks. Under ordinary
+circumstances, each of the tasks would correspond
+to ten individual pairwise system comparisons de-
+noting whether a system A was judged better than,
+worse than, or equivalent to another system B.
+However, since many systems have produced the
+same outputs for a particular sentence, we are of-
+ten able to produce more than ten comparisons
+(Section 3.2), ending up with a total of 569,287
+pairwise annotations—a 75.2% increase over the
+expected baseline of 324,990 pairs. This is smaller
+than last year’s gain of 87.1% as we have decided
+to preserve punctuation differences. Section 3.2
+provides more details on our pre-processing.
+
+133
+
+
+
+Europarl Parallel Corpus
+German↔ English Czech↔ English Finnish↔ English Romanian↔ English
+
+Sentences 1,920,209 646,605 1,926,114 399,375
+Words 50,486,398 53,008,851 14,946,399 17,376,433 37,814,266 52,723,296 10,943,404 10,891,847
+
+Distinct words 381,583 115,966 172,461 63,039 693,963 115,896 73,353 42,650
+
+News Commentary Parallel Corpus
+German↔ English Czech↔ English Russian↔ English
+
+Sentences 242,770 191,432 174,253
+Words 6,284,116 6,307,244 4,385,588 4,914,094 4,452,010 4,681,362
+
+Distinct words 153,835 68,039 154,044 62,043 151,228 55,382
+
+Common Crawl Parallel Corpus
+French↔ English German↔ English Czech↔ English Russian↔ English
+
+Sentences 3,244,152 2,399,123 161,838 878,386
+Words 91,328,790 81,096,306 54,575,405 58,870,638 3,529,783 3,927,378 21,018,793 21,535,122
+
+Distinct words 889,291 859,017 1,640,835 823,480 210,170 128,212 764,203 432,062
+
+United Nations Parallel Corpus
+French↔ English
+
+Sentences 12,886,831
+Words 411,916,781 360,341,450
+
+Distinct words 565,553 666,077
+
+109 Word Parallel Corpus
+French↔ English
+
+Sentences 22,520,400
+Words 811,203,407 668,412,817
+
+Distinct words 2,738,882 2,861,836
+
+Yandex 1M Parallel Corpus
+Russian↔ English
+
+Sentences 1,000,000
+Words 24,121,459 26,107,293
+
+Distinct words 701,809 387,646
+
+CzEng Parallel Corpus
+Czech↔ English
+
+Sentences 51,424,584
+Words 592,890,104 699,087,647
+
+Distinct words 3,073,115 1,727,574
+
+Wiki Headlines Parallel Corpus
+Russian↔ English Finnish↔ English
+
+Sentences 514,859 153,728
+Words 1,191,474 1,230,644 269,429 354,362
+
+Distinct words 282,989 251,328 127,576 96,732
+
+Europarl Language Model Data
+English German Czech Finnish
+
+Sentence 2,218,201 2,176,537 668,595 2,120,739
+Words 59,848,044 53,534,167 14,946,399 39,511,068
+
+Distinct words 123,059 394,781 172,461 711,868
+
+News Language Model Data
+English German Czech Russian Finnish Romanian
+
+Sentence 145,573,876 187,008,695 53,383,346 56,371,276 6,740,879 2,280,642
+Words 3,355,935,396 3,331,396,767 879,993,532 1,016,368,612 83,112,454 54,793,949
+
+Distinct words 5,487,137 16,166,174 3,824,351 3,834,224 2,572,117 504,438
+
+Common Crawl Language Model Data
+English German Czech Russian Finnish Romanian Turkish
+
+Sent. 3,074,921,453 2,872,785,485 333,498,145 1,168,529,851 157,264,161 288,806,234 511,196,951
+Words 65,128,419,540 65,154,042,103 6,694,811,063 23,313,060,950 2,935,402,545 8,140,378,873 11,882,126,872
+Dist. 342,760,462 339,983,035 50,162,437 101,436,673 47,083,545 37,846,546 88,463,295
+
+Test Set
+German↔ EN Czech↔ EN Russian↔ EN Finnish↔ EN Romanian↔ EN Turkish↔ EN
+
+Sent. 2,999 2,999 2,998 3,000 1,999 2,998
+Words 64,379 65,647 57,097 66,457 62,840 71,068 48,839 64,611 50,603 48,531 54,420 67,468
+Dist. 12,234 8,877 15,163 8,639 16,304 8,963 16,092 8,413 9,851 6,953 15,395 8,799
+
+Figure 1: Statistics for the training and test sets used in the translation task. The number of words and the number of distinct
+words (case-insensitive) is based on the provided tokenizer.
+
+134
+
+
+
+Language Sources (Number of Documents)
+English ABC News (5), BBC (5), Brisbane Times (2), CBS News (2), CNN (1), Christian Science Monitor (2),
+
+Daily Mail (4), Euronews (1), Fox News (2), Guardian (9), Independent (1), Los Angeles Times (3),
+Medical Daily (1), News.com Australia (4), New York Times (1), Reuters (3), Russia Today (2), Scots-
+man (2), Sky (1), Sydney Morning Herald (5), stv.tv (1), Telegraph (4), The Local (2), Time Maga-
+zine (1), UPI (3), Xinhua Net (1).
+
+Czech aktuálně.cz (2), blesk.cz (3), denı́k.cz (8), e15.cz (2), iDNES.cz (12), ihned.cz (4), lidovky.cz (7),
+Novinky.cz (1), tyden.cz (6), ZDN (1).
+
+German Wirtschaftsblatt (1), Abendzeitung München (1), Abendzeitung Nürnberg (1), Ärztezeitung (1), Aach-
+ener Nachrichten (4), Berliner Kurier (1), Borkener Zeitung (1), Come On (1), Die Presse (2),
+Dülmener Zeitung (2), Euronews (1), Frankfurter Rundschau (1), Göttinger Tageblatt (1), Hes-
+sische/Niedersächsische Allgemeine (1), In Franken (4), Kleine Zeitung (3), Kreisanzeiger (1),
+Kreiszeitung (1), Krone (2), Lampertheimer Zeitung (1), Lausitzer Rundschau (1), Merkur (2),
+Morgenweb (1), Mitteldeutsche Zeitung (1), NTV (2), Nachrichten.at (6), Neues Deutschland (2),
+Neue Presse Coburg (1), Neue Westfälische (1), Ostfriesenzeitung (2), Passauer Neue Presse (1),
+Rheinzeitung (1), Schwarzwälder Bote (1), Segeberger Zeitung (1), Stuttgarter Nachrichten (1),
+Südkurier (3), Tagesspiegel (1), Teckbote (1), Thueringer Allgemeine (1), Thüringische Lan-
+deszeitung (1), tz München (1), Usinger Anzeiger (6), Volksblatt (3), Westfälischer Anzeiger (1),
+Weser Kurier (1), Wiesbadener Kurier (2), Westfälische Nachrichten (4), Westdeutsche Zeitung (3),
+Willhelmshavener Zeitung (1), Yahoo (1).
+
+Finnish Aamulehti (4), Etelä-Saimaa (2), Etelä-Suomen Sanomat (1), Helsingin Sanomat (12), Ilkka (5), Iltale-
+hti (10), Ilta-Sanomat (31), Kaleva (3), Karjalainen (7), Kouvolan Sanomat (2).
+
+Russian 168.ru (1), aif (2), altapress.ru (2), argumenti.ru (1), BBC Russian (1), Euronews (2), Fakty (3), Russia
+Today (1), Izvestiya (3), Kommersant (13), Lenta (7), lgng (2), MK RU (1), New Look Media (1),
+Novaya Gazeta (3), Novinite (1), ogirk.ru (1), pnp.ru (2), rg.ru (1), Rosbalt (2), rusplit.ru (1), Sport
+Express (10), trud.ru (2), tumentoday.ru (1), Vedomosti (1), Versia (2), Vesti (11), VM News (1).
+
+Romanian National (1), HotNews (1), Info Press (1), Puterea (1), ziare.ro (29), Ziarul de Iaşi (17)
+Turkish hurriyet (37), Sabah (26), Zaman (23)
+Table 1: Composition of the test set. For more details see the XML test files. The docid tag gives the source and the date for
+each document in the test set, and the origlang tag indicates the original source language.
+
+In total, our human annotators spent nearly 39
+days and 3 hours working in Appraise. This gives
+an average annotation time of 6.4 hours per user.
+The average annotation time per HIT amounts to
+5 minutes and 12 seconds. This is a little slower
+than last year’s average time of 4 minutes and 53
+seconds. Similar to the previous campaign, sev-
+eral of the annotators passed the mark of more
+than 100 HITs annotated (the maximum number
+being 684) and, again, some worked for more than
+24 hours (the most patient annotator contributing
+a little over 99 hours of annotation work).
+
+The effort that goes into the manual evalua-
+tion campaign each year is impressive, and we
+are grateful to all participating individuals and
+teams. We believe that human annotation provides
+the best decision basis for evaluation of machine
+translation output and it is great to see continued
+contributions on this large scale.

@@ -1,0 +1,41 @@
+Hiero limits phrase spans for rule extraction through a max-phrase-length constraint (of typically 10 to-
+kens). This limit is needed to restrict the number of extractable phrases, that may grow exponentially
+with sentence length. Further, reorderings may manifest themselves differently locally than at the sen-
+tence level, so that the task of learning sentence-level rules may be better handled separately. However, as
+adjunction introduces long-distance dependencies, factoring it out should allow to extract more relevant
+phrase pairs.
+
+We use adjunction as a guide to extending rule extraction for larger phrases. Like Hiero, we allow
+extraction and unconstrained rewriting of all phrases under max-phrase-length. For larger phrases, we
+subject extraction and rewriting to three constraints: max-effective-length, non-adjunct-crossing, and
+max-target-symbols. Besides, we apply specific constraints to adjuncts and adjunct sequences.
+
+max-effective-length
+We define the effective length as the non-adjunct token count of phrase. Let a phrase φ, that contains
+α0..αn adjuncts (disregarding adjuncts embedded in other adjuncts), its effective length λ(φ) is:
+
+λ(φ) = len(φ)− Σni=0len(αi)
+
+In practice, we set max-effective-length to the same value as max-phrase-length.
+This constraint only applies to non-adjunct phrases, as we allow the extraction of all phrases that
+
+match an adjunct on the source side, or a group of adjuncts: we group together adjuncts that have the
+same orientation with regard to their head, and that form contiguous sequences on source and target
+sides.
+
+no-adjunct-crossing
+This constraint prevents the extraction of larger phrases that cross adjuncts, or groups of adjuncts. This
+forces rewriting to an adjunct group as a whole. When rewriting from an adjunct group, one only forbids
+adjunct crossings, allowing rewriting to sub-groups.
+
+max-target-symbols
+Hiero limits the number of right-hand-side symbols on the rules’ source sides. The length of the target
+side can also be limited: for Hiero, we apply max-phrase-length to the target side of extraction phrase
+pairs; for the adjunction-based models, we limit the number of target right-hand-side symbols to the
+same value as max-phrase-length.
+
+Table 1 shows a possible derivation for the example of Figure 1. Allowing the extraction of rules from
+larger phrases permits to capture long-range dependencies and reorderings inaccessible to Hiero. While
+rule r1 is likely in fact to be learnt by Hiero in a different context, rule r2 displays a pattern (extraposed
+modifier in the Dutch sentence but not in the English sentence) that is only likely to occur with a long
+modifier.

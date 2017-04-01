@@ -1,0 +1,7 @@
+
+We present an adjunction-driven extension to Hiero with two distinguishing features: we use adjuncts to
+guide the extraction from larger phrases than normally allowed by Hiero; and we apply labelling to let
+the model distinguish adjuncts from arguments and other phrases. We present the extraction constraints
+in section 3.1, the labelling method in section 3.2, and the features we use for the model in section 3.3.
+Additionally, section 3.4 presents another extension, inspired from (Arnoult and Sima’an, 2012), that
+leverages adjunct optionality to extract additional rules.

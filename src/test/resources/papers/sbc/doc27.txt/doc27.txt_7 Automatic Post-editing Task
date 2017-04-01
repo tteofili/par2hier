@@ -1,0 +1,107 @@
+
+This year WMT hosted the second round of the
+shared task on MT automatic post-editing (APE),
+which consists in automatically correcting the er-
+rors present in a machine translated text. As
+
+pointed out by Chatterjee et al. (2015b), from the
+application point of view the task is motivated by
+its possible uses to:
+
+• Improve MT output by exploiting informa-
+tion unavailable to the decoder, or by per-
+forming deeper text analysis that is too ex-
+pensive at the decoding stage;
+
+• Cope with systematic errors of an MT system
+whose decoding process is not accessible;
+
+• Provide professional translators with im-
+proved MT output quality to reduce (human)
+post-editing effort;
+
+• Adapt the output of a general-purpose MT
+system to the lexicon/style requested in a spe-
+cific application domain.
+
+174
+
+
+
+Also this year, the general framework consisted
+in a “black box” scenario in which the MT sys-
+tem that produced the translations is unknown to
+the participants and cannot be modified. How-
+ever, building on the lessons learned in the first pi-
+lot round (Bojar et al., 2015), some changes have
+been made.
+
+The major differences concern the domain and
+the origin of the data. First, we moved from
+the general news domain to the more specific
+information technology (IT) domain. This
+novelty is motivated by the difficulties observed in
+the pilot round, in which the baseline (the simple
+do-nothing APE system that leaves all the test sen-
+tences unmodified) remained unbeaten. Indeed,
+the scarce repetitiveness of the news domain pre-
+vented participants to learn from the training data
+effective correction patterns that are also applica-
+ble to the test set. Second, concerning the ori-
+gin of the data, we moved from post-edits ob-
+tained from non-professional crowdsourced work-
+force to material collected from professional trans-
+lators. Data collected from trained professionals
+represents first of all a more standard scenario for
+the translation industry. Besides this, they are con-
+sidered to guarantee higher translation coherence,
+feature higher repetitiveness and, eventually, make
+the APE task more feasible by automatic systems.
+
+Other changes concern the language combina-
+tion and the evaluation mode. As regards the
+languages, we moved from English-Spanish to
+English-German, which is one of the language
+pairs covered by the QT21 Project26 that sup-
+ported data collection and post-editing. Con-
+cerning the evaluation, we changed from TER
+scores computed both in case-sensitive and case-
+insensitive mode to a single ranking based on case
+sensitive measurements.
+
+Besides these changes the new round of the
+APE task included some extensions in the evalu-
+ation. BLEU (Papineni et al., 2002) has been in-
+troduced as a secondary evaluation metric to mea-
+sure the improvements over the rough MT output.
+In addition, to gain further insights on final output
+quality, a subset of the outputs of the submitted
+systems has also been manually evaluated.
+
+Based on these changes and extensions, the
+goals of this year’s shared task were to: i) im-
+prove and stabilize the evaluation framework in
+view of future rounds, ii) analyze the effect on task
+
+26http://www.qt21.eu/
+
+feasibility of data coming from a narrow domain,
+iii) analyze the effect of post-edits collected from
+professional translators, iv) analyze how humans
+perceive TER/BLEU performance differences be-
+tween different systems, v) measure the progress
+made during one year of research on the APE task.
+
+Although the changes made with respect to the
+first pilot round prevent from fair and informa-
+tive result comparisons, we believe that these ob-
+jectives were successfully achieved. Most notice-
+ably, the higher feasibility of the task brought by
+domain-specific data and professional post-edits
+resulted in significant baseline improvements (up
+to 3.2 TER and 5.5 BLEU points), which are also
+evident to human evaluation. These positive re-
+sults, together with the increase in the number of
+participants with respect to the pilot round (from
+four to six), represent a good starting point for fu-
+ture rounds of the APE task.

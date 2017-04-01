@@ -1,0 +1,9 @@
+Similarly to the previous setup, Moses is complemented by a post-editing system implemented in Treex;
+this time, the system is Depfix (see Figure 7). Depfix (Mareček et al., 2011; Rosa, 2014) consists
+of several dozens rule-based post-editing Treex blocks. It focuses mainly on enforcing grammatical
+correctness, e.g., marking the subject and object by inflectional endings based on analysis of the source
+sentence, or inflecting adjectives to morphologically agree with their head nouns in gender, number, and
+case. However, contrary to the TectoMT post-editing (Section 3.4), it only modifies the erroneous parts
+of the output, thus avoiding generating too much noise; its second strength is the availability of the source
+analysis to the post-editing blocks, which enables them to make better-informed decisions regarding the
+intended meaning of the target sentence. This leads to a small but consistent improvement in BLEU.

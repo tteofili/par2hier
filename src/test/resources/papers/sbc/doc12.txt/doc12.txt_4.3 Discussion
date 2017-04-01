@@ -1,0 +1,268 @@
+
+The main trend we can see from tables 3 and 4 is
+that for the versions of DTED with the highest cor-
+relation values to human judgement, those values
+are similar to, if marginally lower than, the scores
+of the baseline metrics. To represent this trend,
+the unflattened version of DTED (irrespective of
+weighting) has an overall correlation almost ex-
+actly the same as the baseline metric WER which
+performed the most poorly.
+
+While the correlations of DTED versions are
+thus fairly encouraging when compared to those of
+other metrics, they are also interesting when com-
+pared to each other. An almost universal trend is
+that when applied on flattened trees DTED was
+significantly less effective in predicting human
+judgements. This strongly indicates that we have
+succeeded in leveraging the structural information
+in the non-flattened dependency trees and used the
+information to good purpose in a similar way to a
+human.
+
+It should be noted that weighting the sentences
+according to the proportion of aligned nodes pro-
+vided a boost to correlations, albeit an extremely
+small one.
+
+5 Conclusions & Future Work
+
+DTED represents the first work we know of which
+uses tree edit distances to incorporate structure
+
+into the evaluation of machine translation word or-
+der. Our results suggest that this approach, while
+not as holistically accurate as metrics designed
+for that purpose, nonetheless provides scores with
+non-trivial similarities to human ratings. This sug-
+gests that our metric does indeed measure a sig-
+nificant component of humans’ intuition on sen-
+tence quality for English. While not a conclusion
+that can be drawn from the empirical results as
+such, we feel confident that our metric does pri-
+marily evaluate word order as opposed to other
+factors such as word choice. Taking these two as-
+sumptions together, we can say that a significant
+component of humans’ sentence-quality intuition
+is based on the order of words.
+
+Though the statement that word order accounts
+for a large part of humans’ quality judgements is
+highly interesting, it would be worthwhile to in-
+vestigate the relationship more directly. An ob-
+vious way to produce results more tailored to
+it would be to obtain human judgements based
+solely and explicitly on word order. Such judge-
+ments would also allow us to more appropriately
+evaluate the more alignment-focused versions of
+DTED: while in the experiments we have per-
+formed on WMT judgements these have done less
+well, this may simply be because these variants are
+intended to more precisely focus on word order.
+An increase in such precision will necessarily re-
+sult in less broad scores and thus lower correlation
+with the broad-scope judgements available.
+
+While tree edit distance leverages much of the
+information contained in structural representations
+of sentences, it fails to account for the distances
+through which nodes must be moved. We thus
+intend to consider models more akin to gradual
+movement than disparate operations, such as those
+related to the concept of inversion numbers (Con-
+lon et al., 1999). A further avenue of investigation
+would be whether the structural and order-specific
+functionality of a tree edit distance could be ap-
+proximated or reproduced by a more lightweight
+algorithm.
+
+496
+
+
+
+References
+Philip Bille. 2005. A survey on tree edit distance and
+
+related problems. Theoretical Computer Science,
+337(1-3):217–239, jun.
+
+Alexandra Birch, Miles Osborne, and Philipp Koehn.
+2008. Predicting success in machine translation. In
+Proceedings of the Conference on Empirical Meth-
+ods in Natural Language Processing, pages 745–
+754.
+
+Alexandra Birch, Miles Osborne, and Phil Blunsom.
+2010. Metrics for MT evaluation: evaluating re-
+ordering. Machine Translation, 24(1):15–26, jan.
+
+Steven Bird. 2006. NLTK: The Natural Language
+Toolkit. In Proceedings of the COLING/ACL on In-
+teractive presentation sessions (COLING-ACL ’06),
+pages 69–72.
+
+Ondej Bojar, Rajen Chatterjee, Christian Federmann,
+Barry Haddow, Matthias Huck, Chris Hokamp,
+Philipp Koehn, Varvara Logacheva, Christof Monz,
+Matteo Negri, Matt Post, Carolina Scarton, Lucia
+Specia, and Marco Turchi. 2015. Findings of the
+2015 Workshop on Statistical Machine Translation.
+In Proceedings of the 10th Workshop on Statistical
+Machine Translation, pages 1–46, Lisboa, Portugal.
+
+Margaret M Conlon, Maria Falidas, Mary Jane Forde,
+John W Kennedy, S McIlwaine, and Joseph Stern.
+1999. Inversion numbers of graphs. Graph Theory
+Notes of New York, 37:42–48.
+
+Daniel Dahlmeier, Chang Liu, and Hwee Tou Ng.
+2011. TESLA at WMT 2011: Translation evalua-
+tion and tunable metric. In Proceedings of the Sixth
+Workshop on Statistical Machine Translation, pages
+78–84.
+
+Erik D. Demaine, Shay Mozes, Benjamin Rossman,
+and Oren Weimann. 2009. An optimal decompo-
+sition algorithm for tree edit distance. ACM Trans-
+actions on Algorithms, 6:1–19.
+
+George Doddington. 2002. Automatic evaluation
+of machine translation quality using n-gram co-
+occurrence statistics. In Proceedings of the Sec-
+ond International Conference on Human Language
+Technology Research, pages 138–145.
+
+Haim Gaifman. 1965. Dependency systems and
+phrase-structure systems. Information and Control,
+8(3):304–337.
+
+Michael Gamon, Anthony Aue, and Martine Smets.
+2005. Sentence-level MT evaluation without refer-
+ence translations: Beyond language modeling. In
+Proceedings of the European Association for Ma-
+chine Translation, pages 103–111.
+
+Nizar Habash and Ahmed Elkholy. 2008. SEPIA:
+Surface Span Extension to Syntactic Dependency
+Precision-based MT Evaluation. In Proceedings of
+the NIST Metrics for Machine Translation Workshop
+
+at the Association for Machine Translation in the
+Americas Conference, Waikiki, HI.
+
+Philipp Koehn, Hieu Hoang, Alexandra Birch, Chris
+Callison-Burch, Marcello Federico, Nicola Bertoldi,
+Brooke Cowan, Wade Shen, Christine Moran,
+Richard Zens, Chris Dyer, Ondej Bojar, Alexandra
+Constantin, and Evan Herbst. 2007. Moses: Open
+source toolkit for statistical machine translation. In
+Proceedings of the 45th Annual Meeting of the ACL
+on Interactive Poster and Demonstration Sessions,
+pages 177–180. Association for Computational Lin-
+guistics.
+
+Alon Lavie and Abhaya Agarwal. 2007. METEOR:
+An automatic metric for MT evaluation with high
+levels of correlation with human judgments. In Pro-
+ceedings of the Second Workshop on Statistical Ma-
+chine Translation, pages 228–231.
+
+Gregor Leusch, Nicola Ueffing, and Hermann Ney.
+2006. CDer: Efficient MT evaluation using block
+movements. In Proceedings of EACL-2006 (11th
+Conference of the European Chapter of the Associa-
+tion for Computational Linguistics), pages 241–248.
+
+Vladimir Iosifovich Levenshtein. 1965. Binary codes
+capable of correcting deletions, insertions, and re-
+versals. Soviet Physics Dokl., 10(1):707–710.
+
+Ding Liu and Daniel Gildea. 2005. Syntactic features
+for evaluation of machine translation. In Proceed-
+ings of the ACL Workshop on Intrinsic and Extrin-
+sic Evaluation Measures for Machine Translation
+and/or Summarization, pages 25–32.
+
+Sonja Nießen, Franz-Josef Och, Gregor Leusch, and
+Hermann Ney. 2000. An evaluation tool for ma-
+chine translation: fast evaluation for MT research.
+LREC, pages 0–6.
+
+Joakim Nivre. 2003. An efficient algorithm for pro-
+jective dependency parsing. Proceedings of the 8th
+International Workshop on Parsing Technologies,
+pages 149–160.
+
+Karolina Owczarzak, Josef van Genabith, and Andy
+Way. 2007. Labelled dependencies in machine
+translation evaluation. In Proceedings of the Second
+Workshop on Statistical Machine Translation, pages
+104–111.
+
+Kishore Papineni, Salim Roukos, Todd Ward, and Wei-
+Jing Zhu. 2002. BLEU: a method for automatic
+evaluation of machine translation. In Proceedings
+of the 40th Annual Meeting on Association for Com-
+putational Linguistics, pages 311–318.
+
+Maja Popović. 2011. Hjerson: An open source tool
+for automatic error classification of machine trans-
+lation output. The Prague Bulletin of Mathematical
+Linguistics, 96:59–67.
+
+C J Van Rijsbergen. 1979. Information Retrieval.
+Butterworth-Heinemann, Newton, MA, USA, 2nd
+edition.
+
+497
+
+
+
+Matthew Snover, Bonnie Dorr, College Park, Richard
+Schwartz, Linnea Micciulla, and John Makhoul.
+2006. A Study of Translation Edit Rate with Tar-
+geted Human Annotation. In Proceedings of the 7th
+Conference of the Association for Machine Transla-
+tion in the Americas,, number August, pages 223–
+231, Cambridge, Massachusetts.
+
+David Talbot, Hideto Kazawa, Hiroshi Ichikawa, Ja-
+son Katz-Brown, Masakazu Seno, and Franz-Josef
+Och. 2011. A lightweight evaluation framework
+for machine translation reordering. In Proceedings
+of the Sixth Workshop on Statistical Machine Trans-
+lation, pages 12–21. Association for Computational
+Linguistics.
+
+C Tillmann, S Vogel, H Ney, A. Zubiaga, and H. Sawaf.
+1997. Accelerated DP Based Search for Statistical
+Translation. Fifth European Conference on Speech
+Communication and Technology, pages 2667–2670.
+
+David Vilar, Jia Xu, Luis Fernando D’Haro, and Her-
+mann Ney. 2006. Error analysis of statistical ma-
+chine translation output. In Proceedings of the
+Conference on Language Resources and Evaluation,
+pages 697–702, Genoa.
+
+Hui Yu, Xiaofeng Wu, Jun Xie, Wenbin Jiang, Qun
+Liu, and Shouxun Lin. 2014. RED: A Reference
+Dependency Based MT Evaluation Metric. In Pro-
+ceedings of COLING 2014, the 25th International
+Conference on Computational Linguistics: Techni-
+cal Papers, pages 2042–2051.
+
+Daniel Zeman, Mark Fishel, Jan Berka, and Ondej Bo-
+jar. 2011. Addicter: What is Wrong with My Trans-
+lations? The Prague Bulletin of Mathematical Lin-
+guistics, (96):79–88.
+
+Kaizhong Zhang and Dennis Shasha. 1989. Simple
+Fast Algorithms for the Editing Distance between
+Trees and Related Problems. SIAM Journal on Com-
+puting, 18(6):1245–1262.
+
+498
+
+

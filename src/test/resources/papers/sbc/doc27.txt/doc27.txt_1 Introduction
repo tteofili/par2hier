@@ -1,0 +1,121 @@
+
+We present the results of the shared tasks of the
+First Conference on Statistical Machine Transla-
+tion (WMT) held at ACL 2016. This confer-
+ence builds on nine previous WMT workshops
+(Koehn and Monz, 2006; Callison-Burch et al.,
+2007, 2008, 2009, 2010, 2011, 2012; Bojar et al.,
+2013, 2014, 2015).
+
+This year we conducted several official tasks.
+We report in this paper on five tasks:
+• news translation (§2, §3)
+• IT-domain translation (§4)
+• biomedical translation (§5)
+• quality estimation (§6)
+• automatic post-editing (§7)
+The conference featured additional shared tasks
+
+that are described in separate papers in these pro-
+ceedings:
+• tuning (Jawaid et al., 2016)
+• metrics (Bojar et al., 2016b)
+• cross-lingual pronoun prediction (Guillou
+
+et al., 2016)
+• multimodal machine translation and crosslin-
+
+gual image description (Specia et al., 2016)
+• bilingual document alignment (Buck and
+
+Koehn, 2016)
+
+In the news translation task (§2), participants
+were asked to translate a shared test set, option-
+ally restricting themselves to the provided train-
+ing data. We held 12 translation tasks this year,
+between English and each of Czech, German,
+Finnish, Russian, Romanian, and Turkish. The
+Romanian and Turkish translation tasks were new
+this year, providing a lesser resourced data con-
+dition on challenging language pairs. The system
+outputs for each task were evaluated both automat-
+ically and manually.
+
+The human evaluation (§3) involves asking
+human judges to rank sentences output by
+anonymized systems. We obtained large num-
+bers of rankings from researchers who contributed
+
+131
+
+
+
+evaluations proportional to the number of tasks
+they entered. We made data collection more effi-
+cient and used TrueSkill as ranking method. We
+also explored a novel way of ranking machine
+translation systems by judgments of adequacy and
+fluency on a 100-point scale.
+
+The IT translation task (§4) was introduced this
+year and focused on domain adaptation of MT to
+the IT (information technology) domain and trans-
+lation of answers in a cross-lingual help-desk ser-
+vice, where hardware&software troubleshooting
+answers are translated from English to the users’
+languages: Bulgarian, Czech, German, Spanish,
+Basque, Dutch and Portuguese. Similarly as in the
+News translation task, training and test data were
+provided and the system outputs were evaluated
+both automatically and manually.
+
+Another task newly introduced this year was
+the biomedical translation task (§5). Participants
+were asked to translate the titles and abstracts of
+scientific articles indexed in the Scielo database.
+Training and test data were provided for two sub-
+domains, biological sciences and health sciences,
+and three language pairs, Portuguese/English,
+Spanish/English and French/English. This task
+therefore provided data for a language not previ-
+ously covered in WMT, Portuguese. The system
+outputs for each language pair were evaluated both
+automatically and manually.
+
+The quality estimation task (§6) this year in-
+cluded three subtasks: sentence-level prediction of
+post-editing effort scores, word and phrase-level
+prediction of good/bad labels, and document-level
+prediction of human post-editing scores. Datasets
+were released with English→German IT trans-
+lations for sentence and word/phrase level, and
+English↔Spanish news translations for document
+level.
+
+The automatic post-editing task (§7) examined
+automatic methods for correcting errors produced
+by an unknown machine translation system. Par-
+ticipants were provided with training triples con-
+taining source, target and human post-edits, and
+were asked to return automatic post-edits for un-
+seen (source, target) pairs. In this second round,
+the task focused on correcting English→German
+translations in the IT domain.
+
+The primary objectives of WMT are to evalu-
+ate the state of the art in machine translation, to
+disseminate common test sets and public train-
+ing data with published performance numbers, and
+
+to refine evaluation and estimation methodologies
+for machine translation. As before, all of the
+data, translations, and collected human judgments
+are publicly available.1 We hope these datasets
+serve as a valuable resource for research into sta-
+tistical machine translation and automatic evalu-
+ation or prediction of translation quality. News
+and IT translations are also available for interac-
+tive visualization and comparison of differences
+between systems at http://wmt.ufal.cz using
+MT-ComparEval (Sudarikov et al., 2016).

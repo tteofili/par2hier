@@ -1,0 +1,65 @@
+
+αi 
+
+βi-1 
+
+βi 
+
+… 
+
+h 
+
+si-1 
+
+auxiliary 
+inputs 
+
+Figure 4: NN-based coverage model.
+
+When βj is a vector (d > 1) and gupdate(·) takes a neural network (NN) form,
+we actually have a recurrent neural network (RNN) model for annotation, as illus-
+trated by Figure 4. In our work, we take the following form
+
+βi,j = gupdate(βi−1,j , αi,j , hj , si−1)
+
+= tanh(Uβi−1,j + V αi,j +Bhj +Wsi−1) (8)
+
+where U, V,B,W are weights and si−1 is the auxiliary input that encodes past
+translation information. Note that we leave out the the word-specific feature func-
+tion Φ(·) and only take the input annotation hj as the input to the annotation RNN.
+
+6
+
+
+
+It is important to emphasize that the NN-based annotation is able to be fed with ar-
+bitrary auxiliary inputs, such as the previous attentional context ci−1. Here we only
+employ αi−1 for past alignment information, si−1 for past translation information,
+and hj for word-specific bias.
+
+Gating To capture long-distance dependencies on past alignment information,
+we can employ gating activation function for gupdate, such as Long Short-Term
+Memory (LSTM) (Hochreiter and Schmidhuber1997) or Gated Recurrent Unit
+(GRU) (Cho et al.2014b). In this work, we adopt GRU since it is simple yet pow-
+erful. Then the coverage βi is computed by
+
+βi,j = (1− zi) ◦ βi−1,j + zi ◦ β̃i,j
+
+where
+
+β̃i,j = tanh(U [ri ◦ βi−1,j ] + V αi,j +Bhj +Wsi−1)
+zi = σ(Uzβi−1,j + Vzαi,j +Bzhj +Wzsi−1)
+
+ri = σ(Urβi−1,j + Vrαi,j +Brhj +Wrsi−1)
+
+where σ(·) is a logistic sigmoid function, and zi and ri are update and reset gates
+respectively.
+
+Although the NN-based annotation model enjoys the flexibility brought by the re-
+current nonlinear form, its lack of clear linguistic meaning may render it hard to
+train: the annotation model can only be trained along with the attention model
+and get the supervision signal from it in back-propagation, which could be weak
+(relatively distant from the decoding process) and noisy (after the distortion from
+other under-trained components in the decoder RNN). Partially to overcome this
+problem, we also propose the linguistically inspired model which has much clearer
+interpretation but much less parameters.

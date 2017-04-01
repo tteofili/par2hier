@@ -1,0 +1,16 @@
+
+The main results are presented in Table 12. The
+PROMT-* systems won all three language pairs,
+for which they were submitted, but they were
+trained using additional training data not avail-
+able to other participants, so they are considered
+unconstrained and not comparable to the con-
+strained systems. In all language pairs except for
+English→Bulgarian, the baseline (QTL-MOSES)
+was outperformed by all other systems.
+
+Table 13 reports the amount of pairwise com-
+parisons collected and inter- and intra-annotator
+agreement of the human evaluation, which is in a
+similar range as in the News task (cf. Tables 4 and
+5).

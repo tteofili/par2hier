@@ -1,0 +1,10 @@
+
+Table 1 presents the results achieved with the
+plain hierarchical phrase-based baseline, and the
+gains when incrementally applying modifications
+as described in Section 2.5. The decoder output
+is postprocessed with the detruecase.perl
+script from the Moses toolkit for recasing and
+tokro with its -r command line switch for
+detokenization. We evaluate case-sensitive with
+mteval-v13a.pl -c.

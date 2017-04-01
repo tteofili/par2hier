@@ -1,0 +1,26 @@
+
+Adjunction in Tree-Adjoining Grammar allows to explain a number of linguistic phenomena like raising
+or wh movement (Kroch and Joshi, 1985), but we focus here on modification, which we identify with
+dependency labels (we use the Turbo parser1).
+
+We identify modifier labels and punctuation with adjuncts: AMOD, NMOD, VMOD and P. We exclude
+cases where the dependent appears obligatory, based on the head’s POS tag: DT, EX, IN, POS, MD, PRP,
+PRP$, RP, SYM, TO, WDT, WP, WP$, WRB, .; we also exclude possessors in genitive constructions, by
+excluding dependents preceding a dependent with a POS part of speech.
+
+We include dependents of enumerations and conjunctions in the list of modifiers. This follows from a
+dependency analysis that treats one of the conjuncts as the head, and conjunctions and other conjuncts as
+its dependents. In the case of the Turbo parser, the last conjunct or element in an enumeration is regarded
+as the head. We modified this representation to a nested one, where conjunctions are treated as heads of
+the dependent conjunct, as shown in Figure 2.
+
+Figure 2: Modifying the representation of enumerations and conjunctions. Dotted lines represent non
+adjuncts.
+
+a , b and c a , b and c
+
+1http://www.cs.cmu.edu/˜ark/TurboParser/
+
+12
+
+

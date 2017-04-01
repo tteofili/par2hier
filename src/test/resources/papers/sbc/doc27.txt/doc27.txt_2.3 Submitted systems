@@ -1,0 +1,16 @@
+
+We received 102 submissions from 24 institu-
+tions. The participating institutions and their entry
+names are listed in Table 2; each system did not
+necessarily appear in all translation tasks. We also
+included 36 online statistical MT systems (origi-
+nating from 4 services), which we anonymized as
+ONLINE-A,B,F,G.
+
+For presentation of the results, systems are
+treated as either constrained or unconstrained, de-
+pending on whether their models were trained only
+on the provided data. Since we do not know how
+they were built, these online and commercial sys-
+tems are treated as unconstrained during the auto-
+matic and human evaluations.

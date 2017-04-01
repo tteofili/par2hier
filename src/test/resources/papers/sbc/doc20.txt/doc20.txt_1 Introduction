@@ -1,0 +1,79 @@
+
+Neural machine translation is a recently proposed approach to
+MT and has shown competing results to conventional transla-
+tion methods [Kalchbrenner and Blunsom, 2013; Cho et al.,
+2014; Sutskever et al., 2014]. In neural machine translation,
+the source sentence is converted into vector representation by
+a neural network called encoder, then another neural network
+called decoder generate target sentence word by word based
+on source representation and target history. This framework
+has several advantages over conventional translation meth-
+ods. First, it does not need any domain knowledge as required
+by conventional methods to design features. Second, the dis-
+tributed representation allows NMT model to generalize well
+and produce novel translations for source words and phrases,
+while the symbolic representation in conventional MT makes
+
+it impossible to generate translations beyond the rule table
+extracted from the bilingual corpus. Third, the memory con-
+sumption of NMT model is also much smaller.
+
+Despite these advantages, NMT models have a major draw-
+back in handling rare words. In order to control the computa-
+tional complexity, which grows proportional to target vocab-
+ulary size1, most NMT systems limit the vocabulary to con-
+tain only 30k to 80k most frequent words in both the source
+and target side and convert rare words into a single unk sym-
+bol. An obvious problem of this approach is that NMT model
+cannot learn the translation of rare words. In particular, if a
+source word is outside the source vocabulary or its translation
+is outside the target vocabulary, the model will not be able to
+generate proper translation for this word during testing. An-
+other problem is that masking rare words with meaningless
+unk will increase the ambiguity of the sentence. This can be
+illustrated by the following three sentences,
+
+a) Mike chases the pet with mottle
+b) Mike chases the pet with scooter
+c) Mike chases the pet with Sullivan
+
+Assume all the last words in the three sentences are rare
+words. The word ’mottle’ in sentence a) modifies the object
+’pet’, and both the word ’scooter’ and ’Sullivan’ in sentence
+b) and c) modifies the predicate, but one describes the tool
+and the other describes the companion. The translation of the
+preposition ’with’ and the word order will be quite different
+when translating the three sentences into Chinese. If the last
+words are replaced by the unk symbol, the three sentences
+will be the same. As a result, the model can only generate the
+translation by chance.
+
+To solve the above problems, we propose a novel rare word
+replacement method based on similarity. During training,
+word alignment will first be induced from bilingual corpus.
+And each aligned word pair which contains rare word either
+on the source side or the target side will be replaced with
+similar in-vocabulary words, where the similarity model is
+learned from a large mono-lingual corpus. Then this new
+bilingual corpus with rare words replaced will be used to train
+a NMT model. During testing, the rare words in input sen-
+tence will also be replaced with similar in-vocabulary words.
+
+1source vocabulary size contributes less to computational com-
+plexity, but knowing how to translate source word to target unk is
+not helpful, so the source vocabulary size is also limited.
+
+Proceedings of the Twenty-Fifth International Joint Conference on Artificial Intelligence (IJCAI-16)
+
+2852
+
+
+
+After translation, a post-processing step is adopted to recover
+the translation of rare words.
+
+Experiments on Chinese to English translation task show
+that more than 4 points in BLEU score can be gained with our
+approach over the baseline. And the gain is also much larger
+than a previously proposed replacement method [Luong et al.,
+2015b].

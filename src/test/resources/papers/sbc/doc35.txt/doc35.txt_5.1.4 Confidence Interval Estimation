@@ -1,0 +1,5 @@
+There are several ways to estimate a confidence interval. We chose to use bootstrap resampling (Koehn,
+2004) to estimate the 95% confidence interval. The procedure is as follows:
+
+1. randomly select 300 sentences from the 400 human evaluation sentences, and calculate the Pairwise
+score of the selected sentences

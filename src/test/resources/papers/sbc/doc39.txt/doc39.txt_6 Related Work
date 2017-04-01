@@ -1,0 +1,40 @@
+
+Our work is inspired by recent works on improving attentional NMT. Attention
+mechanism advanced state of the art NMT by jointly learning to align and trans-
+late (Bahdanau et al.2015; Luong et al.2015). The notion of attention corresponds
+well to that of alignment in traditional word-based SMT (Brown et al.1993), giving
+the opportunities to be further improved with techniques that have been applied
+with success in SMT. Following the success of minimum risk training (MRT) in
+conventional SMT (Och2003), Shen et al. (2015) proposed MRT for end-to-end
+NMT to optimize model parameters directly with repsect to evaluation metrics.
+Based on the observation that the default unidirectional attentional NMT only cap-
+tures partial aspects of attentional regularities due to the non-isomorphism of nat-
+ural languages, Cheng et al. (2015) proposed an agreement-based learning (Liang
+et al.2006) to encourage bidirectional attention models to agree on parameterized
+alignment matrices. Along the same direction, inspired by the essential cover-
+age in SMT to avoid gaps and overlap when translating source words, we propose
+a coverage-based approach to NMT to alleviate the over-translation and under-
+translation problems.
+
+Concurrent with our work, Cohn et al. (2016) and Feng et al. (2016) made use
+of the concept of “fertility” for the attention model, which is similar in spirit to
+our method for building the linguistically inspired coverage with fertility. Cohn
+et al. (2016) introduced a feature-based fertility that includes the total alignment
+scores for the surrounding source words. In contrast, we build a prediction of
+fertility to decide how many target words each source produces before decoding.
+The expected fertility then works as a normalizer to better estimate the covered
+ratio of each source word, which guides the alignment model to pay more attention
+to uncovered words. Feng et al. (2016) used the previous attentional context to
+represent implicit fertility and directly passed it to the decoder , which is in essence
+similar to the input-feed method proposed in (Luong et al.2015). Comparatively,
+we predict explicit fertility for each source word based on its encoding annotation,
+and incorporate it into the linguistic-inspired coverage for attention model. In this
+work, we show that the explicitly designed fertility (or coverage) outperforms its
+implicit neural network-based counterpart in both translation and alignment tasks.
+There is one minor difference as well: we validate the effectiveness of our approach
+on a large-scale corpus while both Cohn et al. (2016) and Feng et al. (2016) did on
+small-scale corpora.
+
+16
+
+

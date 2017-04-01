@@ -1,0 +1,130 @@
+
+In the ever-growing field of translation metrics, a
+number of systems exist which attempt to provide
+an overall rating for a sentence. Most of these
+use one or more reference translations produced
+by a human as a gold standard. One of the earliest
+examples of such a metric may be BLEU (Pap-
+ineni et al., 2002), using an adapted version of the
+well-known principle of Precision. More recently,
+NIST (Doddington, 2002) and Meteor (Lavie and
+Agarwal, 2007) have used n-gram analysis to pro-
+vide similar heuristics, and many other techniques
+have been proposed (Dahlmeier et al., 2011; Ga-
+mon et al., 2005).
+
+These metrics are useful when making high-
+level comparisons between several machine trans-
+lation systems, but they offer very limited insight
+into the linguistic workings of the machine trans-
+lation process. They can be used in automatic
+processes such as training systems through hill-
+climbing iterations, or as broad descriptions of a
+system’s overall quality. It is however difficult to
+use this kind of score to gain more precise insights
+into a system’s features; for example, different
+tasks may have different priorities for which er-
+
+rors are least desirable. Deeper analysis might also
+be able to pinpoint specific areas of improvement
+within a system. With these and other goals in
+mind, granular metrics have been created to eval-
+uate individual aspects of the translated output in
+isolation (Zeman et al., 2011; Popović, 2011).
+
+When developing such granular metrics, the
+question of which linguistic aspects of translations
+to focus on is far from trivial. While there has been
+much related discussion in the professional and
+educational spheres of the factors which can af-
+fect understanding of a given translation, the aca-
+demic sphere has been less prolific. Nonetheless,
+a widely-used taxonomy on the distinct problem
+types which can be observed has been produced
+by Vilar et al. (2006), while Birch et al. (2008) in-
+vestigated those which most affect overall under-
+standing of a translation.
+
+One of the prime factors identified by Birch
+et al. (2008) was word order, and metrics have
+been produced since then which focus on this fac-
+tor (Talbot et al., 2011; Birch et al., 2010). These
+metrics apply various techniques, but most are
+based on the concept of comparing individual sub-
+strings of a source and reference sentence. While
+these techniques allow lightweight algorithms to
+produce rough scores, they ignore how the struc-
+ture of a sentence can dramatically affect the im-
+pact of a mistake in ordering. For example, the
+mistake in the hypothesis of sentence 1 of Table
+1 is much less significant than that of sentence 2,
+despite the latter being closer in a ‘flat’ judgement.
+
+In an attempt to mitigate these problems, though
+without the explicit goal of focusing on word or-
+der, some work has been done using structural
+evaluation of sentences through dependency pars-
+ing (Gaifman, 1965). These systems either focus
+on applying BLEU-style n-gram matching to a tree
+context (Liu and Gildea, 2005; Owczarzak et al.,
+2007) or focus on specific relationships between
+
+491
+
+
+
+Reference Hypothesis
+1 I spoke to him there. I spoke there to him.
+2 She let it be and left. She let it and be left.
+
+Table 1: Example word order errors
+
+and groupings of nodes in the trees and compare
+those features between hypothesis and reference
+trees to produce holistic judgements (Habash and
+Elkholy, 2008; Yu et al., 2014).
+
+The approach of our system, named DTED
+(Dependency-based Tree Edit Distance), differs
+from existing word order literature by including
+dependency structures, but adds to the body of
+dependency-based work by focusing on node or-
+der rather than attempting to give an overall score.
+We work on complete dependency trees, rather
+than specific subsections, to produce an edit dis-
+tance between the hypothesis and reference trees.
+
+A tree edit distance is a count of the actions re-
+quired to convert one ordered tree into another. In
+the manner of Levenshtein distances (Levenshtein,
+1965) and Word Error Rate (Nießen et al., 2000),
+these actions are limited to Renaming, Deleting an
+existing node, or Inserting a new one. A num-
+ber of variants on this model have been proposed,
+many attempting to improve the efficiency of the
+algorithm when applied in large-scale or high-
+throughput areas (Bille, 2005). The algorithm we
+have implemented is an extension of that proposed
+by Demaine et al. (2009), which is worst-case op-
+timal, running in O(n3) time where n is the num-
+ber of words in the shorter sentence.
+
+Its output is thus a count of required modifica-
+tions, which is in turn converted to a normalised
+score between 0 and 1. This is coupled with a
+weighting, indicating when aggregating scores to
+a system level what proportion of nodes were indi-
+cated as aligned by a preprocessing step. Our as-
+sumption is that the position of an aligned word is
+more reliable than an unaligned one, so when cal-
+culating corpus-wide scores we should dispropor-
+tionately consider the information of those with
+many aligned words.
+
+Our algorithm thus requires nothing more than
+the source and reference pairs, plus tools to calcu-
+late alignments and dependency trees for the cho-
+sen target language. We have used English, but
+the methodology would be easily applicable to any
+other target language for which these two compo-
+nents exist.

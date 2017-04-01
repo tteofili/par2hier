@@ -1,0 +1,21 @@
+
+System performance was evaluated by computing
+the distance between automatic and human post-
+edits of the machine-translated sentences present
+in the test set (i.e. for each of the 2, 000 target
+test sentences). Differently from the first edition of
+the task, in which this distance was only measured
+in terms of Translation Error Rate (TER) (Snover
+et al., 2006), this year the BLEU (Papineni et al.,
+2002) score was also used. TER is an evalua-
+tion metric commonly used in MT-related tasks
+(e.g. in quality estimation) to measure the mini-
+mum edit distance between an automatic transla-
+tion and a reference translation.32 BLEU is the
+reference metric for MT evaluation and is based
+on modified n-gram precision to find how many of
+the n-grams in the candidate translation are present
+in the reference translation over the entire test set.
+The main difference between the two metrics is
+that TER works at word level, while BLEU takes
+advantage of words and n-grams with n from 2 to

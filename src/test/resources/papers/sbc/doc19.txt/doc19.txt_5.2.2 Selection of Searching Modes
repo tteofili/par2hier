@@ -1,0 +1,50 @@
+With the hyper-parameters given by the develop-
+
+ing procedures, cross-lingual similarization is con-
+ducted on the whole FBIS dataset. All the searching
+mode configurations are tried and 6 pairs of gram-
+mars are generated. For each of the 6 Chinese de-
+pendency grammars, we also give the three indi-
+cators as described before. Table 2 shows that,
+cross-lingual similarization results in grammars with
+much higher cross-lingual similarity, and the adap-
+tive accuracies given by the adapted grammars ap-
+proach to those of the original grammars. It indi-
+cates that the proposed algorithm improve the cross-
+
+lingual similarity without losing syntactic knowl-
+edge.
+
+To determine the best searching mode for tree-
+based machine translation, we use the Chinese-
+English FBIS dataset as the small-scale bilingual
+corpus. A 4-gram language model is trained on
+the Xinhua portion of the Gigaword corpus with
+the SRILM toolkit (Stolcke and Andreas, 2002).
+For the analysis given by non-projective similarized
+grammars, The projective transformation should be
+conducted in order to produce projective depen-
+dency structures for rule extraction and translation
+decoding. In details, the projective transformation
+first traverses the non-projective dependency struc-
+tures just as they are projective, then adjusts the or-
+der of the nodes according to the traversed word se-
+quences. We take NIST MT Evaluation testing set
+2002 (NIST 02) for developing , and use the case-
+sensitive BLEU (Papineni et al., 2002) to measure
+the translation accuracy.
+
+The last column of Table 2 shows the perfor-
+mance of the grammars on machine translation. The
+cross-lingually similarized grammars correspond-
+ing to the configurations with projective searching
+for Chinese always improve the translation perfor-
+mance, while non-projective grammars always hurt
+the performance. It probably can be attributed to
+the low performance of non-projective parsing as
+well as the inappropriateness of the simple projec-
+tive transformation method. In the final application
+in machine translation, we adopted the similarized
+grammar corresponding to the configuration with
+projective searching on the source side and non-
+projective searching on the target side.

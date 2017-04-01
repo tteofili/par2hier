@@ -1,0 +1,47 @@
+TAG factors adjunction by extracting auxiliary trees and initial trees separately (Joshi and Schabes,
+1997). This leads to a more compact grammar (Chiang, 2000) that is able to generate unseen adjunction
+patterns. Synchronous Tree Adjunction Grammar (STAG) (Shieber and Schabes, 1990) applies TAG
+to translation, and DeNeefe and Knight (2009) propose a probabilistic implementation for string-to-tree
+translation. Their model identifies target-side adjuncts and takes their projection on the source side as a
+basis for auxilliary-tree extraction.
+
+In the case of Hiero, one cannot directly implement STAG, as CFG rules do not have the (tree) structure
+that is necessary for modelling adjunction. One can still however extract generalized versions of rules,
+by factoring out adjuncts contained in extraction phrases. This follows (Arnoult and Sima’an, 2012),
+who apply this idea to a phrase-based model. The hierarchical nature of Hiero further allows to apply
+substitution in these generalized phrases.
+
+We extend Hiero by extracting rules both by standard phrase substitution, and by adjunct factorization.
+For each phrase pair in the training data, we first extract rules by substitution. For each adjunct contained
+in the phrase pair, we instantiate a copy of the extraction phrase where the adjunct is blind: the adjunct
+blocks the extraction of overlapping gaps, and its yield is excised from the rule. We then extract rules by
+phrase substitution from this extraction phrase; Table 2 shows some of the resulting rules for the example
+of Figure 1. The rules extracted in this manner form a subset of the rules that Hiero would extract from
+the phrase pair 〈 those workers have shown, hebben de medewerkers bewezen 〉, as we forbid gaps from
+overlapping with blind adjuncts.
+
+Table 2: Some rules added by adjunct factorization
+
+X → 〈 those workers have shown , hebben de medewerkers bewezen 〉
+X → 〈 those X [1] have shown , hebben de X [1] bewezen 〉
+X → 〈 those workers have X [1] , hebben de medewerkers X [1] 〉
+X → 〈 X [1] have X [2] , hebben X [1] X [2] 〉
+
+14
+
+
+
+The combinations of adjuncts that can be excised from a phrase grow exponentially with the number
+of adjuncts in the phrase. Even if this number remains small in general, adjunct factorization is applied
+to all phrases, in an extraction space that is already increased by extending extraction-phrase spans.
+Besides, the number of adjuncts in a phrase may also be high occasionally, especially since we regard
+enumeration tails as adjuncts. This concern motivates the hierarchical nesting of enumerated elements
+presented in section 2.
+
+We contain grammar size increase by excising one adjunct at a time in adjunct-group phrases, and one
+adjunct group (or stand-alone adjunct) at a time in other phrases.
+
+The adjunct factorization we propose for Hiero is incomplete as it does not fully extract adjuncts from
+phrase pairs. Compared to STAG, our grammar extracts ‘derived’ rules with generalized adjunction
+patterns, rather than separating ‘auxiliary’ from ‘initial’ rules. Consequently, our grammar increases in
+size rather than becoming more compact.

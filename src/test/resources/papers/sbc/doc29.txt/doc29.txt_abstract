@@ -1,0 +1,39 @@
+
+Proceedings of the First Conference on Machine Translation, Volume 2: Shared Task Papers, pages 268–271,
+Berlin, Germany, August 11-12, 2016. c©2016 Association for Computational Linguistics
+
+NYU-MILA Neural Machine Translation Systems for WMT’16
+
+Junyoung Chung
+Université de Montréal
+
+junyoung.chung@umontreal.ca
+
+Kyunghyun Cho
+New York University
+
+Yoshua Bengio
+Université de Montréal
+CIFAR Senior Fellow
+
+Abstract
+
+We describe the neural machine trans-
+lation system of New York Univer-
+sity (NYU) and University of Mon-
+treal (MILA) for the translation tasks of
+WMT’16. The main goal of NYU-MILA
+submission to WMT’16 is to evaluate a
+new character-level decoding approach in
+neural machine translation on various lan-
+guage pairs. The proposed neural machine
+translation system is an attention-based
+encoder–decoder with a subword-level en-
+coder and a character-level decoder. The
+decoder of the neural machine translation
+system does not require explicit segmen-
+tation, when characters are used as to-
+kens. The character-level decoding ap-
+proach provides benefits especially when
+translating a source language into other
+morphologically rich languages.

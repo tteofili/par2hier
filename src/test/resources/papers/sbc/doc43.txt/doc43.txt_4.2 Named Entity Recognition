@@ -1,0 +1,52 @@
+
+We perform NER experiments on OntoNotes (v4.0)
+
+(Hovy et al., 2006) to validate the quality of the
+
+Chinese word embeddings. Our experimental set-
+
+up is the same as Wang et al. (2013). With em-
+
+beddings, we build a naive feed-forward neural net-
+
+work (Collobert et al., 2008) with 2000 hidden neu-
+
+rons and a sliding window of five words. This naive
+
+setting, without sequence modeling or sophisticated
+
+4Due to variations caused by online minibatch L-BFGS, we
+
+take embeddings from five random points out of last 105 mini-
+
+batch iterations, and average their semantic similarity results.
+
+Table 2: Results on Named Entity Recognition
+
+Embeddings Prec. Rec. F1 Improve
+
+Align-Init 0.34 0.52 0.41
+
+Mono-trained 0.54 0.62 0.58 0.17
+
+Biling-trained 0.48 0.55 0.52 0.11
+
+Table 3: Vector Matching Alignment AER (lower is bet-
+
+ter)
+
+Embeddings Prec. Rec. AER
+
+Mono-trained 0.27 0.32 0.71
+
+Biling-trained 0.37 0.45 0.59
+
+join optimization, is not competitive with state-of-
+
+the-art (Wang et al., 2013). Table 2 shows that the
+
+bilingual embeddings obtains 0.11 F1 improvement,
+
+lagging monolingual, but significantly better than
+
+Align-Init (as in Section3.2.1) on the NER task.

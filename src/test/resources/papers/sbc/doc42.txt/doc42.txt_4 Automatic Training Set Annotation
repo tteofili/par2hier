@@ -1,0 +1,64 @@
+
+Our approach relies on annotating politeness in the
+training set to obtain the politeness feature which we
+discussed previously. We choose a sentence-level
+annotation because a target-side honorific may have
+no word-level correspondence in the source. We will
+discuss the annotation of German as an example,
+but our method could be applied to other languages,
+such as Japanese (Nariyama et al., 2005).
+
+German has distinct pronoun forms for informal
+and polite address, as shown in Table 1. A further
+difference between informal and polite speech are
+imperative verbs, and the original imperative forms
+are considered informal. The polite alternative is to
+use 3rd person plural forms with subject in position
+2:
+
+• Ruf mich zurück. (informal)
+(Call me back.)
+
+• Rufen Sie mich zurück. (polite)
+(Call you me back.)
+
+We automatically annotate politeness on a sen-
+tence level with rules based on a morphosyntactic
+annotation by ParZu (Sennrich et al., 2013). Sen-
+tences containing imperative verbs are labelled in-
+formal. Sentences containing an informal or polite
+pronoun from Table 1 are labelled with the corre-
+sponding class.
+
+Some pronouns are ambiguous. Polite pronouns
+are distinguished from (neutral) 3rd person plural
+forms by their capitalization, and are ambiguous in
+sentence-initial position. In sentence-initial posi-
+tion, we consider them polite pronouns if the English
+source side contains the pronoun you(r). For Ihr and
+ihr, we use the morphological annotation by ParZu
+to distinguish between the informal 2nd person plu-
+ral nominative, the (neutral) 3rd person singular da-
+tive, and the possessive; for possessive pronouns, we
+
+36
+
+
+
+category informal politesg. pl. sg./pl.
+nominative du ihr Sie
+genitive deiner euer Ihrer
+dative dir euch Ihnen
+accusative dich euch Sie
+possessive (base form) dein euer Ihr
+
+Table 1: German address pronouns.
+
+distinguish between polite forms and (neutral) 3rd
+person forms by their capitalization.
+
+If a sentence matches rules for both classes, we
+label it as informal – we found that our lowest-
+precision rule is the annotation of sentence-initial
+Sie. All sentences without a match are considered
+neutral.

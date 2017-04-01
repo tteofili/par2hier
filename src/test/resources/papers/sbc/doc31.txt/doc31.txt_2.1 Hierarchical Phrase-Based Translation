@@ -1,0 +1,62 @@
+
+In hierarchical phrase-based translation, a proba-
+bilistic synchronous context-free grammar is in-
+duced from bilingual training corpora. In addi-
+tion to continuous lexical phrases as in standard
+phrase-based translation, hierarchical phrases
+with (usually) up to two non-terminals are ex-
+tracted from the word-aligned parallel training
+data.
+
+The non-terminal set of a standard hierarchical
+grammar comprises two symbols which are shared
+by source and target: the initial symbol S and one
+generic non-terminal symbol X. The initial sym-
+bol S is the start symbol of the grammar. The
+generic non-terminal X is used as a placeholder for
+the gaps within the right-hand side of hierarchical
+translation rules as well as on all left-hand sides
+of the translation rules that are extracted from the
+parallel training corpus.
+
+Extracted rules of a standard hierarchical gram-
+mar are of the form X → 〈α,β ,∼ 〉 where 〈α,β 〉
+
+is a bilingual phrase pair that may contain X, i.e.
+α ∈ ({X}∪VF)+ and β ∈ ({X}∪VE)+, where VF
+and VE are the source and target vocabulary, re-
+spectively. The non-terminals on the source side
+and on the target side of hierarchical rules are
+linked in a one-to-one correspondence. The ∼ re-
+lation defines this one-to-one correspondence.
+
+In addition to the extracted rules, a non-
+lexicalized glue rule
+
+S→ 〈S∼0X∼1,S∼0X∼1〉 (1)
+is incorporated into the hierarchical grammar that
+the system can use for serial concatenation of
+phrases as in monotonic phrase-based translation.
+
+In the Moses implementation, the decoder in-
+ternally adds a sentence start terminal symbol <s>
+and a sentence end terminal symbol </s> to the
+input before and after each sentence, respectively.
+Therefore, two more special rules
+
+S→ 〈<s>,<s>〉
+S→ 〈S∼0</s>,S∼0</s>〉
+
+(2)
+
+are included which allow the decoder to finalize its
+translations.
+
+Hierarchical search is conducted with a cus-
+tomized version of the CYK+ parsing algorithm
+(Chappelier and Rajman, 1998) and cube pruning
+(Chiang, 2007). A hypergraph which represents
+the whole parsing space is built employing CYK+.
+Cube pruning operates in bottom-up topological
+order on this hypergraph and expands at most k
+derivations at each hypernode.

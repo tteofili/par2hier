@@ -1,0 +1,54 @@
+Another interesting aspect to analyse is the effect
+of the different methods on the types of errors
+made by each system. Does the variety in the ap-
+proaches result in major differences in the types of
+errors made? To answer this question, Figure 11
+plots the distribution of the edit operations needed
+to transform the output of each system into the
+human post-edits available for each test sentence.
+Such distribution of systems’ errors is obtained by
+computing the TER between their output and the
+human post-edits of the original translations as ref-
+erence.
+
+The figure does not show visible trends that can
+provide us with useful hints. In terms of error dis-
+tribution, the task baseline, our re-implementation
+of Simard et al. (2007), and the submitted pri-
+mary runs show almost identical ratios. Inser-
+tions range between 17% and 20% of the total,
+deletions range between 23% and 28%, substitu-
+tions range between 44% and 49%. The high-
+est percentage of substitution errors suggests that
+the major problem for all systems is the lexical
+choice. Half of the errors in the APE output be-
+long to this error category, indicating that learn-
+ing the appropriate lexical replacements from hu-
+man post-edits is still one of the main challenges.
+Comparing the error distribution in the MT base-
+line (our ground truth in terms of what has to be
+corrected) with the actions actually made by each
+system as shown in Figure 10, it is interesting to
+emphasise the higher similarity with the distribu-
+tions of the operations made by the top-performing
+system. “AMU Primary”, indeed, seems to per-
+form a slightly larger amount of insertions com-
+pared to the total insertions actually needed, while
+the other operations are substantially in line with
+the expected amount. Based on TER information,
+nothing can be said about which of them are actu-
+ally correct/wrong. The only conclusions we can
+draw at this stage are: i) a good amount of MT
+errors is corrected (the global TER decreases), ii)
+the actions of the top-performing system are quite
+evenly distributed, iii) such distribution is the clos-
+est to the distribution of ground truth operations
+but iv) errors (missing corrections and/or wrong
+corrections) still remain in all classes.
+
+In light of these considerations, we performed
+further analysis by evaluating this years’ APE sub-
+missions also from another point of view. To this
+aim, in the next section we try to understand the re-
+lation between the participants’ performance and
+the human perception of translation quality.

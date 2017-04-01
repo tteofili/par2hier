@@ -1,0 +1,127 @@
+A first interesting aspect to analyse is systems’ be-
+haviour which, compared to last year, reflects the
+larger variety of approaches explored. Does this
+variety result in major differences in the correc-
+tion strategies/operations? To answer this ques-
+tion, we first analysed the submitted runs taking
+into consideration the changes made by each sys-
+tem to the test instances. Table 35 shows the num-
+ber of modified, improved and deteriorated sen-
+tences. It’s worth noting that, as observed last
+year, for all the systems the number of modified
+sentences is higher than the sum of the improved
+and the deteriorated ones. This difference is rep-
+resented by modified sentences for which the cor-
+rections do not yield TER variations. This grey
+area, for which quality improvement/degradation
+can not be automatically assessed, contributes to
+motivate the human evaluation discussed in Sec-
+tion 7.5
+
+180
+
+
+
+Modified Improved Deteriorated
+AMU Primary 1,613 935 374
+AMU Contrastive 1475 776 386
+FBK Contrastive 640 377 148
+FBK Primary 654 384 153
+USAAR Primary 421 290 74
+USAAR Contrastive 499 314 105
+CUNI Primary 498 284 138
+(Simard et al., 2007) 700 320 253
+DCU Contrastive 407 48 314
+JUSAAR Primary 1,521 320 835
+JUSAAR Contrastive 1,540 326 837
+DCU Primary 797 54 651
+
+Table 35: Number of test sentences modified, improved and deteriorated by each submitted run.
+
+Looking at the numbers in Table 35, it be-
+comes evident that the overall number of modi-
+fied sentences is considerably larger than in the
+pilot task. On average, the best run submitted
+by each team modified 42.5% sentences. This
+amount is much larger than last year, when the
+percentage was 18.0%, probably due to the higher
+repetitiveness of the data which makes possible
+to learn more reliable and applicable correction
+rules. The same holds for the average number
+of improved sentences, which this year is signif-
+icantly larger (18.7% vs. 11% in the pilot). This
+trend is confirmed by the performance of our re-
+implementation of Simard et al. (2007), which
+modified 35% of the sentences (vs. 26% in the
+pilot), improving 45% (vs. 11% last year) and de-
+teriorating 36% of them (vs. 61%).
+
+These figures, however, vary considerably
+across the submitted runs. Among the systems that
+improve over the basic statistical APE approach,
+the top-ranked one modified an impressive num-
+ber of test sentences (80%), which is more than
+twice the amount of items changed by the other
+submissions. For the same system, the improved
+and the deteriorated ones are respectively about
+58% and 23% of the total, which is in line with the
+other participants that improved the baseline. An
+interesting general conclusion that we can draw is
+that the neural approach adopted by the top-ranked
+system allowed it to better cope with the data spar-
+sity issues that affect the other methods (despite
+the higher repetitiveness of this year’s data). More
+thorough investigations that are beyond the scope
+of this overview should verify the hypothesis that
+learning and generalising rules from a relatively
+small amount of human post-edits is easier with
+
+Figure 10: System Behaviour – TER(MT, APE)
+
+neural models than with pure statistical solutions.
+Another aspect that should be checked is whether
+the neural solution performs better per se or thanks
+to the much larger amount of training data needed
+for its deployment.
+
+Further insights about systems’ behaviour can
+be drawn from the analysis of Figure 10. It plots
+the distribution of the edit operations done by each
+system (insertions, deletions, substitutions, shifts)
+obtained by computing the TER between the orig-
+inal MT output and the output of each system as
+reference (only for the primary submissions).
+
+The figure evidences some interesting trends,
+starting from the much larger proportion of shifts
+made by the top-ranked neural approach. More
+than 450 shift operations (9.2% of the total),
+in fact, represent the major difference between
+the behaviour of the winning system and all the
+
+181
+
+
+
+Figure 11: System Error – TER(APE, human post-edits)
+
+other submissions (the second-ranked one per-
+forms only 26 shifts, 2.5% of the total). It is likely,
+but this should be verified, that the available train-
+ing data featured correction patterns that the neural
+method was able to model and re-apply better than
+the other solutions. Overall, the behaviour of the
+best system is the most balanced with respect the
+three other operations. In total, insertions, dele-
+tions and substitutions (respectively 1,132, 1,465
+and 1,807) are considerably more that those made
+by the other systems and they are more evenly dis-
+tributed (23%, 30% and 37% respectively). As a
+term of comparison, the second-ranked primary
+submission performed much less operations (83
+insertions, 652 deletions and 248 substitutions),
+with a clear predominance (65%) of deletions that
+is common also to other submissions. As a gen-
+eral remark, best results seem to be associated with
+a rather homogeneous distribution of the types of
+correction patterns learned by the system.

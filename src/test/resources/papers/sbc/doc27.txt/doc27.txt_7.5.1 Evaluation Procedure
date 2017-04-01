@@ -1,0 +1,64 @@
+The two runs of human evaluation were conducted
+using the Appraise37 (Federmann, 2012) open-
+source annotation platform through the ranking
+task interface. A ranking task consists of a source
+segment and the outputs of up to 5 anonymized
+APE systems randomly selected from the set of
+participants and displayed in random order to hu-
+man evaluators. The main difference between the
+two evaluation runs is the following: for the first
+run, the annotators were presented with a transla-
+tion reference consisting of the manual post-edit of
+the machine-translated source segment, while for
+the second run no translation reference was pre-
+sented to the human evaluator. For both evaluation
+runs, the non-post-edited MT output was included
+among the systems to evaluate. For the second
+evaluation run, the human post-edited version of
+the MT output was included among the systems to
+evaluate.
+
+A total of 200 randomly extracted source seg-
+ments taken from the test set presented in Table 31
+with their corresponding systems’ outputs were
+considered for the first evaluation run, while 100
+source segments went through the second run. The
+decision to consider a larger set of segments for
+the first evaluation run is based on the previous
+editions of WMT, where human evaluations con-
+ducted for the translation tasks included a transla-
+tion reference. The smaller scale evaluation for the
+second run can be seen as a pilot study, where no
+translation reference is given to the annotators and
+where the human post-edit is presented as part of
+the anonymized systems. The latter setup allows
+us to see if APE systems can reach human post-
+editing in terms of quality while avoiding evalua-
+tion bias towards a reference.
+
+We carried out six annotation sessions in a con-
+trolled environment of approximately 45 to 60
+minutes each, divided in two blocks of equal dura-
+tion with a small break in between. Prior to the hu-
+man evaluation task, we provided annotators with
+a pilot study in order to be introduced to the rank-
+ing task and be familiarized with the annotation
+interface. For each source sentence, five systems’
+outputs were randomly selected among the partic-
+
+37https://github.com/cfedermann/Appraise
+
+ipants and the non-post-edited MT output. For the
+second evaluation run, the human post-edit was in-
+cluded in the random selection of target sentences
+to annotate. The human annotators then ranked the
+outputs from 1 to 5 (1 being the best) with ties al-
+lowed. All source segments were evaluated by at
+least 3 annotators. The annotations were then used
+with the TrueSkill38 adaptive ranking system to
+produce a score for each system based on their in-
+ferred means (Sakaguchi et al., 2014). This score
+was used to sort and cluster the systems submitted
+by the participants, as well as the MT output and
+the human post-edit, and produce the final ranking
+presented in Section 7.5.3

@@ -1,0 +1,83 @@
+
+Since MT and classifiers differ with respect to
+the types of errors they can better handle, we
+combine these systems in a pipeline architecture
+where the MT is applied to the output of classi-
+fiers. Classifiers are applied first, since MT is bet-
+ter at handling complex phenomena. First, we add
+the speller and those classifier components that
+perform substantially better than MT (articles and
+verb agreement), due to the ability of classifiers to
+generalize beyond lexical information. The added
+classifiers are part of the best system in Table 12.
+
+Results are shown in Table 13. Adding classi-
+fiers improves the performance, thereby demon-
+
+
+
+System Performance
+P R F0.5
+
+MT (CoNLL-train) 43.34 11.81 28.25
+MT (Lang-8) 66.15 15.11 39.48
+Best classifier (Table 12) 60.79 19.93 43.11
+Best class.+MT (CoNLL-train) 51.92 25.08 42.77
+Best class.+MT (Lang-8) 60.17 25.64 47.40
+
+Table 14: Pipelines: the best classifier system
+and MT systems.
+
+System Performance
+P R F0.5
+
+Best classifier (Table 12) 60.79 19.93 43.11
+Art.+Verb agr.+Spell+MT 64.13 22.15 46.51
+Best classifier+MT 60.17 25.64 47.40
+CoNLL-2014 top system 39.71 30.10 37.33
+Susanto et al. (2014) 53.55 19.14 39.39
+Miz. & Mats. (2016) 45.80 26.60 40.00
+
+Table 15: Best systems in this work. Comparison
+to existing state-of-the-art.
+
+strating that the classifiers address a complemen-
+tary set of mistakes. Adding all three modules im-
+proves the results from 28.25 to 40.10 and from
+39.48 to 46.51 for the MT systems trained on
+CoNLL-train and Lang-8, respectively. Notably,
+the CoNLL-train MT system especially benefits,
+which shows that when the parallel data is small,
+it is particularly worthwhile to add classifiers.
+
+It should be stressed that even with a smaller
+parallel corpus, when the three modules are added,
+the resulting system is very competitive with pre-
+vious state-of-the-art that uses a lot more super-
+vision: Susanto et al. (2014) and Mizumoto and
+Matsumoto (2016) use Lang-8. These results
+show that when one has an MT system, it is possi-
+ble to improve by investing effort into building se-
+lect classifiers for phenomena that are most chal-
+lenging for MT.
+
+Finally, Table 14 demonstrates that combining
+MT with the best classifier system improves the
+result further when the MT system is trained on
+Lang-8, but not when the MT system is trained on
+CoNLL-train. We also note that the CoNLL-train
+MT system also has a much lower precision than
+the other systems. We conclude that when only a
+limited amount of data is available, the classifier
+approach on its own performs better.
+
+As a summary, Table 15 lists the best sys-
+tems developed in this work – a classifier sys-
+tem, a pipeline of select classifiers and MT, and
+a pipeline consisting of the best classifier and the
+MT systems – and compares to existing state-of-
+the-art. Our classifier system is a 3-point improve-
+ment over the existing state-of-the-art, while the
+
+best pipeline is a 7.4-point improvement (20% rel-
+ative improvement).

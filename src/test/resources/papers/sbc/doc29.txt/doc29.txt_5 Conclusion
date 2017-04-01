@@ -1,0 +1,107 @@
+
+We present the NYU-MILA neural machine trans-
+lation system for WMT’16, which has a character-
+level decoder on the target side. Our results show
+that a character-level decoder can perform compa-
+rable to state-of-the-art systems. The NYU-MILA
+neural machine translation system achieved sec-
+ond rank in En-Cs and En-Fi (constrained only)
+and third rank in En-De. To the best of our knowl-
+edge the NYU-MILA system may be the only sub-
+mitted system that directly generates characters in-
+stead of words or subwords. The biggest advan-
+tage of the character-level decoding approach is
+that the machine translation system no longer re-
+quires any preprocessing step, such as segmenta-
+tion.
+
+Acknowledgments
+
+The authors would like to thank the developers
+of Theano (Team et al., 2016). We acknowledge
+the support of the following agencies for research
+funding and computing support: NSERC, Calcul
+Québec, Compute Canada, the Canada Research
+Chairs, CIFAR and Samsung. KC thanks the sup-
+port by Facebook, Google (Google Faculty Award
+2016) and NVIDIA (GPU Center of Excellence
+2015-2016). JC thanks Orhan Firat for his con-
+structive feedbacks.
+
+References
+Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Ben-
+
+gio. 2015. Neural machine translation by jointly
+learning to align and translate. In Proceedings of
+the International Conference on Learning Represen-
+tations (ICLR).
+
+Kyunghyun Cho, Bart van Merrienboer, Caglar Gul-
+cehre, Dzmitry Bahdanau, Fethi Bougares, Holger
+
+270
+
+
+
+Schwenk, and Yoshua Bengio. 2014. Learning
+phrase representations using rnn encoder–decoder
+for statistical machine translation. In Proceedings of
+the 2014 Conference on Empirical Methods in Nat-
+ural Language Processing (EMNLP), pages 1724–
+1734.
+
+Junyoung Chung, Kyunghyun Cho, and Yoshua Ben-
+gio. 2016. A character-level decoder without ex-
+plicit segmentation for neural machine translation.
+arXiv preprint arXiv:1603.06147.
+
+Mikel L Forcada and Ramón P Ñeco. 1997. Recur-
+sive hetero-associative memories for translation. In
+International Work-Conference on Artificial Neural
+Networks, pages 453–462. Springer.
+
+Sébastien Jean, Kyunghyun Cho, Roland Memisevic,
+and Yoshua Bengio. 2015. On using very large
+target vocabulary for neural machine translation.
+In Proceedings of the 53rd Annual Meeting of the
+Association for Computational Linguistics: Short
+Papers-Volume 2.
+
+Nal Kalchbrenner and Phil Blunsom. 2013. Recur-
+rent continuous translation models. In EMNLP, vol-
+ume 3, page 413.
+
+Diederik Kingma and Jimmy Ba. 2014. Adam: A
+method for stochastic optimization. arXiv preprint
+arXiv:1412.6980.
+
+Minh-Thang Luong, Ilya Sutskever, Quoc V Le, Oriol
+Vinyals, and Wojciech Zaremba. 2015. Addressing
+the rare word problem in neural machine translation.
+arXiv preprint arXiv:1410.8206.
+
+Razvan Pascanu, Caglar Gulcehre, Kyunghyun Cho,
+and Yoshua Bengio. 2013. How to construct
+deep recurrent neural networks. arXiv preprint
+arXiv:1312.6026.
+
+Rico Sennrich, Barry Haddow, and Alexandra Birch.
+2015. Neural machine translation of rare words with
+subword units. arXiv preprint arXiv:1508.07909.
+
+Ilya Sutskever, Oriol Vinyals, and Quoc V Le. 2014.
+Sequence to sequence learning with neural net-
+works. In Advances in Neural Information Process-
+ing Systems, pages 3104–3112.
+
+The Theano Development Team, Rami Al-Rfou,
+Guillaume Alain, Amjad Almahairi, Christof
+Angermueller, Dzmitry Bahdanau, Nicolas Ballas,
+Frédéric Bastien, Justin Bayer, Anatoly Belikov,
+et al. 2016. Theano: A python framework for fast
+computation of mathematical expressions. arXiv
+preprint arXiv:1605.02688.
+
+271
+
+

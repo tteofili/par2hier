@@ -1,0 +1,10 @@
+
+Our success in using Russian lemmas to improve
+word alignment and NNJMs to improve the over-
+all system performance has inspired us to fur-
+ther develop new components to leverage these
+ideas. In this section, we describe the new fea-
+tures integrated with Portage in our submitted sys-
+tem: a neural network lexical translation model
+(NNLTM), a fallback Russian lemma phrase table,
+and a semi-supervised transliteration model.

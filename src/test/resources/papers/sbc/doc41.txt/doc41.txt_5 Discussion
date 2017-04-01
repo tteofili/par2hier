@@ -1,0 +1,45 @@
+
+We have presented an adjunction-based hierarchical phrase-based model, that extends Hiero in two ways:
+by letting adjuncts guide the extraction of larger phrase pairs, and by marking adjuncts through labelling.
+
+Our model outperforms Hiero for English-Chinese on training sets of moderate size (500k and 2M sen-
+tence pairs), by 0.5 and 0.6 BLEU points respectively. The improvement is brought by the combination
+of extraction features with a minimal adjunct/non-adjunct source labelling scheme. This is a very posi-
+tive result, that shows that the adjunct/argument distinction can be useful for machine translation, even
+
+17
+
+
+
+Table 8: Experimental results for the adjunct-optionality model, for English-Chinese
+
+training=500k training=2M
+
+BLEU BEER TER LEN BLEU BEER TER LEN
+
+Hiero 21.7 11.1 64.6 100.0 23.4 12.6 62.0 98.8
+adj-Opt 21.0∗∗ 10.9 64.1∗ 97.9∗∗ 22.8∗∗ 12.3 61.8 97.5∗∗
+a Results are based on a single tuning round
+
+though our means to identify adjuncts are coarse (in the example of Figure 1 for instance, “to the solar
+power industry” is argueably an argument of “made the switch”, and not an adjunct). Beside we assumed
+here that source adjuncts project into target adjuncts. This is an optimistic assumption (Hwa et al., 2002;
+Arnoult and Sima’an, 2014), and we are bound to extract many erroneous rules. The adjunct-driven
+model is however able to guide the model sufficiently well to ward off these rules for English-Chinese.
+Refining the labels and features is likely to further enhance the model.
+
+While our feature set may be improved, we face the difficulty that the current features are informative
+of the extraction of a rule, and we accordingly store their values along with the rules in the grammar.
+This increases the size occupied by the grammar in memory, making it harder to extract grammars for
+larger training sets.
+
+We found that the adjunct-driven model provides no improvement over Hiero for English-Dutch and
+English-French. We believe that the improvement for English-Chinese is related to the extent of re-
+ordering in this language pair: while system scores suggest a mostly lexical improvement, reordering in
+English-Chinese may favor the application of hierarchical rules (rather than glue rules), and benefit more
+from the linguistic constraint brought by the adjunct-driven model.
+
+Additionally, we have presented another extension, that leverages adjunct optionality to extract rules
+by excising adjuncts and their projections, following what Arnoult and Sima’an (2012) had done for
+a phrase-based model. The resulting model underperforms Hiero for English-Chinese, and while an
+adapted feature and label set may improve results, selecting which adjuncts to excise appears necessary.

@@ -1,0 +1,73 @@
+
+Initial tokenization and preprocessing of the WMT
+2016 English→German news translation dataset
+was performed using the standard scripts provided
+with Moses (Koehn et al., 2007). Two further
+processing steps were used to create the subword-
+based training dataset. First, capitalized characters
+were replaced with a sequence of a capitalization
+control character (a Unicode private-use charac-
+ter) and the corresponding lowercase character, in
+order to allow the subword splitting algorithm to
+treat capitalized words as either inherently capi-
+talized or capitalized versions of lowercase words.
+Without this step, much of the limited output soft-
+max capacity is taken up with capitalized vari-
+ants of common lowercase words; performing this
+transformation also allows us to forego “truecas-
+ing,” which removes sentence-initial capitalization
+in a lossy and sometimes unhelpful way. Second,
+the capitalization-transformed training corpus for
+each language is ingested by a Morfessor 2.0 in-
+stance configured to use a balance between corpus
+and vocabulary entropy that produces a vocabulary
+of approximately 50,000 subword units.
+
+For all experiments, we used using plain
+stochastic gradient descent with learning rate 0.7,
+gradient clipping at magnitude 5.0, dropout of 0.2,
+and learning rate decay of 50% per epoch after 8
+epochs.
+
+Following Sennrich (2015b), we first trained
+
+a non-Y-LSTM model in the reverse direction
+(German→English) on the full WMT ’16 train-
+ing corpus (4.4 million sentences). This model
+was then used simultaneously on 8 GPUs (with
+a beam search width of 4 for speed purposes) to
+translate 45 million sentences of the 2014 mono-
+lingual German news crawl into English. A full
+copy of the original training corpus was then con-
+catenated with a unique subset of this augmenta-
+tion corpus to create a new training corpus for each
+epoch from 1 to 10; the corpus for epoch 1 was
+then repeated as epoch 11 et cetera.
+
+For metamind-single, we trained a non-
+Y-LSTM model using these augmented corpora,
+with data-parallel synchronous SGD across four
+GPUs enabling a batch size of 384 and training
+speed of about 2,500 subword units per second.
+The run submitted as metamind-single uses
+a single snapshot of this model after 12 total train-
+ing epochs.
+
+For metamind-ylstm, we trained a Y-LSTM
+model using the same corpora, with data-parallel
+synchronous SGD across four GPUs enabling a
+batch size of 320 and training speed of about 1,500
+subword units per second. The run submitted as
+metamind-ylstm uses a single snapshot of this
+model after 9 total training epochs.
+
+The run submitted as metamind-ensemble
+uses an equally-weighted ensemble of three snap-
+shots of the metamind-single model (after
+10, 11, and 12 epochs) and a single snapshot of
+the metamind-ylstm model after 9 total train-
+ing epochs.
+
+266
+
+

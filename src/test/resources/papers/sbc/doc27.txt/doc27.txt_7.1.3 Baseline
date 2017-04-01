@@ -1,0 +1,52 @@
+The official baseline results are the TER and
+BLEU scores calculated by comparing the raw MT
+output with the human post-edits. In practice, the
+baseline APE system is a system that leaves all the
+test targets unmodified.35 Baseline results are re-
+ported in Table 34.
+
+Monolingual translation as another term of
+comparison. To get some insights about the
+progress with respect to the first pilot task, partic-
+ipating systems were also evaluated against a re-
+implementation of the approach firstly proposed
+by Simard et al. (2007).36 Last year, in fact, this
+statistical post-editing approach represented the
+common backbone of all submissions (this is also
+reflected by the close results achieved by partici-
+pants in the pilot task). For this purpose, a phrase-
+based SMT system based on Moses (Koehn et al.,
+2007) was used. Translation and reordering mod-
+els were estimated following the Moses protocol
+with default setup using MGIZA++ (Gao and Vo-
+gel, 2008) for word alignment. For language mod-
+eling we used the KenLM toolkit (Heafield, 2011)
+for standard n-gram modeling with an n-gram
+length of 5. Finally, the APE system was tuned on
+
+35In the case of TER, the baseline is computed by averag-
+ing the distances between each machine-translated sentence
+and its human-revised version. The actual evaluation metric
+is the human-targeted TER (HTER). For the sake of clarity,
+since TER and HTER compute edit distance in the same way
+(the only difference is in the origin of the correct sentence
+used for comparison), henceforth we will use TER to refer to
+both metrics.
+
+36This is done based on the description provided
+in (Simard et al., 2007). Our re-implementation, however,
+is not meant to officially represent such approach. Discrep-
+ancies with the actual method are indeed possible due to our
+misinterpretation or to wrong guesses about details that are
+missing in the paper.
+
+the development set, optimizing TER/BLEU with
+Minimum Error Rate Training (Och, 2003). The
+results of this additional term of comparison are
+also reported in Table 34.
+
+For each submitted run, the statistical signifi-
+cance of performance differences with respect to
+the baselines and the re-implementation of Simard
+et al. (2007) was calculated with the bootstrap
+test (Koehn, 2004).

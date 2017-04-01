@@ -1,0 +1,19 @@
+We obtain the word alignment by first lemmatizing
+the Russian side of the parallel training data using
+Yandex MyStem (Segalovich, 2003). Word align-
+ments are built for the lemmatized Russian using
+IBM2, HMM and IBM4 models. The Russian is
+then restored to its fully inflected surface form,
+and phrase-pairs are extracted for each of our three
+alignment methods. Counts from all three align-
+ments are then combined into a single phrase ta-
+ble, with a maximum phrase length of 7 tokens.
+Phrase pairs were filtered so that the top 30 trans-
+lations for each source phrase were retained.
+
+Our internal development experiments indi-
+cated that using lemma alignments improved the
+translation quality of a baseline phrase-based sys-
+tem by roughly 0.2 BLEU, and also benefited the
+perplexity of the bilingual neural language models
+described in Section 2.5 and 3.1.

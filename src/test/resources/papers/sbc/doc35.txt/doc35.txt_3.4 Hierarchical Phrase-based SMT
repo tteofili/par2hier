@@ -1,0 +1,6 @@
+We used the following Moses configuration for the hierarchical phrase-based SMT system.
+
+• max-chart-span = 1000
+• Phrase score option: GoodTuring
+
+The default values were used for the other system parameters.

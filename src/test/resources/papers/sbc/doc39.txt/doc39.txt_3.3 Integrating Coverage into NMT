@@ -1,0 +1,34 @@
+
+Although the introduction of alignment model has advanced the state-of-the-art of
+NMT, it computes soft alignment probabilities without considering useful informa-
+tion in the past. For example, a source word that contributed a lot to the predicted
+target words in the past, should be assigned lower alignment probabilities in the
+following decoding. Motivated by this observation, in this work, we propose to
+calculate the alignment probability by jointly taking into account past alignment
+information (e.g. which source words have been translated).
+
+Intuitively, at each time step i in the decoding phase, coverage from time step
+(i − 1) serves as input to the attention model, which provides complementary
+information of that how likely the source words are translated in the past. We
+expect the coverage information would guide the attention model to focus more
+on untranslated source words (i.e. assign higher probabilities). In practice, we
+find that the coverage model does come up to expectation (see Section 5). The
+translated ratios of source words from linguistic coverages negatively correlate to
+
+9
+
+
+
+the corresponding alignment probabilities. Figure 5 shows an example, in which
+coverage-based NMT indeed alleviates the problems of over-translation and under-
+translation shown in Figure 1.
+
+More formally, we rewrite the alignment model in Equation 5 as
+
+ei,j = a(si−1, hj , βi−1,j)
+
+= v>a tanh(Wasi−1 + Uahj +Baβi−1,j) (11)
+
+where βi−1,j is the translated ratio of source word xj before time i. Bd ∈ Rn×1 is
+the additional weight matrix for coverage with n and d be the numbers of hidden
+units and coverage units respectively.

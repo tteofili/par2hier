@@ -1,0 +1,9 @@
+ASPEC-JC is a parallel corpus consisting of Japanese scientific papers from the literature database and
+electronic journal site J-STAGE of JST that have been translated to Chinese with permission from the
+necessary academic associations. The parts selected were abstracts and paragraph units from the body
+text, as these contain the highest overall vocabulary coverage.
+The development, development-test and test data are extracted at random from documents containing
+
+single paragraphs across the entire corpus. Each set contains 400 paragraphs (documents). Therefore,
+there are no documents sharing the same data across the training, development, development-test and
+test sets.

@@ -1,0 +1,11 @@
+We used the following Moses configuration for the phrase-based SMT system.
+
+• distortion-limit
+– 20 for JE, EJ, JC, and CJ
+– 0 for JK, KJ, HE, and EH
+– 6 for IE and EI
+
+• msd-bidirectional-fe lexicalized reordering
+• Phrase score option: GoodTuring
+
+The default values were used for the other system parameters.

@@ -1,0 +1,37 @@
+−300
+
+−250
+
+−200
+
+−150
+
+−100
+
+−50
+
+Iterations
+
+L
+o
+
+w
+e
+
+r 
+b
+
+o
+u
+
+n
+d
+
+(a) (b) (c)
+
+Figure 1: (a) shows the probabilities estimated by exact softmax (blue bar), one-vs-each approximation (red bar)
+and Bouchard’s method (green bar). (b) shows the 5-class artificial data together with the decision boundaries
+found by exact softmax (blue line), one-vs-each (red line) and Bouchard’s bound (green line). (c) shows the
+maximized (approximate) log likelihoods for the different approaches when applied to the data of panel (b)
+(see Section 3). Notice that the blue line in (c) is the exact maximized log likelihood while the remaining lines
+correspond to lower bounds.

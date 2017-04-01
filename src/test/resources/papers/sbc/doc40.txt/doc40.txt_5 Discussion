@@ -1,0 +1,441 @@
+
+Although the Multimodal Machine Translation
+and Crosslingual Description tasks are based on
+the same collection of images, there are a number
+of important differences in the textual data, out-
+lined below, which lead to different patterns of re-
+sults for both tasks.
+
+The nature of the sentences The sentences in
+Task 1 are professional translations, whereas the
+sentences in Task 2 are independent descriptions.
+The differences between translations and descrip-
+tions may affect the performance of image de-
+
+549
+
+
+
+System ID Meteor ↑ BLEU ↑ TER ↓
+English-German
+
+•LIUM 1 MosesNMTRnnLMSent2Vec C 53.2 34.2 48.7
+•LIUM 1 MosesNMTRnnLMSent2VecVGGFC7 C 53.2 34.1 48.7
+
+•*SHEF 1 en-de-Moses-rerank C 52.6 32.8 49.8
+1 en-de-Moses C 52.5 32.5 50.2
+
+*CMU 1 MNMT+RERANK U 51.9 33.6 52.4
+HUCL 1 RROLAPMBen2de C 51.5 32.2 51.1
+
+CMU 1 MNMT C 50.8 35.1 49.2
+DCU 1 min-risk-baseline C 49.7 31.8 52.6
+
+LIUM 1 TextNMT C 49.2 32.5 51.6
+DCU 1 min-risk-multimodal C 48.4 32.5 49.8
+
+CUNI 1 MMS2S-1 C 46.5 29.7 53.5
+DCU-UVA 1 doubleattn C 46.4 27.4 59.7
+
+LIUMCVC 1 MultimodalNMT C 45.0 27.8 57.3
+DCU-UVA 1 imgattninit C 44.1 26.5 60.1
+
+IBM-IITM-Montreal-NYU 1 NeuralTranslation U 39.1 21.8 61.9
+UPC 1 SIMPLE-BIRNN-DEMB C 37.7 22.1 60.4
+
+IBM-IITM-Montreal-NYU 1 NeuralTranslation C 31.1 16.0 69.4
+1 GroundedTranslation C 24.7 9.4 77.2
+
+German-English
+•*SHEF 1 de-en-Moses-rerank C 36.5 39.8 41.0
+
+•1 de-en-Moses C 36.2 38.1 40.8
+HUCL 1 RROLAPMBde2en C 35.1 37.0 42.4
+
+Table 3: Official results for the WMT16 Multimodal Machine Translation task. The baseline results
+are underlined. Systems with grey background indicate use of resources that fall outside the constraints
+provided for the shared task. The winning submissions are indicated by a •. These are the top-scoring
+submission and those that are not significantly different (based on Meteor scores) according the approx-
+imate randomisation test (with p-value <= 0.05) provided by MultEval. Submissions marked with a
+* indicate those that are not significantly different from the main baseline (1 Moses C) according to the
+same test.
+
+scription models relative to the translation mod-
+els. This can be seen by comparing the re-
+sults of teams that submitted the same systems
+(but separately trained) to both tasks: LIUM,
+IBM-IITM-Montreal-NYU, and the Grounded-
+Translation baseline. The LIUM and IBM-IITM-
+Montreal-NYU submissions seem to benefit from
+training over translation data instead of the de-
+scription data, as suggested by the higher Me-
+teor scores achieved in Task 1 (1 reference) vs.
+Task 2 (5 references); the GroundedTranslation
+submissions exhibit the opposite effect (this may
+be explained by the fact that this submission is
+an image description model and not a translation
+model). We hypothesize that the differences in
+performance may originate from the possibility
+that (a) the description data is merely a compara-
+ble corpus instead of a parallel corpus leading to
+
+noisier pairing of source-target pairs, and/or (b) in
+the description task the training data is less com-
+patible with the test data than in the translation
+task. This demands further exploration.
+
+The number of training examples Submis-
+sions for Task 1 are trained over 29,000 parallel
+instances (one sentence pair per image), whereas
+submissions for Task 2 are trained over 145,000
+(five independent sentences per language per im-
+age). The number of training examples for each
+task further complicates the analysis of the differ-
+ence in performance between the two tasks, as the
+larger-data scenario in Task 2 does not lead to a
+straightforward improvement in performance. The
+type and the quality of the parallel translation data
+– despite its small size – makes it relatively easy
+to train high-performing translation models, as we
+can see by comparing the absolute Meteor scores
+
+550
+
+
+
+System ID Meteor ↑ BLEU ↑ TER ↓ Visual
+Features?
+
+English-German
+• LIUM 2 TextNMT C 35.1 23.8 62.1 —
+
+LIUM 2 MultimodalNMT C 32.3 19.2 70.0 ResNet
+2 GroundedTranslation C 31.2 15.8 76.4 FC7
+
+IBM-IITM-Montreal-NYU 2 NeuralTranslation U 29.5 9.7 89.0 FC7
+IBM-IITM-Montreal-NYU 2 NeuralTranslation C 29.1 17.8 60.0 FC7
+
+CUNI 2 MMS2S-2 C 13.1 1.2 73.3 FC7
+UPCb 2 MNMT C 12.1 1.5 63.1 FC7
+UPCb 2 MNMT U 11.7 1.0 82.2 FC7
+
+Table 4: Official results for the WMT16 Crosslingual Image Description task. The baseline results are
+underlined. Systems with grey background indicate use of resources that fall outside the constraints
+provided for the shared task. The winning submission, indicated by a •, is significantly different from all
+other submissions based on Meteor scores. Submissions marked with a * are not significantly different
+compared to the baseline (2 GroundedTranslation C).
+
+in Tables 3 and 4. In fact, it is quite remarkable
+that both statistical and neural MT approaches per-
+formed so well with only 29,000 sentence pairs for
+training, particularly for English→German trans-
+lation. In different text domains (e.g. Europarl,
+News), this language pair and direction is well
+known as a challenging case. The two languages
+are structurally distant and the target language –
+German – is morphologically richer than English,
+which poses a problem in machine translation par-
+ticularly when not enough training instances are
+available with examples of the various morpho-
+logical variants of target words. The fact that the
+performance for Task 1 was so high seems to indi-
+cate that the data for this task is much simpler and
+probably significantly more repetitive than data
+used in other shared tasks, for example, the News
+translation task at WMT (Bojar et al., 2015).
+
+The amount of evaluation data Task 1 submis-
+sions are evaluated against one reference transla-
+tion and Task 2 submissions are evaluated against
+five independent sentences. The larger number of
+references for Task 2 should make it easier for sub-
+missions to achieve high Meteor scores but this
+is not borne out in the results. One reason for
+this could be that each independently collected de-
+scription had a free choice in what to describe and
+how to describe it (Elliott and Keller, 2014). This
+has led to collected descriptions that are not trans-
+lations of their English counterparts. We could
+collect five professionally translated references for
+each image to study this issue. We would expect
+the absolute Meteor scores for Task 1 to increase
+
+with more references (Dreyer and Marcu, 2012);
+however, we should also bear in mind that the im-
+age descriptions are quite simple and there is likely
+to be very high similarity among translations.
+
+Further research is needed to determine whether
+having more parallel translation data or more ref-
+erences for evaluation will lead to better perfor-
+mance for both tasks. However, this data would
+be very expensive to collect. Collecting more
+independent descriptions would be significantly
+cheaper.
+
+Use of visual information The use of visual in-
+formation had very different effects in the two
+tasks. While for Task 1 this information only
+proved marginally useful in indirect ways (i.e.
+rescoring k-best translations), visual information
+featured prominently in submissions for Task 2:
+six submissions used the FC7 features, one sub-
+mission used features extracted from the ResNet-
+50 network, and one submission used no visual
+features. The submission with ResNet-50 features
+outperformed all submissions with FC7 features,
+which is not surprising given the difference in ob-
+ject categorisation performance between the mod-
+els (4.49% top-5 error on the ILSVRC validation
+data (Russakovsky et al., 2014) compared to 7.1%
+error). However, the submission without visual
+features achieved the best performance for Task 2.
+
+In light of our aim of furthering multimodal re-
+search with multilingual multimodal data, this is
+a somewhat disappointing result. However, we
+believe that it only reinforces the call to develop
+more robust models that can integrate visual and
+
+551
+
+
+
+linguistic features into a single model. Building
+more realistic and challenging datasets is also an
+interesting direction for future research.
+
+Acknowledgments
+
+SF was supported by European Union’s Horizon
+2020 research and innovation programme under
+grant agreement nr. 645452. DE and KS are sup-
+ported by the NWO Vici grant nr. 277-89-002.
+
+References
+
+Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua
+Bengio. 2014. Neural machine translation by
+jointly learning to align and translate. CoRR,
+abs/1409.0473.
+
+Raffaella Bernardi, Ruket Cakici, Desmond Elliott,
+Aykut Erdem, Erkut Erdem, Nazli Ikizler-Cinbis,
+Frank Keller, Adrian Muscat, and Barbara Plank.
+2016. Automatic description generation from im-
+ages: A survey of models, datasets, and evaluation
+measures. CoRR, abs/1601.03896.
+
+Ondřej Bojar, Rajen Chatterjee, Christian Federmann,
+Barry Haddow, Matthias Huck, Chris Hokamp,
+Philipp Koehn, Varvara Logacheva, Christof Monz,
+Matteo Negri, Matt Post, Carolina Scarton, Lucia
+Specia, and Marco Turchi. 2015. Findings of the
+2015 workshop on statistical machine translation.
+In Proceedings of the Tenth Workshop on Statistical
+Machine Translation, pages 1–46, Lisbon, Portugal.
+
+Ozan Caglayan, Walid Aransa, Yaxing Wang,
+Marc Masana, Mercedes Garcı́a-Martı́nez, Fethi
+Bougares, Loı̈c Barrault, and Joost van de Wei-
+jer. 2016. Does multimodality help human and
+machine for translation and image captioning? In
+Proceedings of the First Conference on Machine
+Translation, Berlin, Germany.
+
+Iacer Calixto, Desmond Elliott, and Stella Frank. 2016.
+Dcu-uva multimodal mt system report. In Proceed-
+ings of the First Conference on Machine Translation,
+Berlin, Germany.
+
+Jonathan H. Clark, Chris Dyer, Alon Lavie, and
+Noah A. Smith. 2011. Better hypothesis testing for
+statistical machine translation: Controlling for opti-
+mizer instability. In Proceedings of the 49th Annual
+Meeting of the Association for Computational Lin-
+guistics: Human Language Technologies: Short Pa-
+pers - Volume 2, pages 176–181, Portland, Oregon.
+
+Michael Denkowski and Alon Lavie. 2014. Meteor
+universal: Language specific translation evaluation
+for any target language. In Proceedings of the Ninth
+Workshop on Statistical Machine Translation, pages
+376–380, Baltimore, Maryland.
+
+Markus Dreyer and Daniel Marcu. 2012. Hyter:
+Meaning-equivalent semantics for translation eval-
+uation. In Proceedings of the 2012 Conference of
+the North American Chapter of the Association for
+Computational Linguistics: Human Language Tech-
+nologies, pages 162–171, Montréal, Canada, June.
+
+Chris Dyer, Adam Lopez, Juri Ganitkevitch, Johnathan
+Weese, Ferhan Ture, Phil Blunsom, Hendra Seti-
+awan, Vladimir Eidelman, and Philip Resnik. 2010.
+cdec: A decoder, alignment, and learning framework
+for finite-state and context-free translation models.
+In Proceedings of the 48th Annual Meeting of the
+Association for Computational Linguistics, pages 7–
+12, Uppsala, Sweden.
+
+Desmond Elliott and Frank Keller. 2014. Compar-
+ing Automatic Evaluation Measures for Image De-
+scription. In Proceedings of the 52nd Annual Meet-
+ing of the Association for Computational Linguis-
+tics, pages 452–457, Baltimore, Maryland.
+
+Desmond Elliott, Stella Frank, and Eva Hasler. 2015.
+Multi-language image description with neural se-
+quence models. CoRR, abs/1510.04709.
+
+Desmond Elliott, Stella Frank, Khalil. Sima’an, and
+Lucia Specia. 2016. Multi30K: Multilingual
+English-German Image Descriptions. In Proceed-
+ings of the 5th Workshop on Vision and Language,
+Berlin, Germany.
+
+Yansong Feng and Mirella Lapata. 2010. Topic mod-
+els for image annotation and text illustration. In
+Proceedings of Human Language Technologies: The
+2010 Annual Conference of the North American
+Chapter of the Association for Computational Lin-
+guistics, pages 831–839, Los Angeles, California.
+
+Ruka Funaki and Hideki Nakayama. 2015. Image-
+mediated learning for zero-shot cross-lingual docu-
+ment retrieval. In Proceedings of the Conference on
+Empirical Methods in Natural Language Process-
+ing, pages 585–590, Lisbon, Portugal.
+
+Haoyuan Gao, Junhua Mao, Jie Zhou, Zhiheng Huang,
+Lei Wang, and Wei Xu. 2015. Are you talking to a
+machine? dataset and methods for multilingual im-
+age question answering. Advances in Neural Infor-
+mation Processing Systems, pages 2287–2295.
+
+Michael Grubinger, Paul D. Clough, Henning Muller,
+and Thomas Desealers. 2006. The IAPR TC-12
+benchmark: A new evaluation resource for visual in-
+formation systems. In Proceedings of the Language
+Resources and Evaluation Conference.
+
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian
+Sun. 2015. Deep residual learning for image recog-
+nition. CoRR, abs/1512.03385.
+
+Julian Hitschler, Shigehiko Schamoni, and Stefan Rie-
+zler. 2016. Multimodal Pivots for Image Cap-
+tion Translation. In Proceedings of the 54th Annual
+Meeting of the Association for Computational Lin-
+guistics, Berlin, Germany.
+
+552
+
+
+
+Chris Hokamp and Iacer Calixto. 2016. Multi-
+modal neural machine translation using minimum
+risk training. https://www.github.com/c
+hrishokamp/multimodal_nmt.
+
+Po-Yao Huang, Frederick Liu, Sz-Rung Shiang, Jean
+Oh, and Chris Dyer. 2016. Attention-based mul-
+timodal neural machine translation. In Proceed-
+ings of the First Conference on Machine Translation,
+Berlin, Germany.
+
+Philipp Koehn, Hieu Hoang, Alexandra Birch, Chris
+Callison-Burch, Marcello Federico, Nicola Bertoldi,
+Brooke Cowan, Wade Shen, Christine Moran,
+Richard Zens, et al. 2007. Moses: Open source
+toolkit for statistical machine translation. In Pro-
+ceedings of the 45th Annual meeting of Associa-
+tion for Computational Linguistics, pages 177–180,
+Prague, Czech Republic.
+
+Jindřich Libovický, Jindřich Helcl, Marek Tlustý,
+Ondřej Bojar, and Pavel Pecina. 2016. Cuni system
+for wmt16 automatic post-editing and multimodal
+translation tasks. In Proceedings of the First Con-
+ference on Machine Translation, Berlin, Germany.
+
+Kishore Papineni, Salim Roukos, Todd Ard, and Wei-
+Jing Zhu. 2002. Bleu: a method for automatic eval-
+uation of machine translation. In Proceedings of the
+40th Annual Meeting of the Association for Com-
+putational Linguistics, pages 311–318, Philadelphia,
+Pennsylvania.
+
+Arnau Ramisa, Fei Yan, Francesc Moreno-Noguer, and
+Krystian Mikolajczyk. 2016. Breakingnews: Arti-
+cle annotation by image and text processing. CoRR,
+abs/1603.07141.
+
+Sergio Rodrı́guez Guasch and Marta R. Costa-jussà.
+2016. Wmt 2016 multimodal translation system
+description based on bidirectional recurrent neural
+networks with double-embeddings. In Proceedings
+of the First Conference on Machine Translation,
+Berlin, Germany.
+
+Olga Russakovsky, Jia Deng, Hao Su, Jonathan Krause,
+Sanjeev Satheesh, Sean Ma, Zhiheng Huang, An-
+drej Karpathy, Aditya Khosla, Michael S. Bernstein,
+Alexander C. Berg, and Fei-Fei Li. 2014. Imagenet
+large scale visual recognition challenge. CoRR,
+abs/1409.0575.
+
+Kashif Shah, Josiah Wang, and Lucia Specia. 2016.
+Shef-multimodal: Grounding machine translation
+on images. In Proceedings of the First Conference
+on Machine Translation, Berlin, Germany.
+
+Shiqi Shen, Yong Cheng, Zhongjun He, Wei He, Hua
+Wu, Maosong Sun, and Yang Liu. 2016. Minimum
+Risk Training for Neural Machine Translation. In
+Proceedings of the 54th Annual Meeting of the Asso-
+ciation for Computational Linguistics, Berlin, Ger-
+many.
+
+Karen Simonyan and Andrew Zisserman. 2015. Very
+deep convolutional networks for large-scale image
+recognition. In Proceedings of the International
+Conference on Learning Representations.
+
+Matthew Snover, Bonnie Dorr, and Richard Schwartz.
+2006. A study of translation edit rate with tar-
+geted human annotation. In Proceedings of Associa-
+tion for Machine Translation in the Americas, Cam-
+bridge, Massachusetts.
+
+Karen Spärck Jones. 1972. A statistical interpretation
+of term specificity and its application in retrieval.
+Journal of Documentation, 28:11–21.
+
+Darlene Stewart, Roland Kuhn, Eric Joanis, and
+George Foster. 2014. Coarse split and lump bilin-
+gual language models for richer source information
+in SMT. In Proceedings of the Eleventh Confer-
+ence of the Association for Machine Translation in
+the Americas, pages 28–41, Vancouver, Canada.
+
+Oriol Vinyals, Alexander Toshev, Samy Bengio, and
+Dumitru Erhan. 2015. Show and tell: A neural im-
+age caption generator. In The IEEE Conference on
+Computer Vision and Pattern Recognition.
+
+Zichao Yang, Xiaodong He, Jianfeng Gao, Li Deng,
+and Alexander J. Smola. 2015. Stacked atten-
+tion networks for image question answering. CoRR,
+abs/1511.02274.
+
+Peter Young, Alice Lai, Micha Hodosh, and Julia
+Hockenmaier. 2014. From image descriptions to
+visual denotations: New similarity metrics for se-
+mantic inference over event descriptions. Transac-
+tions of the Association for Computational Linguis-
+tics, 2:67–78.
+
+553
+
+

@@ -1,0 +1,110 @@
+
+At this stage, the DITA structure provides a language-independent functional framework, which helps
+authors identify what information should be included. It is, however, still unclear how to write and
+translate each element. In order to instantiate the elements as texts, we defined context-dependent CL
+rules, i.e., desired linguistic patterns, for each element on both source and target sides.
+For example, Event condition requires a conditional clause such as ‘日本に来たとき/nihon ni kita
+
+toki’ (when you arrive in Japan). We also assigned a rather strict pattern for Steps element, polite speech
+style with declarative form ‘します/shimasu’ in Japanese and imperative form ‘do’ in English, such as
+‘以下の書類を持参します/ika no shorui o jizan shimasu’ (Bring the following documents), while the
+constraint is relaxed in Context, Result and Postreq.
+The problem here is that a CL-compliant ST segment does not always generate a desired linguistic
+
+form in the target language. To resolve such incompatibilities, we introduce background pre-translation
+processing to transform the ST into an internal form amenable to the chosen MT system. Figure 1 depicts
+an example flow of this process for the Steps element: ST1 is the CL-compliant original sentence, in
+polite speech style with the declarative ‘shimasu’. Since the MT output MT1 is not a desirable result,
+ST1 is transformed internally into ST2, with the imperative ‘shiro’. This then enables MT to produce
+
+36
+
+
+
+* To bring the following documents. Bring the following documents.
+
+Transform ‘shimasu’ into ‘shiro’
+
+Pre-translation processing
+
+MT MT
+
+以下の書類を持参します。
+(ika no shorui o jisan-shimasu)
+
+* 以下の書類を持参しろ。
+(ika no shorui o jisan-shiro)
+
+ST1
+
+MT1 MT2
+
+ST2
+
+Figure 1: Pre-translation processing for Steps (* undesirable sentence)
+
+CL authoring
+assistant
+
+‒ CL rules
+‒ Terminology
+
+Similar text
+search
+
+Topic
+database
+
+Document
+database
+
+Terminology
+database
+
+Municipal
+web sites
+
+Multilingual parallel
+term extraction
+
+translation
+
+back translation
+
+M
+T dictionary
+
+check search
+
+sea
+rch
+
+alert
+
+archive editreuse
+
+MT
+(+TM)
+
+Pre-translation
+processing
+
+Topic template
+
+Map organiser
+Controlled
+
+Writing
+
+Document
+
+Structuring
+
+Multilingualisation
+
+Figure 2: Modules of MuTUAL
+
+MT2, which complies with the target side CL rule, with the use of the imperative form ‘do’. ST1 is
+served to Japanese readers and MT2 to English readers. This process can be fully automated by defining
+simple transformation rules based on the morphological analysis of ST,3 on condition that the linguistic
+patterns of the ST are sufficiently controlled in conjunction with functional elements.

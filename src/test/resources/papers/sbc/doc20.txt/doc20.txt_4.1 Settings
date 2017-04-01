@@ -1,0 +1,22 @@
+
+The bilingual data to train the NMT model is selected from
+LDC, which contains about 0.6M sentence pairs. To avoid
+
+spending too much training time on long sentences, all sen-
+tences pairs longer than 50 words either on the source side or
+on the target side are discarded. The alignment information
+needed for replacement are obtained by the Berkeley Aligner
+[Liang et al., 2006] on the same bilingual data. We use the
+word2vec toolkit [Mikolov et al., 2013] to train word vec-
+tors on the monolingual data, which is the combination of the
+source side of the bilingual data and Chinese Giagaword Xin-
+hua portion. The Chinese bi-directional language model is
+trained with kenlm [Heafield et al., 2013] on the same mono-
+lingual data, while the English language model is trained on
+the combination of the target side of the bilingual data and the
+English Gigaword.
+
+The NIST 03 dataset is chosen as the development set,
+which is used to monitoring the training process and decide
+the early stop condition. And the NIST 04 to 06 are used as
+our testing set.

@@ -1,0 +1,27 @@
+
+This setup uses Moses with transfer-less TectoMT as a post-editing tool (see Figure 6). A transfer-less
+TectoMT performs a tecto-analysis of the input, and then immediately proceeds with the tecto-synthesis
+
+5
+
+
+
+Figure 6: Moses with TectoMT post-editing
+
+Figure 7: Moses with Depfix post-editing
+
+of the output, completely omitting the interlingual transfer step.
+Theoretically, analysis and a subsequent synthesis of a correct sentence should lead to the output being
+
+identical to the input (except for real synonymy). The motivation of Moses with transfer-less TectoMT
+post-editing was that incorrect sentences should be fixed this way, especially with respect to grammatical
+agreement. However, even the first assumption of identical output for correct sentences is not always
+true in practice, as some of the Treex blocks are not 100% accurate. Unfortunately, the assumption about
+fixing incorrect sentences also did not stand the practical test, mainly because the incorrect sentence on
+input tends to confuse the analysis pipeline and often leads to a largely incorrect analysis being produced
+(even if we disregard the fact that it is hard to define a correct analysis of an incorrect sentence).
+
+We have been unable to find any work evaluating this particular setup, apart from the project of Majliš
+(2009), who applied TectoMT post-editing to Google Translate.9 Therefore, we rerun the experiment
+ourselves, using current TectoMT10 to post-edit the output of Moses obtained from the website of the
+WMT 2016 translation task (Bojar et al., 2016),11 confirming the negative result reported by Majliš.

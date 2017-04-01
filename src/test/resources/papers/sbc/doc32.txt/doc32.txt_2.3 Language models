@@ -1,0 +1,24 @@
+Our system consists of three n-gram language
+models (LMs) and two word class language mod-
+els (Stewart et al., 2014). Each is included as a
+distinct feature in the decoder’s log-linear model.
+
+• A 4-gram LM trained on the target side of all
+the WMT parallel training corpora.
+
+• A 6-gram LM trained on the Gigaword cor-
+pus.
+
+• A 6-gram LM trained on the WMT monolin-
+gual English training corpus.
+
+• A 6-gram, 200-word-class coarse LM trained
+on a concatenation of the target side of all the
+WMT parallel training corpora and the WMT
+monolingual English training corpus.
+
+• A 6-gram, 800-word-class coarse LM trained
+on the same corpus as the 200-word-class
+model.
+
+Word classes are built using mkcls (Och, 1999).

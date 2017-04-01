@@ -1,0 +1,17 @@
+Figures 2, 3, 4 and 5 show the official evaluation results of ASPEC subtasks, Figures 6, 7, 8, 9 and 10
+show those of JPC subtasks, Figures 11 and 12 show those of BPPT subtasks and Figures 13 and 14 show
+those of IITB subtasks. Each figure contains automatic evaluation results (BLEU, RIBES, AM-FM), the
+pairwise evaluation results with confidence intervals, correlation between automatic evaluations and the
+pairwise evaluation, the JPO adequacy evaluation result and evaluation summary of top systems.
+The detailed automatic evaluation results for all the submissions are shown in Appendix A. The de-
+
+tailed JPO adequacy evaluation results for the selected submissions are shown in Table 8. The weights
+for the weighted κ (Cohen, 1968) is defined as |Evaluation1− Evaluation2|/4.
+From the evaluation results, the following can be observed:
+
+• Neural network based translation models work very well also for Asian languages.
+• None of the automatic evaluation measures perfectly correlate to the human evaluation result (JPO
+adequacy).
+
+• The JPO adequacy evaluation result of IITB E→H shows an interesting tendency: the system which
+achieved the best average score has the lowest ratio of the perfect translations and vice versa.

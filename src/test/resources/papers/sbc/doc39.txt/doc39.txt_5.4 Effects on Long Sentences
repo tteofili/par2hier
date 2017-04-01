@@ -1,0 +1,15 @@
+
+We follow Bahdanau et al. (2015) to group sentences of similar lengths together
+and compute a BLEU score and an averaged length of translation per group, as
+shown in Figure 7. Cho et al. (2014a) shows that the performance of NMT drops
+rapidly when the length of input sentence increases. Our results confirm these find-
+ings. One main reason is that NMT produces much shorter translations on longer
+sentences (e.g. > 40, see right panel in Figure 7), thus faces a serious under-
+translation problem. Coverage-based NMT alleviates this problem through incor-
+porating coverage information into the attention model, which in general pushes
+the attention to untranslated parts of the input sentence and implicitly discourages
+the early stop of the decoding process.
+
+15
+
+

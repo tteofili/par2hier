@@ -1,0 +1,92 @@
+
+Five teams participated in the Biomedical Trans-
+lation task, submitting a total of 40 runs. Partici-
+pants are listed in Table 15; a short description of
+their systems is provided below.
+
+Istrionbox The Istrionbox team utilized a non-
+log-linear model based on a weighted average of
+the translation and language models. They aligned
+the training documents on the phrase level using
+
+an aligner based on a lexicon which contains more
+than 930,000 terms derived from many parallel
+corpora for English/Portuguese. The language
+model was based on phrases, instead of words, as
+well as the translation model. For the various runs
+that the team submitted, they experimented with
+assigning equal or different weights for the distinct
+models trained on the biological or the health cor-
+pora, and they also considered a bilingual lexicon
+and named entities.
+
+IXA The IXA team adapted a general-domain
+statistical machine translation system to the
+biomedical domain. Three approaches were de-
+veloped for English-Spanish and Spanish-English
+language pairs, using Moses and three corpora
+(News corpora, Scielo Health and Scielo Biolog-
+ical, both the bilingual and monolingual docu-
+ments). In the system used for the first submission,
+the medical vocabulary SNOMED-CT is used to
+extend the vocabulary to address the problem of
+out-of-vocabulary (OOV) words. In the system
+used for the second submission, OOV words are
+
+154
+
+
+
+Team ID Participating team
+Istrionbox Istrionbox, Portugal (Aires et al., 2016)
+IXA University of the Basque Country UPV/EHU, Spain (Perez-de Viñaspre
+
+and Labaka, 2016)
+LIMSI-TLP LIMSI, France (Ive et al., 2016)
+TALP-UPC Universitat Politècnica de Catalunya, Spain (Costa-jussà et al., 2016)
+uedin University of Edinburgh, UK (Williams et al., 2016)
+
+Table 15: Participants in the WMT16 Biomedical Translation task.
+
+addressed by expanding generated phase tables
+with morphological variants and transliterations of
+the remaining words. In the system used for the
+third submission, the IXA team used the test set
+provided by the organizers to optimize the method
+used in the second submission.
+
+TALP The TALP team’s system is a standard
+phrase-based system based on Moses and MERT
+and enhanced with vocabulary expansion using
+bilingual word embeddings and a character-based
+neural language model with rescoring. The former
+focuses on resolving out-of-vocabulary words,
+while the latter enhances the fluency of the sys-
+tem.
+
+LIMSI-TLP The LIMSI-TLP system is a
+MOSES-based statistical machine translation sys-
+tem, rescored with Structured Output Layer neu-
+ral network models. It relied on additional in-
+domain data, including data from the WMT’14
+medical translation task (English-French) and a set
+of English-French Cochrane systematic review ab-
+stracts. They also experiment with a confusion
+network system combination which combines the
+outputs of Phrase Based SMT systems trained ei-
+ther to translate entire source sentences or spe-
+cific syntactic constructs extracted from those sen-
+tences. The approach is implemented using Con-
+fusion Network decoding.
+
+uedin The University of Edinburgh team used
+the phrase-based statistical model from Moses in-
+cluding hierarchical lexicalized reordering model
+with four orientations in both directions. The
+translation model was trained on data from the
+WMT13, the Scielo training data as well as the
+EMEA corpus. The language model was based
+on the interpolation of various language models
+trained separately on monoligual English corpora,
+such as the WMT14 medical, Scielo, EMEA and
+English LDC GigaWord corpus.

@@ -1,0 +1,20 @@
+The test set consisted of 1000 answers from
+the Batch 3 of the QTLeap Corpus.10 The
+in-domain training data contained 2000 answers
+from the Batches 1 and 2 and also localization
+files from several open-source projects (LibreOf-
+fice, KDE, VLC) and bilingual dictionaries of IT-
+related terms extracted from Wikipedia. The out-
+of-domain training data contained all the corpora
+from the News Task (see Figure 1), plus PaCo2-
+EuEn Basque-English corpus and SETimes with
+Bulgarian-English parallel sentences.
+
+“Constrained” systems were restricted to use
+only these training data provided by the organiz-
+ers. Linguistic tools such as morphological ana-
+lyzers, taggers, parsers, word-sense disambigua-
+tion or named entity recognizer were allowed in
+the constrained condition. The split of Batches 1
+and 2 into the training set and development test set
+was left to the participants.

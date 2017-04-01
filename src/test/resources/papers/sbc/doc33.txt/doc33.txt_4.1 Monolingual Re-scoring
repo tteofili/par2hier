@@ -1,0 +1,13 @@
+
+To evaluate the quality of the translation, the most
+simple approach is to check whether the translated
+sentences are readable. To achieve this, using lan-
+guage model is an effective way to check whether
+the sentences fit into the model that trained on a
+large corpus. If the language model score is high,
+it implies that the sentence holds the high proba-
+bility to be generated from the corpus. We trained
+a single layer LSTM with 300 hidden state to pre-
+dicting the next word. Image caption datasets
+MSCOCO and IAPR TC-12 (overall 56,968 sen-
+tences) are used as training data.

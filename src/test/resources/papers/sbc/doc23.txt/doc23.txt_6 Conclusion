@@ -1,0 +1,19 @@
+
+In this paper, we investigate the issue of unbalanced
+outputs suffered by recurrent neural networks, and
+empirically show its existence in the context of ma-
+chine translation. To address this issue, we pro-
+pose an easy to implement agreement model that
+extends the method of (Liu et al., 2016) from sim-
+ple sequence-to-sequence learning tasks to machine
+translation.
+
+On two challenging JP-EN and CH-EN transla-
+tion tasks, our approach was empirically shown to
+be effective in addressing the issue; by generating
+balanced outputs, it was able to consistently outper-
+form a respectable NMT baseline on all test sets,
+delivering gains of up to 1.4 BLEU points. To put
+these results in the broader context of machine trans-
+lation research, our approach (even without special
+handling of unknown words) achieved gains of up to

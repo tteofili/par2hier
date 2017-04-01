@@ -1,0 +1,51 @@
+
+In the official WMT 2016 multimodal translation
+task dataset (Elliott et al., 2016), there are 29,000
+parallel sentences from English to German for
+training, 1014 for validation and 1000 for testing.
+Each sentence describes an image from Flickr30k
+dataset (Young et al., 2014). We preprocessed all
+the descriptions into lower case with tokenization
+and German compound word splitting.
+
+Global visual features (fc7) are extracted with
+VGG-19 (Simonyan and Zisserman, 2014). For
+regional visual features, the region proposal net-
+work in RCNN (Girshick et al., 2014) first recog-
+nizes bounding boxes of objects in an image and
+then we computed 4096-dimensional fc7 features
+from these regions with VGG-19. The RPN of
+RCNN is pre-trained on ImageNet dataset 2 and
+then fine-tuned on MSCOCO dataset 3 with 80 ob-
+
+1https://glosbe.com/en/de/
+2http://image-net.org/
+3http://mscoco.org/
+
+Table 1: BLEU and METEOR of the proposed
+multimodal NMT
+
+BLEU METEOR
+Text baseline 34.5 (0.7) 51.8 (0.7)
+
+m1:image at tail 34.8 (0.6) 51.6 (0.7)
+m1:image at head 35.1 (0.8) 52.2 (0.7)
+
+m2:5 sequential RCNNs 36.2 (0.8) 53.4 (0.6)
+m3:5 parallel RCNNs 36.5 (0.8) 54.1 (0.7)
+
+ject classes.
+We use a single-layered LSTM with 256 cells
+
+and 128 batch size for training. The dimension of
+word embedding is 256. Wimg is a 4096 × 256
+matrix transforming visual features into the same
+embedding space as words. When training NMT,
+we follow (Luong et al., 2015) with similar set-
+tings: (a) we uniformly initialized all parameters
+between -0.1 and 0.1, (b) we trained the LSTM
+for 20 epochs using simple SGD, (c) the learning
+rate was initialized as 1.0, multiplied by 0.7 af-
+ter 12 epochs, (d) dropout rate was 0.8. Note that
+the same dropout mask and NMT parameters are
+shared by all LSTM threads in model 3.

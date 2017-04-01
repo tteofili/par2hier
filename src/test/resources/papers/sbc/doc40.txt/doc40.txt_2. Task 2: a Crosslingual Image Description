@@ -1,0 +1,121 @@
+task, which takes an image and generates
+a description for it in the target language,
+where this process can be supported by the
+source language description; see Figure 2.
+
+This shared task has the following main goals:
+
+• To push existing work on multimodal lan-
+guage processing towards multilingual mul-
+timodal language processing.
+
+• To investigate the effectiveness of informa-
+tion from images in machine translation.
+
+• To investigate the effectiveness of crosslin-
+gual textual information in image description
+generation.
+
+The challenge was organised in the framework
+of the well-established WMT series of shared
+tasks.1 Participants were called to submit sys-
+tems focusing on either or both of these task vari-
+ants. The tasks differ in the training data and in
+
+1http://www.statmt.org/wmt16/
+
+543
+
+
+
+Source:
+A brown dog is running after the black dog.
+
+Ein brauner Hund ...
+
+Gold Target:
+Ein brauner Hund rennt dem schwarzen Hund
+hinterher.
+
+translate
+
+evaluate
+
+Figure 1: Multimodal Machine Translation (Task 1). English and translated German image descriptions
+are grounded to an image.
+
+English Descriptions:
+A brown dog is running after the black dog.
+Two dogs run towards each other on a ...
+A brown dog is running after a black ...
+Two dogs run across stones near a body ...
+Two dogs playing on a beach.
+
+Zwei Hunde ...
+
+Gold German Descriptions:
+Ein schwarzer und ein brauner Hund rennen ...
+Zwei Hunde rennen über einen steinigen Platz.
+Zwei Hunde spielen auf dem Strand.
+Zwei Hunde rennen am Strand.
+Zwei Hunde tollen in der Nähe des Meeres.
+
+describe
+
+evaluate
+
+Figure 2: Multilingual Image Description (Task 2). The data consist of independently produced image
+descriptions in English and German.
+
+Sentences Types Tokens Avg. length
+
+Task 1: Translations
+English
+
+31,014
+11,420 357,172 11.9
+
+German 19,397 333,833 11.1
+
+Task 2: Descriptions
+English
+
+155,070
+22,815 1,841,159 12.3
+
+German 46,138 1,434,998 9.6
+
+Table 1: Corpus-level statistics about the translation and the description data over 31,014 images.
+
+544
+
+
+
+the way the target language descriptions are evalu-
+ated: against one translation of the corresponding
+source description (translation variant) or against
+five descriptions of the same image in the tar-
+get language, created independently from the cor-
+responding source description (image description
+variant). The data used for both tasks is an ex-
+tended version of the Flickr30K dataset. Partici-
+pants were also allowed to use external data and
+resources for unconstrained submissions.
+
+Participants were encouraged to make use of
+both the sentences and the images as part of their
+submissions but they were not required to do so.
+The baseline systems for the translation task were
+a text-only Moses phrase-based statistical machine
+translation (SMT) model (Koehn et al., 2007) and
+the GroundedTranslation multilingual image de-
+scription model (Elliott et al., 2015) (in particu-
+lar, the MLM→LM variant). The baseline sys-
+tem for the description generation task was also
+the GroundedTranslation model.
+
+In this paper we describe the data, image fea-
+tures and participants of the shared task (Sections
+2 and 3), present its main findings (Section 4), and
+discuss interesting issues and directions for future
+research (Section 5).

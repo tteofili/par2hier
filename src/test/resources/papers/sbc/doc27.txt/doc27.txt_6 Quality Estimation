@@ -1,0 +1,28 @@
+
+The fifth edition of the WMT shared task on
+quality estimation (QE) of machine translation
+(MT) builds on the previous editions of the task
+(Callison-Burch et al., 2012; Bojar et al., 2013,
+2014, 2015), with “traditional” tasks at sentence
+and word levels, a new task for entire documents
+quality prediction, and a variant of the word-level
+task: phrase-level estimation.
+
+The goals of this year’s shared task were:
+
+• To advance work on sentence and word-
+level quality estimation by providing domain-
+specific, larger and professionally annotated
+datasets.
+
+• To analyse the effectiveness of different types
+of quality labels provided by humans for
+longer texts in document-level prediction.
+
+• To investigate quality estimation at a new
+level of granularity: phrases.
+
+These goals are addressed through three groups
+of tasks: Task 1 at sentence level (Section 6.3),
+Task 2 at word and phrase levels (Section 6.4),
+and Task 3 at document level (Section 6.6). Tasks

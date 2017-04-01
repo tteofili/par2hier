@@ -1,0 +1,338 @@
+This year, six teams (two more than in the pilot
+round) participated in the APE task by submitting
+a total of eleven runs. Participants are listed in
+Table 33; a short description of their systems is
+provided in the following.
+
+Adam Mickiewicz University. This system is
+among the very first ones exploring the appli-
+cation of neural translation models to the APE
+task. In particular, it investigates the following
+aspects: i) the use of artificially-created post-
+edited data to train the neural models, ii) the log-
+linear combination of monolingual and bilingual
+models in an ensemble-like manner, iii) the ad-
+dition of task-specific features in the log-linear
+model to control the final output quality. Con-
+cerning the data, in addition to the official train-
+ing and development material, the system exploits
+the English-German bilingual training material re-
+leased for the IT-domain and news translation
+shared tasks. The German monolingual common
+crawl corpus admissible for these two tasks is also
+exploited. This data is used by a “round-trip trans-
+lation” approach aimed to artificially create the
+huge amount of triples needed to train the neu-
+ral models. Such models are attentional encoder-
+decoder models (Bahdanau et al., 2014) trained
+with subword units (Sennrich et al., 2015) in or-
+der to deal with the limited ability of neural trans-
+lation models to handle out-of-vocabulary words.
+They include both monolingual models trained to
+translate from TGT to PE, and cross-lingual mod-
+els trained to translate from SRC to PE. An en-
+semble is obtained through their log-linear combi-
+nation with empirically-set weights (higher for the
+
+177
+
+
+
+ID Participating team
+AMU Adam Mickiewicz University, Poland (Junczys-Dowmunt and Grundkiewicz, 2016)
+CUNI Univerzita Karlova v Praze, Czech Republic (Libovický et al., 2016)
+DCU Dublin City University, Ireland
+FBK Fondazione Bruno Kessler, Italy (Chatterjee et al., 2016)
+JUSAAR Jadavpur University, India & Saarland University, Germany
+USAAR Saarland University, Germany (Pal et al., 2016)
+
+Table 33: Participants in the WMT16 Automatic Post-editing task.
+
+TGT-to-PE model). Finally, a task-specific feature
+based on string matching is added to the log-linear
+combination to control the faithfulness of the APE
+results with regard to the input. This is done by
+penalizing words in the output that do not appear
+in the input to be corrected.
+
+Univerzita Karlova v Praze. Also this system
+is based on the neural translation model with atten-
+tion proposed by Bahdanau et al. (2014) and ex-
+tends it to include multiple encoders able to man-
+age different input representations. Each encoder
+is a bidirectional RNN that takes in input a one-
+hot vector for each representation of a word. The
+decoder is an RNN which receives an embedding
+of the previously produced word as an input in ev-
+ery time step together with the hidden state from
+the previous time step. The RNNs output is then
+used to compute the attention and the next word
+distribution. The attention is computed over each
+of the encoders separately. The initial state of the
+decoder is obtained by a weighted combination of
+the encoders final states. To improve the capability
+of the network to focus on the edits made by the
+post-editors, the target sentence is converted in the
+minimum-length sequence of edit operations per-
+formed on the machine-translated sentence. For
+this purpose, the network vocabulary is extended
+adding two more tokens (keep and delete) and the
+new representation is made of a sequence of keep,
+delete and insert operations, where the insert op-
+eration is defined by placing the word itself. The
+different inputs used for the APE task submission
+are the source sentence and its translation into the
+target language and the sequence of edits. The
+network is trained using only the task data. To
+better handle the complexity of the German target
+language, different language-dependent pre- and
+post-processing are used, in particular, splitting
+the contracted prepositions and articles and sep-
+arating some pronouns from their case ending.
+
+Dublin City University. This system is de-
+signed as an automatic rule learning system. It
+considers four types of editings, i.e. replace-
+ment, deletion, insertion and reordering, as gener-
+alized replacement (GR) editings. GR editings are
+learned from aligning words in source and target
+sentences and records replacement pairs and their
+corresponding contexts for each source and target
+sentence pair. When the source word is empty,
+it is of an insertion editing; similarly, when the
+target word is empty, it is of a deletion editing.
+When the source words and target words in a GR
+editing both comprise the same set of words but
+with different orderings, it is of a reordering edit-
+ing. The word-based GR editings and their gener-
+alization which uses POSs to replace their context
+words, comprise the whole rule set of GR editings.
+There is no linguistic knowledge incorporated in
+the system, which therefore can be applied to any
+language for post-editing purposes. Three things
+are learned from the training set, 1) the GR rules,
+2) the precedence ordering of these rules, and 3)
+the maximum number of rules to be applied to
+a sentence. For each set of GR rules, the prece-
+dence ordering can be ranked based on the counts
+of replacement words, the counts of their context
+words, the lengths of GR editings, the number
+of occurrences of GR editings observed in train-
+ing set and/or their combinations. In the training
+phase, given a set of GR rules, the system will ap-
+ply the rules to the training set using different set-
+tings of precedence ordering and maximum num-
+ber of rules to be applied for each sentence. The
+system is trained when one setting is selected if
+the system yields the best overall post-edited re-
+sults by applying that setting. In the test phase,
+the GR rules will be applied to each sentence in
+the test set using the trained precedence ordering
+and stop when the maximum number of rules to be
+applied is met for that sentence.
+
+178
+
+
+
+Fondazione Bruno Kessler. This system com-
+bines the monolingual statistical approaches pre-
+viously exploited in Chatterjee et al. (2015a) with
+a factored machine translation model that is able to
+leverage benefits from both. One is the monolin-
+gual statistical translation approach proposed by
+Simard et al. (2007). The other is the context-
+aware variant proposed by Béchara et al. (2011).
+The former is more robust and it better general-
+izes the learned post-editing rules. The latter is
+prone to data sparsity, word alignment and tun-
+ing problems due to its richer representation of
+the terms. Nevertheless, by integrating knowl-
+edge about the source context in the learned rules,
+its precision is a good complement to the higher
+recall of (Simard et al., 2007). By enabling a
+straightforward integration of additional annota-
+tion (factors) at the word-level, factored transla-
+tion models (Koehn and Hoang, 2007) are used
+to leverage such complementarity. In the FBK
+system they include part-of-speech-tag and class-
+based neural language models (LM) along with
+statistical word-based LM to improve the fluency
+of the post-edits. These models are built upon
+a data augmentation technique (i.e. the exten-
+sion of the monolingual parallel corpus with the
+post-edits available in the training data), which
+helps to mitigate the problem of over-correction
+in phrase-based APE systems. One of the submit-
+ted runs incorporates a quality estimation model
+(C. de Souza et al., 2013, 2014), which aims to
+select the best translation between the MT output
+and the automatic post-edit.
+
+Jadavpur University & Saarland University.
+This system contains three basic components: sta-
+tistical APE, word deletion model and word sur-
+face form correction model. The final generated
+translation is the product of a multi-engine re-
+ranking system. The statistical APE component
+is based on the phrase-based APE approach of Pal
+et al. (2015). MT outputs generally contain four
+types of errors: presence of unwarranted words,
+wrong word surface form, absence of some rele-
+vant words, and wrong word order. The system
+tries to address the first two types of errors. The
+word deletion model is based on source language
+context modelling and target language word dele-
+tion frequency in the training data. The surface
+form correction model tries to fix the morphologi-
+cal errors by generating all possible surface forms
+for each root word present in the MT output and
+
+to select the most likely sequence of word sur-
+face forms by applying a language model. The
+word deletion model and the word surface form
+correction model are applied to all the APE out-
+puts. Finally, the generated translation candidates
+are ranked using a ranking algorithm based on
+language model information and a length-based
+heuristic. The top ranked output is chosen as the
+final APE output.
+
+Saarland University. This system combines the
+Operation Sequence Model (OSM) (Durrani et al.,
+2011) with the classic phrase-based statistical MT
+(PB-SMT) approach. The OSM-APE method rep-
+resents the post-edited translation process as a lin-
+ear sequence of operations such as lexical genera-
+tion of post-edited translation and their orderings.
+The translation and reordering decisions are con-
+ditioned on n previous translation and reordering
+decisions. This technique is able to model both lo-
+cal and long-range reorderings that are quite useful
+when dealing with the German language. To im-
+prove the capability of choosing the correct edit to
+process, eight new features are added to the log-
+linear model. These features capture the cost of
+deleting a phrase and different information on pos-
+sible gaps in reordering operations. The monolin-
+gual alignments between the MT outputs and their
+post-edits are computed using different methods
+based on TER, METEOR (Snover et al., 2006) and
+Berkeley Aligner (Liang et al., 2006). Only the
+task data is used for these submissions.
+
+7.3 TER/BLEU results
+
+The official TER and BLEU results achieved by
+participants are reported in Table 34. The sub-
+mitted runs are sorted based on the average (case-
+sensitive) TER measured on test data, which was
+this year’s primary evaluation metric.
+
+Looking at the performance of the two base-
+lines, i.e. the raw MT output (Baseline) and the
+basic statistical APE approach of Simard et al.
+(2007), the latter outperforms the former with both
+metrics. This indicates that, under this year’s
+evaluation conditions, the MT outputs could be
+improved by learning from human post-editors’
+work.
+
+Differently from the pilot task (Bojar et al.,
+2015), in which none of the runs was able to beat
+the baselines, this year half of the participants
+achieved this goal by producing automatic post-
+edited sentences that result in lower TER (with a
+
+179
+
+
+
+ID Avg. TER BLEU
+AMU Primary 21.52 67.65
+AMU Contrastive 23.06 66.09
+FBK Contrastive 23.92 64.75
+FBK Primary 23.94 64.75
+USAAR Primary 24.14 64.10
+USAAR Constrastive 24.14 64.00
+CUNI Primary 24.31 63.32
+(Simard et al., 2007) 24.64 63.47
+Baseline 24.76 62.11
+DCU Contrastive 26.79 58.60
+JUSAAR Primary 26.92 59.44
+JUSAAR Contrastive 26.97 59.18
+DCU Primary 28.97 55.19
+
+Table 34: Official results for the WMT16 Automatic Post-
+editing task – average TER (↓), BLEU score (↑).
+
+maximum of -3.24 points) and higher BLEU score
+(up to +5.54 points). All differences with respect
+to such baselines are statistically significant. This
+suggests that the correction patterns learned from
+the data were reliable enough to allow most sys-
+tems to effectively correct the original MT output.
+
+The obvious question is whether the improve-
+ments observed this year are due to the new data
+set (i.e. domain-specific texts and professional
+post-edits) or to a real technology jump (i.e. the
+use of neural end-to-end APE systems, factored
+or operational sequential models). A partial an-
+swer is given by the performance of the approach
+of Simard et al. (2007), which we run on the data
+of both rounds of the APE task with the same im-
+plementation. Although its results on the two test
+sets are difficult to compare (also due to the differ-
+ent language setting), the overall TER scores and
+the relative distances with respect to the other sub-
+mitted runs can give us some indications.
+
+First of all, on the pilot test set, the basic statis-
+tical APE method damaged the original MT out-
+put quality, with a TER reduction of about 1 point.
+On this year’s data it achieves a small improve-
+ment (though statistically significant only in terms
+of BLEU). This suggests that, as hypothesized in
+Section 7.1.1, the higher repetitiveness featured by
+the selected data can facilitate the work of the APE
+systems. The new scenario, with repetition rates
+for SRC, TGT and PE that are more than twice the
+values measured last year (see Table 32), makes
+them able to learn from the training data a larger
+number of reliable and re-applicable correction
+patterns. However, the large improvements ob-
+
+tained this year by the top runs can only be reached
+by moving from the basic statistical MT backbone
+shared by all last year’s participants to new and
+more reliable APE solutions. Indeed, its distance
+from the top-ranked systems has increased from
+0.6 up to 3.12 TER points. While on one side it
+is true that the new data made the task easier, on
+the other side the deployed solutions and the in-
+creased results’ distance over the basic statistical
+APE approach indicate a significant step forward.
+
+In terms of TER and BLEU evaluations, there
+are minor differences (only for the lower ranked
+systems) between the two rankings. This confirms
+that both metrics capture similar linguistic phe-
+nomena and the use of n-grams does not show par-
+ticular advantages.
+
+7.4 System/performance analysis
+
+Differently from the pilot round, in which TER re-
+sults were more concentrated (the difference be-
+tween the top and the lowest ranked system was
+about 1.5 points), this year systems’ performance
+is distributed within an interval of about 7.5 points.
+Indeed, the two rankings of Table 34 can be seen
+as composed of three blocks: the best system,
+the systems scoring around the baselines and the
+lower performing systems. Trying to go beyond
+rough TER/BLEU measurements and to shed light
+on such performance differences, in this section
+we focus on a more fine-grained analysis of sys-
+tems’ behaviour and the corresponding errors.

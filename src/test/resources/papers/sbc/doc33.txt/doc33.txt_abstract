@@ -1,0 +1,28 @@
+
+Proceedings of the First Conference on Machine Translation, Volume 2: Shared Task Papers, pages 639–645,
+Berlin, Germany, August 11-12, 2016. c©2016 Association for Computational Linguistics
+
+Attention-based Multimodal Neural Machine Translation
+
+Po-Yao Huang, Frederick Liu, Sz-Rung Shiang, Jean Oh†, Chris Dyer
+Language Technologies Institute, Robotics Institute†
+
+Carnegie Mellon University
+Pittsburgh, PA, USA
+
+{poyaoh|fliu1|sshiang|cdyer}@cs.cmu.edu, jeanoh@nrec.ri.cmu.edu†
+
+Abstract
+
+We present a novel neural machine trans-
+lation (NMT) architecture associating vi-
+sual and textual features for translation
+tasks with multiple modalities. Trans-
+formed global and regional visual features
+are concatenated with text to form attend-
+able sequences which are dissipated over
+parallel long short-term memory (LSTM)
+threads to assist the encoder generating a
+representation for attention-based decod-
+ing. Experiments show that the proposed
+NMT outperform the text-only baseline.

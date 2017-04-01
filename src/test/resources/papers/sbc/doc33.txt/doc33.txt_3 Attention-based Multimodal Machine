@@ -1,0 +1,48 @@
+Translation
+
+Based on the encoder-decoder framework, the
+attention-based model aim to handle the missing
+order and source information problems in the basic
+encoder-decoder framework. At each time step t
+in the decoding phrase, the attention-based model
+attends to subsets of words in the source sentences
+that can form up the context which can help the de-
+coder to predict the next word. This model infers a
+variable-length alignment weight vector at based
+on the current target state ht and all source states
+hs. The context feature vector ct = at · hs is the
+weighted sum of the source states hs according to
+at, which is defined as:
+
+at(s) =
+escore(ht,hs)∑′
+s e
+
+score(ht,h′s)
+(1)
+
+The scoring function score(ht,hs) can be re-
+
+ferred as a content-based measurement of the sim-
+ilarity between the currently translating target and
+the source words. We utilize a transformation ma-
+trix Wa which associates source and target hidden
+state to learn the general similarity measure by:
+
+score(ht,hs) = htWahs (2)
+
+We produce an attentional hidden state ĥt by
+learning Wc of a single layer perceptron activated
+by tanh. The input is simply the concatenation
+of the target hidden state ht and the source-side
+context vector ct:
+
+ĥt = tanh(Wc[ct;ht]) (3)
+
+After generating the context feature vector and
+the attentional hidden state, the target word is
+predicted through the softmax layer with the at-
+tentional hidden state ht vector by p(yt|x) =
+softmax(Wsĥt). The following we will intro-
+duce how we incorporate images features based on
+the attention models.

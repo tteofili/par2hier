@@ -1,0 +1,170 @@
+
+We now describe modifications that we apply on
+top of the baseline. The results of the empirical
+evaluation will be given in Section 3.
+
+Linear LM interpolation vs. individual LMs as
+features in the log-linear combination. Rather
+than employing a linearly interpolated LM, we in-
+tegrate the individual LMs trained over the sepa-
+rate corpora (news2015, Europarl, SETimes2) di-
+rectly into the log-linear feature combination of
+the system and let MIRA optimize their weights
+along with all other features in tuning.
+
+Background LM. We add one more language
+model, which we denote as background LM. The
+background LM is estimated from a concatenation
+of the Romanian news2015, Europarl, and SE-
+Times2 training data. The background LM does
+not replace the individual LMs in the log-linear
+combination, but acts as another feature with an
+associated weight.
+
+CommonCrawl LM training data. A large Ro-
+manian CommonCrawl corpus has been released
+for the constrained track of the WMT16 shared
+task for machine translation of news. In our sys-
+tem, we utilize this corpus by adding it to the
+training data of the background LM. We append
+it to the concatenation of news2015, Europarl, and
+SETimes2 data and estimate a bigger background
+LM.
+
+6Pruned individual LMs are trained with KenLM’s
+--prune '0 0 1' parameters. Weights for linear LM in-
+terpolation are optimized on newsdev2016_1.
+
+313
+
+
+
+Pruned vs. unpruned LMs. We compare
+pruned and unpruned language models. In the
+pruned versions of the models, singleton n-grams
+of order three and higher are discarded, whereas
+all n-grams are kept in the unpruned versions.
+
+More hierarchical rules. The baseline syn-
+chronous context-free grammar rules in the phrase
+table are extracted from the parallel training data
+with Moses’ default settings: a maximum of five
+symbols on the source side, a maximum span of
+ten words, and no right-hand side non-terminal at
+gaps that cover only a single word on the source
+side. We allow for extraction of more hierarchical
+rules by applying less strict rule extraction con-
+straints: a maximum of ten symbols on the source
+side, a maximum span of twenty words, and no
+lower limit to the amount of words covered by
+non-terminals at extraction time.
+
+Phrase orientation model. We implemented a
+feature in Moses that resembles the phrase ori-
+entation model for hierarchical machine transla-
+tion as described by Huck et al. (2013). The Huck
+et al. (2013) implementation had been released as
+part of the Jane toolkit (Vilar et al., 2010; Vi-
+lar et al., 2012; Huck et al., 2012). Our new
+Moses implementation technically operates in al-
+most the same manner, except for minor imple-
+mentation differences. Similarly to the type of
+lexicalized reordering models that are in common
+use in phrase-based systems (Galley and Manning,
+2008), our model estimates the probabilities of ori-
+entation classes for each phrase (or: rule) from
+the training data. We use three orientation classes:
+monotone, swap, and discontinuous.7
+
+Lightly-supervised training. We automatically
+translated parts (1.2 M sentences) of the mono-
+lingual Romanian news2015 corpus to English
+with a Romanian→English phrase-based statisti-
+cal machine translation system (Williams et al.,
+2016). The resulting synthetic parallel corpus
+of the original Romanian news texts paired with
+machine-translated English counterparts is uti-
+lized for lightly-supervised training (Schwenk,
+2008) of our English→Romanian hierarchical sys-
+tem.
+
+7Using Moses’ Experiment Management System (EMS)
+(Koehn, 2010), the phrase orientation model for hierarchical
+machine translation can be activated by simply adding a line
+phrase-orientation = true to the [TRAINING]
+section of the EMS configuration file.
+
+We follow the approach outlined by Huck et al.
+(2011) to augment the system with the synthetic
+parallel data. A foreground phrase table extracted
+from the human-generated parallel data is filled up
+with entries from a background phrase table ex-
+tracted from the synthetic parallel data. An en-
+try from the background table is only added if the
+foreground table does not already contain a sim-
+ilar entry (Bisazza et al., 2011). A binary fea-
+ture distinguishes background phrases from fore-
+ground phrases. For the background phrase ta-
+ble, we extract only lexical phrases (i.e., phrases
+without non-terminals on their right-hand side)
+from the synthetic parallel data, no hierarchical
+phrases. The phrase length for entries of the back-
+ground table is restricted to a maximum number of
+five terminal symbols on the source side. Lexical
+scores over the phrases extracted from synthetic
+data are calculated with a lexicon model learned
+from the human-generated parallel data, as pro-
+posed by Huck and Ney (2012).
+
+Larger development data. Since no dedicated
+unseen test set was available during system build-
+ing, newsdev2016 was split into its first half
+(newsdev2016_1) and its second half (news-
+dev2016_2) so that we could tune on the first half
+and keep the second half untouched for evaluat-
+ing progress in translation quality with the vari-
+ous enhancements. For the final system (our pri-
+mary submission), we took the best configuration
+built in this manner and tuned it on both halves,
+i.e. all of newsdev2016. 1000 sentences (as in
+newsdev2016_1) are a relatively small size for a
+development set, and we suspected that the op-
+timized feature weights could become more reli-
+able with twice the amount of development data.8
+
+Good results when tuning on newsdev2016_1 and
+testing on newsdev2016_2 made us feel confi-
+dent about keeping the overall system configura-
+tion fixed and re-tuning the feature weights on all
+of newsdev2016. We calculated the BLEU scores
+on newsdev2016_1 and newsdev2016_2 (both be-
+ing part of the development set now) as a sanity
+check and then submitted a hypothesis translation
+for the evaluation set, newstest2016, without fur-
+ther internal validation on a test set.
+
+8Whenever available, we typically attempt to use large de-
+velopment sets (in the order of a few thousand sentences),
+e.g. for Edinburgh’s phrase-based systems for the German–
+English language pair (Haddow et al., 2015).
+
+314
+
+
+
+en→ro newsdev2016_1 newsdev2016_2 newstest2016
+
+baseline with interpolated LM over news2015, Europarl, SETimes2 22.1 26.6 23.0
++ three individual LMs (replacing the interpolated LM) 21.6 26.6 22.9
++ background LM over concatenation of news2015, Europarl, SETimes2 22.2 27.1 23.3
++ CommonCrawl LM training data in background LM 23.1 28.3 24.4
++ all LMs unpruned 23.4 28.6 24.4
++ more hierarchical rules 23.1 29.0 24.7
++ phrase orientation model 24.4 29.5 25.5
++ lightly-supervised training (contrastive submission system) 24.8 30.2 25.5
++ tuning on full newsdev2016 (primary submission system) 24.5 30.9 25.9
+
+Table 1: Incremental improvements over a plain hierarchical phrase-based baseline for
+English→Romanian (case-sensitive BLEU scores). Feature weights are tuned on newsdev2016_1 in
+all experiments except the one in the bottom line, where both newsdev2016_1 and newsdev2016_2 are
+employed for tuning.

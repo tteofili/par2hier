@@ -1,0 +1,32 @@
+AF •
+B •
+J •
+H •
+
+Both examples would be reduced to the following
+set of pairwise judgments:
+
+A > B,A = F,A > H,A < J
+
+B < F,B < H,B < J
+
+F > H,F < J
+
+H < J
+
+Here, A > B should be read is “A is ranked
+higher than (worse than) B”. Note that by this pro-
+cedure, the absolute value of ranks and the mag-
+nitude of their differences are discarded. In the
+
+5Technically, another distinct output would have been in-
+serted, if possible, so as to present the annotator with five, but
+we ignore that for illustration purposes.
+
+case of multi-system outputs, this set of pairwise
+rankings would have been produced with less an-
+notator effort. This productivity gain grows in the
+number of systems that produce identical output,
+and this situation is quite common, due in part to
+the fact that many systems are built on the same
+underlying technology. Table 3 has more details.

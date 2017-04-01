@@ -1,0 +1,8 @@
+We used the following data for training the SMT baseline systems.
+
+• Training data for the language model: All of the target language sentences in the parallel corpus.
+• Training data for the translation model: Sentences that were 40 words or less in length. (For ASPEC
+Japanese–English training data, we only used train-1.txt, which consists of one million parallel
+sentence pairs with high similarity scores.)
+
+• Development data for tuning: All of the development data.

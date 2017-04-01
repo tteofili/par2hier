@@ -1,0 +1,12 @@
+
+The results of the NYU-MILA system is presented
+in Table 1. The character-level decoding works
+well on most of the languages that are tested,
+achieving comparable BLEU-c scores to other ap-
+proaches using words or subwords (BPE) as to-
+kens. Note that our system does not incorporate
+extra monolingual training corpus, and does not
+include any kind of postprocessing e.g., reranking.
+
+1We used the multi-bleu.perl script from Moses during
+training and internal evaluation.

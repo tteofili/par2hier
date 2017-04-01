@@ -1,0 +1,78 @@
+
+We transliterated the lemmatized forms of all
+Russian words whose surface forms are out-of-
+vocabulary, regardless of whether their lemma-
+tized forms occurred in either the standard or the
+lemmatized phrase tables. Transliterations were
+encoded as translation rules with multiple scored
+alternatives, similar to the approach found to be
+optimal by Durrani et al. (2014). We experimented
+with letting transliterations compete with trans-
+lations of lemmatized forms from the phrase ta-
+ble when available, but found that using only the
+transliteration rules for OOVs resulted in slightly
+higher BLEU scores.
+
+Transliterations were produced by two versions
+of our Portage PBMT system trained to map Cyril-
+lic character sequences into Latin ones. Words
+containing more than 2 characters, all of which
+were either alphabetic or hyphens, and at least one
+of which was non-ASCII, were transliterated with
+a standard system; others (about 20% of OOVs)
+were transliterated using a backoff system.
+
+The standard transliteration system was trained
+on parallel corpora consisting of the wiki-guessed-
+names and wiki-guessed-patronymic-names cor-
+pora,2 with first and last names split into sepa-
+rate entries; and additionally on 200K transliter-
+ated word pairs mined from the parallel corpora as
+described below. Two character 6-gram language
+models were trained on all word types from the
+English side of the parallel corpora, and from the
+English Gigaword. The standard system used KN
+smoothing for phrase probabilities and an indica-
+
+1We experimented with log-linear and backoff combina-
+tions, but these did not perform as well.
+
+2Both corpora are provided as part of the official WMT
+2016 Russia-to-English training data.
+
+5 runs ave. best run
+System dev test
+word-aligned baseline 35.3 28.0 28.1
+lemma-aligned baseline 35.3 28.2 28.3
++ lemma NNJM 36.1 28.7 28.8
++ word NNJM 36.3 28.8 28.8
++ NNLTM 36.3 28.8 28.9
++ fallback lemma table 36.8 29.1 29.2
++ transliteration 37.0 29.2 29.3
++ rescoring – – 29.7
+
+Table 1: Selected results from our development
+experiments.
+
+tor feature on phrase pairs from the mined corpus.
+The backoff system was intended to enforce a
+
+more literal style of transliteration appropriate for
+non-words. It was trained only on the guessed-
+*names corpora, with a phrase length limit of 3
+and a restriction to monotonic translation.
+
+We used a semi-supervised approach to mine
+transliterated word pairs from the parallel cor-
+pora, loosely modeled on the work of Sajjad et
+al. (2012). We first extracted candidate pairs from
+one-to-one word alignments where both words
+were longer than 2 characters and contained only
+alphabetic characters. Next we scored each can-
+didate pair e, f using the formula log p(e|f) +
+log p(f |e)−log pn(e, f), where p(e|f) and p(f |e)
+are probabilities from (character-wise) HMM
+models trained on the guessed-*names corpora,
+and pn(e, f) = pn(e)pn(f) is a character unigram
+model. Finally, we ranked all candidates by de-
+scending score and retained the top 200K.

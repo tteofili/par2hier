@@ -1,0 +1,40 @@
+
+Table 4 presents the final results for the Crosslin-
+gual Image Description task. Meteor is the pri-
+mary evaluation measure because it has been
+shown to have a much stronger correlation with
+human judgements than BLEU or TER for this
+task (Elliott and Keller, 2014). The data for this
+task was lowercased and had punctuation removed
+where necessary.
+
+The strongest performing constrained submis-
+sion (LIUM 2 TextNMT C) does not use any
+visual features. Including multimodal features
+(i.e., LIUM 2 MultimodalNMT C) results in a 2.8
+Meteor drop in performance for that model type.
+The baseline system 2 GroundedTranslation C
+outperformed all but these two systems. In gen-
+eral, there is a wide range of performances, and an
+intriguing discrepancy between Meteor and BLEU
+rankings. This discrepancy was much larger than
+the one observed in Task 1, where the overall rank-
+ing trend for all metrics is similar. We believe the
+difference between metrics in Task 2 is due to the
+different ways in which these metrics use multi-
+ple references (which are only available for Task
+2). While Meteor (and TER) will match the single
+closest reference (the entire sentence) to the sys-
+tem output, BLEU allows n-grams from different
+references to be used for its n-gram matching.
+
+Only two groups submitted uncon-
+strained runs, marked in grey and with
+U in Table 4. The IBM-IITM-Montreal-
+
+NYU 2 NeuralTranslation U submission resulted
+in a small improvement over the IBM-IITM-
+Montreal-NYU 2 NeuralTranslation C submis-
+sion, but the UPC 2 MNMT U resulted in a small
+decrease compared to the analogous constrained
+submission UPC 2 MNMT C.

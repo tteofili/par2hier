@@ -1,0 +1,35 @@
+
+Proceedings of COLING 2016, the 26th International Conference on Computational Linguistics: System Demonstrations,
+pages 35–39, Osaka, Japan, December 11-17 2016.
+
+MuTUAL: A Controlled Authoring Support System
+Enabling Contextual Machine Translation
+
+Rei Miyata
+The University of Tokyo
+
+rei@p.u-tokyo.ac.jp
+
+Cécile Paris
+Data61, CSIRO
+
+Anthony Hartley
+Rikkyo University
+
+Masao Utiyama
+NICT
+
+Kyo Kageura
+The University of Tokyo
+
+Eiichiro Sumita
+NICT
+
+Abstract
+
+The paper introduces a web-based authoring support system, MuTUAL, which aims to help
+writers create multilingual texts. The highlighted feature of the system is that it enables machine
+translation (MT) to generate outputs appropriate to their functional context within the target doc-
+ument. Our system is operational online, implementing core mechanisms for document structur-
+ing and controlled writing. These include a topic template and a controlled language authoring
+assistant, linked to our statistical MT system.

@@ -1,0 +1,16 @@
+We used the Berkeley parser to obtain target language syntax. We used the followingMoses configuration
+for the string-to-tree syntax-based SMT system.
+
+• max-chart-span = 1000
+• Phrase score option: GoodTuring
+• Phrase extraction options: MaxSpan = 1000, MinHoleSource = 1, and NonTermConsecSource.
+
+The default values were used for the other system parameters.
+8http://nlp.ist.i.kyoto-u.ac.jp/EN/index.php?JUMAN
+9http://nlp.stanford.edu/software/segmenter.shtml
+10https://bitbucket.org/eunjeon/mecab-ko/
+11https://bitbucket.org/anoopk/indic nlp library
+
+6
+
+

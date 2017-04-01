@@ -1,0 +1,122 @@
+
+We have presented the NRC submission to the
+WMT 2016 Russian-English news translation
+task. The key contributions of our system in-
+clude 1) using Russian lemmas to improve word
+alignment while using the original Russian words
+to preserve case information in different models;
+2) the incorporation of NNJMs and NNLTM; 3)
+a fallback Russian lemma phrase table for Rus-
+sian OOVs and 4) a semi-supervised transliter-
+ation model built on a seed corpus mined from
+
+the standard parallel training data. Our system
+achieved the highest uncased BLEU, the second
+highest cased BLEU and the lowest TER scores
+among the eight participants in WMT 2016, and
+ranked third out of ten systems in the human eval-
+uation.
+
+References
+
+Colin Cherry and George Foster. 2012. Batch Tun-
+ing Strategies for Statistical Machine Translation. In
+Proc. 2012 Conf. of the N. American Chapter of the
+Association for Computational Linguistics: Human
+Language Technologies, pages 427–436, Montréal,
+Canada.
+
+Colin Cherry. 2013. Improved reordering for phrase-
+based translation using sparse features. In Proceed-
+ings of NAACL HLT 2013.
+
+Jacob Devlin, Rabih Zbib, Zhongqiang Huang, Thomas
+Lamar, Richard Schwartz, and John Makhoul. 2014.
+Fast and robust neural network joint models for
+statistical machine translation. In Proceedings of
+the Annual Meeting of the Association for Compu-
+tational Linguistics, pages 1370–1380, Baltimore,
+Maryland, June.
+
+Nadir Durrani, Hassan Sajjad, Hieu Hoang, and Philipp
+Koehn. 2014. Integrating an unsupervised translit-
+eration model into statistical machine translation. In
+EACL, pages 148–153.
+
+Ahmed El Kholy and Nizar Habash. 2012. Ortho-
+graphic and morphological processing for english–
+arabic statistical machine translation. Machine
+Translation, 26(1):25–45.
+
+331
+
+
+
+George Foster, Boxing Chen, Eric Joanis, Howard
+Johnson, Roland Kuhn, and Samuel Larkin. 2009.
+PORTAGE in the NIST 2009 MT Evaluation. Tech-
+nical report, NRC-CNRC.
+
+Mark Hopkins and Jonathan May. 2011. Tuning as
+ranking. In Proceedings of the Conference on Em-
+pirical Methods in Natural Language Processing,
+pages 1352–1362. Association for Computational
+Linguistics.
+
+Liang Huang and David Chiang. 2007. Forest Rescor-
+ing: Faster Decoding with Integrated Language
+Models. In Proc. 45th Annual Meeting of the As-
+soc. for Comp. Linguistics, pages 144–151, Prague,
+Czech Republic.
+
+Samuel Larkin, Boxing Chen, George Foster, Uli Ger-
+mann, Eric Joanis, J. Howard Johnson, and Roland
+Kuhn. 2010. Lessons from NRC’s portage system
+at WMT 2010. In 5th Workshop on Statistical Ma-
+chine Translation.
+
+Franz Josef Och, Daniel Gildea, Sanjeev Khudanpur,
+Anoop Sarkar, Kenji Yamada, Alexander M Fraser,
+Shankar Kumar, Libin Shen, David Smith, Kather-
+ine Eng, Viren Jain, Zhen Jin, and Radev Dragomir.
+2004. A smorgasbord of features for statistical ma-
+chine translation. In Proceedings of the Human Lan-
+guage Technology Conference of the North Ameri-
+can Chapter of the Association for Computational
+Linguistics: HLT-NAACL 2004, pages 161–168.
+
+Franz Josef Och. 1999. An efficient method for de-
+termining bilingual word classes. In Proceedings of
+the Conference of the European Chapter of the As-
+sociation for Computational Linguistics (EACL).
+
+Hassan Sajjad, Alexander Fraser, and Helmut Schmid.
+2012. A statistical model for unsupervised and
+semi-supervised transliteration mining. In Proceed-
+ings of the 50th Annual Meeting of the Associa-
+tion for Computational Linguistics: Long Papers-
+Volume 1, pages 469–477. Association for Compu-
+tational Linguistics.
+
+Ilya Segalovich. 2003. A fast morphological algorithm
+with unknown word guessing induced by a dictio-
+nary for a web search engine. In Proc. of MLMTA-
+2003, Las Vegas, US.
+
+Darlene Stewart, Roland Kuhn, Eric Joanis, and
+George Foster. 2014. Coarse “split and lump” bilin-
+gual language models for richer source information
+in SMT. In Proceedings of the Eleventh Confer-
+ence of the Association for Machine Translation in
+the Americas (AMTA), volume 1, pages 28–41.
+
+Ashish Vaswani, Yinggong Zhao, Victoria Fossum, and
+David Chiang. 2013. Decoding with large-scale
+neural language models improves translation. In
+Proceedings of the 2013 Conference on Empirical
+Methods in Natural Language Processing (EMNLP
+2013), pages 1387–1392.
+
+332
+
+

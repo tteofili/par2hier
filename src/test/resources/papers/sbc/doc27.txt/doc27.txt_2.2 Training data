@@ -1,0 +1,26 @@
+
+As in past years we provided parallel corpora to
+train translation models, monolingual corpora to
+train language models, and development sets to
+tune system parameters. Some training corpora
+were identical from last year (Europarl3, United
+Nations, French-English 109 corpus, Common
+Crawl, Russian-English parallel data provided by
+Yandex, Wikipedia Headlines provided by CMU)
+and some were updated (CzEng v1.6pre (Bojar
+et al., 2016a), News Commentary v11, monolin-
+gual news data).
+
+We added a few new corpora:
+
+• Romanian Europarl (Koehn, 2002)
+• SETIMES2 from OPUS for Romanian–
+
+English and Turkish–English (Tiedemann,
+2009)
+• Monolingual data sets from CommonCrawl
+
+(Buck et al., 2014)
+
+Some statistics about the training materials are
+given in Figure 1.

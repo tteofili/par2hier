@@ -1,0 +1,41 @@
+
+Neural machine translation has a short history of only a few
+years. [Kalchbrenner and Blunsom, 2013; Cho et al., 2014]
+first propose to use the encoder-decoder architecture to do se-
+quence to sequence mapping. However, they only use it as
+an additional feature to evaluate the quality of phase pairs in
+traditional machine translation. At the same time, [Sutskever
+et al., 2014] apply it in end-to-end machine translation. Hav-
+ing considered using only a single vector to represent source
+sentences with variable lengths is not reasonable, [Bahdanau
+et al., 2015] propose the attention mechanism to dynamically
+attend to different source words when generating different tar-
+get words. [Luong et al., 2015a] propose to use local attention
+instead of global attention for improved speed and accuracy.
+
+Different to traditional machine translation, NMT model
+can only employ a small vocabulary due to computational
+complexity. The rare words problem has attracted a lot of
+
+3The word vectors learnt for words with only a few occurrences
+are not reliable.
+
+attention recently. Besides the work by [Luong et al., 2015b]
+which we compared in our paper, [Jean et al., 2015] pro-
+pose to directly use large vocabulary with a method based
+on importance sampling. As pointed out in their paper, their
+method is complementary and can be used together with re-
+placement methods.
+
+In traditional machine translation, although all vocabulary
+in the training set can be used for decoding, there are still a
+lot of out-of-vocabulary words during testing and they hurt
+the translation performance a lot. Most work [Fung and
+Cheung, 2004; Marton et al., 2009; Jiang et al., 2007] ad-
+dressing OOV problem focus on how to translate those OOV
+correctly during translation. They often resort to additional
+resources such as comparable data and synonym thesaurus.
+One notable exception is the work from [Zhang et al., 2012;
+2013], which also focuses on the syntactic and semantic role
+of those OOV and propose to replace OOV with similar words
+during testing.

@@ -1,0 +1,87 @@
+
+SWoRD2 was developed to support web-based re-
+ciprocal peer review, especially in large classes in-
+volving writing in the disciplines where writing and
+revision are hard to support due to lack of resources.
+A typical peer review exercise in SWoRD involves
+three main phases: (1) student authors submit pa-
+pers to SWoRD, (2) student reviewers download pa-
+pers assigned to them and submit peer reviews of
+the papers, and (3) student authors submit paper re-
+visions that address the peer reviews they received.
+To further enhance the utility of SWoRD, we have
+
+2SWoRD is now licensed by Panther Learning Systems Inc.
+– www.peerceptiv.com. A free version for users willing to trial
+instant feedback is available at https://sword.lrdc.pitt.edu.
+
+developed Instant-feedback SWoRD, with the goal
+of helping student reviewers increase the presence
+of solutions in the peer review comments produced
+during Phase 2 of the typical peer review exercise.
+
+Figures 2 and 1 illustrate technical details
+of Instant-feedback SWoRD. As in the original
+SWoRD, student reviewers create a new review ses-
+sion by opening the review interface (Figure 2,
+left). Now, however, whenever the SUBMIT button
+is clicked, the “text review input” is passed to the
+“Submission order check” (Figure 1, diamond #1).
+The submission order threshold3 specifies how many
+times a review will be processed for instant feedback
+(e.g., 0 means no instant feedback, 1 means only
+the original comments are analyzed, 2 means revised
+comments are also analyzed, etc.). If the threshold
+is not reached, each comment in the review is an-
+alyzed by the “Comment-level Solution Prediction
+Component” (see Section 3) and classified as a Solu-
+tion, Problem-only, or Non-criticism. Problem-only
+comments point out problems without providing so-
+lutions, while Non-criticisms such as summaries or
+praise do not require solutions. To measure how
+many problem comments have solutions, we define
+S-RATIO as number of solution comments over the
+sum of solution and problem-only comments. If the
+predicted S-RATIO is less than or equal to a thresh-
+old4 (Figure 1, diamond #2), instant feedback is trig-
+
+3The deployment in Section 4 used a threshold of 1.
+4For the deployment in Section 4, S-RATIO was tuned to 0.7
+
+7
+
+
+
+gered to scaffold students in revising problem-only
+comments. Otherwise the review is deemed accept-
+able and stored for later use by Phase 3.
+
+When instant feedback is triggered, the instant
+feedback interface (Figure 2, right) displays a mes-
+sage at the top suggesting that comments may need
+to be revised to include solutions, followed by but-
+tons representing the 3 possible reviewer responses:
+revise the review and resubmit (left), view some pre-
+defined example comments with solutions before re-
+sponding (center), or submit the review without revi-
+sion (right). To call the reviewer’s attention to com-
+ments that might need revision, the interface turns
+text boxes around predicted problem-only comments
+to red (Figure 2, middle right). For these comments,
+the system also generates option buttons that ask re-
+viewers to provide feedback on the prediction. We
+hypothesized that asking students to reason about
+the absence of solutions in their own comments
+would promote review revision. Their feedback on
+the system’s predictions also provides new anno-
+tated examples for future re-training of the predic-
+tion model (described in Section 3). Conversely, the
+interface highlights predicted solution comments in
+green (Figure 2, bottom right) along with displaying
+a thumbs-up icon. This highlighting was designed
+to draw reviewer attention to examples of solutions
+in their own comments. Finally, for reviews that are
+revised and resubmitted, Instant-feedback SWoRD
+increases the submission order and re-checks the
+threshold (diamond #1 in Figure 1). Unrevised re-
+views are instead stored for Phase 3 of SWoRD.

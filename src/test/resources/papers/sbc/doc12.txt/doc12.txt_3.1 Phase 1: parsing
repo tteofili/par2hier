@@ -1,0 +1,17 @@
+
+In order to best represent the structure of the sen-
+tences we follow past examples and parse them
+into dependency trees. Dependency parsing has
+become recognised as providing a good balance
+between deep semantic analysis and simplicity
+of parsing procedure. First devised by Gaifman
+(1965), it uses a simplified semantic role analysis
+to link words by their dependency relations, pro-
+viding a bare-bones structural description of the
+
+sentences, which can then be compared.
+We used the dependency parsing framework
+
+provided by Python’s NLTK toolkit (Bird, 2006).
+This in turn wraps around the Java-implemented
+Malt parser (Nivre, 2003).

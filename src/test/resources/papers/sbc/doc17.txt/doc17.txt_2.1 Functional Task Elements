@@ -1,0 +1,17 @@
+
+DITA is an XML architecture for authoring and publishing technical information which supports struc-
+tured authoring to help writers compose a modularised chunk of information, called topic (Bellamy et al.,
+2012). A topic has a hierarchical structure of functional elements, i.e., elements which play certain com-
+municative roles within the documents, and, at the highest level, is composed of the common elements:
+Title, Short description, Prologue, Body and Related-links.
+According to topic types, DITA further defines more specific elements under the Body element. DITA
+
+provides by default several topic types such as Concept topic, Reference topic and Task topic. We focus
+here on the Task topic, which is designed for describing technical procedures, because what we are
+concerned is mainly municipal procedures. The left column in Table 1 shows the functional elements
+under the Body of Task topic (OASIS, 2010).
+Note that the functional elements of the Task topic as defined in DITA are still too coarse-grained to
+
+properly organise municipal procedures and specify detailed linguistic patterns for each element. How-
+ever, DITA allows for ‘specialisation’, so we undertook a genre analysis of actual municipal documents
+and assigned fine-grained sub-elements (the right column of Table 1).

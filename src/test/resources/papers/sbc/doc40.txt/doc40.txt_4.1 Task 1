@@ -1,0 +1,74 @@
+
+Table 4 shows the final results for the Multimodal
+Machine Translation task on the official test set,
+where systems are ranked by their Meteor scores.
+Meteor, BLEU and TER were computed based on
+the single reference (human translation) provided
+for the test set. For Meteor, we replaced the de-
+fault version by the latest version of the metric
+(Meteor Version 1.5). Both reference and system
+submissions were first normalised for punctuation.
+
+11https://github.com/jhclark/multeval
+
+548
+
+
+
+System submissions that preserved casing or had
+been tokenised were further processed for lower-
+casing and detokenisation.12 For all of these pre-
+processing steps, we used Moses scripts.13
+
+It is interesting to note that while the three eval-
+uation metrics do not fully agree on the ranking of
+participating systems, their overall Pearson’s cor-
+relation (English-German direction) is very high:
+0.98 between Meteor and BLEU, and -0.97 be-
+tween Meteor and TER.
+
+The three winning submissions from the LIUM
+and SHEF teams are heavily based on the output
+of a standard phrase-based SMT system (Moses)
+built using only the shared task data. This is a
+remarkable result, given the size of the dataset:
+29,000 parallel segments. They all use additional
+features to re-rank the k-best output of a text-only
+phrase-based system, including visual features, al-
+though these seem to play a minor role and lead to
+only marginally better results.
+
+Submissions based on the output of a Moses
+translation model – like the main baseline
+(1 en-de-Moses C) – have very similar Meteor
+scores. In fact, SHEF 1 en-de-Moses-rerank C
+and CMU+NTU 1 MNMT+RERANK U are not
+considered significantly different from this base-
+line Shah et al. (2016) provide some analysis
+on the differences between SHEF 1 en-de-Moses-
+rerank C and 1 en-de-Moses C. They show that
+the output of these systems differ in 260 out of the
+1,000 segments. However, despite differences in
+the actual translations, the Meteor scores for many
+of these cases may be the same/close.
+
+Disappointingly, truly multimodal systems,
+which in most cases use neural MT approaches
+(e.g. CUNI 1 MMS2S-1 C, DCU 1 min-risk-
+multimodal C) do not fare as well as the text-only
+SMT systems (or those followed by multimodal-
+based translation rescoring), except when addi-
+tional resources are used for rescoring translations
+(CMU 1 MNMT+RERANK U).
+
+Only two submissions made use of additional
+data (unconstrained submissions, U) and in both
+cases it proved helpful in comparison with the con-
+strained submissions by the same teams.
+
+12We note that MultEval does not perform any normali-
+sation of the segments. Scores with tokenised texts would be
+consistently higher.
+
+13https://github.com/moses-smt/mosesde
+coder/blob/master/scripts/

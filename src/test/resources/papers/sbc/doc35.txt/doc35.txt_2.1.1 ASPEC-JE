@@ -1,0 +1,15 @@
+The training data for ASPEC-JE was constructed by the NICT from approximately 2 million Japanese-
+English scientific paper abstracts owned by the JST. Because the abstracts are comparable corpora, the
+sentence correspondences are found automatically using the method from (Utiyama and Isahara, 2007).
+Each sentence pair is accompanied by a similarity score and the field symbol. The similarity scores are
+calculated by the method from (Utiyama and Isahara, 2007). The field symbols are single letters A-Z and
+show the scientific field for each document5. The correspondence between the symbols and field names,
+along with the frequency and occurrence ratios for the training data, are given in the README file from
+ASPEC-JE.
+The development, development-test and test data were extracted from parallel sentences from the
+
+Japanese-English paper abstracts owned by JST that are not contained in the training data. Each data
+set contains 400 documents. Furthermore, the data has been selected to contain the same relative field
+coverage across each data set. The document alignment was conducted automatically and only docu-
+ments with a 1-to-1 alignment are included. It is therefore possible to restore the original documents.
+The format is the same as for the training data except that there is no similarity score.

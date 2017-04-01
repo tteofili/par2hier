@@ -1,0 +1,34 @@
+Here, Treex is used in a more aggressive way, modifying the input and/or output to account for phenom-
+ena that the PB-SMT system is known not to be able to handle well (see Figure 8).
+
+9https://translate.google.com/
+10The 13th September 2016 version of the Treex repository, https://github.com/ufal/treex/
+11cu-plain Moses output downloaded from http://matrix.statmt.org/systems/show/2807, test set downloaded
+
+from http://matrix.statmt.org/test_sets/list.
+
+Figure 8: Moses with TectoMT pre- and post-processing
+
+6
+
+
+
+Figure 9: Two-headed Chimera
+
+Zeman (2010) used several pre-processing steps to make the source English text more similar to Czech,
+such as removing articles, marking subjects by artificial suffixes (“/Sb”), and reordering auxiliary verbs
+to neighbor their main verbs. Of course, the SMT system was also trained on texts preprocessed in that
+way; in these experiments, the Joshua PB-SMT system (Li et al., 2009) was used instead of Moses.
+This approach may seem too aggressive, prone to making the input noisier as well as being potentially
+lossy. However, the author showed that with careful selection and tuning of the pre-processing steps,
+a significant improvement of translation quality can be achieved; moreover, this was also confirmed on
+English-to-Hindi translation.
+
+Rosa et al. (2016) successfully apply Treex pre-processing and post-processing to Moses, but this time
+with the main objective being an adaptation of Moses trained on general-domain data to a specific domain
+(namely the domain of Information Technology). The authors use Treex to perform forced translation of
+identified named entities, using a named entity recognizer and a bilingual gazetteer, as well as forced non-
+translation of special structures (URLs, e-mail addresses, computer commands and filenames); Moses
+XML annotation is used to preserve the forcedly translated items.12 Apart from domain adaptation,
+simpler general Treex pre- and post-processing steps were also successfully used, such as projection of
+letter case in identical words from source to target.

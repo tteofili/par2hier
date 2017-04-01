@@ -1,0 +1,113 @@
+
+Results for all three runs described above are pre-
+sented in Table 1. Only the ensemble was sub-
+mitted to the human evaluation process, with a
+final ranking of second place (behind U. Edin-
+burgh’s ensemble of four independently initial-
+ized models). Our best single model matches
+the performance of the best model from U. Edin-
+burgh, which applies a similar attentional frame-
+work, subword splitting, and back-translated aug-
+mentation.
+
+The Y-LSTM model underperformed relative to
+the model based on Luong (2015), but provided
+a small additional boost to the ensemble. The
+primary contribution of this model is to demon-
+strate that purely attentional NMT is possible: the
+only inputs to the decoder are through the attention
+mechanism. This may be helpful for using transla-
+tion to build general attentional sentence encoding
+models, since the representation of the input sen-
+tence is entirely in the attentional encoding, not
+split between an attentional encoding vector and a
+vector representing the last timestep of the multi-
+layer encoder hidden state.
+
+Acknowledgements
+
+We would like to thank the developers of Chainer
+(Tokui et al., ), which we used for all models
+and experiments reported here. We also thank
+Stephen Merity, Kai Sheng Tai, and Caiming
+Xiong for their helpful feedback, and all partic-
+ipants in the manual evaluation campaign. We
+thank the Salesforce acquisition and IT teams for
+keeping the MetaMind compute cluster up and
+running throughout the acquisition process.
+
+References
+D. Bahdanau, K. Cho, and Y. Bengio. 2015. Neural
+
+machine translation by jointly learning to align and
+translate. In ICLR.
+
+K. Cho, B. van Merrienboer, D. Bahdanau, and Y. Ben-
+gio. 2014. On the properties of neural machine
+translation: Encoder-decoder approaches. CoRR,
+abs/1409.1259.
+
+J. Chung, C. Gulcehre, K. Cho, and Y. Bengio.
+2014. Empirical evaluation of gated recurrent neu-
+ral networks on sequence modeling. arXiv preprint
+arXiv:1412.3555.
+
+Çaglar Gülçehre, Orhan Firat, Kelvin Xu, Kyunghyun
+Cho, Loı̈c Barrault, Huei-Chi Lin, Fethi Bougares,
+
+Holger Schwenk, and Yoshua Bengio. 2015. On
+using monolingual corpora in neural machine trans-
+lation. CoRR, abs/1503.03535.
+
+Sébastien Jean, Kyunghyun Cho, Roland Memisevic,
+and Yoshua Bengio. 2015. On using very large tar-
+get vocabulary for neural machine translation. In
+ACL.
+
+Nal Kalchbrenner and Phil Blunsom. 2013. Recurrent
+continuous translation models. In EMNLP.
+
+Philipp Koehn, Hieu Hoang, Alexandra Birch, Chris
+Callison-Burch, Marcello Federico, Nicola Bertoldi,
+Brooke Cowan, Wade Shen, Christine Moran,
+Richard Zens, et al. 2007. Moses: Open source
+toolkit for statistical machine translation. In Pro-
+ceedings of the 45th annual meeting of the ACL on
+interactive poster and demonstration sessions, pages
+177–180. Association for Computational Linguis-
+tics.
+
+Jiwei Li and Daniel Jurafsky. 2016. Mutual informa-
+tion and diverse decoding improve neural machine
+translation. CoRR, abs/1601.00372.
+
+Wang Ling, Isabel Trancoso, Chris Dyer, and Alan W.
+Black. 2015. Character-based neural machine trans-
+lation. CoRR, abs/1511.04586.
+
+M. T. Luong, H. Pham, and C. D. Manning. 2015.
+Effective approaches to attention-based neural ma-
+chine translation. In EMNLP.
+
+Rico Sennrich, Barry Haddow, and Alexandra Birch.
+2015a. Improving neural machine translation mod-
+els with monolingual data. CoRR, abs/1511.06709.
+
+Rico Sennrich, Barry Haddow, and Alexandra Birch.
+2015b. Neural machine translation of rare words
+with subword units. CoRR, abs/1508.07909.
+
+I. Sutskever, O. Vinyals, and Q. V. Le. 2014. Sequence
+to sequence learning with neural networks. In NIPS.
+
+Seiya Tokui, Kenta Oono, and Shohei Hido. Chainer:
+a next-generation open source framework for deep
+learning.
+
+Sami Virpioja, Peter Smit, Stig-Arne Grönroos, Mikko
+Kurimo, et al. 2013. Morfessor 2.0: Python imple-
+mentation and extensions for morfessor baseline.
+
+267
+
+

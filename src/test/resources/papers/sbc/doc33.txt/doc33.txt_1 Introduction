@@ -1,0 +1,59 @@
+
+In fields of machine translation, neural network at-
+tracts lots of research attention recently that the
+encoder-decoder framework is widely used. Nev-
+ertheless, the main drawback of this neural ma-
+chine translation (NMT) framework is that the de-
+coder only depends on the last state of the encoder,
+which may deteriorate the performance when the
+sentence is long. To overcome this problem, atten-
+tion based encoder-decoder framework as shown
+in Figure 1 is proposed. With the attention model,
+in each time step the decoder depends on both the
+previous LSTM hidden state and the context vec-
+tor, which is the weighted sum of the hidden states
+in the encoder. With attention, the decoder can
+“refresh” it’s memory to focus on source words
+that may help to translate the correct words rather
+than only seeing the last state of the sentences
+where the words in the sentence and the ordering
+of words are missing.
+
+Most of the machine translation task only focus
+textual sentences of the source language and target
+language; however, in the real world, the sentences
+may contain information of what people see. Be-
+yond the bilingual translation, in WMT 16’ multi-
+modal translation task, we would like to translate
+
+Figure 1: Attention-based neural machine
+translation framework using a context vector to
+focus on a subset of the encoding hidden states.
+
+the image captions in English into German. With
+the additional information from images, we would
+further resolve the problem of ambiguity in lan-
+guages. For example, the word “bank” may refer
+to the financial institution or the land of the river’s
+edge. It would be confusing if we only look at the
+language itself. In this task, the image may help to
+disambiguate the meaning if it shows that there is
+a river and thus the “bank” means “river bank”.
+
+In this paper, we explore approaches to integrat-
+ing multimodal information (text and image) into
+the attention-based encoder-decoder architecture.
+We transform and make the visual features as one
+of the steps in the encoder as text, and then make
+it possible to attend to both the text and the image
+while decoding. The image features we used are
+(visual) semantic features extracted from the en-
+tire images (global) as well as the regional bound-
+ing boxes proposed by the region-based convolu-
+tional neural networks (R-CNN) (Girshick et al.,
+2014). In the following section, we first describe
+the related works, and then we introduce the pro-
+posed multimodal attention-based NMT in Section
+3, followed by re-scoring of the translation can-
+didates in Section 4. Finally we demonstrate the
+experiments in Section 5.

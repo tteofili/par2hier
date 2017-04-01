@@ -1,0 +1,178 @@
+
+The document-level QE task consists in scoring
+and ranking documents according to their pre-
+dicted quality. Knowing the quality of entire doc-
+uments is useful for scenarios where fully auto-
+mated approaches are used. An example is gisting,
+mainly if the user of the system does not know the
+source language. Another example are scenarios
+where post-editing is not an option or cannot be
+performed for the entire data.
+
+Different from last year’s task, in this second
+edition we use entire documents and a document-
+oriented quality score. The quality scores are
+achieved by a two-stage post-editing method
+(Scarton et al., 2015b), with post-editing done by
+professional translators. In the first stage, sen-
+tences are shuffled and post-edited without context
+(PE1). In the second stage, the post-edited sen-
+tences (from the first stage) are put together in the
+document context and post-edited again (PE2) by
+
+the same translator. This approach aims to isolate
+problems that can only be solved with document-
+level information.
+
+Although the annotation task is considerably
+simple to perform, generating reliable quality la-
+bels from the data is not a trivial task. Aver-
+age (AVG) and Standard Deviation (STDEV) of
+HTER between PE1 and MT (PE1 ×MT ), PE2
+and MT (PE2 ×MT ) and PE2 and PE1 (PE2 ×
+PE1) are presented in Table 26.22
+
+As shown in Table 26, PE1 ×MT and PE2 ×
+MT show low variation. As discussed last year
+(Bojar et al., 2015), we hypothesise that the low
+variation in the scores means that quality labels
+are not not able to distinguish documents reliably.
+PE2×PE1 values, on the other hand, show a high
+variation, indicating that the documents vary more
+when only document-wide errors are considered.
+However, taking only PE2 × PE1 as quality la-
+bel is not ideal as it disregards problems at word
+and sentence levels, which certainly also influence
+the quality of the document as whole. Our solu-
+tion is to combine the scores such as to maintain
+a high enough variation in the data, while consid-
+ering all issue levels. More specifically, we use a
+linear combination of PE1×MT and PE2×PE1
+(Equation 1).
+
+f = w1 · PE1 ×MT + w2 · PE2 × PE1, (1)
+
+where w1 and w2 are empirically defined weights.
+w1 was fixed to 1, while w2 was optimised aim-
+ing at finding how much relevance we should give
+to each component in order to meet two crite-
+ria. First, the final label (f ) should lead to sig-
+nificant data variation (in terms of standard devi-
+ation on the mean). Second, the difference be-
+tween the MAE of the mean baseline23 and the
+MAE of the official baseline QE system should be
+large enough.24 The quality labels were defined
+by Equation 1 with w1 = 1 and w2 = 13.
+
+22HTER was calculated by using the Asiya toolkit im-
+plementation of TER (non-tokenised and case insensitive)
+(Giménez and Màrquez, 2010).
+
+23This baseline is calculated by assuming the mean of the
+training set as the predicted value of all instances in the test
+set.
+
+24In our experiments, for variance we defined that the ratio
+between the standard deviation and mean should be at least
+0.5 and for MAE difference, we defined it to be at least 0.1.
+w2 was increased by 1 at each iteration and the optimisation
+process stopped when any of the requirements was met.
+
+169
+
+
+
+System ID F1-mult ↑ F1-BAD F1-OK
+English-German
+
+• CDACM/RNN 0.380 0.503 0.755
+• POSTECH/PHR-RNN-QV3 0.378 0.495 0.764
+• POSTECH/PHR-RNN-QV2 0.369 0.478 0.772
+
+• USFD2/W&SLP4PT 0.368 0.486 0.757
+• USFD2/CONTEXT 0.365 0.470 0.777
+RTM/s5 RTM-GLMd 0.327 0.408 0.802
+
+BASELINE 0.321 0.401 0.800
+RTM/s4 RTM-GLMd 0.307 0.377 0.814
+
+Ualacant/SBI-Online-baseline 0.259 0.493 0.526
+UAlacant/SBI-Online 0.098 0.459 0.213
+
+Table 24: Official results for the WMT16 Quality Estimation Task 2p. The winning submissions are indicated by a •. These are
+the top-scoring submission and those that are not significantly worse according to approximate randomisation tests with 95%
+confidence intervals. The grey area indicates the submissions whose results are not statistically different from the baseline.
+
+System ID F1-mult ↑ F1-BAD F1-OK
+English-German
+
+• POSTECH/PHR-RNN-QV3 0.393 0.518 0.759
+• POSTECH/PHR-RNN-QV2 0.388 0.504 0.771
+
+• CDACM/RNN 0.378 0.500 0.756
+USFD/CONTEXT 0.364 0.467 0.780
+
+USFD/W&SLP4PT 0.363 0.475 0.764
+RTM/s5-RTM-GLMd 0.331 0.413 0.802
+
+BASELINE 0.311 0.389 0.799
+RTM/s4-RTM-GLMd 0.306 0.376 0.815
+
+UAlacant/SBI-Online-baseline 0.275 0.502 0.547
+UAlacant/SBI-Online 0.146 0.456 0.320
+
+Table 25: Results for the WMT16 Quality Estimation Task 2p computed in terms of phrase-level F1-scores. The winning
+submissions are indicated by a •. These are the top-scoring submission and those that are not significantly worse according to
+approximate randomisation tests with 95% confidence intervals. The grey area indicates the submissions whose results are not
+statistically different from the baseline.
+
+PE1 ×MT PE2 ×MT PE2 × PE1
+AVG 0.346 0.381 0.042
+STDEV 0.108 0.091 0.034
+Ratio 0.312 0.239 0.810
+
+Table 26: AVG and STDEV of the post-edited data.
+
+Data The documents were extracted from the
+WMT translation task test data from 2008 to 2013,
+using submissions from all participating MT sys-
+tems. Source documents were randomly chosen.
+For each source document, a translation was taken
+from a different MT system. We considered EN-
+ES as language pair, extracting 208 documents.
+All documents were post-edited as previously ex-
+plained. 146 documents were used for training and
+62 for test.
+
+Evaluation The evaluation of the document-
+level task was the same as that for the sentence-
+level task. Pearson’s r, MAE and RMSE are re-
+ported as evaluation metrics for the scoring task,
+with Pearson’s r as official metric for the ranking
+of systems. For the ranking task, Spearman’s ρ
+correlation and DeltaAvg are reported, with Spear-
+man’s rho as main metric. The significance of the
+results is evaluated by applying the Williams test
+
+on Pearson’s r scores.
+
+Results The results of both the scoring and rank-
+ing variants of the task are given in Table 27,
+sorted from best to worst by using the Pearson’s
+r scores as primary key. USHEF/BASE-EMB-
+GP and RTM/RTM-FS+PLS-TREE showed the
+best scores, with no significant difference between
+them. The other two systems are not statistically
+significantly different from the baseline.
+
+The two winning submissions are very differ-
+ent. The BASE-EMB-GP system combines word
+embeddings with the official baseline features in a
+GP model with two-kernels, while RTM-FS+PLS-
+TREE is an RTM implementation that explores
+more sophisticated features from the source and
+target texts. For ranking variant, however, RTM-
+FS+PLS-TREE showed better results. Moreover,
+this is the only system with higher scores than the
+baseline that is also significantly better than the
+baseline.

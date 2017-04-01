@@ -1,0 +1,43 @@
+
+Proceedings of the First Conference on Machine Translation, Volume 2: Shared Task Papers, pages 543–553,
+Berlin, Germany, August 11-12, 2016. c©2016 Association for Computational Linguistics
+
+A Shared Task on Multimodal Machine Translation
+and Crosslingual Image Description
+
+Lucia Specia
+Department of Computer Science, University of Sheffield, UK
+
+l.specia@sheffield.ac.uk
+
+Stella Frank, Khalil Sima’an and Desmond Elliott
+ILLC, University of Amsterdam, The Netherlands
+
+{s.c.frank, k.simaan, d.elliott}@uva.nl
+
+Abstract
+
+This paper introduces and summarises the
+findings of a new shared task at the in-
+tersection of Natural Language Process-
+ing and Computer Vision: the generation
+of image descriptions in a target language,
+given an image and/or one or more de-
+scriptions in a different (source) language.
+This challenge was organised along with
+the Conference on Machine Translation
+(WMT16), and called for system submis-
+sions for two task variants: (i) a transla-
+tion task, in which a source language im-
+age description needs to be translated to
+a target language, (optionally) with addi-
+tional cues from the corresponding image,
+and (ii) a description generation task, in
+which a target language description needs
+to be generated for an image, (optionally)
+with additional cues from source language
+descriptions of the same image. In this
+first edition of the shared task, 16 systems
+were submitted for the translation task and
+seven for the image description task, from
+a total of 10 teams.

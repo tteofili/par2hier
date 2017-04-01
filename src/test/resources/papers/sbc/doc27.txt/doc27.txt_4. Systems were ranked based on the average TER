@@ -1,0 +1,57 @@
+calculated on the test set by using the TERcom33
+
+software: lower average TER scores correspond
+to higher ranks. BLEU was computed using the
+multi-bleu.perl package34 available in MOSES.
+
+Differently from the pilot round, in which TER
+was computed both in case-sensitive and case-
+insensitive mode, this year we opted for only one
+mode. Working with German, for which case er-
+rors are of crucial importance, participants’ sub-
+missions were evaluated with the more strict case-
+sensitive mode.
+
+30Repetition rate measures the repetitiveness inside a text
+by looking at the rate of non-singleton n-gram types (n=1...4)
+and combining them using the geometric mean. Larger value
+means more repetitions in the text.
+
+31https://autodesk.app.box.com/
+Autodesk-PostEditing
+
+32Edit distance is calculated as the number of edits (word
+insertions, deletions, substitutions, and shifts) divided by the
+number of words in the reference. Lower TER values indicate
+lower distance from the reference as a proxy for higher MT
+quality.
+
+33http://www.cs.umd.edu/˜snover/tercom/
+34https://github.com/moses-smt/mosesdecoder/
+
+blob/master/scripts/generic/multi-bleu.perl
+
+176
+
+
+
+Tokens Types Lemmas
+SRC TGT PE SRC TGT PE SRC TGT PE
+
+Train (12,000) 201,505 210,573 214,720 9,328 14,185 16,388 5,628 11,418 13,244
+Dev (1,000) 17,827 19,355 19,763 2,931 3,333 3,506 1,922 2,686 2,806
+Test (2,000) 31,477 34,332 35,276 3,908 4,695 5,047 2,479 3,753 4,050
+
+Table 31: Data statistics.
+
+APE@WMT15 APE@WMT16
+(EN-ES, news, crowd) (EN-DE, IT, prof.)
+
+SRC 2.905 6.616
+TGT 3.312 8.845
+PE 3.085 8.245
+
+Table 32: Repetition Rate (RR) of the WMT15 (English-
+Spanish, news domain, crowdsourced post-edits) and
+WMT16 (English-German, IT domain, professional post-
+editors) APE Task data.

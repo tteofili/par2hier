@@ -1,0 +1,115 @@
+In this section we analyze the errors we observed
+in the translations submitted by teams, the lessons
+we learned in this first edition of the task and our
+plans for future work.
+
+Error analysis. During our manual analysis of a
+sample of the translations that were submitted for
+the test data, we noticed that their quality is still
+poor in comparison to the reference translations.
+We identified numerous problems, as summarized
+below:
+
+• many missing words or words in the source
+language mixed in with the target language,
+probably due to words or concepts in the
+source language that could not be translated
+to the target language;
+
+• incorrect ordering of adjectives and nouns,
+given that, in contrast to English, nouns typi-
+cally precede adjectives in Portuguese, Span-
+ish and French;
+
+• incorrect agreement of nouns, verbs and ad-
+jectives with respect to gender and number;
+
+• incorrect punctuation, e.g., periods placed in
+the middle of a sentence;
+
+• incorrect casing for words, e.g., common
+words which were capitalized or in upper
+case;
+
+• missing translations for acronyms, i.e., the
+acronym in the source language was used in-
+stead.
+
+We note that some of these issues were ignored
+during the manual evaluation, for instance, incor-
+rect capitalization was not penalized if the trans-
+lation was otherwise better or comparable to the
+other translation.
+
+157
+
+
+
+Lessons learned. We performed a comparison
+of the systems based only on the overall results
+on the complete test set and on the samples of sets
+that we randomly selected for manual validation.
+For this first edition of the Biomedical Translation
+task, we aimed at providing an evaluation platform
+for the automatic translation of scientific publica-
+tions, in particular for titles and abstracts in the
+biomedical domain.
+
+In this first edition of the task, the training and
+test data was obtained from the parallel publica-
+tions available in Scielo. We did not perform
+manual translation of the documents for either the
+training or the test data, but rather used the origi-
+nal text available in Scielo for all languages under
+consideration here. In practice, this means that the
+reference translations were produced by the arti-
+cle authors independently of the WMT challenge
+goals. These authors are not professional writers
+or professional translators, and some of them may
+have limited proficiency in the languages they are
+required to use for publication. This situation has
+an impact on the quality of the reference trans-
+lations, compared to other WMT tasks. It is re-
+flected in the manual evaluation which indicates
+that for some language pairs (notably English–
+Spanish health), participant runs were rated over-
+all as better or equal to the reference translation.
+Our experience with this first edition of the task
+indicates that the Scielo corpus is a valuable re-
+source for biomedical WMT, however more work
+is needed in terms of quality assurance to ensure
+that meaningful evaluation results can be obtained.
+
+Plan for future editions. In next editions, we
+plan to build on the established pipeline to collect
+and pre-process Scielo data to prepare a new test
+dataset. More importantly, we plan to work to-
+wards improved data and evaluation quality.
+
+While we initially focused on characterizing
+the quality of the alignment in the parallel Scielo
+corpus, we are planning to craft a higher quality
+dataset by removing any sentence pairs with align-
+ment issues. Furthermore, the data set will also be
+pruned for sentences exhibiting lexical, grammati-
+cal or fluency issues. These steps will contribute to
+improve the significance of the evaluation results,
+especially in terms of BLEU scores.
+
+Furthermore, we believe that the nature of sci-
+entific texts and biomedical texts in particular calls
+for specific evaluation metrics. One of the in-
+tended uses of translation systems in the biomedi-
+
+cal domain is to provide health professionals with
+access to the latest research results that are pub-
+lished in a language other than their native lan-
+guage. Consequently, health professionals may
+use the translated information to make clinical
+decisions impacting patients care. It is vital
+that translation systems do not contribute to the
+dissemination of incorrect clinical information.
+Therefore, the evaluation of biomedical translation
+systems should include an assessment at the doc-
+ument level indicating whether a translation con-
+veyed erroneous clinical information.

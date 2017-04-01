@@ -1,0 +1,152 @@
+
+We have presented an adjunct-driven extension to Hiero: the model uses source-side adjuncts to extract
+larger phrases and to label rules. The model is able to improve over Hiero for English-Chinese with
+minimal labelling and a few features. This improvement appears to be mostly lexical: the model captures
+long-distance dependencies better, but not long-distance reorderings. We found no improvement for
+English-Dutch and English-French. The lesser extent of reordering in these language pairs may limit the
+application of rules involving adjuncts; further constraining the model may then be beneficial for these
+language pairs too.
+
+We have also presented a second extension, that factors adjunction to derive rules with simpler adjunc-
+tion patterns. This extension leads to a decrease in performance compared to Hiero: while an adapted
+feature and label set may help this model, constraints on which adjuncts to excise are likely to be neces-
+sary as well.
+
+Acknowledgments
+
+This research is part of the project “Statistical Translation of Novel Constructions”, which is supported
+by NWO VC EW grant 612.001.122 from the Netherlands Organisation for Scientific Research (NWO).
+
+18
+
+
+
+References
+Hala Almaghout, Jie Jiang, and Andy Way. 2011. CCG contextual labels in hierarchical phrase-based SMT. In
+
+Proceedings of the 15th conference of the European Association for Machine Translation, pages 281–288.
+
+Sophie Arnoult and Khalil Sima’an. 2012. Adjunct Alignment in Translation Data with an Application to Phrase-
+Based Statistical Machine Translation. In Proceedings of the 16th Annual Conference of the European Associ-
+ation for Machine Translation, pages 287–294.
+
+Sophie Arnoult and Khalil Sima’an. 2014. How Synchronous are Adjuncts in Translation Data? In Proceedings of
+SSST-8, Eighth Workshop on Syntax, Semantics and Structure in Statistical Translation, pages 157–165, Doha,
+Qatar.
+
+Alexandra Birch and Miles Osborne. 2011. Reordering Metrics for MT. In Proceedings of the Association for
+Computational Linguistics, Portland, Oregon, USA.
+
+Colin Cherry and George Foster. 2012. Batch Tuning Strategies for Statistical Machine Translation. In Proceed-
+ings of the 2012 Conference of the North American Chapter of the Association for Computational Linguistics:
+Human Language Technologies, pages 427–436, Montréal, Canada.
+
+David Chiang. 2000. Statistical Parsing with an Automatically-Extracted Tree Adjoining Grammar. In Proceed-
+ings of the 38th Annual Meeting of the Association for Computational Linguistics, pages 456–463.
+
+David Chiang. 2005. A Hierarchical Phrase-Based Model for Statistical Machine Translation. In Proceedings of
+the 43rd Annual Meeting of the Association for Computational Linguistics, pages 263–270.
+
+Steve DeNeefe and Kevin Knight. 2009. Synchronous Tree Adjoining Machine Translation. In Proceedings of
+the 2009 Conference on Empirical Methods in Natural Language Processing, pages 727–736.
+
+Andreas Eisele and Yu Chen. 2010. MultiUN: A Multilingual Corpus from United Nation Documents. In Pro-
+ceedings of the Seventh conference on International Language Resources and Evaluation (LREC’10), Valletta,
+Malta.
+
+Kenneth Heafield, Ivan Pouzyrevsky, Jonathan H. Clark, and Philipp Koehn. 2013. Scalable modified Kneser-Ney
+language model estimation. In Proceedings of the 51st Annual Meeting of the Association for Computational
+Linguistics, pages 690–696, Sofia, Bulgaria.
+
+Matthias Huck, Stephan Peitz, Markus Freitag, and Hermann Ney. 2012. Discriminative Reordering Extensions
+for Hierarchical Phrase-Based Machine Translation. In 16th Annual Conference of the European Association
+for Machine Translation, pages 313–320, Trento, Italy.
+
+Rebecca Hwa, Philip Resnik, Amy Weinberg, and Okan Kolak. 2002. Evaluating Translational Correspondence
+Using Annotation Projection. In Proceedings of the 40th Annual Meeting on Association for Computational
+Linguistics, ACL ’02, pages 392–399.
+
+Aravind K. Joshi and Yves Schabes. 1997. Tree-Adjoining Grammars. In G. Rosenberg and A. Salomaa, editors,
+Handbook of Formal Languages. Springer-Verlag, New York, NY.
+
+Aravind K. Joshi, Leon S. Levy, and Masako Takahashi. 1975. Tree Adjunct Grammars. Journal of Computer
+and System Sciences, 10(1):136–163.
+
+Philipp Koehn, Franz Josef Och, and Daniel Marcu. 2003. Statistical Phrase-Based Translation. In Proceedings
+of HLT/NAACL, pages 127–133.
+
+Anthony Kroch and Aravind Joshi. 1985. The Linguistic Relevance of Tree Adjoining Grammars. Technical
+Report MC CIS 85 18, Department of Computer and Information Science, University of Pennsylvania.
+
+Zhifei Li, Chris Callison-Burch, Chris Dyer, Sanjeev Khudanpur, Lane Schwartz, Wren Thornton, Jonathan Weese,
+and Omar Zaidan. 2009. Joshua: An open source toolkit for parsing-based machine translation. In Proceedings
+of the Fourth Workshop on Statistical Machine Translation, pages 135–139, Athens, Greece.
+
+Junhui Li, Zhaopeng Tu, Guodong Zhou, and Josef van Genabith. 2012. Using Syntactic Head Information in
+Hierarchical Phrase-Based Translation. In Proceedings of the 7th Workshop on Statistical Machine Translation,
+pages 232–242.
+
+Junhui Li, Philip Resnik, and Hal Daumé III. 2013. Modeling Syntactic and Semantic Structures in Hierarchi-
+cal Phrase-based Translation. In Proceedings of the 2013 Conference of the North American Chapter of the
+Association for Computational Linguistics: Human Language Technologies, pages 540–549, Atlanta, Georgia.
+
+19
+
+
+
+Gideon Maillette de Buy Wenniger and Khalil Sima’an. 2013. Hierarchical Alignment Decomposition Labels
+for Hiero Grammar Rules. In Proceedings of the Seventh Workshop on Syntax, Semantics and Structure in
+Statistical Translation, pages 19–28, Atlanta, Georgia.
+
+Markos Mylonakis and Khalil Sima’an. 2011. Learning Hierarchical Translation Structure with Linguistic An-
+notation. In Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics, pages
+642–652.
+
+Franz Josef Och and Hermann Ney. 2003. A Systematic Comparison of Various Statistical Alignment Models.
+Computational Linguistics, 29:19–51.
+
+Stuart Shieber and Yves Schabes. 1990. Synchronous Tree-Adjoining Grammars. In Handbook of Formal Lan-
+guages, pages 69–123. Springer.
+
+Stuart M. Shieber. 2007. Probabilistic Synchronous Tree-Adjoining Grammars for Machine Translation: The
+Argument from Bilingual Dictionaries. In Proceedings of the Workshop on Syntax and Structure in Statistical
+Translation, Rochester, New York.
+
+Miloš Stanojević and Khalil Sima’an. 2014. Evaluating Word Order Recursively over Permutation-Forests. In
+Proceedings of SSST-8, Eighth Workshop on Syntax, Semantics and Structure in Statistical Translation, pages
+138–147, Doha, Qatar.
+
+Andreas Zollmann and Ashish Venugopal. 2006. Syntax Augmented Machine Translation via Chart Parsing. In
+Proceedings of NAACL 2006 - Workshop on statistical machine translation, pages 138–141.
+
+20
+
+
+
+A Hybrid Approach for Deep Machine Translation
+
+Kiril Simov
+Linguistic Modelling Department
+
+IICT-BAS
+Bulgaria
+
+kivs@bultreebank.org
+
+Petya Osenova
+Linguistic Modelling Department
+
+IICT-BAS
+Bulgaria
+
+petya@bultreebank.org
+
+Abstract
+
+This paper presents a Hybrid Approach to Deep Machine Translation in the language direction
+from English to Bulgarian. The set-up uses pre- and post-processing modules as well as two-level
+transfer. The language resources that have been incorporated are: WordNets for both languages;
+a valency lexicon for Bulgarian; aligned parallel corpora. The architecture comprises a pre-
+dominantly statistical component (factor-based SMT in Moses) with some focused rule-based
+elements. The experiments show promising results and room for further improvements within
+the MT architecture.

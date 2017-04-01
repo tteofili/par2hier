@@ -1,0 +1,52 @@
+
+The model identified as metamind-single
+is based on the attention-based encoder-decoder
+framework described in Luong (2015), using the
+attention mechanism referred to as “Global atten-
+tion (dot).” The encoder is a four-layer stacked
+LSTM recurrent neural network whose inputs (at
+the bottom layer) are vectors wint corresponding to
+the subword units in the input sentence and which
+saves the topmost output state at each timestep et
+as the variable-length encoding matrix E. The
+decoder also contains a four-layer stacked LSTM
+whose states (c0 and h0 for each layer) are initial-
+ized to the last states for each layer of the encoder.
+At the first timestep, the decoder LSTM receives
+as input an initialization word vector wout0 ; its top-
+most output state ht is concatenated with an en-
+coder context vector κt computed as:
+
+score(ht, es) = hte
+>
+s
+
+αst = softmaxall s(score(ht, es))
+
+κt =
+∑
+
+s
+
+αstes
+
+This concatenated output is then fed through an
+additional neural network layer to produce a final
+
+attentional output vector h̃, which serves as input
+to the output softmax:
+
+h̃ = tanh(Watt[ht;κt])
+
+output probabilities = softmax(Wouth̃)
+
+For subsequent timesteps, the decoder LSTM re-
+ceives as input the previous word vectorwoutt−1 con-
+catenated with the previous output vector h̃.
+
+Decoding is performed using beam search, with
+beam width 16. The beam search decoder differs
+slightly from Luong (2015) in that we normalize
+output sentence probabilities by length, following
+Cho (2014), rather than performing ad-hoc adjust-
+ments to correct for short output sentences.

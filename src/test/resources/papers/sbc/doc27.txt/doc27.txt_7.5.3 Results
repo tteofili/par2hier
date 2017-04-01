@@ -1,0 +1,105 @@
+The first and second runs of human evaluation re-
+sults are respectively presented in Table 36 and Ta-
+ble 37.
+
+The first run shows a preference for the AMU
+Primary system compared to the other submis-
+sions (Table 36). These results confirm those ob-
+tained with the automatic metrics as shown in Ta-
+ble 34 and we can see that two systems are above
+the Baseline (the raw MT output). The CUNI
+Primary and USAAR Primary systems are in the
+same cluster with the Baseline, which indicates a
+non-significant difference with p ≤ 0.05. Two
+systems are in a single cluster below the base-
+line, namely JUSAAR Primary and DCU Primary,
+being on par with the results obtained using au-
+
+38https://github.com/keisks/wmt-trueskill
+39http://fr46.uni-saarland.de/?id=2393
+40http://fr46.uni-saarland.de
+
+183
+
+
+
+# Score Range ID
+1 1.967 1 AMU Primary
+2 0.033 2 FBK Primary
+3 -0.108 3-4 CUNI Primary
+
+-0.191 3-5 USAAR Primary
+-0.211 3-5 Baseline
+
+4 -0.712 6-7 JUSAAR Primary
+-0.778 6-7 DCU Primary
+
+Table 36: Results of the first run of human evaluation in-
+cluding human post-edited MT output as translation refer-
+ence. Scores and ranges are obtained with TrueSkill (Sak-
+aguchi et al., 2014). Lines between systems indicate clusters
+according to bootstrap resampling at p-level p ≤ 0.05 based
+on 1, 000 runs. Systems within a cluster are considered tied.
+
+# Score Range ID
+1 2.058 1 Human Post-edit
+2 0.867 2 AMU Primary
+3 -0.213 3-4 CUNI Primary
+
+-0.348 3-6 FBK Primary
+-0.374 3-6 USAAR Primary
+-0.499 5-7 Baseline
+-0.675 6-8 JUSAAR Primary
+-0.816 7-8 DCU Primary
+
+Table 37: Results of the second run of human evaluation
+without translation reference provided to annotators. Scores
+and ranges are obtained with TrueSkill (Sakaguchi et al.,
+2014). Lines between systems indicate clusters according to
+bootstrap resampling at p-level p ≤ 0.05 based on 1, 000
+runs. Systems within a cluster are considered tied.
+
+tomatic metrics. The correlation between auto-
+matic metrics and the first manual evaluation run
+indicates the reliability of popular MT metrics for
+the evaluation of APE systems. On average, an-
+notators needed 53 seconds to perform one rank-
+ing task, while the fastest ranking was performed
+in 18.3 seconds and the slowest one took more
+than 4 minutes and 30 seconds (averaged over at
+least 3 annotators for the same source segment).
+The agreement between annotators on the first run
+of evaluation is k = 0.481 according to Fleiss’
+Kappa (Fleiss, 1971).
+
+The results of the second run of manual evalua-
+tion (Table 37) show that the human post-editing
+of MT output is preferred by human annotators
+when compared to the other systems’ outputs,
+reaching the first position. It indicates that, in spite
+of the significant improvements over the original
+MT output, none of the submitted APE systems
+managed to reach the translation quality achieved
+by human post-editing. The second position in
+the ranking is reached by the AMU Primary sys-
+
+tem, while a single cluster is ranked third and con-
+tains all the remaining systems as well as the Base-
+line. This smaller amount of clusters can be due
+to the limited scale of the second run of manual
+evaluation involving 100 source segments only,
+compared with the 200 segments for the first run.
+However, this second run shows that the AMU Pri-
+mary system is again preferred by human evalua-
+tors compared to the other systems without nec-
+essarily being closer to the human post-edited MT
+output, which is not included as a translation refer-
+ence, and thus without biasing human judgements.
+The agreement between annotators for the second
+run of evaluation is slightly lower compared to
+the first run, with a Fleiss’ Kappa of k = 0.466.
+For both runs, the inter-annotator agreement is
+considered moderate. On average, the annota-
+tors needed 60 seconds per ranking task, while the
+fastest ranked outputs was completed in 21.7 sec-
+onds and the slowest one in 3 minutes.

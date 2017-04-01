@@ -1,0 +1,29 @@
+
+Different languages are not perfectly corresponded in word
+level. For example, English articles are usually omitted when
+translated into Chinese. And the city name New York is just
+one word in Chinese. Sometimes the correspondence is even
+at phrase or sentence level, such as the translation of idioms.
+In this paper, we only handle word pairs with one-to-one map-
+ping and rare words aligned to null. According to whether the
+source and the target word is rare, there are five cases.
+
+– unk to unk, both the source and target word in the aligned
+pair are rare words. In this case we will replace the
+source word with a similar in-vocabulary word and the
+target word with the translation of the similar word.
+
+– unk to common, only the source word is rare. In this
+case we will keep the target word and replace the source
+
+word with the translation of the target word.
+– common to unk, only the target word is rare. In this case
+
+we will keep the source word and replace the target word
+with the translation of the source word.
+
+– common to common, no replacement in this case.
+– unk to null or null to unk, source or target rare word is
+
+not aligned to any word. In this case we simply remove
+the rare word from the sentence.

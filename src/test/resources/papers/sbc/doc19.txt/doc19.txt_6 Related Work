@@ -1,0 +1,41 @@
+
+There are some work devoted to adjusting the syn-
+tactic structures according to bilingual constraints to
+improve constituency tree-based translation (Huang
+and Knight, 2006; Ambati and Lavie, 2008; Wang
+et al., 2010; Burkett and Klein, 2012; Liu et
+al., 2012). These efforts concentrated on con-
+stituency structures, adopted hand-crafted transfor-
+mation templates or rules, and learnt the operation
+sequences of structure transformation on the bilin-
+gual corpora. Such methods are hard to be di-
+rectly applied to dependency structures due to the
+great discrepancy between constituency and depen-
+dency grammars. There are also work on automati-
+cally adjusting the syntactic structures for machine
+translation resorting to self-training (Morishita et
+al., 2015), where the parsed trees for self-training
+are selected according to translation performance.
+Our work focuses on the automatic cross-lingual
+similarization of dependency grammars, and learnt
+grammars with higher cross-lingual similarity while
+maintaining the non-triviality of the grammars.
+
+There are substantial efforts that have been made
+in recent years towards harmonizing syntactic repre-
+sentations across languages. This includes the Ham-
+leDT project (Zeman et al., 2012; Zeman et al.,
+2014), as well as the Universal Dependencies ini-
+tiative (Petrov et al., 2012; McDonald et al., 2013).
+
+508
+
+
+
+Our work aims to automatically harmonize the de-
+pendency representations resorting to bilingual cor-
+respondence, thus can be grouped into the build-
+ing strategies for harmonized or universal dependen-
+cies. These existing annotated treebanks would also
+permit interesting control experiments, both for the
+measurement of similarity and for parsing.

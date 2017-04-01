@@ -1,0 +1,128 @@
+
+We have presented an approach to maintain a coverage vector for NMT to indicate
+whether each source word is translated or not. By encouraging attentional NMT
+to pay more attention to untranslated words and less attention to translated words,
+coverage-based NMT alleviates the serious over-translation and under-translation
+problems that attentional NMT suffers. Experimental results show that coverage-
+based NMT achieves significant improvements in terms of alignment and transla-
+tion quality over NMT without coverage.
+
+In the future, we plan to further validate the effectiveness of our approach on
+more language pairs. Further directions also include better designs of coverages
+model and making better use of the coverage information (e.g. directly pass it to
+the decoder).
+
+References
+
+Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. 2015. Neural machine
+translation by jointly learning to align and translate. ICLR 2015.
+
+Yoshua Bengio, Réjean Ducharme, Pascal Vincent, and Christian Janvin. 2003. A
+neural probabilistic language model. JMLR.
+
+Peter E. Brown, Stephen A. Della Pietra, Vincent J. Della Pietra, and Robert L.
+Mercer. 1993. The mathematics of statistical machine translation: Parameter
+estimation. Computational Linguistics, 19(2):263–311.
+
+Y. Cheng, S. Shen, Z. He, W. He, H. Wu, M. Sun, and Y. Liu. 2015. Agreement-
+based Joint Training for Bidirectional Attention-based Neural Machine Trans-
+lation. arXiv.
+
+David Chiang. 2007. Hierarchical phrase-based translation. CL.
+
+Kyunghyun Cho, Bart van Merrienboer, Dzmitry Bahdanau, and Yoshua Bengio.
+2014a. On the properties of neural machine translation: encoder–decoder
+approaches. In SSST 2014.
+
+Kyunghyun Cho, Bart van Merrienboer, Caglar Gulcehre, Fethi Bougares, Holger
+Schwenk, and Yoshua Bengio. 2014b. Learning phrase representations using
+rnn encoder-decoder for statistical machine translation. In EMNLP 2014.
+
+T. Cohn, C. D. V. Hoang, E. Vymolova, K. Yao, C. Dyer, and G. Haffari. 2016.
+Incorporating Structural Alignment Biases into an Attentional Neural Trans-
+lation Model. arXiv.
+
+17
+
+
+
+M. Collins, P. Koehn, and I. Kučerová. 2005. Clause restructuring for statistical
+machine translation. In ACL 2005.
+
+S. Feng, S. Liu, M. Li, and M. Zhou. 2016. Implicit Distortion and Fertility Models
+for Attention-based Encoder-Decoder NMT Model. arXiv.
+
+S. Hochreiter and J. Schmidhuber. 1997. Long short-term memory. Neural Com-
+putation.
+
+Sébastien Jean, Kyunghyun Cho, Roland Memisevic, and Yoshua Bengio. 2015.
+On using very large target vocabulary for neural machine translation. In ACL
+2015.
+
+Nal Kalchbrenner and Phil Blunsom. 2013. Recurrent continuous translation mod-
+els. In EMNLP 2013.
+
+Philipp Koehn, Franz Josef Och, and Daniel Marcu. 2003. Statistical phrase-based
+translation. In NAACL 2003.
+
+Philipp Koehn, Hieu Hoang, Alexandra Birch, Chris Callison-Burch, Marcello
+Federico, Nicola Bertoldi, Brooke Cowan, Wade Shen, Christine Moran,
+Richard Zens, Chris Dyer, Ondrej Bojar, Alexandra Constantin, and Evan
+Herbst. 2007. Moses: open source toolkit for statistical machine translation.
+In ACL 2007.
+
+Percy Liang, Ben Taskar, and Dan Klein. 2006. Alignment by agreement. In
+NAACL 2006.
+
+Yang Liu and Maosong Sun. 2015. Contrastive unsupervised word alignment with
+non-local features. AAAI.
+
+Minh-Thang Luong, Hieu Pham, and Christopher D Manning. 2015. Effective
+approaches to attention-based neural machine translation. In EMNLP 2015.
+
+Franz J. Och and Hermann Ney. 2003. A systematic comparison of various statis-
+tical alignment models. Computational Linguistics, 29(1):19–51.
+
+Franz Josef Och. 2003. Minimum error rate training in statistical machine transla-
+tion. In ACL 2003.
+
+Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing Zhu. 2002. Bleu: a
+method for automatic evaluation of machine translation. In ACL 2002.
+
+Mike Schuster and Kuldip K Paliwal. 1997. Bidirectional recurrent neural net-
+works. IEEE Transactions on Signal Processing, 45(11):2673–2681.
+
+18
+
+
+
+S. Shen, Y. Cheng, Z. He, W. He, H. Wu, M. Sun, and Y. Liu. 2015. Minimum
+Risk Training for Neural Machine Translation. arXiv.
+
+Ilya Sutskever, Oriol Vinyals, and Quoc VV Le. 2014. Sequence to sequence
+learning with neural networks. In NIPS 2014.
+
+Kelvin Xu, Jimmy Ba, Ryan Kiros, Kyunghyun Cho, Aaron Courville, Ruslan
+Salakhutdinov, Richard Zemel, and Yoshua Bengio. 2015. Show, Attend and
+Tell: Neural Image Caption Generation with Visual Attention. In ICML 2015.
+
+19
+
+
+	1 Introduction
+	2 Background
+	3 Coverage Model for NMT
+	3.1 Neural Network-based Coverage Model
+	3.2 Linguistic Coverage Model
+	3.3 Integrating Coverage into NMT
+
+	4 Training
+	5 Experiments
+	5.1 Setup
+	5.2 Translation Quality
+	5.3 Alignment Quality
+	5.4 Effects on Long Sentences
+
+	6 Related Work
+	7 Conclusion
+

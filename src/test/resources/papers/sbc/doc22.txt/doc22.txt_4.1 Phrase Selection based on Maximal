@@ -1,0 +1,126 @@
+Phrases
+
+To solve both the problem of overlapping phrases
+and the problem of requiring limits on phrase length
+for computational reasons, we propose a method us-
+ing the idea of maximal substrings (Okanohara and
+Tsujii, 2009). Maximal substrings are formally de-
+fined as “a substring that is not always included in
+a particular longer substring.” For example, if we
+define pi as a phrase and occ(pi) as its occurrence
+count in a corpus, and have the following data
+
+p1 = “one of the preceding”, occ(p1) = 200, 000
+
+p2 = “one of the preceding claims”, occ(p2) = 200, 000
+
+p3 = “any one of the preceding claims”, occ(p3) = 190, 000
+
+p1 = “one of the preceding” always co-occurs with
+the longer p2 = “one of the preceding claims” and
+thus is not a maximal substring. On the other hand,
+p2 does not always co-occur with p3, and thus p2
+will be maximal. This relationship can be defined
+formally with the following semi-order relation:
+
+p1 ⪯ p2 ⇔ ∃α, β : p1 = αp2β ∧ occ(p1) = occ(p2). (1)
+
+Demonstrating this by the previous example,
+p1 = αp2β, α = “”, β = “claims” hold, meaning
+p1 is a sub-sequence of p2, and p2 is a sub-sequence
+of p3 in a similar manner. Since p1 is a sub-sequence
+of p2 and occ(p1) = occ(p2) = 200, 000, p1 ⪯ p2
+holds. However, although p2 is a sub sequence of p3,
+
+22
+
+
+
+because occ(p2) = 200, 000 ̸= 190, 000 = occ(p3),
+the relation p2 ⪯ p3 does not hold. Here, we say
+p has maximality if there does not exist any q other
+than p itself that meets p ⪯ q, and we call such a
+phrase a maximal phrase.
+To apply this concept to active learning, our pro-
+
+posed method limits translation data selection to
+only maximal phrases. This has two advantages.
+First, it reduces overlapping phrases to only the
+maximal string, allowing translators to cover mul-
+tiple high-frequency phrases in the translation of a
+single segment. Second, maximal phrases and their
+occurrence counts can be enumerated efficiently by
+using enhanced suffix arrays (Kasai et al., 2001) in
+linear time with respect to document length, remov-
+ing the need to set arbitrary limits on the length of
+strings such as n = 4 used in previous work.
+However, it can be easily noticed that while in
+
+the previous example p2 is included in p3, their oc-
+currence counts are close but not equivalent, and
+thus both are maximal phrases. In such a case, the
+naı̈ve implementation of this method can not remove
+these redundant phrases, despite the fact that it is in-
+tuitively preferable that the selection method com-
+bines phrases if they have almost the same occur-
+rence count. Thus, we also propose to use the fol-
+lowing semi-order relation generalized with param-
+eter λ:
+
+p1
+∗⪯ p2 ⇔∃α, β :
+
+p1 = αp2β ∧ λ · occ(p1) < occ(p2). (2)
+
+where λ takes a real numbered value from 0 to 1,
+which we set to λ = 0.5 in this research.
+This removes the restriction that the two phrases
+
+under comparison be of exactly equal counts, allow-
+ing them to have only approximately the same oc-
+currence count. We redefine maximality using this
+
+semi-order
+∗⪯ as semi-maximality, and call maxi-
+
+mal phrases defined with
+∗⪯ semi-maximal phrases
+
+in contrast to normal maximal phrases. By using
+semi-maximal phrases instead of maximal phrases,
+we can remove a large number of phrases that are
+included in a particular longer phrase more than half
+the time, indicating that it might be preferable to
+translate the longer phrase instead.
+
+two  methods  are  proposed
+
+CD	 NNS	 VBP	
+
+VP	
+
+NP	
+
+S	
+
+VBN	
+
+VP	
+
+(a) “are proposed” is counted
+
+are  proposed  and  discussed
+
+VBZ	 VBN	 CC	 VBN	
+
+VP	
+
+VP	
+
+VP	
+
+VP	
+
+(b) “are proposed” is not counted
+
+Figure 2: Phrase counting based on parse trees

@@ -1,0 +1,40 @@
+
+We have performed analysis on two types of met-
+ric: holistic and word order specific. Table 3 com-
+pares human judgements to those produced by a
+number of well-known and widely used baseline
+metrics, while table 4 shows the same values for
+metrics designed specifically for word order. In
+both tables, the highest score for each corpus is
+highlighted.
+
+Meteor’s fragmentation-only subsystem (see
+section 2.2) is included in the latter table, while
+
+495
+
+
+
+cs-en de-en fi-en fr-en ru-en all
+Num. systems 7 13 14 6 13 53
+
+Total sentences 909 692 510 815 782 3708
+
+Table 5: Sizes of corpora used for all empirical calculations, all produced during WMT 2015
+
+the version of Meteor in the former is a stan-
+dard off-the-shelf installation. For DTED, the W
+column indicates whether sentences were consid-
+ered equally when aggregating, or were Weighted
+based on aligned word content as per section 3.5.
+Results run on Flattened trees (section 3.4) are in-
+dicated by the column F.
+
+All scores except those for DTED and Meteor
+were calculated using implementations of the met-
+rics provided with the well-known open-source
+system Moses (Koehn et al., 2007). In all cases,
+the numbers shown are Pearson correlation coef-
+ficients between the output of the given metric at
+the system level and the normalised human judge-
+ments provided at WMT 2015.

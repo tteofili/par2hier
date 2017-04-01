@@ -1,0 +1,29 @@
+
+We used all the Russian-English parallel cor-
+pora available for the constrained news translation
+task. They include the CommonCrawl corpus, the
+NewsCommentary v11 corpus, the Yandex cor-
+pus and the Wikipedia headlines corpus. We also
+added the WMT 12 and WMT 13 Russian-English
+news translation test set to the parallel training
+data. In total, 2.6 million parallel Russian-English
+sentences are used to train the translation model.
+For monolingual English corpora, we used the Gi-
+gaword corpus (191 million sentences) and the
+monolingual English corpus available for the con-
+strained news translation task, which is a combina-
+tion of the Europarl v7 corpus, the NewsCommen-
+tary v11 monolingual corpus and the NewsCrawl
+2015 (206 million sentences in total). Due to
+resource limits, we have not used the newly re-
+leased 3 billion sentence CommonCrawl monolin-
+gual English corpus. Our submitted system was
+tuned on the WMT 2014 test set. Both the Rus-
+sian and English text in the parallel and monolin-
+gual corpora in the training/development/test cor-
+
+327
+
+
+
+pora were lower cased and tokenized.

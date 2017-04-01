@@ -1,0 +1,120 @@
+Figure 1 shows dependency trees for the following
+sentences which occur in the WMT 2015 corpus.
+All pairs of words shared by both sentences are
+aligned, as are ‘started’ and ‘began’.
+Hyp: The cellist of Malkki began career.
+Ref: Ms Malkki started her career as a cellist.
+
+This comes to a total of 4 Delete operations and
+6 Match operations, resulting in a total matching
+dist of 10. With the hypothesis tree containing
+nH = 7 nodes and the reference containing nR =
+9, we can normalise this (as per equation 1) to:
+
+scores = 1−
+10
+
+7 + 9
+= 0.375
+
+Finally, we may optionally consider a weighting
+for the sentence as per equation 3.
+
+weights =
+10
+
+10 + 6
+= 0.625
+
+This weighting indicates that we consider our
+low rating of the sentence partially trustworthy
+relative to others in the corpus.
+
+4 Results & Discussion
+
+4.1 Setup & Evaluation
+DTED has been run on sentences provided for the
+2015 (Bojar et al., 2015) and 2016 Workshops
+on Statistical Machine Translation. The results
+
+494
+
+
+
+Metric cs-en de-en fi-en fr-en ru-en all
+BLEU 0.989 0.836 0.920 0.970 0.643 0.622
+WER 0.913 0.813 0.794 0.972 0.700 0.524
+TER 0.929 0.822 0.846 0.975 0.712 0.563
+PER 0.980 0.764 0.858 0.967 0.753 0.670
+
+CDER 0.955 0.813 0.944 0.981 0.762 0.561
+Meteor 0.984 0.934 0.961 0.968 0.877 0.647
+
+Table 3: System-level correlations of holistic metrics with normalised human rankings
+
+Metric Version W F cs-en de-en fi-en fr-en ru-en all
+Meteor Frag - - 0.905 0.853 0.941 0.927 0.781 0.615
+DTED Pure X X 0.974 0.877 0.841 0.993 0.824 0.522
+DTED Pure X X 0.964 0.542 0.867 0.729 0.431 0.461
+DTED Pure X X 0.975 0.872 0.814 0.992 0.822 0.522
+DTED Pure X X 0.963 0.507 0.886 0.476 0.337 0.445
+
+Table 4: System-level correlations of word order metrics with normalised human rankings
+
+for 2015 data are provided in this paper, while
+for 2016 the reader is referred to the Findings of
+the 2016 Workshop on Machine Translation. For
+the latter, DTED uses unflattened trees, without
+weighting by aligned nodes. Sentences from all
+available into-English corpora were used, but only
+segments for which corresponding human judge-
+ments were available. The number of individual
+systems for each language pair, and the count of
+sentences within each, are given in table 5.
+
+Human judgements during the Workshop were
+given as rankings between up to 5 systems, with
+ties allowed. We have normalised these ranks into
+scores out of 1: for example, a rank of 3 between
+five systems is converted to 0.5, reflecting that an
+equal number of systems were preferred to it as
+were considered less good, while a system ranked
+best would achieve a perfect score of 1.
+
+It should be noted that while DTED is intended
+to evaluate word order in isolation, rankings at
+WMT were based on all features of the sentences.
+As no data of sufficient quantity and quality was
+available for human judgements specifically of
+word order, we have used the holistic data. As
+such, we do not expect cutting-edge correlational
+values for this data; instead, such comparisons are
+provided for two separate reasons.
+
+First, as word order is clearly involved in some
+non-trivial way in human judgements, we can as-
+sume that holistic ranks contain an implicit word
+order component. A limited level of similarity
+between human judgements and DTED is thus to
+
+be expected, as they are at least partially measur-
+ing the same phenomenon. In addition, while the
+DTED algorithm is intended to measure word or-
+der alone, the structure and alignment of the trees
+we use may themselves depend on other factors.
+For example, a badly chosen word may occupy
+a different role in its sentence than the reference
+choice would, resulting in an unpredictable change
+in the actions needed to correct it.
+
+Second, if we assume DTED’s results to be suc-
+cessfully representative of a sentence’s word or-
+der quality and human judgements to contain a
+word order component, the level of correlation can
+begin to quantify the significance of word order
+within the overall judgement. In the ideal theoret-
+ical case where DTED perfectly simulated human
+intuition on word order, such correlational coef-
+ficients would give direct insight into the signif-
+icance of that intuition to overall quality judge-
+ments.

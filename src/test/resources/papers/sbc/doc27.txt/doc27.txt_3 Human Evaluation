@@ -1,0 +1,36 @@
+
+Each year, we conduct a human evaluation
+campaign to assess translation quality and deter-
+mine the final ranking of candidate systems. This
+section describes how we prepared the evaluation
+data, collected human assessments, and computed
+the official results.
+
+3As of Fall 2011, the proceedings of the European Parlia-
+ment are no longer translated into all official languages.
+
+Over the past few years, our method of col-
+lecting and evaluating the manual translations has
+settled into the following pattern. We ask hu-
+man annotators to rank the outputs of five systems.
+From these rankings, we produce pairwise trans-
+lation comparisons, and then evaluate them with a
+version of the TrueSkill algorithm adapted to our
+task. We refer to this approach (described in Sec-
+tion 3.4) as the relative ranking approach (RR),
+so named because the pairwise comparisons de-
+note only relative ability between a pair of sys-
+tems, and cannot be used to infer their absolute
+quality. These results are used to produce the of-
+ficial ranking for the WMT 2016 tasks. However,
+work in evaluation over the past few years has pro-
+vided fresh insight into ways to collect direct as-
+sessments (DA) of machine translation quality. In
+this setting, annotators are asked to provide an as-
+sessment of the direct quality of the output of a
+system relative to a reference translation. In or-
+der to evaluate the potential of this approach for
+future WMT evaluations, we conducted a direct
+assessment evaluation in parallel. This evaluation,
+together with a comparison of the official results,
+is described in Section 3.5.

@@ -1,0 +1,7 @@
+In the more recent experiments that we report, the Moses system used is actually the Factored Moses of
+Bojar et al. (2012). It translates the source English text into a factored representation of Czech, where
+each word is represented by a tuple of a word form and a corresponding part-of-speech (PoS) tag. This
+enables Moses to use an additional language model which operates on PoS tags instead of word forms.
+This helps overcome data sparsity issues of the word-based language model and thus leads to a higher
+output quality, especially to its better grammaticality. Factored Moses is trained on parallel corpora
+pre-analyzed by Treex.

@@ -1,0 +1,63 @@
+
+The quantitative performance of the proposed
+models can be seen in Table 1. We evaluate BLEU
+and METEOR scores with tokenization under the
+official settings of WMT 2016 multimodal ma-
+chine translation challenge. The text-only baseline
+is the NMT implementation with global attention.
+Adding single global visual feature from an image
+at the head of a text sequence improves BLEU by
+0.6% and METEOR by 0.4% respectively.
+
+The results show that the additional visual in-
+formation improves the translations in this dataset.
+However, the lukewarm improvement is not as sig-
+nificant as we expected. One possible explana-
+tion is that the information required for the multi-
+modal translation task is mostly self-contained in
+the source text transcript. Adding global features
+from whole images do not provide extra supple-
+mentary information and thus results in a subtle
+improvement.
+
+Detailed regional visual features provide extra
+attributes and information that may help the NMT
+translates better. In our experiment, the proposed
+model2 with multiple regional and one global vi-
+sual features showed an improvement of 1.7%
+in BLEU and 1.6% in METEOR while model3
+
+643
+
+
+
+showed an improvement of 2.0% in BLEU and
+2.3% in METEOR. The results correspond to our
+observation that most sentences would describe
+important objects which could be identified by R-
+CNN. The most commonly mentioned object is
+“person”. It’s likely that the additional attributes
+provided by the visual features about the person in
+an image help to encode more detailed context and
+thus benefit NMT decoding. Other high frequency
+objects are “car”, “baseball”, “cellphone”, etc.
+
+For the proposed LSTM with multiple regional
+visual features (model 2), the semantic features
+in fc7 of the regions-of-interest in an image pro-
+vide additional regional visual information to form
+a better sentence representation. We also experi-
+mented other sorting methods including descend-
+ing size, random, and categorical order to generate
+the visual sequences. However, ascending-ordered
+sequences achieve the best result.
+
+For the proposed parallel LSTM architecture
+with regional visual features (model 3), the re-
+gional visual features further help the NMT de-
+coder to attend more accurately and accordingly
+to focus on the right thread where the hidden states
+are twiddle by the local visual attributes. The best
+result of our models achieve 36.5% in BLEU and
+54.1% in METEOR, which is comparable to the
+state-of-the-art Moses results in this challenge.

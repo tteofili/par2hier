@@ -1,0 +1,32 @@
+
+Proceedings of the First Conference on Machine Translation, Volume 2: Shared Task Papers, pages 264–267,
+Berlin, Germany, August 11-12, 2016. c©2016 Association for Computational Linguistics
+
+MetaMind Neural Machine Translation System for WMT 2016
+
+James Bradbury
+MetaMind - A Salesforce Company
+
+Palo Alto, CA
+james.bradbury@salesforce.com
+
+Richard Socher
+MetaMind - A Salesforce Company
+
+Palo Alto, CA
+rsocher@salesforce.com
+
+Abstract
+
+Neural Machine Translation (NMT) sys-
+tems, introduced only in 2013, have
+achieved state of the art results in many
+MT tasks. MetaMind’s submissions to
+WMT ’16 seek to push the state of the art
+in one such task, English→German news-
+domain translation. We integrate promis-
+ing recent developments in NMT, includ-
+ing subword splitting and back-translation
+for monolingual data augmentation, and
+introduce the Y-LSTM, a novel neural
+translation architecture.

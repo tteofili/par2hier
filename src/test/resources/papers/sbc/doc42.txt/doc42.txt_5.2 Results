@@ -1,0 +1,107 @@
+
+Our first test set is a random sample of 2000 sen-
+tences from OpenSubtitles2013 where the English
+source contains a 2nd person pronoun. Results are
+shown in Table 2. Side constraints very effectively
+control whether the NMT system produces polite
+or informal output. Translations constrained to be
+polite are overwhelmingly labelled polite or neutral
+
+37
+
+
+
+side constraint output label BLEUneutral polite informal
+(reference) 429 524 1047 -
+none 178 351 1471 20.7
+polite 208 1728 64 17.9
+informal 141 28 1831 20.2
+oracle 161 567 1272 23.9
+
+Table 2: Politeness and translation quality on test set of 2000
+sentences from OpenSubtitles2013 that contain second person
+
+pronoun you(r(s(elf))) in English source text.
+
+source Give me the telephone!
+reference Gib mir das Telefon! [T]
+none Gib mir das Telefon! [T]
+polite Geben Sie mir das Telefon! [V]
+informal Gib mir das Telefon! [T]
+source Are you kidding?
+reference Das ist doch ein Witz! [N]
+
+(this is a joke!)
+none Machst du Witze? [T]
+polite Machen Sie Witze? [V]
+informal Machst du Witze? [T]
+source You foolish boy.
+reference Du dummer Junge. [T]
+none Du dummer Junge. [T]
+polite Du dummer Junge. [T]
+informal Du dummer Junge. [T]
+
+Table 3: Translation examples with different side constraints.
+Translations marked as neutral [N], informal [T] or polite [V].
+
+by our automatic target-side annotation (96%), and
+analogously, translations constrained to be informal
+are almost exclusively informal or neutral (98%).
+
+We also see that BLEU is strongly affected by the
+choice. An oracle experiment in which the side con-
+straint of every sentence is informed by the reference
+obtains an improvement of 3.2 BLEU over the base-
+line (20.7→23.9).
+
+We note that the reference has a higher propor-
+tion of German sentences labelled neutral than the
+NMT systems. A close inspection shows that this is
+due to sentence alignment errors in OpenSubtitles,
+free translations as shown in Table 3, and sentences
+where you is generic and translated by the imper-
+sonal pronoun man in the reference.
+
+The side constraints are only soft constraints, and
+are occasionally overridden by the NMT system.
+These cases tend to be sentences where the source
+text provides strong politeness clues, like the sen-
+
+side constraint output label BLEUneutral polite informal
+(reference) 1406 189 405 -
+none 1385 125 490 22.6
+polite 1386 576 38 21.7
+informal 1365 11 624 22.5
+oracle 1374 185 441 24.0
+
+Table 4: Politeness and translation quality on test set of 2000
+random sentences from OpenSubtitles2013.
+
+tence You foolish boy. Neither the address boy nor
+the attribute foolish are likely in polite speech, and
+the sentence is translated with a T pronoun, regard-
+less of the side constraint.
+
+While Table 2 only contains sentences with an
+address pronoun in the source text, Table 4 repre-
+sents a random sample. There are fewer address
+pronouns in the random sample, and thus more neu-
+tral sentences, but side constraints remain effective.
+This experiment also shows that we do not over-
+produce address pronouns when side constraints are
+provided, which validates our strategy of includ-
+ing side constraints with a constant probability α at
+training time.
+
+The automatic evaluation with BLEU indicates
+that the T-V distinction is relevant for translation.
+We expect that the actual relevance for humans de-
+pends on the task. For gisting, we expect the T-V
+distinction to have little effect on comprehensibility.
+For professional translation that uses MT with post-
+editing, producing the desired honorifics is likely to
+improve post-editing speed and satisfaction. In an
+evaluation of MT for subtitle translation, Etchegoy-
+hen et al. (2014) highlight the production of the ap-
+propriate T-V form as “a limitation of MT technol-
+ogy” that was “often frustrat[ing]” to post-editors.

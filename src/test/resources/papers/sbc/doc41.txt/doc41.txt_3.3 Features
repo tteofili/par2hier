@@ -1,0 +1,13 @@
+The model uses two rule features to distinguish larger phrase pairs from Hiero-extractable phrase pairs:
+a long-distance feature, corresponding to the probability estimate that a rule was extracted from a larger
+phrase pair (exceeding Hiero’s max-phrase-length); and an adjunct-crossing feature corresponding to
+the probability that a rule was extracted from a (shorter) phrase pair violating the non-adjunct-crossing
+constraint.
+
+Besides, we tested a version of the model with a simplified labelling for adjunct sequences. These
+sequences are then labelled with A instead of Ax, while their size x appears in the following feature:
+
+fx = e
+1−x (1)
+
+For other rules (adjuncts and other phrase pairs), fx is taken to be 1.

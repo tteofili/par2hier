@@ -1,0 +1,52 @@
+
+Dependency parsing aims to link each word to its
+arguments so as to form a directed graph spanning
+the whole sentence. Normally the directed graph is
+restricted to a dependency tree where each word de-
+pends on exactly one parent, and all words find their
+parents. Given a sentence as a sequence n words:
+
+x = x1 x2 .. xn
+
+dependency parsing finds a dependency tree y,
+where (i, j) ∈ y is an edge from the head word xi
+to the modifier word xj . The root r ∈ x in the tree
+y has no head word, and each of the other words,
+j(j ∈ x and j 6= r), depends on a head word
+i(i ∈ x and i 6= j).
+
+Following the edge-based factorization method
+(Eisner, 1996), the score of a dependency tree can be
+factorized into the dependency edges in the tree. The
+graph-based method (McDonald et al., 2005) factor-
+izes the score of the tree as the sum of the scores of
+all its edges, and the score of an edge is defined as
+the inner product of the feature vector and the weight
+vector. Given a sentence x, the parsing procedure
+searches for the candidate dependency tree with the
+
+maximum score:
+
+y(x) = argmax
+y∈GEN(x)
+
+S(y)
+
+= argmax
+y∈GEN(x)
+
+∑
+
+(i,j)∈y
+S(i, j)
+
+(1)
+
+Here, the function GEN indicates the enumer-
+ation of candidate trees. The MIRA algorithm
+(Crammer et al., 2003) is used to train the parameter
+vector. A bottom-up dynamic programming algo-
+rithm is designed for projective parsing which gives
+projective parsing trees, and the Chu-Liu-Edmonds
+algorithm for non-projective parsing which gives
+non-projective parsing trees.

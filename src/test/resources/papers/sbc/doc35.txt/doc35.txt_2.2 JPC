@@ -1,0 +1,42 @@
+JPC was constructed by the Japan Patent Office (JPO). It consists of a Chinese-Japanese patent de-
+scription corpus (JPC-CJ), Korean-Japanese patent description corpus (JPC-KJ) and English-Japanese
+patent description corpus (JPC-EJ) with four sections, which are Chemistry, Electricity, Mechanical en-
+gineering, and Physics, based on International Patent Classification (IPC). Each corpus is separated into
+
+1http://lotus.kuee.kyoto-u.ac.jp/ASPEC/
+2http://lotus.kuee.kyoto-u.ac.jp/WAT/patent/index.html
+3http://orchid.kuee.kyoto-u.ac.jp/WAT/bppt-corpus/index.html
+4http://www.cfilt.iitb.ac.in/iitb parallel/index.html
+5http://opac.jst.go.jp/bunrui/index.html
+
+2
+
+
+
+LangPair Train Dev DevTest Test
+JPC-CJ 1,000,000 2,000 2,000 2,000
+JPC-KJ 1,000,000 2,000 2,000 2,000
+JPC-EJ 1,000,000 2,000 2,000 2,000
+
+Table 2: Statistics for JPC.
+
+LangPair Train Dev DevTest Test
+BPPT-IE 50,000 400 400 400
+
+Table 3: Statistics for BPPT Corpus.
+
+training, development, development-test and test data, which are sentence pairs. This corpus was used
+for patent subtasks C↔J, K↔J and E↔J. The statistics for each corpus are described in Table2.
+The Sentence pairs in each data were randomly extracted from a description part of comparable patent
+
+documents under the condition that a similarity score between sentences is greater than or equal to the
+threshold value 0.05. The similarity score was calculated by the method from (Utiyama and Isahara,
+2007) as with ASPEC. Document pairs which were used to extract sentence pairs for each data were
+not used for the other data. Furthermore, the sentence pairs were extracted to be same number among
+the four sections. The maximize number of sentence pairs which are extracted from one document pair
+was limited to 60 for training data and 20 for the development, development-test and test data. The
+training data for JPC-CJ was made with sentence pairs of Chinese-Japanese patent documents published
+in 2012. For JPC-KJ and JPC-EJ, the training data was extracted from sentence pairs of Korean-Japanese
+and English-Japanese patent documents published in 2011 and 2012. The development, development-
+test and test data for JPC-CJ, JPC-KJ and JPC-EJ were respectively made with 100 patent documents
+published in 2013.

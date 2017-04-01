@@ -1,0 +1,94 @@
+
+In SMT, a coverage set is maintained to keep track of which source words have been
+translated (“covered”) in the past. Take an input sentence x = {x1, x2, x3, x4} as
+an example, the initial coverage set is C = {0, 0, 0, 0} which denotes no source
+word is yet translated. When a translation rule bp = (x2x3, ymym+1) is used
+to generate translation, we produce one hypothesis labelled with coverage C =
+{0, 1, 1, 0}. It means that the second and third source words are translated. The
+
+4
+
+
+
+x1 x2 xT 
+
+yi-1 yi 
+
+si-1 si 
+
+αi,1 αi,2 αi,T 
+
+ci 
+
+βi-1,1 βi-1,2 βi-1,T 
+
+h1 
+
+h1 
+
+h2 
+
+h2 hT 
+
+hT 
+
+Figure 3: Architecture of coverage-based alignment model. A coverage set βi−1 is
+maintained to keep track of which source words have been translated before time
+i. Alignment decisions (αi,j) are made jointly taking into account βi−1,j to give a
+bias to untranslated source words.
+
+goal is to generate translation with full coverage C = {1, 1, 1, 1}. A source word
+is translated when it is covered by one translation rule, and it is not allowed to be
+translated again in the future (i.e. hard coverage). In this way, each source word
+is guaranteed to be translated and only be translated once. As shown, coverage is
+essential for SMT since it avoids gaps and overlap when translating source words.
+
+Modeling coverage is also useful for neural machine translators with automatic
+alignment, since they generally lack a mechanism to tell whether a certain segment
+of source sentence is translated, and therefore prone to the “coverage” mistakes:
+some part of source sentence is translated more than once or not translated. For
+neural machine translation model, directly modeling coverage is less straightfor-
+ward, but the problem can be significantly alleviated by keeping track of the atten-
+tion signal during the decoding process. The most natural way for doing that is to
+append an annotation vector βj to every hj , which is uniformly initialized but up-
+dated after every attentive read of the corresponding hidden state. This annotation
+vector will enter the soft attention model for alignment, as illustrated in Figure 3.
+
+Roughly speaking, since βi−1,j summarizes the attention record for hj ( and
+therefore for a small neighbor centering at the jth source word), it will discour-
+age further attention to it if it has been heavily attended, and implicitly push the
+attention to the less attended segments of the source sentence since the attention
+weights are normalized to one. This could potentially solve both coverage mistakes
+mentioned above, when modeled and learned properly.
+
+Formally annotation model is given by
+
+βi,j = gupdate
+(
+βi−1,j , αi,j ,Φ(hj), auxs
+
+)
+(7)
+
+5
+
+
+
+where
+
+• gupdate(·) is the function that updates βi,j after the new attention at time step
+i in the decoding process;
+
+• βi,j is a d-dimensional annotation vector summarizing the history of atten-
+tion till time step i on hj ;
+
+• Φi(hj) is a word-specific feature with its own parameters;
+
+• auxs are auxiliary inputs exploited in different sorts of coverage models;
+
+Equation 5 gives a rather general model, which could take different function forms
+for gupdate(·) and Φ(·), and different auxiliary inputs auxs (e.g. previous decod-
+ing state si−1). In the rest of this section, we will give a number of representative
+implementations of the annotation model, which either resort to the flexibility of
+neural network function approximation (Section 3.1) or bear more linguistic intu-
+ition (Section 3.2).

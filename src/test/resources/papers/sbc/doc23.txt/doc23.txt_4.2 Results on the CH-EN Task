@@ -1,0 +1,12 @@
+
+Table 3 shows the comparison between our method
+and the baselines on the CH-EN task.7 The results
+were similar in character to the results for JP-EN.
+The proposed joint model (NMT-J-5) consistently
+outperformed the strongest neural baseline (NMT-
+l2r-5), an ensemble of five l2r NMT models, on
+all the test sets with gains up to 1.4 BLEU points.
+Furthermore, our model again achieved substantial
+gains over the Moses and Moses-hier systems, in the
+range 1.9∼5.2 BLEU points, depending on the test
+set.

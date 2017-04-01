@@ -1,0 +1,40 @@
+
+As the advances of deep learning, Neural Machine
+Translation (NMT) (Kalchbrenner and Blunsom,
+
+639
+
+
+
+2013; Jean et al., 2014) leveraging encode-
+decoder architecture attracts research attention.
+Under the NMT framework, less domain knowl-
+edge is required and large training corpora can
+compensate for it. However, encoder-decoder
+structure encodes the source sentence into one
+fixed-length vector, which may deteriorate the
+translation performance as the length of source
+sentences increasing. (Bahdanau et al., 2014) ex-
+tended encoder-decoder structure that the decoder
+only focuses on parts of source sentence. (Lu-
+ong et al., 2015) further proposed attention-based
+model that combine global, attending to all source
+words, and local, only focusing on a part of source
+words, attentional mechanism.
+
+Rather than using the embedding of each
+modality independently, Some works (Hardoon
+et al., 2004; Andrew et al., 2013; Ngiam et al.,
+2011; Srivastava and Salakhutdinov, 2014) focus
+on learning joint space of different modalities. In
+machine translation fields, (Zhang et al., 2014; Su
+et al., 2015) learned phrase-level bilingual repre-
+sentation using recursive auto-encoder. Beyond
+textual embedding, (Kiros et al., 2014) proposed
+CNN-LSTM encoder to project two modalities
+into the same space. Based on the jointly learn-
+ing of multiple modalities or languages, we find
+it possible to evaluate the quality of the transla-
+tions that if the space of the translated sentence is
+similar to the source sentence or the image, it may
+imply that the translated sentence is good.

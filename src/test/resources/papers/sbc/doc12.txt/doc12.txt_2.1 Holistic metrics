@@ -1,0 +1,36 @@
+Word Error Rate (Nießen et al., 2000) uses
+an approach closely linked to Levenshtein dis-
+tances (Levenshtein, 1965), producing a straight-
+forward count of the number of insertions, dele-
+tions and substitutions needed to convert the hy-
+pothesis into a given reference. The Position-
+Independent Error Rate (Tillmann et al., 1997)
+performs similar calculations without considering
+word ordering. More recently, Translation Error
+Rate (Snover et al., 2006) allows ‘phrase shifting’
+of word groups together, while CDer (Leusch et
+al., 2006) places higher priority and level of detail
+on block movement calculations.
+
+BLEU (Papineni et al., 2002) on the other hand
+has achieved success by directly comparing n-
+grams between the two sentences: it calculates a
+geometric mean of n-gram precisions and applies
+a penalty for short sentences.
+
+A more recent and substantial metric, Me-
+teor (Lavie and Agarwal, 2007), first applies the
+parameterised harmonic mean of the Precision and
+Recall (Rijsbergen, 1979), which measures the
+correctness of the individual word choices in the
+hypothesis sentence. It includes a second step,
+taking into account the ordering of those words.
+It does this by ‘chunking’ the sentences, finding
+the smallest number of groups of aligned words
+such that each contains words which are both ad-
+jacent and identical in both hypothesis and refer-
+ence sentences. The ratio of the chunk count to
+the total number of aligned words represents the
+‘goodness’ of the ordering, and is then multiplied
+with the original harmonic mean to produce a final
+score.

@@ -1,0 +1,53 @@
+Cumulative Duration [Hours]
+
+9.2
+
+9.4
+
+9.6
+
+9.8
+
+10.0
+
+10.2
+
+10.4
+
+10.6
+
+10.8
+
+BL
+EU
+
+ S
+co
+
+re
+ [%
+
+]
+
+BLEU Score vs. Cumulative Duration (En-Ja)
+sent-by-4gram-freq
+4gram-freq
+reduced-struct-freq
+
+Figure 5: Transition of BLEU score vs. additional source words (left) and vs. cumulative working duration (right)
+
+the proposed method. For each method we col-
+lected translations of 10k source words, alternating
+between segments selected by each method to pre-
+vent bias.
+We used the same dataset as the English-Japanese
+
+translation task and the same tools in the simula-
+tion experiment (Section 5). However, for training
+target language models, we interpolated one trained
+with the base data and a second trained with col-
+lected data by using SRILM (Stolcke, 2002) because
+the hand-made data set was too small to train a full
+language model using only this data. We tuned the
+interpolation coefficient such that it maximizes the
+perplexity for the tuning dataset.

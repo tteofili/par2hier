@@ -1,0 +1,13 @@
+We used the following tools for tokenization.
+
+• Juman version 7.08 for Japanese segmentation.
+• Stanford Word Segmenter version 2014-01-049 (Chinese Penn Treebank (CTB) model) for Chinese
+segmentation.
+
+• The Moses toolkit for English and Indonesian tokenization.
+• Mecab-ko10 for Korean segmentation.
+• Indic NLP Library11 for Hindi segmentation.
+
+To obtain word alignments, GIZA++ and grow-diag-final-and heuristics were used. We used 5-gram
+language models with modified Kneser-Ney smoothing, which were built using a tool in the Moses
+toolkit (Heafield et al., 2013).

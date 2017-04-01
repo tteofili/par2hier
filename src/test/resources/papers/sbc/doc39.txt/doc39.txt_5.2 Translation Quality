@@ -1,0 +1,35 @@
+
+Table 1 shows the translation performances measured in BLEU score. Clearly the
+proposed COVERAGE-BASED NMT significantly improves the translation quality
+in all cases, although there are still considerable differences among different vari-
+ants. More specifically,
+
+• NN-based Coverages (Rows 3 and 4 in Table 1): Both variants of NN-
+based coverages outperform RNNSearch with averaged gains of 0.63 and
+0.94 BLEU points, respectively. Introducing gating activation function im-
+proves the performance of coverage models, which is consistent with the
+results in other tasks (e.g. (Cho et al.2014b)).
+
+3There are recent progress on aggregating multiple models or enlarging the vocabulary(e.g., in
+(Jean et al.2015)), but here we focus on the generic models.
+
+12
+
+
+
+System SAER AER
+RNNsearch 69.84 56.78
++ NN-based coverage w/o gating 69.37 56.44
++ NN-based coverage w/ gating 68.49 56.17
++ Linguistic coverage w/o fertility 69.25 55.88
++ Linguistic coverage w/ fertility 67.89 54.91
+
+Table 2: Evaluation of alignment quality. For both metrics, the lower the score, the
+better the alignment quality.
+
+• Linguistic Coverages (Rows 5 and 6 in Table 1): Two observations can be
+made. First, linguistic coverages overall outperforms its NN-based coun-
+terparts, indicating that explicitly linguistic regularities are very important
+to the attention model. This is further verified on the alignment task (Sec-
+tion 5.3). Second, incorporating fertility model boosts performance by better
+estimating the covered ratios of source words.

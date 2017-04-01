@@ -1,0 +1,19 @@
+Moses (Koehn et al., 2007) is a standard PB-SMT system. It features simple rule-based tokenization
+and true-casing scripts, which are sometimes language-specific, but the core of the decoder is purely
+statistical and oblivious of any linguistics. It relies on GIZA++ (Och and Ney, 2003) to compute word
+alignment of the training parallel corpus, used to extract lexicons and phrase tables that provide the
+knowledge of translation options to the decoder. A word-based language model is used to score possible
+translations, so that a fluent one can be produced as the output.
+
+1A few combinations have been also applied to other translation pairs.
+This work is licenced under a Creative Commons Attribution 4.0 International License. Page numbers and proceedings footer
+are added by the organizers. License details: http://creativecommons.org/licenses/by/4.0/
+
+1
+Proceedings of the 2nd Deep Machine Translation Workshop (DMTW 2016), pages 1–10,
+
+Lisbon, Portugal, 21 October 2016.
+
+
+
+Figure 1: TectoMT

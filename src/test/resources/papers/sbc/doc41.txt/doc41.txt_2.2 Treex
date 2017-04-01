@@ -1,0 +1,5 @@
+Treex2 (Popel and Žabokrtský, 2010; Žabokrtský, 2011) is a linguistically motivated NLP framework.
+It consists of a large number of smaller components performing a specific NLP-task (blocks), both
+Treex-specific as well as Treex-wrapped external tools, which can be flexibly combined into processing
+pipelines. Sentences are represented by surface and deep syntactic dependency trees, richly annotated
+with numerous linguistic attributes, similarly to the Prague Dependency Treebank (Hajič, 1998).

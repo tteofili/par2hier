@@ -1,0 +1,20 @@
+
+The IT-domain translation task introduced this
+year brought several novelties to WMT:
+
+• 4 out of the 7 languages of the IT task are
+new in WMT (Bulgarian, Basque, Dutch and
+Portuguese),
+
+• adaptation to the IT domain with its specifics
+such as frequent named entities (mostly menu
+items, names of products and companies) and
+technical jargon,
+
+• adaptation to translation of answers in help-
+desk service setting (many of the sentences
+are instructions with imperative verbs, which
+is very rare in the News translation task and
+may require adaptation of the whole transla-
+tion pipeline, including e.g. part-of-speech
+taggers).

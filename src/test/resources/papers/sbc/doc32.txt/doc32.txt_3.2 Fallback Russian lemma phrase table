@@ -1,0 +1,25 @@
+
+To augment source coverage, we used an addi-
+tional phrase table trained on source lemmas in
+a similar fashion to the regular phrase table de-
+scribed in Section 2.2. We combined the two ta-
+bles statically prior to decoding, into a single ta-
+
+329
+
+
+
+ble with non-lemmatized source phrases. For a
+given source text and its lemmatized version, we
+first create an expansion phrase table with an entry
+for each source phrase in the text whose lemma-
+tized form is present in the lemmatized phrase ta-
+ble. The target phrase and scores for the entry are
+obtained from the lemmatized table; that is, entries
+for different surface forms of the same lemma will
+have identical scores in the expansion table. We
+then linearly interpolate the regular and expansion
+tables, using epsilon probabilities for missing en-
+tries, and a weight of 0.9 on the regular table.1 The
+combined table is used in a standard way during
+decoding.

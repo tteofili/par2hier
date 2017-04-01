@@ -1,0 +1,11 @@
+
+In the neural machine translation, the easiest way
+to decode is to greedily get the words with highest
+probability step-by-step. To achieve better perfor-
+mance, ensemble of models are required. Transla-
+tion candidates are generated from multiple mod-
+els, and we aim to figure out which candidate
+should be the best one. The following we de-
+scribe the approaches we investigated to re-score
+the translation candidates using monolingual and
+bilingual information.

@@ -1,0 +1,17 @@
+The decoder was used to translate the lowercased,
+rescored output to mixed case using a target side
+LM and a truecase map. The 3-gram truecasing
+LM was trained on the target side of all the WMT
+parallel training data as well as the WMT mono-
+lingual English corpus described in Section 2.1.
+Beginning of sentence case was normalized be-
+fore training the LM. In addition, casing informa-
+tion was transferred heuristically from the source
+to the target for OOVs and title/upper cased multi-
+word sequences. Beginning-of-sentence case was
+also restored. There were no OOVs because of
+
+transliteration (Section 3.3), so case for translit-
+erated words was restored via a post-processing
+script. As a final step, the output was detokenized
+with rule-based methods.

@@ -1,0 +1,103 @@
+
+The model identified as metamind-ylstm uses
+a novel attentional framework we call the Y-
+LSTM. The encoder is a five-layer stacked LSTM
+recurrent neural network language model (RNN-
+LM) with subword-vector inputs wint , whose top-
+most output state htopt is used as input to a soft-
+max layer which predicts the next input token. The
+middle (l = 3) layer of this encoder RNN-LM
+is connected recurrently to a single-layer LSTM
+called the “tracker;” at denotes the set of inputs to
+a given LSTM layer:
+
+al 6=3t = [h
+l−1
+t ;h
+
+l
+t−1]
+
+al=3t = [h
+l−1
+t ;h
+
+l
+t−1;h
+
+tracker
+t−1 ]
+
+atrackert = [h
+tracker
+t−1 ;h
+
+3
+t ]
+
+The hidden and memory states ctrackert and h
+tracker
+t
+
+of the tracker LSTM are saved at each timestep
+as the variable-length encoding matrices C and
+H . The decoder is an analogous RNN-LM with a
+tracker LSTM, identical except that the hidden and
+memory states of the decoder’s tracker (c̃trackert
+and h̃trackert ) are replaced at each timestep with
+an attentional sum of the encoder’s saved tracker
+states:
+
+score(h̃t, hs) = h̃th
+>
+s
+
+αst = softmaxall s(score(h̃
+tracker
+t , h
+
+tracker
+s ))
+
+c̃trackert =
+∑
+
+s
+
+αstc
+tracker
+s
+
+h̃trackert =
+∑
+
+s
+
+αsth
+tracker
+s
+
+265
+
+
+
+System BLEU-c on newstest2016
+Best phrase-based system (uedin-syntax) 30.6
+Other NMT systems – single model
+NYU/U. Montreal character-based 30.8
+U. Edinburgh subword-based (uedin-nmt-single) 31.6
+Other NMT systems – ensemble or model combination
+U. Edinburgh ensemble of 4 (uedin-nmt-ensemble) 34.2
+Our systems – single model
+metamind-single 31.6
+metamind-ylstm 29.3
+Our systems – ensemble
+metamind-ensemble 32.3
+Ensemble of four checkpoints without Y-LSTM 32.1
+
+Table 1: BLEU results on the official WMT 2016 test set. Only our main ensemble was entered into the
+human ranking process, coming in second place behind U. Edinburgh.
+
+The overall network loss is the sum of the lan-
+guage model (negative log-likelihood over the out-
+put softmax) losses for the encoder and decoder.

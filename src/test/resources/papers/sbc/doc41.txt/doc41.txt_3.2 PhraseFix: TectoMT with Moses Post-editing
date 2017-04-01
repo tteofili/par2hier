@@ -1,0 +1,10 @@
+
+The PhraseFix system of Galuščáková et al. (2013) is based on the work of Simard et al. (2007), who
+introduced the idea of automatically post-editing a first-stage MT system by a second-stage MT system,
+trained to “translate” the output of the first-stage system into a reference translation. This has been shown
+to be particularly beneficial for conceptually different MT systems. In PhraseFix, the source English side
+of the CzEng parallel corpus of Bojar and Žabokrtský (2009) is translated by TectoMT into Czech, and
+Moses is then trained in a monolingual setting to translate the TectoMT-Czech into reference-Czech, i.e.,
+the target side of CzEng (see Figure 3). Evaluation shows that this approach works well in principle,
+significantly improving the quality of the output as compared to the base TectoMT system. However, it
+does not surpass the translation quality provided by a standard standalone bilingual Moses.

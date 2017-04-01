@@ -1,0 +1,74 @@
+The participants submit translation results via an automatic evaluation system deployed on the WAT2016
+web page, which automatically gives evaluation scores for the uploaded results. Figure 1 shows the sub-
+mission interface for participants. The system requires participants to provide the following information
+when they upload translation results:
+
+• Subtask:
+– Scientific papers subtask (J ↔ E, J ↔ C);
+– Patents subtask (C ↔ J ,K ↔ J , E ↔ J);
+– Newswire subtask (I ↔ E)
+– Mixed domain subtask (H ↔ E, H ↔ J)
+
+• Method (SMT, RBMT, SMT and RBMT, EBMT, NMT, Other);
+
+12http://www.kecl.ntt.co.jp/icl/lirg/ribes/index.html
+13http://www.phontron.com/kytea/model.html
+14http://code.google.com/p/mecab/downloads/detail?
+
+name=mecab-ipadic-2.7.0-20070801.tar.gz
+15http://nlp.stanford.edu/software/segmenter.shtml
+16https://bitbucket.org/eunjeon/mecab-ko/
+17https://github.com/moses-smt/mosesdecoder/tree/
+
+RELEASE-2.1.1/scripts/tokenizer/tokenizer.perl
+18https://bitbucket.org/anoopk/indic nlp library
+19http://lotus.kuee.kyoto-u.ac.jp/WAT/evaluation/index.html
+
+7
+
+
+
+Fi
+gu
+re
+1:
+
+T
+he
+
+su
+bm
+
+is
+si
+on
+
+w
+eb
+
+pa
+ge
+
+fo
+rp
+
+ar
+tic
+ip
+an
+ts
+
+8
+
+
+
+• Use of other resources in addition to ASPEC / JPC / BPPT Corpus / IITB Corpus;
+
+• Permission to publish the automatic evaluation scores on the WAT2016 web page.
+
+The server for the system stores all submitted information, including translation results and scores, al-
+though participants can confirm only the information that they uploaded. Information about translation
+results that participants permit to be published is disclosed on the web page. In addition to submitting
+translation results for automatic evaluation, participants submit the results for human evaluation using
+the same web interface. This automatic evaluation system will remain available even after WAT2016.
+Anybody can register to use the system on the registration web page 20.

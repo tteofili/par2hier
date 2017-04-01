@@ -1,0 +1,130 @@
+
+Comparison of efficiency: In Figure 3, we show
+the evaluation score results by the number of addi-
+tional source words up to 100k and 1M words. We
+can see that in English-French translation, the ac-
+curacy of the selection methods using parse trees
+grows more rapidly than other methods and was sig-
+nificantly better even at the point of 1M additional
+words. In the case of English-Japanese translation,
+the gains over 4-gram frequency are much smaller,
+but the proposed methods still consistently perform
+as well or better than the other methods. Besides,
+in all the graphs we can see the improvement of
+reduced-maxsubst-freq and reduced-struct-freq over
+maxsubst-freq and struct-freq respectively, demon-
+strating that avoiding selecting redundant segments
+is helpful in improving efficiency.
+
+24
+
+
+
+0k 20k 40k 60k 80k 100k25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+BL
+EU
+
+ S
+co
+
+re
+ [%
+
+]
+
+sent-rand
+4gram-rand
+sent-by-4gram-freq
+4gram-freq
+maxsubst-freq
+reduced-maxsubst-freq
+struct-freq
+reduced-struct-freq
+(Oracle Score = 30.28)
+
+100k 200k 300k 400k 500k 600k 700k 800k 900k 1000k
+#Additional Lines [Source Words]
+
+BLEU Score vs. #Additional Words (En−Fr)
+
+0k 20k 40k 60k 80k 100k
+10
+
+12
+
+14
+
+16
+
+18
+
+20
+
+22
+
+BL
+EU
+
+ S
+co
+
+re
+ [%
+
+]
+
+sent-rand
+4gram-rand
+sent-by-4gram-freq
+4gram-freq
+maxsubst-freq
+reduced-maxsubst-freq
+struct-freq
+reduced-struct-freq
+(Oracle Score = 21.59)
+
+100k 200k 300k 400k 500k 600k 700k 800k 900k 1000k
+#Additional Lines [Source Words]
+
+BLEU Score vs. #Additional Words (En−Ja)
+
+Figure 3: BLEU score vs. number of additional source words in each method
+
+Length of selected phrases: Due to the differ-
+ent criteria used by each method, there are also sig-
+nificant differences in the features of the selected
+phrases. In Table 2, we show the details of the
+number of all selected phrases, words and average
+phrase length until the stop condition, and at the
+point of 10k additional source words. Here we see
+the tendency that the selection methods based on
+parse trees select shorter phrases than other meth-
+ods. This is caused by the fact that longer phrases
+are only counted if they cover a syntactically defined
+phrases, and thus longer substrings that do not form
+syntactic phrases are removed from consideration.
+
+Phrase coverage: This difference in the features
+of the selected phrases also affects howwell they can
+cover new incoming test data. To demonstrate this,
+in Table 3 we show the 1-gram and 4-gram cover-
+age of the test dataset after 10k, 100k and 1M words
+have been selected. From the results, we can see that
+
+the reduced-struct-freq method attains the highest 1-
+gram coverage, efficiently covering unknown words.
+On the other hand, it is clear that methods selecting
+longer phrases have an advantage for 4-gram cover-
+age, and we see the highest 4-gram coverage in the
+sent-by-4gram-freq method.

@@ -1,0 +1,49 @@
+
+Proceedings of the First Conference on Machine Translation, Volume 2: Shared Task Papers, pages 326–332,
+Berlin, Germany, August 11-12, 2016. c©2016 Association for Computational Linguistics
+
+NRC Russian-English Machine Translation System for WMT 2016
+
+Chi-kiu Lo Colin Cherry
+Anna Kazantseva
+
+George Foster
+
+National Research Council Canada
+1200 Montreal Road, Ottawa, Ontario K1A 0R6, Canada
+
+FirstName.LastName@nrc.ca
+
+Darlene Stewart
+Roland Kuhn
+
+Rabib Islam
+
+Abstract
+
+We describe the statistical machine trans-
+lation system developed at the National
+Research Council of Canada (NRC) for
+the Russian-English news translation task
+of the First Conference on Machine Trans-
+lation (WMT 2016). Our submission is
+a phrase-based SMT system that tackles
+the morphological complexity of Russian
+through comprehensive use of lemmatiza-
+tion. The core of our lemmatization strat-
+egy is to use different views of Russian for
+different SMT components: word align-
+ment and bilingual neural network lan-
+guage models use lemmas, while sparse
+features and reordering models use fully
+inflected forms. Some components, such
+as the phrase table, use both views of the
+source. Russian words that remain out-of-
+vocabulary (OOV) after lemmatization are
+transliterated into English using a statisti-
+cal model trained on examples mined from
+the parallel training corpus. The NRC
+Russian-English MT system achieved the
+highest uncased BLEU and the lowest
+TER scores among the eight participants
+in WMT 2016.

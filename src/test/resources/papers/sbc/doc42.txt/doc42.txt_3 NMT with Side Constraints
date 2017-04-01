@@ -1,0 +1,28 @@
+
+We are interested in machine translation for lan-
+guage pairs where politeness is not grammatically
+marked in the source text, but should be predicted in
+the target text. The basic idea is to provide the neu-
+ral network with additional input features that mark
+side constraints such as politeness.
+
+At training time, the correct feature is extracted
+from the sentence pair as described in the following
+section. At test time, we assume that the side con-
+straint is provided by a user who selects the desired
+level of politeness of the translation.
+
+We add side constraints as special tokens at the
+end of the source text, for instance <T> or <V>.
+The attentional encoder-decoder framework is then
+able to learn to pay attention to the side constraints.
+One could envision alternative architectures to in-
+
+corporate side constraints, e.g. directly connecting
+them to all decoder hidden states, bypassing the
+attention model, or connecting them to the output
+layer (Mikolov and Zweig, 2012). Our approach is
+simple and applicable to a wide range of NMT ar-
+chitectures and our experiments suggest that the in-
+corporation of the side constraint as an extra source
+token is very effective.

@@ -1,0 +1,26 @@
+
+In recent years, significant research has been done
+to address problems that require joint modelling
+of language and vision. Examples of popular ap-
+plications involving both Natural Language Pro-
+cessing (NLP) and Computer Vision (CV) include
+image description generation and video captioning
+(Bernardi et al., 2016), image retrieval based on
+textual and visual cues (Feng and Lapata, 2010),
+visual question answering (Yang et al., 2015),
+among many others (see (Ramisa et al., 2016) for
+more examples). With very few exceptions (Grub-
+inger et al., 2006; Funaki and Nakayama, 2015;
+
+Gao et al., 2015), these applications are inherently
+monolingual and existing work explore mostly En-
+glish data. In an attempt to push this interdis-
+ciplinary field to incorporate a multilingual com-
+ponent, we propose the first shared task on two
+new applications: Multimodal Machine Transla-
+tion and Crosslingual Image Description. Gener-
+ally speaking, this shared task targets the gener-
+ation of image descriptions in a target language,
+given an image and one or more descriptions in a
+different (source) language. More specifically, the
+task can be addressed from two perspectives:

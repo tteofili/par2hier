@@ -1,0 +1,55 @@
+
+Our aim is to obtain appropriate example sentences that ease understanding of Japanese functional
+expressions. We conducted a small-scale experiment for evaluating the method for generating
+simplified example sentences. For the source data, the Balanced Corpus of Contemporary Written
+Japanese was used. We removed too short or too long sentences by limiting the sentence length
+between 3 to 25 words and then used the remaining 4,232,120 sentences for the experimental data.
+To identify occurrences of Japanese functional expressions in the extracted sentences, we used a
+
+publicly available morphological analyzer MeCab (taku910.github.io/mecab/). We add the two lists
+we created, “Japanese Functional Expressions List” and “Simple Japanese Replacement List”, into the
+IPA (mecab-ipadic-2.7.0-20070801) dictionary used as the standard dictionary for MeCab, with
+appropriate part-of-speech information for each expression, hoping that the morphological analyzer
+MeCab extracts the usages of functional expressions automatically. The accuracy is evaluated in the
+next section. Table 3 shows some example sentences of Japanese functional expressions and their
+corresponding simplified sentences.
+
+ID Original sentences Simplified sentences
+
+1 そしてそこへ、どこからか小鳥がやって来て、その
+虫をついばみました。
+
+そしてそこへ、どこからか小鳥が来て、その虫を啄
+
+みました。
+
+2 したがって、いろいろな関係部門、団体等と調整し
+なければならないことは言うまでもない。
+
+だから、色々な関係部門、団体等と調整しなければ
+
+ならないことは言う必要がない。
+
+3 私はそれ以来、数々の失敗を経てつぎのような結論
+にたどり着きました。
+
+私はそれ以来、多くの失敗を経て次のような結論に
+
+到達しました。
+
+4 つめが伸びていると、皮膚を傷つけるおそれがある
+ので、気をつけてください。
+
+爪が伸びていると、皮膚を傷つける可能性があるの
+
+で、気をつけてください。
+
+5 その土の中から、冬眠を破られた小さな虫が顔をの
+ぞかせました。
+
+その土の中から、冬眠を破られた小さな虫が顔を見
+
+せました。
+
+Table 3: Examples of original sentences and simplified sentences. The words with underline are
+functional expressions and the words in bold are simplified words.

@@ -1,0 +1,235 @@
+
+The five participating teams submitted a total of
+40 runs. However, only the Spanish–English and
+English–Spanish language pairs attracted submis-
+sions from more than one team. In addition, one
+language pair (fr-en) did not receive any submis-
+sion. Table 16 presents the BLEU score for each
+run as well as for our baseline system.
+
+All runs obtained a much higher BLEU score
+than the baseline system, except for the en-pt and
+pt-en submissions, with BLEU scores just slightly
+superior to the baseline. The LIMSI run showed
+the best improvement over the baseline (246% ab-
+solute improvement, from 9.24 to 22.75). Overall,
+however, the BLEU scores for all language pairs
+remain quite moderate. Regarding comparison of
+the various runs and teams for each language pair,
+we did not observe considerable differences be-
+tween them, except for the the runs of the ”uedin”
+system, which obtained around two BLEU points
+more than other runs.
+
+We rank the systems as follows according to
+their BLEU scores, with B=biology and H=health,
+and bl=baseline:
+
+• en-pt(B): Istrionbox>bl;
+
+• en-pt(H): Istrionbox>bl;
+
+• pt-en(B): Istrionbox>bl;
+
+• pt-en(H): Istrionbox>bl;
+
+• en-es(B): TALP>IXA>bl;
+
+• en-es(H): TALP>IXA>bl;
+
+• es-en(B): uedin>IXA>TALP>bl;
+
+• es-en(H): uedin>IXA>TALP>bl;
+
+• en-fr(H): LIMSI>bl;
+
+155
+
+
+
+Languages Team ID Run ID
+BLEU score
+
+Biological Health
+
+en-pt
+Istrionbox
+
+1 17.55 19.01
+2 16.47 18.33
+3 16.45 18.37
+
+Baseline - 15.38 17.22
+
+pt-en
+Istrionbox
+
+1 20.88 21.50
+2 20.17 20.17
+3 20.14 20.62
+
+Baseline - 17.59 18.48
+
+en-es
+
+IXA
+1 31.57 28.09
+2 31.32 28.06
+3 29.61 28.13
+
+TALP
+1 31.18 28.11
+2 31.17 27.85
+3 33.22 29.47
+
+Baseline - 17.82 16.88
+
+es-en
+
+IXA
+1 30.66 27.96
+2 30.59 27.97
+3 29.51 28.12
+
+TALP
+1 29.68 27.42
+2 29.41 26.74
+3 29.83 27.27
+
+uedin 1 31.49 29.05
+Baseline - 18.78 16.92
+
+en-fr LIMSI
+1 - 22.52
+2 - 22.75
+
+Baseline - - 9.24
+
+Table 16: Official BLEU scores for the WMT16 Biomedical Translation task.
+
+For the pairwise manual validation of sentences,
+and given the high number of runs for some lan-
+guage pairs, e.g., Spanish–English and English–
+Spanish, we did not perform a pairwise evaluation
+for every pair of two systems. Instead, we consid-
+ered only one run from each participant for each
+language pair and dataset: the one that achieved
+the best BLEU score in the automatic evaluation.
+An exception was made for the English–French
+and English-Portuguese tasks for which we had
+only one participating team: we considered all
+combinations of runs and reference translations
+for English–French and combinations of the refer-
+ence translation and both the run with best BLEU
+score and the one that the participant (Istrionbox)
+reported as their best run. The results of the man-
+ual validation are presented in Table 17.
+
+Only one run (IXA run 3, English–Spanish,
+health dataset) was comparable to the reference
+translation: 30 vs. 26 for A>B and A<B, respec-
+
+tively. For all other cases, the reference translation
+was assigned to be better than the other translation
+at least twice as many times.
+
+Regarding comparison between teams and
+runs, i.e., ES2PT (biological and health) and
+English–French, we did not observe much differ-
+ence when comparing distinct runs of the same
+team. When comparing runs from distinct teams,
+IXA clearly outperformed TALP in two compar-
+isons: Spanish–English biological (57 vs. 24) and
+Spanish–English health (48 vs. 22). On the other
+hand, TALP slightly outperformed IXA in one
+dataset: English–Spanish biological (16 vs. 7). Fi-
+nally, the uedin system was clearly superior to
+TALP in the Spanish–English biological dataset
+(60 vs. 20) and to both TALP and IXA in the
+Spanish–English health dataset (54 vs. 19 and 41
+vs. 15, respectively).
+
+We rank the systems as follows according to our
+manual validation (ref=reference):
+
+156
+
+
+
+Datasets Pairs Runs Total A>B A=B A<B
+
+Biological
+
+en-es
+TALP run3 vs. reference 97 18 20 59
+IXA run1 vs. TALP run3 70 7 47 16
+reference vs. IXA run1 96 50 30 16
+
+es-en
+IXA run1 vs. reference 76 17 19 40
+
+reference vs. uedin run1 75 43 14 18
+TALP run3 vs. IXA run1 100 24 19 57
+reference vs. TALP run3 68 52 6 10
+IXA run1 vs. uedin run1 100 30 31 39
+
+uedin run1 vs. TALP run3 100 60 20 20
+
+en-es
+reference vs. Istrionbox run1 80 54 20 6
+
+Istrionbox run3 vs. Istrionbox run1 99 22 52 25
+Istrionbox run3 vs. reference 80 4 14 62
+
+pt-en reference vs. Istrionbox run3 78 67 7 4
+
+Health
+
+en-fr
+reference vs. LIMSI-TLP run2 91 71 5 15
+
+LIMSI-TLP run1 vs. LIMSI-TLP run2 88 26 40 22
+LIMSI-TLP run1 vs. reference 85 8 12 65
+
+en-es
+reference vs. IXA run3 93 30 37 26
+
+IXA run3 vs. TALP run3 82 23 40 19
+TALP run3 vs. reference 94 21 28 45
+
+es-en
+reference vs. IXA run3 82 41 29 12
+
+IXA run3 vs. TALP run1 100 48 30 22
+TALP run1 vs. reference 75 8 20 47
+IXA run3 vs. uedin run1 100 15 44 41
+reference vs. uedin run1 79 44 20 15
+
+TALP run1 vs. uedin run1 100 19 27 54
+
+en-pt
+Istrionbox run3 vs. Istrionbox run1 100 29 42 29
+
+Istrionbox run1 vs. reference 80 4 15 61
+reference vs. Istrionbox run3 82 62 17 3
+
+pt-en Istrionbox run1 vs. reference 89 6 1 82
+Table 17: Results for the manual validation carried out in Appraise for the Biomedical Translation task.
+
+• en-pt (B): ref>Istrionbox;
+
+• en-pt (H): ref>Istrionbox;
+
+• pt-en (B): ref>Istrionbox;
+
+• pt-en (H): ref>Istrionbox;
+
+• en-es (B): ref>TALP> IXA;
+
+• en-es (H): {IXA,ref}>TALP;
+
+• es-en (B): ref>uedin>IXA>TALP;
+
+• es-en (H): ref>uedin> IXA>TALP;
+
+• en-fr (H): ref>LIMSI;

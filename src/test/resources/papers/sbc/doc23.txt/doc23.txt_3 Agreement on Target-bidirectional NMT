@@ -1,0 +1,7 @@
+
+In this section, we extend the method in (Liu et al.,
+2016) to address this issue of unbalanced outputs for
+NMT. The key idea is to: 1) train two kinds of NMT,
+i.e. one generating targets from left-to-right while
+the other from right-to-left; 2) encourage the agree-
+ment between them by joint search.

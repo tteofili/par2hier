@@ -1,0 +1,65 @@
+
+We perform English→German experiments on
+OpenSubtitles (Tiedemann, 2012)1, a parallel cor-
+pus of movie subtitles. Machine translation is com-
+monly used in the professional translation of movie
+subtitles in a post-editing workflow, and politeness
+is considered an open problem for subtitle transla-
+tion (Etchegoyhen et al., 2014). We use OpenSub-
+titles2012 as training corpus, and random samples
+from OpenSubtitles2013 for testing. The training
+corpus consists of of 5.58 million sentence pairs, out
+of which we label 0.48 million sentence pairs as po-
+lite, and 1.09 million as informal.
+
+We train an attentional encoder-decoder NMT
+system using Groundhog2 (Bahdanau et al., 2015;
+Jean et al., 2015a). We follow the settings and train-
+ing procedure described by Sennrich et al. (2015),
+using BPE to represent the texts with a fixed vocab-
+ulary of subword units (vocabulary size 90000).
+
+1http://www.opensubtitles.org
+2github.com/sebastien-j/LV_groundhog
+
+The training set is annotated as described in sec-
+tion 4, and the source side is marked with the po-
+liteness feature as described in section 3. Note that
+there are only two values for the politeness feature,
+and neutral sentences are left unmarked. This is to
+allow users to select a politeness level for the whole
+document, without having to predict which transla-
+tions should contain an address pronoun. Instead,
+we want the NMT model to ignore side constraints
+when they are irrelevant.
+
+To ensure that the NMT model does not overly
+rely on the side constraints, and that performance
+does not degrade when no side constraint is provided
+at test time, only a subset of the labelled training in-
+stances are marked with a politeness feature at train-
+ing time. We set the probability that a labelled train-
+ing instance is marked, α, to 0.5 in our experiments.
+To ensure that the NMT model learns to ignore side
+constraints when they are irrelevant, and does not
+overproduce address pronouns when side constraints
+are active, we also mark neutral sentences with a
+random politeness feature with probability α. Keep-
+ing the mark-up probability α constant for all sen-
+tences in the training set prevents the introduction
+of unwanted biases. We re-mark the training set for
+each epoch of training. In preliminary experiments,
+we found no degradation in baseline performance
+when politeness features were included in this way
+during training.
+
+The model is trained for approximately 9 epochs
+(7 days). At test time, all results are obtained with
+the same model, and the only variable is the side
+constraint used to control the production of hon-
+orifics. We test translation without side constraint,
+and translations that are constrained to be polite or
+informal. In an oracle experiment, we use the po-
+liteness label of the reference to determine the side
+constraint. This simulates a setting in which a user
+controls the desired politeness.

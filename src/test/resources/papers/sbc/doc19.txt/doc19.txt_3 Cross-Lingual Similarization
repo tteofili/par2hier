@@ -1,0 +1,21 @@
+
+Since structural analysis can be factorized into fun-
+damental classification decisions, we assume that
+the adjustment of the analysis results can be fac-
+torized into the adjustment of the fundamental de-
+cisions. The classification decision for graph-based
+dependency parsing is to classify the dependency re-
+lationship between each pair of words, and we hope
+it works well to conduct cross-lingual similariza-
+tion on the level of dependency relationship classifi-
+cation. In this work, we investigate the automatic
+cross-lingual similarization for dependency gram-
+mars on the level of fundamental classification de-
+cisions, to avoid the difficulty of using hand-crafted
+transformation rules or templates.
+
+In this section, we first introduce the evalua-
+tion metric for cross-lingual similarity, then describe
+the automatic cross-lingual similarization algorithm,
+and finally give a method to measure the real perfor-
+mance of the cross-lingually similarized grammars.

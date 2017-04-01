@@ -1,0 +1,34 @@
+
+Proceedings of NAACL-HLT 2016, pages 35–40,
+San Diego, California, June 12-17, 2016. c©2016 Association for Computational Linguistics
+
+Controlling Politeness in Neural Machine Translation via Side Constraints
+
+Rico Sennrich and Barry Haddow and Alexandra Birch
+School of Informatics, University of Edinburgh
+
+{rico.sennrich,a.birch}@ed.ac.uk, bhaddow@inf.ed.ac.uk
+
+Abstract
+
+Many languages use honorifics to express po-
+liteness, social distance, or the relative so-
+cial status between the speaker and their ad-
+dressee(s). In machine translation from a lan-
+guage without honorifics such as English, it
+is difficult to predict the appropriate honorific,
+but users may want to control the level of po-
+liteness in the output. In this paper, we per-
+form a pilot study to control honorifics in neu-
+ral machine translation (NMT) via side con-
+straints, focusing on English→German. We
+show that by marking up the (English) source
+side of the training data with a feature that en-
+codes the use of honorifics on the (German)
+target side, we can control the honorifics pro-
+duced at test time. Experiments show that
+the choice of honorifics has a big impact on
+translation quality as measured by BLEU, and
+oracle experiments show that substantial im-
+provements are possible by constraining the
+translation to the desired level of politeness.

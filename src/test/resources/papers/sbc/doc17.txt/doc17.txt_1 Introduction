@@ -1,0 +1,22 @@
+
+For improved machine translatability, a wide variety of controlled language (CL) rule sets have been
+proposed (Kittredge, 2003; Kuhn, 2014). Evidence of reduced post-editing costs when a CL is employed
+is provided (Bernth and Gdaniec, 2001; O’Brien and Roturier, 2007), and several controlled authoring
+support tools, such as Acrolinx1 and MAXIT2, have been developed. The fundamental limitation of the
+CLs proposed hitherto is, however, that they are defined at the level of the sentence rather than at the
+level of the document (Hartley and Paris, 2001). In fact, the notion of functional document element (see
+Section 2.1) does figure in some CL rule sets. ASD Simplified Technical English (ASD, 2013), for ex-
+ample, specifies writing patterns linked to functional roles of the document elements; the recommended
+maximum length of sentence is 20 words for ‘procedural’ writing and 25 words for ‘descriptive’ writing.
+Yet, the granularity of the elements is not high enough to enable detailed definitions of linguistic pat-
+terns within the elements. Thus it is necessary to formalise a document-level framework which enables
+context-dependent CL specification.
+In this paper, we introduce an integrated web-based system, MuTUAL, which implements a suite of
+
+controlled authoring support modules, combined with our statistical machine translation (SMT) system.
+At the document level, document structuring modules help authors create well-organised documents.
+At the sentence level, controlled writing modules help them write source texts (ST) consistent with
+source-language CL rules. The principal innovation in the system is to contextualise the CL rules in
+the document structure to enable MT to generate outputs consistent with the target-side CL for a given
+functional element. While the current system supports the creation of municipal procedural documents
+in Japanese and their translation into English, it is extensible to other language pairs and text domains.

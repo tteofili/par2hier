@@ -1,0 +1,66 @@
+
+CoNLL-2014 training data (henceforth CoNLL-
+train) is a corpus of learner essays (1.2M words)
+written by students at the National University of
+Singapore (Dahlmeier et al., 2013), corrected and
+error-tagged. The CoNLL-2013 test set was in-
+cluded in CoNLL-2014 and is used as develop-
+ment. Both the development and the test sets are
+also from the student population studying at the
+same University but annotated separately. We re-
+port results on the CoNLL-2014 test.
+
+The annotation includes specifying the relevant
+correction as well as the information about each
+error type. The tagset consists of 28 categories.
+Table 2 illustrates the 11 most frequent errors in
+
+the development data; errors are marked with an
+asterisk, and ∅ denotes a missing word. The ma-
+jority of these errors are related to grammar but
+also include mechanical, collocation, and other er-
+rors.
+
+An F-based scorer, named M2, was used to
+score the systems (Dahlmeier and Ng, 2012). The
+metric in CoNLL-2014 was F0.5, i.e. weighing
+precision twice as much as recall. Two types of
+annotations were used: original and revised. We
+follow the recommendations of the organizers and
+use the original data (Ng et al., 2014).
+
+The approaches varied widely: classifiers, MT,
+rules, hybrid systems. Table 3 summarizes the top
+five systems. The top team used a hybrid system
+that combined rules and MT. The second system
+developed classifiers for common grammatical er-
+rors. The third system used MT.
+
+As for external resources, the top 1 and top 3
+teams used additional learner data to train their
+MT systems, the Cambridge University Press
+Learners’ Corpus and the Lang-8 corpus (Mizu-
+moto et al., 2011), respectively. Many teams also
+used native English datasets. The most common
+ones are the Web1T corpus (Brants and Franz,
+2006), the CommonCrawl dataset, which is sim-
+ilar to Web1T, and the English Wikipedia. Several
+teams used off-the-shelf spellcheckers.
+
+In addition, Susanto et al. (2014) made an at-
+tempt at combining MT and classifiers. They
+used CoNLL-train and Lang-8 as non-native data
+and English Wikipedia as native data. We be-
+lieve that the reason this study did not yield sig-
+nificant improvements (Table 1) is that individual
+strengths of each framework have not been fully
+exploited. Further, each system was applied sepa-
+rately and decisions were combined using a gen-
+eral MT combination technique (Heafield et al.,
+2009). Finally, Mizumoto and Matsumoto (2016)
+attempt to improve an MT system also trained
+on Lang-8 with discriminative re-ranking using
+part-of-speech (POS) and dependency features but
+only obtain a small improvement. These results
+suggest that standard combination and re-ranking
+techniques are not sufficient.

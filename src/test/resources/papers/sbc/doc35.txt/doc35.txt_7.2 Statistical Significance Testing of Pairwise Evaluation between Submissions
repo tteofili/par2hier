@@ -1,0 +1,18 @@
+Tables 9, 10, 11 and 12 show the results of statistical significance testing of ASPEC subtasks, Tables 13,
+14, 15, 16 and 17 show those of JPC subtasks, 18 shows those of BPPT subtasks and 19 shows those of
+JPC subtasks.≫,≫ and > mean that the system in the row is better than the system in the column at a
+significance level of p< 0.01, 0.05 and 0.1 respectively. Testing is also done by the bootstrap resampling
+as follows:
+
+1. randomly select 300 sentences from the 400 pairwise evaluation sentences, and calculate the Pair-
+wise scores on the selected sentences for both systems
+
+2. iterate the previous step 1000 times and count the number of wins (W ), losses (L) and ties (T )
+
+3. calculate p = LW+L
+
+Inter-annotator Agreement
+To assess the reliability of agreement between the workers, we calculated the Fleiss’ κ (Fleiss and others,
+1971) values. The results are shown in Table 20. We can see that the κ values are larger for X → J
+translations than for J→ X translations. This may be because the majority of the workers are Japanese,
+and the evaluation of one’s mother tongue is much easier than for other languages in general.

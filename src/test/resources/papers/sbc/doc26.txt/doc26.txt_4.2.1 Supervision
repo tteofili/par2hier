@@ -1,0 +1,92 @@
+Supervision in the form of annotated learner data
+plays an important role in developing an error cor-
+rection system but is expensive. Native data, in
+contrast, is cheap and available in large quantities.
+Therefore, the fact that, unlike with MT, it is pos-
+sible to build a classifier system without any anno-
+tated data, is a clear advantage of classifiers.
+
+Training without supervision is possible in the
+classification framework, as follows. For a given
+mistake type, e.g. preposition, a classifier is
+trained on native data that is assumed to be cor-
+rect; the classifier uses context words around each
+preposition as features. The resulting model is
+then applied to learner prepositions and will pre-
+dict the most likely preposition in a given con-
+text. If the preposition predicted by the classi-
+fier is different from what the author used in text,
+this preposition is flagged as a mistake. We refer
+the reader to Rozovskaya and Roth (2010b) and
+Rozovskaya and Roth (2011) for a description of
+training classifiers with and without supervision
+for error correction tasks. Below, we address two
+questions related to the use of supervision:
+• Training with supervision: When training us-
+ing learner data, how does a classifier-based sys-
+tem compare against an MT system?
+• Training without supervision: How well can
+we do by building a classifier system with native
+data only, compared to MT and classifier-based
+systems that use supervision?
+
+Our classifier system is based on the imple-
+mentation framework of the second CoNLL-2014
+system (Rozovskaya et al., 2014) and consists of
+classifiers for 7 most common grammatical errors
+in CoNLL-train: article; preposition; noun num-
+ber; verb agreement; verb form; verb tense; word
+form. All modules take as input the corpus doc-
+uments pre-processed with a POS tagger3 (Even-
+Zohar and Roth, 2001), a shallow parser4 (Pun-
+
+3http://cogcomp.cs.illinois.edu/page/
+software view/POS
+
+4http://cogcomp.cs.illinois.edu/page/
+software view/Chunker
+
+System Performance
+P R F0.5
+
+Classifiers (learner) 32.15 17.96 27.76
+Classifiers (native) 38.41 23.05 33.89
+MT 43.34 11.81 28.25
+CoNLL-2014 top 1 39.71 30.10 37.33
+CoNLL-2014 top 2 41.78 24.88 36.79
+CoNLL-2014 top 3 41.62 21.40 35.01
+
+Table 10: Classifier systems trained with and
+without supervision. Learner data refers to
+CoNLL-train. Native data refers to Web1T. The
+MT system uses CoNLL-train for parallel data.
+
+yakanok and Roth, 2001), a syntactic parser (Klein
+and Manning, 2003) and a dependency converter
+(Marneffe et al., 2006).
+
+Classifiers are trained either on learner data
+(CoNLL-train) or native data (Web1T). Classifiers
+built on CoNLL-train are trained discriminatively
+with the Averaged Perceptron algorithm (Rizzolo
+and Roth, 2010) and use rich POS and syntactic
+features tailored to specific error types that are
+standard for these tasks (Lee and Seneff, 2008;
+Han et al., 2006; Tetreault et al., 2010; Ro-
+zovskaya et al., 2011); Naı̈ve Bayes classifiers are
+trained on Web1T with word n-gram features. A
+detailed description of the classifiers and the fea-
+tures used can be found in Rozovskaya and Roth
+(2014). We also add several novel ideas that are
+described below.
+
+Table 10 shows the performance of two classi-
+fier systems, trained with supervision (on CoNLL-
+train) and without supervision on native data
+(Web1T), and compares these to an MT approach
+trained on CoNLL-train. The first classifier system
+performs comparably to the MT system (27.76 vs.
+28.25), however, the native-trained classifier sys-
+tem outperforms both, and does not use any an-
+notated data. The native-trained classifier system
+would place fourth in CoNLL-2014.

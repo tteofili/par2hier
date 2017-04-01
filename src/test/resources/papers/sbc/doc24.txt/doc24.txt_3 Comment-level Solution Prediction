@@ -1,0 +1,89 @@
+
+To support the instant feedback interface described
+in the prior section, we developed a 3-way classi-
+fication model for predicting a review comment’s
+feedback type: Solution, Problem-only, or Non-
+criticism. Challenges emerge from the fact that
+SWoRD serves a wide range of classes ranging from
+high school to graduate school and from STEM to
+language arts. Consequently, our prediction model
+has to process peer review comments that greatly
+differ in style and vocabulary. We thus focused on
+modeling how students suggested solutions by de-
+veloping the following feature sets that abstracted
+
+using development data from prior classes.
+
+over specific lexicons and paper topics:
+• Simple: word count and order of the comment.
+• Keywords: we semi-automatically created 10 key-
+
+word sets to model different content patterns, extending
+prior work (Xiong et al., 2010): Solution, Idea, Sugges-
+tion, Location, Connective, Positive, Negative, Summary,
+Error, Negation. For each set, we count the total occur-
+rences of its keywords in the comment.
+• Location phrases: we observed in our training data
+
+that solution content usually co-occurs with location in-
+formation in comments. Thus, we extracted words and
+phrases that signal positional localization in comments
+of training data. This feature set includes hand-crafted
+regular expressions of location patterns (e.g., on page
+5) (Xiong et al., 2010), location seed words (manu-
+ally collected, e.g., page, thesis, conclusion), and loca-
+tion bigrams (automatically extracted given the location
+seeds, e.g., transition paragraph). For each location seed,
+phrase or regular expression, we count its occurrences or
+matches in the comment.
+• Paper content: motivated by topic word features in
+
+(Kim et al., 2006), this feature set was designed to model
+how much of a paper’s content/topic was mentioned in
+the comment. We first extracted bigrams with TF-IDF
+above average in the training data, and collected uni-
+grams that make-up these bigrams, e.g., ‘civil’ and ‘war’
+in ‘civil war’.5 Domain unigram feature is the number of
+collected unigrams in the comment. Window size feature
+is the length of maximal common text span between the
+comment and the paper (Ernst-Gerlach and Crane, 2008).
+Similarity feature searches for the highest similarity score
+between paper sentence to the comment. We extract 5 pa-
+per sentences (1 covering the common span, 2 preceding,
+and 2 following). For each pair of paper sentence and the
+comment, we apply different similarity scores (e.g., Lev-
+enshtein, cosine) to 4 abstractions of the pair (sequence
+of tokens, sequence of part-of-speech, sequence of nouns,
+sequence of verbs), and return the pair’s sum score. Fea-
+ture value is the highest sum score over all pairs.
+
+Our solution prediction model was trained with
+logistic regression using annotated peer review com-
+ments from two university classes (Computer Sci-
+ence, History) and a high-school class (Literature).
+During learning, we used a cost matrix to favor in-
+stant feedback precision over recall by penalizing
+relevant error types. We thought it would be better
+to miss some feedback opportunities than to incor-
+rectly trigger instant feedback (e.g., asking students
+to revise reviews where all comments already con-
+
+5Starting with unigrams gave us a noisy set and degraded
+model performance. We plan to apply LDA (Blei et al., 2003)
+for this task in future.
+
+8
+
+
+
+Model Acc. κ F1:Sln F1:Prb F1:Non
+BoW 0.50 0.24 0.40 0.51 0.57
+SWoRD 0.62 0.44 0.55 0.59 0.72
+
+Table 1: Comment-level solution prediction performance. Acc:
+Accuracy, F1 by class label is reported – Sln: Solution, Prb:
+
+Problem-only, Non: Non-criticism.
+
+tained solutions) or to incorrectly display comments
+as red or green in the feedback interface.

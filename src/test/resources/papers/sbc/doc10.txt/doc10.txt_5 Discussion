@@ -1,0 +1,93 @@
+We have presented the one-vs-each lower bound on softmax probabilities and we have analyzed
+its theoretical properties. This bound is just the most extreme case of a full family of hierarchi-
+cally ordered bounds. We have explored the ability of the bound to perform parameter estimation
+through stochastic optimization in models having large number of categorical symbols, and we have
+demonstrated this ability to classification problems.
+
+There are several directions for future research. Firstly, it is worth investigating the usefulness of the
+bound in different applications from classification, such as for learning word embeddings in natural
+language processing and for training recommendation systems. Another interesting direction is to
+consider the bound not for point estimation, as done in this paper, but for Bayesian estimation using
+variational inference.
+
+Acknowledgments
+We thank the reviewers for insightful comments. We would like also to thank Francisco J. R. Ruiz for
+useful discussions and David Blei for suggesting the name one-vs-each for the proposed method.
+
+8
+
+
+
+References
+[1] Yoshua Bengio and Jean-Sébastien Sénécal. Quick training of probabilistic neural nets by importance
+
+sampling. In Proceedings of the conference on Artificial Intelligence and Statistics (AISTATS), 2003.
+
+[2] Kush Bhatia, Himanshu Jain, Purushottam Kar, Manik Varma, and Prateek Jain. Sparse local embeddings
+for extreme multi-label classification. In C. Cortes, N. D. Lawrence, D. D. Lee, M. Sugiyama, and
+R. Garnett, editors, Advances in Neural Information Processing Systems 28, pages 730–738. Curran
+Associates, Inc., 2015.
+
+[3] Christopher M. Bishop. Pattern Recognition and Machine Learning (Information Science and Statistics).
+Springer-Verlag New York, Inc., Secaucus, NJ, USA, 2006.
+
+[4] D. Bohning. Multinomial logistic regression algorithm. Annals of the Inst. of Statistical Math, 44:197–200,
+1992.
+
+[5] Guillaume Bouchard. Efficient bounds for the softmax function and applications to approximate inference
+in hybrid models. Technical report, 2007.
+
+[6] R. A. Bradley and M. E. Terry. Rank analysis of incomplete block designs: I. The method of paired
+comparisons. Biometrika, 39(3/4):324–345, 1952.
+
+[7] Jacob Devlin, Rabih Zbib, Zhongqiang Huang, Thomas Lamar, Richard Schwartz, and John Makhoul.
+Fast and robust neural network joint models for statistical machine translation. In Proceedings of the
+52nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages
+1370–1380, Baltimore, Maryland, June 2014. Association for Computational Linguistics.
+
+[8] Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep learning. Book in preparation for MIT Press,
+2016.
+
+[9] Siddharth Gopal and Yiming Yang. Distributed training of large-scale logistic models. In Sanjoy Dasgupta
+and David Mcallester, editors, Proceedings of the 30th International Conference on Machine Learning
+(ICML-13), pages 289–297. JMLR Workshop and Conference Proceedings, 2013.
+
+[10] Tzu-Kuo Huang, Ruby C. Weng, and Chih-Jen Lin. Generalized Bradley-Terry models and multi-class
+probability estimates. J. Mach. Learn. Res., 7:85–115, December 2006.
+
+[11] Shihao Ji, S. V. N. Vishwanathan, Nadathur Satish, Michael J. Anderson, and Pradeep Dubey. Blackout:
+Speeding up recurrent neural network language models with very large vocabularies. 2015.
+
+[12] Ioannis Katakis, Grigorios Tsoumakas, and Ioannis Vlahavas. Multilabel text classification for automated
+tag suggestion. In In: Proceedings of the ECML/PKDD-08 Workshop on Discovery Challenge, 2008.
+
+[13] Mohammad Emtiyaz Khan, Shakir Mohamed, Benjamin M. Marlin, and Kevin P. Murphy. A stick-
+breaking likelihood for categorical data analysis with latent Gaussian models. In Proceedings of the
+Fifteenth International Conference on Artificial Intelligence and Statistics, AISTATS 2012, La Palma,
+Canary Islands, April 21-23, 2012, pages 610–618, 2012.
+
+[14] Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg S Corrado, and Jeff Dean. Distributed representations of
+words and phrases and their compositionality. In C. J. C. Burges, L. Bottou, M. Welling, Z. Ghahramani,
+and K. Q. Weinberger, editors, Advances in Neural Information Processing Systems 26, pages 3111–3119.
+Curran Associates, Inc., 2013.
+
+[15] Andriy Mnih and Yee Whye Teh. A fast and simple algorithm for training neural probabilistic language
+models. In Proceedings of the 29th International Conference on Machine Learning, pages 1751–1758,
+2012.
+
+[16] F. Morin and Y. Bengio. Hierarchical probabilistic neural network language model. In Proceedings of the
+Tenth International Workshop on Artificial Intelligence and Statistics, pages 246–252. Citeseer, 2005.
+
+[17] Ulrich Paquet, Noam Koenigstein, and Ole Winther. Scalable Bayesian modelling of paired symbols.
+CoRR, abs/1409.2824, 2012.
+
+[18] Jeffrey Pennington, Richard Socher, and Christopher Manning. Glove: Global Vectors for Word Represen-
+tation. In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing
+(EMNLP), pages 1532–1543, Doha, Qatar, October 2014. Association for Computational Linguistics.
+
+[19] Sudheendra Vijayanarasimhan, Jonathon Shlens, Rajat Monga, and Jay Yagnik. Deep networks with large
+output spaces. CoRR, abs/1412.7479, 2014.
+
+9
+
+

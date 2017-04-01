@@ -1,0 +1,343 @@
+
+Ten teams submitted a total of 23 systems for the
+two tasks. The teams are listed in Table 2. In what
+follows, we summarise the participating systems.
+
+CMU (Task 1) The approach incorporates
+global and regional visual features with textual
+features from English (source) and German (tar-
+get) to jointly train a Recurrent Neural Network
+(RNN). Visual features extracted from a region-
+based convolution neural network (RCNN) are de-
+signed to be appended in the head/tail of the tex-
+tual feature or dissipated in parallel long short
+term memory (LSTM) threads to assist the LSTM
+reader in computing a representation. For re-
+scoring, an additional bilingual dictionary is used
+to select the best sentence from candidates gen-
+erated by five different models. The submission
+is thus unconstrained, with the German-English
+Dictionary from GLOSBE6 used as additional re-
+source.
+
+CUNI (Tasks 1 and 2) The method is a sys-
+tem combination which implements the attentive
+neural Machine Translation (MT) (Bahdanau et
+al., 2014). The input of the decoder is a lin-
+ear combination of the image features obtained
+from the penultimate layer of the VGG16 convo-
+lutional network (Simonyan and Zisserman, 2015)
+and two recurrent encoders coding the source sen-
+tence and its translation obtained from the Moses
+system. The Moses system uses the with addi-
+tional language models based on coarse bitoken
+classes (Stewart et al., 2014).
+
+4http://github.com/BVLC/caffe/releases
+/tag/rc2
+
+5http://github.com/karpathy/neuraltalk
+/tree/master/matlab_features_reference
+
+6https://glosbe.com/en/de/
+
+545
+
+
+
+ID Participating team
+CMU+NTU Carnegie Melon University (Huang et al., 2016)
+
+CUNI Univerzita Karlova v Praze (Libovický et al., 2016)
+DCU Dublin City University (Hokamp and Calixto, 2016)
+
+DCU-UVA Dublin City University & Universiteit van Amsterdam (Calixto et
+al., 2016)
+
+HUCL Universität Heidelberg (Hitschler et al., 2016)
+IBM-IITM-Montreal-NYU IBM Research India, IIT Madras, Université de Montréal & New
+
+York University
+LIUM Laboratoire d’Informatique de l’Université du Maine (Caglayan
+
+et al., 2016)
+SHEF University of Sheffield (Shah et al., 2016)
+UPC Universitat Politècnica de Catalunya (Rodrı́guez Guasch and
+
+Costa-jussà, 2016)
+UPCb Universitat Politècnica de Catalunya
+
+Table 2: Participants in the WMT16 multimodal machine translation shared task.
+
+DCU (Task 1) Both submissions from DCU are
+neural MT systems with an attention mechanism
+on the source-side representation (Bahdanau et al.,
+2014). The first submission is text-only, and the
+second submission includes the FC7 image fea-
+tures in the target-side decoder initial state. The
+FC7 features are passed through a 3-layer fully-
+connected feedforward network with Tanh non-
+linearities, and then summed with the final state of
+the source-side representation. This summed rep-
+resentation is passed through another feed-forward
+layer, and becomes the initial state for the de-
+coder recurrent transition. The main novelty of
+our system is that we use a minimum-risk training
+objective to directly optimise the model for Me-
+teor, instead of the word-level cross entropy loss
+function which is currently standard for NMT sys-
+tems. This idea comes from (Shen et al., 2016),
+although our implementation is somewhat differ-
+ent than the idea outlined in that work. To opti-
+mise for expected Meteor, we take up to 100 sam-
+ples from our model, compute an expectation over
+these samples, and use Stochastic Gradient De-
+scent to directly optimise the model on this ex-
+pected score.
+
+DCU-UVA (Task 1) The approach integrates
+separate attention mechanisms over the source
+language and the CONV5,4 visual features in a
+single decoder. The source language was rep-
+resented using a bidirectional RNN with Gated
+Recurrent Units (GRU); the images were repre-
+sented as 196x512 matrix from the pre-trained
+VGG-19 convolutional network. A separate, time-
+
+dependent context vector was constructed for the
+source sentence and the visual features, which
+were merged into a single multimodal context vec-
+tor. This time-dependent multimodal context vec-
+tor was input into the target language decoder,
+along with the previous hidden state and the previ-
+ously emitted word. Throughout, 300D word em-
+beddings, 1000D hidden states, and 1000D con-
+text vectors were used; the source and target lan-
+guages were estimated over the entire vocabular-
+ies.
+
+HUCL (Task 1) The submitted system for the
+constrained task extends a standard SMT pipeline
+by a re-ranking component that makes use of mul-
+timodal information. The cdec decoder (Dyer et
+al., 2010) was used to produce hypothesis lists,
+which were re-scored by comparison with simi-
+lar image captions from the training corpus us-
+ing the pivoting approach described in Hitschler
+et al. (2016), with some minor differences: Be-
+cause all data for the shared task was parallel,
+a constrained model was built by employing a
+source side matching approach inspired by stan-
+dard translation memories, instead of retrieving
+matching captions in the target language by piv-
+oting on larger image-caption data as described
+by Hitschler et al. (2016), which would have re-
+sulted in an unconstrained model. That is, the
+submission resorted to textual similarity (as mea-
+sured by the TF-IDF score (Spärck Jones, 1972))
+on the source language side as well as visual sim-
+ilarity (as measured by the Euclidean distance be-
+tween the feature values of the FC7 layer of the
+
+546
+
+
+
+VGG16 deep convolutional model (Simonyan and
+Zisserman, 2015), supplied by the task organisers)
+for retrieval of matches. The retrieval model ar-
+chitecture was identical to that in Hitschler et al.
+(2016). Instead of TF-IDF, a modified version of
+BLEU (Papineni et al., 2002) was used in order to
+re-score hypotheses based on the target-language
+text of retrieved captions. Fixed settings were used
+for some parameters (d = 90, b = 0.01 and
+km = 20), while kr and λ were optimised on the
+validation set (parameters as defined in (Hitschler
+et al., 2016)).
+
+IBM-IITM-Montreal-NYU (Tasks 1 and 2)7
+The approach for Task 1 is similar to that of (El-
+liott et al., 2015) with two differences. First, in-
+stead of using a RNN based encoder for the source
+(English) sentence, a simple bag of words encoder
+is used. In other words, the representation of the
+source sentence is simply a sum of the represen-
+tations of the words in it. These word represen-
+tations are randomly initialised and then learned
+during training. Second, unlike (Elliott et al.,
+2015), the image and source sentence representa-
+tion are fed at every timestep to the target RNN
+decoder. The approach for Task 2 is same as that
+for Task 1, except that now instead of having a sin-
+gle source sentence representation, the representa-
+tions of all the five source sentences are concate-
+nated. This is then further concatenated with the
+image representation and the result is fed at every
+timestep to the target decoder. The FC7 features
+for images as provided by the task organisers are
+used and tuned during training. The source and
+target RNNs contain 512 hidden neurons and the
+word embeddings are also of size 512. The models
+for both the tasks are trained for 10 epochs. For
+the unconstrained setup, the MSCOCO dataset,
+which contains English captions for images, was
+explored. These English captions were translated
+into German using IBM’s translation services and
+then these pseudo Image-English-German tuples
+were used as additional training data, together
+with the training data provided by the task organ-
+isers. These are referred to as pseudo tuples since
+the German captions were machine translated and
+not human generated.
+
+LIUM (Tasks 1 and 2) All sub-
+missions from LIUM are constrained.
+
+7Systems submitted by Amrita Saha, Mitesh M. Khapra,
+Janarthanan Rajendran, Sarath Chandar, Kyunghyun Cho
+
+LIUM 1 MosesNMTRnnLMSent2Vec C and
+LIUM 1 MosesNMTRnnLMSent2VecVGGFC7 C
+are phrase-based systems based on Moses (14
+standard features plus operation sequence models.
+They include re-scoring with several models
+and more particularly with a continuous space
+language model (CSLM) and a neural MT system
+(see TextNMT system). The CSLMs can use
+image feature maps as auxiliary data, in order to
+provide some context to the probabilities. The
+LIUM 1 TextNMT C and LIUM 2 TextNMT C
+systems are monomodal (text-only) fully neural
+MT systems similar to the one proposed by
+DL4MT school.8 They are made of a bidirection-
+nal recurrent encoder followed by a conditional
+Gated Recurrent Unit decoder which embeds an
+attention mechanism. The difference between
+the two systems is the training and development
+data, as provided by the organisers. Finally, the
+LIUMCVC 1 MultimodalNMT C and LIUM-
+CVC 2 MultimodalNMT C are an extension of
+the previous systems, where an additional input is
+given: the convolutional feature maps extracted
+with a very deep ResNet (up to 152 layers)
+from the images (He et al., 2015). The attention
+mechanism is shared across the two modalities
+(with softmax activations remaining distinct). The
+architecture of the decoder is the same as before.
+The difference between the two systems is again
+the training and development data.
+
+SHEF (Task 1) Both submissions from the
+Sheffield team are constrained, each focusing on
+one language direction: SHEF 1 en-de-Moses-
+rerank C cover the official task direction (English-
+German), while SHEF 1 de-en-Moses-rerank C
+covers the opposite direction (German-English).
+Our proposed systems are standard phrase-based
+statistical MT systems based on the Moses de-
+coder, trained on the provided data. We investi-
+gate how image features can be used to re-rank
+the n-best output of the SMT model, with the aim
+of improving performance by grounding the trans-
+lations on images. Image features from a CNN
+are used to re-rank the n-best list along with stan-
+dard Moses features. We also propose an alterna-
+tive scheme for the German-to-English direction,
+where terms in the English image descriptions
+are matched with 1,000 WordNet synsets, and the
+probability of these synsets occurring in the image
+estimated using CNN predictions on the images.
+
+8http://dl4mt.computing.dcu.ie/
+
+547
+
+
+
+The aggregated probabilities are then used to re-
+rank the n-best list, with the intuition that the best
+translations should contain these entities. Our sub-
+missions to re-rank the n-best translations with im-
+age vectors are able to marginally outperform the
+strong, text-only baseline Moses system for both
+directions.
+
+UPC (Task 1) Bidirectional Recurrent Neu-
+ral Networks (BiRNNs) have shown outstanding
+results on sequence-to-sequence learning tasks.
+This architecture becomes especially interesting
+for multimodal machine translation task, since
+BiRNNs can deal with images and text. On most
+translation systems the same word embedding is
+fed to both BiRNN units. In our submission, we
+enhance a baseline sequence-to-sequence system
+(Elliott et al., 2015) by using double embeddings.
+These embeddings are trained on the forward and
+backward directions of the input sequence. The
+system was trained, validated and tested using the
+task’s dataset only.
+
+UPCb (Task 2)9 The two submissions
+from UPCb use the same method with dif-
+ferent training data, one is constrained
+(UPC 2 MNMT C), while the other is un-
+constrained (UPC 2 MNMT2 U). Captions are
+generated from two different directions. One
+caption is generated through translating the
+captions in the source language directly using
+the method proposed in (Bahdanau et al., 2014).
+The other one is generated based on the image
+feature using method proposed in (Vinyals et al.,
+2015). After that, an SVM-based model decides
+which one is better according to the sentence’s
+score from a language model and the score from
+the model that generated the sentence. The only
+difference between the two submissions is that
+the unconstrained one used Task 1 dataset in the
+training of text translator.
+
+Baseline - GroundedTranslation (Tasks 1 & 2)
+This method follows (Elliott et al., 2015):10 A
+source language multimodal RNN model is ini-
+tialised with a visual feature vector (i.e., a mul-
+timodal model for the source language). The fi-
+nal hidden state is then used to initialise a target
+
+9Systems submitted by Zhiwen Tang and Marta Ruiz
+Costa-jussà; code available: https://github.com/Z
+-TANG/re-scorer.
+
+10https://github.com/elliottd/Grounded
+Translation
+
+language model, which generates the target lan-
+guage description. The source language multi-
+modal RNN language model was trained until the
+loss stopped falling on the validation data. The
+target model was initialised with the final hidden
+state transferred from the source model and trained
+until the loss stopped falling on the validation data.
+The source model and target models were param-
+eterised with 300D word embeddings and 1000D
+GRU hidden states; the source model was ini-
+tialised with the 4096D FC7 visual feature vector;
+for Task 1, the target model was initialised with a
+1000D source model feature vector; for Task 2 the
+feature vectors corresponding to each source lan-
+guage description were summed into a 1000D fea-
+ture vector. For both tasks, we found the optimal
+combination of target model language generation
+timesteps and beam width size using grid search.
+
+Baseline - Moses (Task 1) This baseline system
+uses text-only information. It is a standard phrase-
+based SMT system built using the Moses toolkit
+(Koehn et al., 2007). The models were trained
+using the extended version of Flickr30K parallel
+dataset provided for the task only (29, 000 sen-
+tence pairs), and tuned with the official validation
+dataset (1, 014 segment pairs). Default settings
+and features in Moses were used, with a 4-gram
+language model trained on the target side of the
+parallel data.

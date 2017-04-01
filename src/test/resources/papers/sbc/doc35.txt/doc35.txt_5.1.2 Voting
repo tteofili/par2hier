@@ -1,0 +1,6 @@
+To guarantee the quality of the evaluations, each sentence is evaluated by 5 different annotators and the
+final decision is made depending on the 5 judgements. We define each judgement ji(i = 1, · · · , 5) as:
+
+ji =
+
+

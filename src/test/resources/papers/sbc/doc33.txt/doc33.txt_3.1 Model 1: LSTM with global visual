@@ -1,0 +1,25 @@
+feature
+
+Visual features from convolution neural network
+(CNN) may provide additional information to tex-
+tual features in machine translation with multiple
+modalities. As depicted in Figure 2, we propose to
+append visual features at the head/tail to the origi-
+nal text sequence in the encoding phase. Note that
+for simplicity, we omit the attention part in the fol-
+lowing figures.
+
+Global (i.e., whole image) visual feature are ex-
+tracted from the last fully connected layer known
+as fc7, a 4096-dimensional semantic layer in
+the 19-layered VGG (Simonyan and Zisserman,
+2014). With the dimension mismatch and the in-
+herent difference in content between the visual and
+textual embedding, a transformation matrix Wimg
+is proposed to learn the mapping. The encoder
+then encode both textual and visual feature se-
+quences to generate the representation for decod-
+ing. In the decoding phase, the attention model
+weights all the possible hidden states in the encod-
+ing phase and produce the context vector ct with
+Eq. 1 and Eq. 2 for NMT decoding.

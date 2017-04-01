@@ -1,0 +1,134 @@
+
+As mentioned in Section 1, topological field an-
+notation has often been performed as a part of
+phrase structure parsing. In order to test our hy-
+pothesis that topological field annotation could in-
+form dependency parsing, it would be more ap-
+propriate to use a syntax-less approach. Several
+shallow approaches have been tried in the past.
+For instance, Veenstra et al., (2002) compare three
+different chunkers (finite state, PCFG, and clas-
+sification using memory-based learning). Becker
+and Frank (2002) predict topological fields using
+a PCFG specifically tailored towards topological
+fields. Finally, Liepert (2003) proposes a chunker
+that uses support vector machines.
+
+In the present work, we will treat the topolog-
+ical field annotation as a sequence labeling task.
+This is more useful in the context of dependency
+parsing because it allows us to treat the topological
+field as any other property of a token.
+
+Topological field projection In order to obtain
+data for training, validation, and evaluation, we
+use the TüBa-D/Z treebank. Topological fields
+are only annotated in the constituency version of
+the TüBa-D/Z, where the fields are represented as
+special constituent nodes. To obtain token-level
+field annotations for the dependency version of the
+treebank, we project the topological fields of the
+constituency trees on the tokens. The recursive
+projection function for projection is provided in
+Appendix B. The function is initially called with
+the root of the tree and a special unknown field
+marker, so that tokens that are not dominated by a
+topological field node (typically punctuation) also
+receive the topological field feature.
+
+We should point out that our current projection
+method results in a loss of information when a
+sentence contains multiple clauses. For instance,
+an embedded clause is in a topological field of
+the main clause, but also has its own topological
+structure. In our projection method, the topologi-
+cal field features of tokens in the embedded clause
+reflect the topological structure of the embedded
+clause.
+
+Model Our topological field labeler uses a recur-
+rent neural network. The inputs consist of con-
+catenated word and part-of-speech embeddings.
+The embeddings are fed to a bidirectional LSTM
+(Graves and Schmidhuber, 2005), on which we
+stack a regular LSTM (Hochreiter and Schmidhu-
+
+3
+
+
+
+ber, 1997), and finally an output layer with the
+softmax activation function. The use of a recur-
+rent model is motivated by the necessity to have
+long-distance memory. For example, (2-a) con-
+sists of a main clause with the LK wird and RK
+begrünt and an embedded clause wie geplant with
+its own clausal structure. When the labeler en-
+counters jetzt, it needs to ‘remember’ that it was
+in the MF field of the main clause.
+
+(2) a. Die
+The
+
+neue
+new
+
+Strecke
+stretch
+
+wird
+is
+
+,
+,
+
+wie
+as
+
+geplant
+planned
+
+,
+,
+
+jetzt
+now
+
+begrünt
+being-greened
+
+.
+
+.
+
+Moreover, the use of a bidirectional LSTM is mo-
+tivated by the need for backwards-flowing infor-
+mation to make some labeling decisions. For in-
+stance, die Siegerin is in the VF of the verb-second
+clause (3-a), while it is in the MF of the verb-
+final clause (3-b). The labeller can only make such
+choices by knowing the position of the finite verb.
+
+(3) a. die
+die
+
+Siegerin
+winner
+
+wurde
+was
+
+disqualifiziert
+disqualified
+
+b. die
+the
+
+Siegerin
+winner
+
+zu
+to
+
+disqualifizieren
+disqualify

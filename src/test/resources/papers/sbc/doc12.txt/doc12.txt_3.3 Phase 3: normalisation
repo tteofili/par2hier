@@ -1,0 +1,5 @@
+
+The tree edit distance produced by the previous
+stage represents actions required to convert one
+tree into the other. We apply a simple formula to
+convert this count to a normalised score between

@@ -1,0 +1,412 @@
+
+In what follows, we discuss the main findings of
+this year’s shared task based on the goals we had
+
+170
+
+
+
+System ID Pearson’s r ↑ MAE ↓ RMSE ↓ Spearman’s ρ ↑ DeltaAvg ↑
+English-Spanish
+• USHEF/BASE-EMB-GP 0.391 0.295 0.128 0.393 0.111
+• RTM/RTM-FS+PLS-TREE 0.356 0.253 0.118 0.476 0.123
+
+RTM/RTM-FS-SVR 0.293 0.268 0.125 0.360 0.119
+BASELINE 0.286 0.278 0.139 0.354 0.093
+
+USHEF/GRAPH-DISC 0.256 0.285 0.144 0.285 0.061
+
+Table 27: Official results for the scoring ad ranking variants of the WMT16 Quality Estimation Task 3. The systems are
+ranked according to the Pearson r metric and significance results are also computed for this metric. The winning submissions
+are indicated by a •. These are the top-scoring submission and those that are not significantly worse according to Williams
+test with 95% confidence intervals. The systems in the grey area are not different from the baseline system at a statistically
+significant level according to the same test.
+
+previously identified for it.
+
+Domain specific, professionally done
+post-editions
+Last year we used the largest dataset of all editions
+of the shared task to date (for sentence and phrase-
+level QE): ∼14K segment pairs altogether. How-
+ever, the findings were somewhat inconclusive as
+the quality of the dataset was dubious (crowd-
+sourced post-editions). This year we were able
+to collect a dataset of comparable size (15K) but
+in a completely controlled way, and with profes-
+sional (paid) translators to ensure the quality of
+the data. Another critical difference in this year’s
+main dataset is its domain: IT, as opposed to the
+rather general, “news” domain that had been used
+so far. Finally, we had access to the SMT sys-
+tem that produced the translations, which was very
+important for the new task introduced this year –
+phrase-level QE. For phrase-level QE, the segmen-
+tation of the sentences in phrases was necessary.
+Having a more repetitive text domain was deemed
+particularly relevant for the word and phrase-level
+tasks, where data sparsity is a major issue.
+
+In practice, we found that this year’s main
+dataset is similar to last year’s in terms of error
+distribution at the word-level: about 20% of the
+words are labelled as BAD. One thing to notice,
+however, is that with the new data systems did not
+seem to benefit from filtering data out. Last year,
+various systems reported improvements from fil-
+tering out significant portions of the “all/mostly
+GOOD” sentences, which could have meant that
+these sentences may not have been correct, but did
+not get post-edited by the crowdworkers.
+
+In terms of progress with respect to last year for
+comparable tasks, although direct comparisons are
+not possible, we observed that:
+
+• For sentence-level, the Pearson correlation of
+the winning submission last year was 0.39
+
+(against 0.14 of the baseline system). This
+year, the winning submission reached 0.52
+Pearson correlation, with many other systems
+above 0.4 (against 0.35 of the same baseline
+system as last year). One can speculate that
+the task was made somewhat “easier” by us-
+ing high quality data, but the delta in Pearson
+correlation between the baseline and winning
+submission is still very substantial.
+
+• For word-level, the main metric used this
+year (F1-mult) is different from the one used
+last year (F1-BAD), and this may have been
+the metric most systems optimised against, so
+looking at the F1-BAD results for both years
+is not entirely fair to this year’s systems, but
+nevertheless this year’s systems performed
+much better: 0.56 against 0.43 last year. The
+baseline system used last year was much sim-
+pler, and therefore comparisons against the
+baseline cannot be made.
+
+Effectiveness of new quality label provided by
+humans for document-level prediction
+Participation in the document-level task was again
+disappointingly low, with only four systems.
+Document-level QE is still a relative new area and
+engaging the community is therefore still a chal-
+lenge.
+
+The main changes in this year’s task were the
+fact that entire documents are used (potentially re-
+sulting in the need for more discourse/document-
+wide features), and the the fact that the quality la-
+bels are computed based on human post-editing.
+We start by analysing the new quality label against
+automatic metrics (such as BLEU) used in previ-
+ous work. Our hypothesis is that automatic met-
+rics are not reliable labels for document-level eval-
+uation (as discussed in (Scarton et al., 2015b)).
+Therefore, we expect that our new label would per-
+form differently from these metrics. We use cor-
+
+171
+
+
+
+relation to measure whether or not the new label
+shows different behaviour. Table 28 shows Pear-
+son r correlation scores for automatic metrics ver-
+sus the new label, as well as between HTER and
+all labels. The HTER score was calculated consid-
+ering the last version of the two-stage post-editing
+method (PE2 ×MT ).
+
+NEW (↓) BLEU(↑) TER(↓) METEOR(↑)
+BLEU −0.168 - - -
+TER +0.195 −0.928 - -
+METEOR −0.186 +0.954 −0.961 -
+HTER(↓) +0.516 −0.462 +0.449 −0.452
+
+Table 28: Pearson r correlation between automatic metrics,
+our new label (NEW) and HTER. All correlation scores are
+significant with 95% of confidence.
+
+Although the new label showed some corre-
+lation to BLEU, TER and METEOR, the best
+correlation is showed with HTER. On the other
+hand, the automatic metrics showed higher cor-
+relation among themselves than against HTER
+scores, which is expected since such metrics are
+similar in many ways.
+
+An important observation is that the automatic
+metrics are calculated against a human translation
+and HTER is calculated against a post-edited ver-
+sion. The effect of this is that BLEU, TER and
+METEOR compare the MT output to a human
+translation that can be completely different from
+the MT output, without necessarily meaning that
+the machine translation is bad. HTER, conversely,
+compares the MT output to its post-edited version.
+
+It is also worth noticing that although HTER did
+not show a high variation (0.091 for mean 0.381 -
+third column of Table 26), similar to the automatic
+metrics, it still did not show very high correla-
+tion with BLEU, TER and METEOR. Conversely,
+the new label showed high correlation with HTER,
+but much lower correlation with BLEU, TER and
+METEOR than HTER itself. This seems to indi-
+cate that the new label captures different informa-
+tion than BLEU, TER and METEOR. Therefore,
+we believe that the new label and standard evalu-
+ation metrics provide complementary information
+on translation quality.
+
+In terms of features, most are similar to
+those used by the systems submitted last year,
+which are aggregations of sentence-level fea-
+ture values. Therefore, our hypothesis that
+discourse/document-aware features would show
+better results on evaluating full document was not
+proved. Systems using discourse-aware features
+(USHEF/GRAPH-DISC) did not show improve-
+
+ments relative to the baseline system. This could
+be an indication of the limitations of the features
+or of the labels themselves.
+
+QE at the phrase level
+One of the main motivations for switching from
+the word level to phrase level is the fact that MT
+errors are often context-dependent, and the wrong
+choice of a word might be explained by an error
+in its context. A good example of such errors are
+adjectives that take the gender of the noun they
+depend on, and become erroneous if this noun is
+replaced with another noun of a different gender.
+
+This motivation suggests that the phrases to be
+used as atomic units in a phrase-level QE sys-
+tem should be syntactically motivated. However,
+there can be other approaches. For example, the
+very popular SMT systems manipulate sequences
+of words as opposed to single words. These se-
+quences – referred to as “phrases” – are not lin-
+guistically motivated phrases. During decoding
+these phrases are selected or rejected as atomic
+units (regardless of the quality of the individual
+words they consist of), and thus it may be useful
+to estimate the quality of the entire phrase.
+
+Overall, there is no single answer to what
+should be considered as a “phrase” in a phrase-
+level QE system. A fully-fledged phrase-level QE
+system should be able to handle both the segmen-
+tation of a sentence into phrases and the labelling
+of each phrase for quality. However, each of these
+two steps is a complex problem on itself. There-
+fore, for the first edition of the task we decided to
+simplify it and provide the phrase segmentation.
+Following Logacheva et al. (2015), we considered
+a “phrase” the final segmentation produced by the
+SMT decoder by an MT decoder that generated
+the automatic translations in the dataset. This seg-
+mentation is useful for decoding-time QE.
+
+The baseline phrase-level QE system uses a
+set of features which were originally designed
+for sentences and later adapted for smaller se-
+quences. These features were used to train a CRF
+model. Participants chose many different tech-
+niques to model the task. The best performing
+ones are deep neural networks: the Recurrent Neu-
+ral Network from the POSTECH team which pre-
+dicts the phrase-level label and the CDACM Re-
+current Neural Network whose word-level predic-
+tions were successfully applied to the phrase-level
+task. Two of the submitted models make use of
+the baseline feature set: the USFD team enhanced
+
+172
+
+
+
+it with context information, while the UAlacante
+team combined it with features based on pseudo-
+reference translations coming from a number of
+sources.
+
+Several teams attempted to take into account
+the predictions for other the task at other levels.
+The phrase-level submission from CDACM sim-
+ply labels the phrase-level test set using word-
+level predictions; while the UAlacant submission
+uses the probability of each word in a phrase be-
+ing labelled as BAD along with other external fea-
+tures. Similarly, USFD uses information on word
+labels within a phrase as well as the information
+on sentence-level quality.
+
+Comparison of word-level and phrase-level
+models The word-level and phrase-level sys-
+tems that participated in Tasks 2 and 2p are not di-
+rectly comparable. Although they are evaluated on
+the same test sentences, and the labels for the test
+set come from the same post-editions, they are not
+identical. The labels for the phrase-level test set
+were modified in order to comply with the phrase-
+level training data. We established a pessimistic
+approache where a phrase is considered BAD if
+any of its words is BAD. We changed the word-
+level labels so that all labels within a BAD phrase
+are also BAD. This is analogous to replacing some
+OK labels with BAD labels for words.
+
+Nevertheless, we can still try to compare the
+word-level and phrase-level submissions if we
+change the word-level submissions appropriately.
+Let us consider that a word-level QE model was
+used to label phrases for quality. Following the
+rules mentioned above we will label a phrase as
+BAD if our QE model labelled any of words of
+this phrase as BAD. After performing this trans-
+formation we can use the Task 2p test set to eval-
+uate both phrase-level and (modified) word-level
+submissions.
+
+While this comparison is an approximation as
+the submitted word-level models were not trained
+to predict the quality of phrases, it still al-
+lows a rough comparison between word-level and
+phrase-level QE models. One of the purposes
+of the phrase-level task was to understand if the
+subsentence-level QE can benefit from joint la-
+belling of groups of words, and this cross-task
+comparison is a means to try to answer that ques-
+tion.
+
+Table 29 contains the joint results of Tasks 2 and
+2p. The best-performing system is the winning
+
+word-level submission. Moreover, the word-level
+systems tend to perform better in this task in gen-
+eral: the top seven positions in this joint table are
+occupied by the word-level systems. Some of the
+phrase-level systems which performed well turn
+out not to be better than the word-level baseline
+system. Presumably, this result means that defin-
+ing the quality for individual words yields better
+results in general.
+
+Another observation we can make from this ta-
+ble is the change in the significance level of the re-
+sults: some of the word-level submissions which
+were significantly different from the word-level
+baseline model in the original (word-level) task
+are no longer different in the phrase-level version.
+This can shed some light on the difficulties we had
+with defining the single best phrase-level system:
+perhaps the lack of significance in the differences
+between the labellings is derived from the phrase-
+level task itself. Alternatively, as it was discussed
+in Section 6.5, it could be explained by the fact that
+F1-mult score is not a suitable metric for phrase-
+level QE.
+
+In order to examine how the phrase-level task
+relates to the word-level one more closely we per-
+formed a different comparison. Some of the teams
+presented their results for both variants of Task 2,
+and the majority of them have similar models for
+both levels: they tried to adapt their original word-
+level system for the phrase-level task. We can
+compare these pairs of systems to see if the adap-
+tation was successful. This is not a direct compar-
+ison, because the models, although similar, can-
+not be identical due to differences between words
+and phrases. This comparison was only done for
+analysis, as it can give us more insights on the fu-
+ture perspectives for the phrase-level task. Table
+30 outlines the results of this comparison.25
+
+Here, in order to enable the direct comparison,
+we adapted the word-level systems to phrase-level
+test set the same way as we did for Table 29. It can
+be clearly seen that the performance of word-level
+systems is better than that of the analogous phrase-
+level systems. There are multiple possible reasons
+for that, for example, wrong choice of phrase-level
+features, limitations of models originally designed
+for word-level QE in dealing effectively with word
+
+25The submission by the CDACM team was not included
+in the table because their phrase-level submission is an adap-
+tation of word-level predictions to phrase level. It was per-
+formed analogously to our word-level submissions adapta-
+tion, therefore it should be no different.
+
+173
+
+
+
+System ID F1-mult ↑
+English-German
+
+• word UNBABEL/ensemble 0.517
+word UNBABEL/linear 0.487
+word UGENT-LT3/SCATE-RF 0.426
+word POSTECH/WORD-RNN-QV3 0.399
+word UGENT-LT3/SCATE-ENS 0.395
+word POSTECH/WORD-RNN-QV2 0.388
+word CDACM/RNN 0.381
+phrase CDACM/RNN 0.379
+phrase POSTECH/PHR-RNN-QV3 0.378
+phrase POSTECH/PHR-RNN-QV2 0.369
+word UAlacant/SBI-Online-baseline 0.369
+phrase USFD/W&SLP4PT 0.367
+word SHEF/SHEF-MIME-0.3 0.367
+word SHEF/SHEF-MIME-1 0.367
+phrase USFD/CONTEXT 0.364
+word BASELINE 0.360
+word RTM/s5-RTM-GLMd 0.344
+phrase RTM/s5-RTM-GLMd 0.327
+phrase BASELINE 0.321
+word RTM/s4-RTM-GLMd 0.313
+phrase RTM/s4-RTM-GLMd 0.307
+word UAlacant/SBI-Online 0.290
+phrase UAlacant/SBI-Online-baseline 0.259
+phrase UAlacant/SBI-Online 0.097
+
+Table 29: Comparison of submissions for Tasks 2 and 2p in terms of word-level F1-mult scores computed on the test set used
+for the Task 2p. Word-level systems (Task 2) are indicated by “word”, while phrase-level systems (Task 2p), by “phrase”.
+The winning submission is indicated with •. The grey area indicates the models which are not significantly different from
+the word-level baseline system, the cyan area indicates the models which are not significantly different from the phrase-level
+baseline.
+
+System ID Word-level Phrase-level
+English-German
+
+POSTECH/RNN-QV3 0.399 0.378
+POSTECH/RNN-QV2 0.388 0.369
+RTM/s5-RTM-GLMd 0.344 0.327
+RTM/s4-RTM-GLMd 0.313 0.307
+Ualacant/SBI-Online-baseline 0.369 0.259
+Ualacant/SBI-Online 0.290 0.097
+
+Table 30: Comparison of systems’ performance in Task 2 (word-level) and 2p (phrase-level). Performance is evaluated in
+terms of word-level F1-mult scores computed on the test set used for the Task 2p. The submissions to the word-level task are
+modified in order to comply with the phrase-level task.
+
+sequences.
+Nevertheless, it is worth noticing the phrase-
+
+level QE systems introduced a number of inter-
+esting strategies that allowed them to outperform
+a strong baseline phrase-level model. Finally, we
+recall that the evaluation metric – word-level F1-
+mult – has difficulties to distinguish phrase-level
+systems. This suggests that we may need to find a
+different metric for evaluation of the phrase-level
+task, with phrase-level F1-mult one of the candi-
+dates.

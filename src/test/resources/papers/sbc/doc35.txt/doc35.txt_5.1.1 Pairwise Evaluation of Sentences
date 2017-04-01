@@ -1,0 +1,4 @@
+We conducted pairwise evaluation of each of the 400 test sentences. The input sentence and two transla-
+tions (the baseline and a submission) are shown to the annotators, and the annotators are asked to judge
+which of the translation is better, or if they are of the same quality. The order of the two translations are
+at random.

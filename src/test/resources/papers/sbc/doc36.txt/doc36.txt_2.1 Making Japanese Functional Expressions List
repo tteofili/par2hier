@@ -1,0 +1,31 @@
+
+In order to identify Japanese functional expressions, Tsuchiya et al. (2006) developed an example
+
+This work is licensed under a Creative Commons Attribution 4.0 International Licence. Licence details:
+http://creativecommons.org/licenses/by/4.0/
+
+1
+
+
+
+database with 337 types of Japanese compound functional expressions. Shime et al. (2007) proposed
+an approach to detecting 59 types of Japanese functional expressions through a machine learning
+technique based on a chunking program. However, the major drawback of these studies is in the scale
+of Japanese functional expressions, which does not reach the need of the five levels (from N1 to N5)
+of the new Japanese-Language Proficiency Test (JLPT).
+According to the requirements of the new JLPT, we manually constructed a list of Japanese
+
+functional expressions, which consists of about 680 headwords and 4,000 types of different surface
+forms. Here, we consider levels 3-5 as easy level, and levels 1-2 as difficult level, respectively. Table
+1 shows some examples of Japanese functional expressions and their surface form variations.
+
+Headword Difficulty Level Surface Forms
+たあとで(after) N5 たあとで、た後で、だあとで、だ後で
+
+かもしれない(maybe) N4 かもしれない、かもしれません、かもしれず...
+にたいして(to) N3 にたいして、に対して、にたいしては、に対しては...
+
+ざるをえない(have to) N2 ざるをえない、ざるを得ない、ざるをえず、ざるを得ず...
+やいなや(as soon as) N1 やいなや、や否や
+
+Table 1: Examples of Japanese functional expressions and surface form variations

@@ -1,0 +1,30 @@
+
+We create word alignments by aligning the bilin-
+gual data in both directions with MGIZA++ (Gao
+and Vogel, 2008). We use a sequence of IBM
+word alignment models (Brown et al., 1993) with
+five iterations of EM training (Dempster et al.,
+1977) of Model 1, three iterations of Model 3,
+and three iterations of Model 4. After EM, we
+obtain a symmetrized alignment by applying the
+grow-diag-final-and heuristic (Och and
+Ney, 2003; Koehn et al., 2003) to the two trained
+alignments. We extract synchronous context-free
+grammar rules that are consistent with the sym-
+metrized word alignment from the parallel training
+data.
+
+We train 5-gram language models (LMs) with
+modified Kneser-Ney smoothing (Kneser and Ney,
+1995; Chen and Goodman, 1998). KenLM
+(Heafield, 2011) is employed for LM training and
+scoring, and SRILM (Stolcke, 2002) for linear LM
+interpolation.
+
+Our translation model incorporates a number of
+different features in a log-linear combination (Och
+and Ney, 2002). We tune the feature weights with
+batch k-best MIRA (Cherry and Foster, 2012) to
+maximize BLEU (Papineni et al., 2002) on a de-
+velopment set. We run MIRA for 25 iterations on
+200-best lists.

@@ -1,0 +1,21 @@
+
+In this section, we propose a second phrase selec-
+tion method based on the results from the syntac-
+tic analysis of source language data. This method
+first processes all the source language data with a
+phrase structure parser, traverses and counts up all
+the subtrees of parse trees as shown in Figure 2, and
+finally selects phrases corresponding to a subtree in
+frequency order.2 We propose this method because
+we expect the selected phrases to have syntactically
+coherent meaning, potentially making human trans-
+lation easier than other methods that do not use syn-
+tactic information.
+It should be noted that because this method counts
+
+all subtrees, it is capable of selecting overlapping
+phrases like the methods based on n-grams. There-
+fore we also experiment with a method using to-
+gether both subtrees and the semi-maximal phrases
+proposed in Section 4.1 to select both syntactic and
+non-redundant segments.

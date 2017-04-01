@@ -1,0 +1,40 @@
+
+The collected pairwise rankings are used to pro-
+duce the official human ranking of the sys-
+tems. Since WMT14, we have used the TrueSkill
+method for producing the official ranking, in the
+following fashion. We produce 1,000 bootstrap-
+resampled datasets over all of the available data
+(i.e., datasets sampled uniformly with replacement
+from the complete dataset). We run TrueSkill over
+each dataset. We then compute a rank range for
+each system by collecting the absolute rank of
+each system in each fold, throwing out the top
+and bottom 2.5%, and then clustering systems into
+equivalence classes containing systems with over-
+lapping ranges, yielding a partial ordering over
+systems at the 95% confidence level.
+
+The full list of the official human rankings for
+each task can be found in Table 6, which also re-
+ports all system scores, rank ranges, and clusters
+for all language pairs and all systems. The official
+interpretation of these results is that systems in the
+same cluster are considered tied. Given the large
+number of judgments that we collected, it was pos-
+sible to group on average about two systems in a
+cluster, even though the systems in the middle are
+typically in larger clusters.
+
+In Figure 3–5, we plotted the human evalu-
+ation result against everybody’s favorite metric
+BLEU. Although these two metrics correlate gen-
+erally well, the plots clearly suggest that a fair
+comparison of systems of different kinds cannot
+
+rely on automatic scores. Rule-based systems re-
+ceive a much lower BLEU score than statistical
+systems (see for instance English–German, e.g.,
+PROMT-RULE). The same is true to a lesser degree
+for statistical syntax-based systems (see English–
+German, UEDIN-SYNTAX vs. UEDIN-PBMT).

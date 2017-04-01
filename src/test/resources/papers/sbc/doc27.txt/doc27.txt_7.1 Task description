@@ -1,0 +1,6 @@
+
+Similar to last year, participants were provided
+with training and development data consisting of
+(source, target, human post-edit) triplets, and were
+asked to return automatic post-edits for a test set of
+unseen (source, target) pairs.

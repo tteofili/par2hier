@@ -1,0 +1,31 @@
+31 systems were submitted in total for the 7 lan-
+guage pairs.
+
+Avramidis (2016) describes all
+English→German QTL-* systems (DFKI).
+Rosa et al. (2016) describe QTL-CHIMERA
+(Charles University). Gaudio et al. (2016) de-
+scribe the remaining QTL-* systems (partners
+
+10http://metashare.metanet4u.eu/go2/
+qtleapcorpus
+
+from the QTLeap project: HF&FCUL for Por-
+tuguese, UPV/EHU for Spanish and Basque,
+IICT-BAS for Bulgarian, CUNI for Czech and
+UG for Dutch). Duma and Menzel (2016)
+describe UHDS-DOC2VEC and UHBS-LMI
+(University of Hamburg). Pahari et al. (2016)
+describe JU-USAAR (Jadavpur University
+& Saarland University). Cuong et al. (2016)
+describe ILLC-UVA-SCORPIO (University of
+Amsterdam). IILC-UVA-DS is based on Hoang
+and Sima’an (2014). PROMT-RULE-BASED and
+PROMT-HYBRID systems were submitted by the
+PROMT LLC company and they are not described
+in any paper.
+
+QTL-MOSES is the standard Moses setup
+(MERT-tuned on the in-domain training data, but
+otherwise without any domain-adaptation) and
+serves as a baseline.

@@ -1,0 +1,21 @@
+
+sum of attention and the expect fertility for linguistic coverage. This is similar to
+the more explicit training for fertility as in Xu et al. (2015), which directly penalizes
+the discrepancy between each Φj and the sum of attention to the corresponding hj .
+
+Our end-to-end training strategy poses less constraints on the dependency be-
+tween {Φj} and the attention than a more explicit strategy taken in (Xu et al.2015),
+
+10
+
+
+
+and let the objective associated with the translation quality (i.e., the likelihood)
+drive the training. This strategy is arguably advantageous, since the attention
+weight on a hidden state hj cannot be interpreted as the proportion of the cor-
+responding word being translated on the target side. For one thing, the hidden state
+{hj}, after the transformation from encoding RNN, bear the contextual informa-
+tion from other parts of the source sentence and therefore lose the rigid correspon-
+dence with the corresponding words. Our empirical study shows that a combined
+objective as in Equationeqn-coverage-training consistently worsens the translation
+quality (BLEU score) while gaining slightly on the alignment.

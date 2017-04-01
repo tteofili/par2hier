@@ -1,0 +1,19 @@
+
+To evaluate the effectiveness of adding topo-
+logical fields to the input, we use the publicly
+available neural network parser described by De
+Kok (2015). This parser uses an architecture that
+is similar to that of Chen and Manning (2014).
+However, it learns morphological analysis as an
+embedded task of parsing. Since most inflectional
+information that can be relevant for parsing Ger-
+man is available in the prefix or suffix, this parser
+learns morphological representations over charac-
+ter embeddings of prefixes and suffixes.
+
+We use the same parser configuration as that of
+De Kok (2015), with the addition of topological
+field annotations. We encode the topological fields
+as one-hot vectors in the input of the parser. This
+information is included for the four tokens on top
+of the stack and the next three tokens on the buffer.

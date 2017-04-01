@@ -1,0 +1,49 @@
+
+Replacing the baseline’s linearly interpolated LM
+with three individual LMs as features in the log-
+linear combination deteriorates the BLEU score on
+the development set by half a point, but has barely
+any impact on translation quality on the test sets
+(±0.0 BLEU on newsdev2016_2, −0.1 BLEU on
+newstest2016). By also adding a background LM
+over the concatenated news2015, Europarl, and
+SETimes2 corpora, we attain a similar BLEU score
+on the development set as with the baseline’s lin-
+early interpolated LM, but a gain of +0.3 to +0.5
+BLEU on the test sets, compared to the baseline.
+
+Utilizing a larger amount of target-side mono-
+lingual resources by appending the Common-
+Crawl corpus to the background LM’s training
+data is very beneficial and increases the BLEU
+scores by around one point. Not pruning the
+LMs, i.e. not discarding singleton n-grams of or-
+der three and higher, has a positive effect on news-
+dev2016_1 and newsdev2016_2 (+0.3 BLEU), but
+makes no difference on newstest2016. If we al-
+low for extraction of more hierarchical rules, we
+slightly harm the result on the development set
+
+again, but the model seems to generalize better,
+with +0.4 BLEU on newsdev2016_2 and +0.3
+BLEU on newstest2016.
+
+The phrase orientation model performs partic-
+ularly well on newstest2016, with a gain of an-
+other +0.8 BLEU. Lightly-supervised training, on
+the other hand, does not boost translation quality
+on newstest2016 at all, though we see a decent
+improvement on newsdev2016_2, our internal test
+set. (+0.7 BLEU).
+
+In our very last experiment, when we tune on
+the concatenation of newsdev2016_1 and news-
+dev2016_2, we find that employing the larger de-
+velopment data is of benefit to the system (+0.4
+BLEU on newstest2016).
+
+Overall, the two individual system enhance-
+ments that give us the largest improvements on
+newstest2016 are the large Romanian Common-
+Crawl corpus (+1.1 BLEU) and the phrase orien-
+tation model (+0.8 BLEU).

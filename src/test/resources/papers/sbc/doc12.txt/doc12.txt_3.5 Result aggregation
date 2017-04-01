@@ -1,0 +1,42 @@
+
+Combining individual sentence scores to an over-
+all system-level result is done in two ways. The
+straightforward way is to simply take an arithmetic
+mean of all sentence scores, indicated in table 4 as
+unweighted or not W. This gives a total score for
+
+corpus c containing N sentences as:
+
+unweightedc =
+
+∑
+s scores
+N
+
+(2)
+
+Additionally, to investigate the importance of
+the aligned words in our sentence, we produce
+a version which assigns each sentence a weight
+equal to the proportion of nodes aligned in the sen-
+tence. With na aligned nodes and nna unaligned
+nodes, the weight for sentence s for the Weighted
+version of DTED (W in table 4) is calculated as:
+
+weights =
+na
+
+na + nna
+(3)
+
+For an individual sentence the score and weight
+can be viewed separately, while overall values for
+a corpus are calculated as:
+
+weightedc =
+
+∑
+s(scores × weights)∑
+
+sweights
+(4)

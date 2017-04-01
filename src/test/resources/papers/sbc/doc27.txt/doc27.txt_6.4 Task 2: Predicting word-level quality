@@ -1,0 +1,167 @@
+The goal of this task is to evaluate the extent to
+which we can detect word-level errors in MT out-
+put. Various classes of errors can be found in
+translations, but for this task we consider all error
+types together, aiming at making a binary distinc-
+tion between OK and BAD tokens. The decision to
+bucket all error types together was made because
+of the lack of sufficient training data that could al-
+low consideration of more fine-grained error tags.
+
+Data This year’s word-level task uses the same
+dataset as Task 1, for a single language pair:
+English-German. Each instance of the training,
+
+21http://www.cs.umd.edu/˜snover/tercom/
+
+development and test sets consists of the follow-
+ing elements:
+
+• Source sentence (English).
+• Automatic translation (German).
+• Manual post-edition of the automatic transla-
+
+tion.
+
+• Word-level binary (OK/BAD) labelling of the
+automatic translation.
+
+The binary labels for the datasets were acquired
+automatically with the TERCOM tool. The tool iden-
+tifies four types of errors: substitution of a word
+with another word, deletion of a word (word was
+omitted by the translation system), insertion of a
+word (a spurious word was added by the transla-
+tion system), and word or sequence of words shift
+(word order error). Every word in the machine-
+translated sentence is tagged with one of these er-
+ror types or not tagged if it matches a word from
+the reference.
+
+All the untagged (correct) words were tagged
+with OK, while the words tagged with substitution
+and insertion errors were assigned the tag BAD.
+The deletion errors are not associated with any
+word in the automatic translation, so we could not
+consider them. We also disabled the shift errors by
+running TERCOMwith the option ‘-d 0’. The reason
+for that is the fact that searching for shifts intro-
+duces significant noise in the annotation. The tool
+cannot discriminate between cases where a word
+was really shifted and where a word (especially
+common words such as prepositions, articles and
+pronouns) was deleted in one part of the sentence
+and then independently inserted in another part of
+this sentence, i.e. to correct an unrelated error. The
+statistics of the datasets are outlined in Table 20.
+
+Evaluation This year’s evaluation procedure is
+different from the one used in previous QE tasks.
+Previously, the submissions were evaluated in
+terms of F1-score for the BAD class. However,
+this metric was criticised for being biased towards
+“pessimistic” labellings. It tends to rate higher the
+outputs of systems which labelled most of words
+as BAD, e.g. a trivial “all-BAD” baseline out-
+performs many real systems in terms of F1-BAD
+score (Bojar et al., 2013).
+
+Therefore, this year we used a different metric:
+the multiplication of F1-scores of the BAD and
+OK classes (herein referred to as F1-mult). As it
+
+165
+
+
+
+System ID Pearson’s r ↑ MAE ↓ RMSE ↓ Spearman’s ρ ↑ DeltaAvg ↑
+English-German
+
+• YSDA/SNTX+BLEU+SVM 0.525 12.30 16.41 – –
+POSTECH/SENT-RNN-QV2 0.460 13.58 18.60 0.483 7.663
+
+SHEF-LIUM/SVM-NN-emb-QuEst 0.451 12.88 17.03 0.474 8.129
+POSTECH/SENT-RNN-QV3 0.447 13.52 18.38 0.466 7.527
+
+SHEF-LIUM/SVM-NN-both-emb 0.430 12.97 17.33 0.452 7.886
+UGENT-LT3/SCATE-SVM2 0.412 19.57 24.11 0.418 7.615
+
+UFAL/MULTIVEC 0.377 13.60 17.64 0.410 7.114
+RTM/RTM-FS-SVR 0.376 13.46 17.81 0.400 6.655
+
+UU/UU-SVM 0.370 13.43 18.15 0.405 6.519
+UGENT-LT3/SCATE-SVM1 0.363 20.01 24.63 0.375 7.008
+
+RTM/RTM-SVR 0.358 13.59 18.06 0.384 6.379
+BASELINE 0.351 13.53 18.39 0.390 6.300
+
+SHEF/SimpleNets-SRC 0.320 13.92 18.23 – –
+SHEF/SimpleNets-TGT 0.283 14.35 18.22 – –
+
+Table 19: Official results for the scoring ad ranking variants of the WMT16 Quality Estimation Task 1. The systems are
+ranked according to the Pearson r metric and significance results are also computed for this metric. The winning submissions
+are indicated by a •. These are the top-scoring submission and those that are not significantly worse according to Williams
+test with 95% confidence intervals. The systems in the grey area are not different from the baseline system at a statistically
+significant level according to the same test.
+
+Sentences Words % of BADwords
+Training 12,000 210,958 21.4
+Development 1,000 19,487 19.54
+Test 2,000 34,531 19.31
+
+Table 20: Datasets for Task 2.
+
+was shown in (Logacheva et al., 2016c), this met-
+ric is not biased neither towards “pessimistic” nor
+to “optimistic” labellings, and is good at discrimi-
+nating between different systems.
+
+We tested the significance of the results using
+randomisation tests (Yeh, 2000) with Bonferroni
+correction (Abdi, 2007).
+
+Results The results for Task 2 are summarised in
+Table 21. We show the performance of all partici-
+pating systems as well as the baseline model. The
+results are ordered by the F1-mult metric. The top
+three submissions are statistically significantly dif-
+ferent from any other system. However, we cannot
+unambiguously depict other significance groups in
+the table. Therefore, we only show the systems
+which are not significantly different from the base-
+line (grey area). The models above and below the
+grey area are significantly better and worse than
+the baseline system, respectively.
+
+In order to show and analyse the groups of
+significantly different systems we plot the results
+of significance test as a heatmap (see Table 22).
+Here, a cell at the crossing of a row and a col-
+umn corresponding to different submissions con-
+tains the information about the significance of the
+difference in their results: the darker the cell is,
+the lower is the significance in the difference for
+
+the pair of systems. The coloured frames denote
+groups of submissions which are not significantly
+different.
+
+We should also note that in order to adequately
+evaluate the significance for multiple experiments
+we used Bonferroni correction. The essence of
+this method is that in cases when multiple results
+are compared (i.e. multiple comparisons are per-
+formed) the final significance level is computed
+as the initial significance level over the number of
+comparisons. In our case we had 91 comparisons
+which gave us αB = α91 = 0.0005 for the sig-
+nificance level of 0.05. Bonferroni correction is
+quite a conservative method, so the number of sig-
+nificance groups may vary when using a different
+correction technique.
+
+Overall, there are 10 groups of significantly
+different results: three of them contain one sub-
+mission (the three best-performing models), other
+seven contain two to five models each (these are
+the groups denoted by frames of different colours).

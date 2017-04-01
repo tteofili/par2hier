@@ -1,0 +1,33 @@
+
+This section presents error analysis of the MT
+and classifier approaches. We begin by identify-
+ing several key properties that distinguish between
+MT systems and classifier systems and that we use
+to characterize the learning frameworks and the
+outputs of the systems:
+(1a) Error coverage denotes the ability of a sys-
+tem to identify and correct a variety of error types.
+(1b) Error complexity indicates the capacity of a
+system to address complex mistakes such as those
+where multiple errors interact.
+
+(2) Generalizibility refers to the ability of a sys-
+tem to identify mistakes in new unseen contexts
+and propose corrections beyond those observed in
+training data.
+(3) The role of supervision or having annotated
+learner data for training.
+(4) System flexibility is a property of the system
+that allows it to adapt resources specially to correct
+various phenomena. The two paradigms are sum-
+marized in Table 4. We use + and − to indicate
+whether a learning framework has desirable (+) or
+undesirable characteristic with regard to each fac-
+tor.
+
+The first three properties characterize system
+output, while (3) and (4) arise from the system
+frameworks. Below we analyze the output of sev-
+eral state-of-the-art CoNLL-2014 systems in more
+detail.1 Section 4 explores (3) and (4) that relate
+to the learning frameworks.

@@ -1,0 +1,13 @@
+
+In the WMT 16’ multimodal task, captions are
+structured with simple grammars; therefore, only
+considering language model may be insufficient
+to distinguish good translations. In order to di-
+rectly consider whether the concepts mentioned in
+the source sentences are all well-translated, we uti-
+lize the bilingual dictionary Glosbe1, in which we
+use the words in one language extracting the corre-
+sponding words in the other language. We directly
+count the number of words in the source language
+that the synonyms in target language are also in
+the translated results as the re-ranking score.

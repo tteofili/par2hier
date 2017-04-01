@@ -1,0 +1,52 @@
+
+Many languages use honorifics to express polite-
+ness, social distance, or the relative social status be-
+tween the speaker and their addressee(s). A wide-
+spread instance is the grammatical T-V distinction
+(Brown and Gilman, 1960), distinguishing between
+the familiar (Latin Tu) and the polite (Latin Vos)
+second person pronoun. In machine translation from
+a language without honorifics such as English, it
+is difficult to predict the appropriate honorific, but
+users may want to control the level of politeness in
+the output.
+
+The research presented in this publication was conducted in
+cooperation with Samsung Electronics Polska sp. z o.o. - Sam-
+sung R&D Institute Poland.
+
+We propose a simple and effective method for in-
+cluding target-side T-V annotation in the training of
+a neural machine translation (NMT) system, which
+allows us to control the level of politeness at test
+time through what we call side constraints. It can be
+applied for translation between languages where the
+T-V distinction is missing from the source, or where
+the distribution differs. For instance, both Swedish
+and French make the T-V distinction, but reciprocal
+use of T pronouns is more widespread in Swedish
+than in French (Schüpbach et al., 2006). Hence, the
+Swedish form is not a reliable signal for the appro-
+priate form in the French translation (or vice-versa).
+
+Our basic approach of using side constraints to
+control target-side features that may be missing from
+the source, or are unreliable because of a cate-
+gory mismatch, is not limited to the T-V distinc-
+tion, but could be applied to various linguistic fea-
+tures. This includes grammatical features such as
+tense and the number/gender of discourse partici-
+pants, and more generally, features such as dialect
+and register choice.
+
+This paper has the following contributions:
+
+• we describe rules to automatically annotate the
+T-V distinction in German text.
+
+• we describe how to use target-side T-V anno-
+tation in NMT training to control the level of
+politeness at test time via side constraints.
+
+• we perform oracle experiments to demonstrate
+the impact of controlling politeness in NMT.

@@ -1,0 +1,113 @@
+
+In this section, we describe the details of the NYU-
+MILA neural machine translation system. In our
+system, we closely follow the neural machine
+translation model proposed by Bahdanau et al.
+(2015). A neural machine translation model (For-
+cada and Ñeco, 1997; Kalchbrenner and Blunsom,
+2013; Cho et al., 2014; Sutskever et al., 2014) aims
+at building an end-to-end neural network that takes
+as input a source sentence X = (x1, . . . , xTx) and
+outputs its translation Y = (y1, . . . , yTy), where
+
+268
+
+
+
+xt and yt′ are respectively source and target to-
+kens. The neural network is constructed as a com-
+posite of an encoder network and a decoder net-
+work.
+
+The encoder maps the input sentence X into its
+continuous representation. A bidirectional recur-
+rent neural network, which consists of two recur-
+rent neural networks (RNNs), is used to give more
+representational power to the encoder. The for-
+ward network reads the input sentence in a for-
+ward direction: −→z t =
+
+−→
+φ (ex(xt),
+
+−→z t−1), where
+ex(xt) is a continuous embedding of the t-th in-
+put symbol, and φ is a recurrent activation func-
+tion. Similarly, the reverse network reads the
+sentence in a reverse direction (right to left):
+←−z t =
+
+←−
+φ (ex(xt),
+
+←−z t+1). At each location in the
+input sentence, we concatenate the hidden states
+from the forward and reverse RNNs to form a
+context set: C = {z1, . . . , zTx} , where zt =[−→z t;←−z t
+
+]
+.
+
+Then the decoder computes the conditional dis-
+tribution over all possible translations based on
+this context set. This is done by first rewriting the
+conditional probability of a translation: log p(Y |
+X) =
+
+∑Ty
+t′=1 log p(yt′ | y<t′ , X). For each con-
+
+ditional term in the summation, the decoder RNN
+updates its hidden state by
+
+ht′ = φ(ey(yt′−1),ht′−1, ct′), (1)
+
+where ey is the continuous embedding of a target
+symbol. ct′ is a context vector computed by a soft-
+alignment mechanism:
+
+ct′ = falign(ey(yt′−1),ht′−1, C)). (2)
+
+The soft-alignment mechanism falign weights
+each vector in the context set C according to its
+relevance given what has been translated. The
+weight of each vector zt is computed by
+
+αt,t′ =
+1
+
+Z
+efscore(ey(yt′−1),ht′−1,zt), (3)
+
+where fscore is a parametric function returning an
+unnormalized score for zt given ht′−1 and yt′−1.
+We use a feedforward network with a single hid-
+den layer in this paper. Z is a normalization con-
+stant: Z =
+
+∑Tx
+k=1 e
+
+fscore(ey(yt′−1),ht′−1,zk). This
+procedure can be understood as computing the
+alignment probability between the t′-th target
+symbol and t-th source symbol.
+
+The hidden state ht′ , together with the previous
+target symbol yt′−1 and the context vector ct′ , is
+
+fed into a feedforward neural network to result in
+the conditional distribution:
+
+p(yt′ | y<t′ , X) ∝ ef
+yt′
+out(ey(yt′−1),ht′ ,ct′ ). (4)
+
+The whole network, consisting of the encoder,
+decoder and soft-alignment mechanism, is then
+tuned end-to-end to minimize the negative log-
+likelihood using stochastic gradient descent. In
+our system, the source sentenceX is a sequence of
+subword tokens extracted by byte-pair-encoding
+(BPE) (Sennrich et al., 2015), and the target sen-
+tence Y is represented as a sequence of characters.

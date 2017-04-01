@@ -1,0 +1,95 @@
+
+x1 x2 xT 
+
+yi-1 yi 
+
+si-1 si 
+
+αi,1 αi,2 αi,T 
+
+ci 
+
+h1 
+
+h1 
+
+h2 
+
+h2 hT 
+
+hT 
+
+Figure 2: Architecture of NMT with alignment model. The alignment model cal-
+culates the alignment probability αi,j between yi and xj , which is based on the
+decoder hidden state si−1 and the encoder annotation hj .
+
+Our work is built on attention-based NMT (RNNSearch) (Bahdanau et al.2015),
+which simultaneously conducts dynamic alignment and generation of the target
+sentence, as illustrated in Figure 2. It produces the translation by generating one
+target word at every time step conditioned on a context vector, the previous hidden
+state and the previously generated word. Given an input sentence x = {x1, . . . , xTx}
+and previous translated words {y1, . . . , yi−1}, the probability of next word yi is:
+
+P (yi|y1, . . . , yi−1,x) = g(yi−1, si, ci) (1)
+
+where si is an decoder hidden state for time step i, computed by
+
+si = f(si−1, yi−1, ci) (2)
+
+3
+
+
+
+Here the activation function f(·) is a gated recurrent unit (GRU) (Cho et al.2014b),
+and ci is a distinct context vector for time i, which is calculated as a weighted sum
+of the input annotations hj :
+
+ci =
+
+Tx∑
+j=1
+
+αi,j · hj (3)
+
+where hj = [
+−→
+h >j ;
+←−
+h >j ]
+
+>
+is the annotation of xj from a bi-directional RNN (Schus-
+
+ter and Paliwal1997), and its weight αi,j is computed by
+
+αi,j =
+exp(ei,j)∑Tx
+k=1 exp(ei,k)
+
+(4)
+
+where
+
+ei,j = a(si−1, hj)
+
+= v>a tanh(Wasi−1 + Uahj) (5)
+
+is an alignment model that scores how well yi and hj match. With the alignment
+model, it avoids the need to represent the entire source sentence with a fixed-length
+vector. Instead, the decoder selects parts of the source sentence to pay attention to,
+thus exploits an expected annotation ci over possible alignments αi,j for each time
+step i.
+
+The parameters are trained to maximize the likelihood of the training data
+
+arg max
+N∑
+
+n=1
+
+logP (yn|xn) (6)
+
+However, the alignment model misses the opportunity to take advantage of past
+alignment information, which proves useful in traditional statistical machine trans-
+lation (Koehn et al.2003). For example, if a source word is translated in the past, it
+is less likely to be translated again, thus should be assigned a lower probability.

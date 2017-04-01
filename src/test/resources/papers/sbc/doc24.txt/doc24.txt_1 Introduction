@@ -1,0 +1,262 @@
+
+We argue that trust is crucial for effective human
+interaction with machine learning based NLP sys-
+tems, and that explaining individual predictions is
+important in assessing trust. We present a demonstra-
+tion for LIME, a modular and extensible approach
+to faithfully explain the predictions of any model in
+
+an interpretable manner, and SP-LIME, a method to
+select representative and non-redundant explanations,
+providing a global view of the model to users. The
+user interactions on multiple applications and clas-
+sifiers span a variety of trust-related tasks: getting
+insights into predictions, deciding between models,
+and improving untrustworthy models.
+
+Acknowledgments
+
+We would like to thank Kevin Gimpel, John Wieting,
+and Cristian Danescu-Niculescu-Mizil for making
+their classifiers and datasets available for use. This
+work was supported in part by the TerraSwarm Re-
+search Center, one of six centers supported by the
+STARnet phase of the Focus Center Research Pro-
+gram (FCRP) a Semiconductor Research Corporation
+program sponsored by MARCO and DARPA.
+
+100
+
+
+
+References
+J. Quiñonero Candela, M. Sugiyama, A. Schwaighofer,
+
+and N. D. Lawrence. 2009. Dataset Shift in Machine
+Learning. MIT.
+
+Cristian Danescu-Niculescu-Mizil, Moritz Sudhof, Dan
+Jurafsky, Jure Leskovec, and Christopher Potts. 2013.
+A computational approach to politeness with applica-
+tion to social factors. In Proceedings of ACL.
+
+Mary T. Dzindolet, Scott A. Peterson, Regina A. Pom-
+ranky, Linda G. Pierce, and Hall P. Beck. 2003. The
+role of trust in automation reliance. Int. J. Hum.-
+Comput. Stud., 58(6).
+
+Bradley Efron, Trevor Hastie, Iain Johnstone, and Robert
+Tibshirani. 2004. Least angle regression. Annals of
+Statistics, 32:407–499.
+
+Uriel Feige. 1998. A threshold of ln n for approximating
+set cover. J. ACM, 45(4), July.
+
+Jonathan L. Herlocker, Joseph A. Konstan, and John Riedl.
+2000. Explaining collaborative filtering recommenda-
+tions. In Conference on Computer Supported Coopera-
+tive Work (CSCW).
+
+Shachar Kaufman, Saharon Rosset, and Claudia Perlich.
+2011. Leakage in data mining: Formulation, detection,
+
+and avoidance. In Knowledge Discovery and Data
+Mining (KDD).
+
+Andreas Krause and Daniel Golovin. 2014. Submodu-
+lar function maximization. In Tractability: Practical
+Approaches to Hard Problems. Cambridge University
+Press, February.
+
+Kayur Patel, James Fogarty, James A. Landay, and Bev-
+erly Harrison. 2008. Investigating statistical machine
+learning as a tool for software development. In Human
+Factors in Computing Systems (CHI).
+
+Marco Tulio Ribeiro, Sameer Singh, and Carlos Guestrin.
+2016. “Why should I trust you?”: Explaining the pre-
+dictions of any classifier. CoRR, abs/1602.04938.
+
+Richard Socher, Alex Perelygin, Jean Wu, Jason Chuang,
+Christopher D. Manning, Andrew Y. Ng, and Christo-
+pher Potts. 2013. Recursive deep models for semantic
+compositionality over a sentiment treebank. In Pro-
+ceedings of the 2013 Conference on Empirical Methods
+in Natural Language Processing, pages 1631–1642,
+Stroudsburg, PA, October. Association for Computa-
+tional Linguistics.
+
+John Wieting, Mohit Bansal, Kevin Gimpel, and Karen
+Livescu. 2015. Towards universal paraphrastic sen-
+tence embeddings. CoRR, abs/1511.08198.
+
+101
+
+
+
+
+
+Author Index
+
+Abdelali, Ahmed, 11, 17
+Agarwal, Vipul, 47
+Aggarwal, Khushboo, 47
+Anastasakos, Tasos, 47
+Apidianaki, Marianna, 27
+Artstein, Ron, 32
+
+B. Hashemi, Homa, 37
+Balaji, Peddamuthu, 77
+Bhatt, Himanshu Sharad, 77
+Bikkula, Ravi, 47
+Boies, Daniel, 47
+
+Callison-Burch, Chris, 62
+Cassidy, Taylor, 72
+Celikyilmaz, Asli, 47
+Chan, Ho Yin Ricky, 87
+Chandramohan, Senthilkumar, 47
+Chang, Shih-fu, 72
+Cho, Eunah, 82
+Crook, Paul, 47
+Cubaud, Pierre, 27
+
+Dandapat, Sandipan, 77
+Darwish, Kareem, 11
+Dehdari, Jon, 42
+Demberg, Vera, 57
+Dey, Anik, 87
+Durrani, Nadir, 11, 17
+
+Feizollahi, Zhaleh, 47
+Fung, Pascale, 87
+
+Gainer, Alesia, 32
+Georgila, Kallirroi, 32
+Goldsmith, John, 22
+Guan, Rachel, 72
+Guestrin, Carlos, 97
+Guzmán, Francisco, 17
+
+Ha, Thanh-Le, 82
+Han, Jiawei, 72
+Hendler, James, 72
+Holenstein, Roman, 47
+Hsu, Kuang-Yi, 67
+Huang, Chien-Tsung, 67
+Hwa, Rebecca, 37
+
+Jat, Sharmistha, 77
+Jeong, Minwoo, 47
+Ji, Heng, 72
+
+Kaplan, Lance, 72
+Khan, Omar, 47
+Kilgour, Kevin, 82
+Kim, Young-Bum, 47
+Korolov, Rostyslav, 72
+Krawczyk, Elizabeth, 47
+Krüger, Bastian, 82
+
+Lee, Jackson, 22
+Leuski, Anton, 32
+Li, Chung-Min, 67
+Li, Hongzhi, 72
+Liang, Chao-Chun, 67
+Lin, Ruixi, 87
+Litman, Diane, 6, 37
+Liu, Xiaohu, 47
+Lu, Di, 72
+
+Marin, Alex, 47
+Mediani, Mohammed, 82
+Miao, Shen-Yu, 67
+Mohanty, Sharada Prasanna, 92
+Mubarak, Hamdy, 11
+Müller, Markus, 82
+
+Napoles, Courtney, 62
+Nguyen, Huy, 6
+
+103
+
+
+
+Nguyen, Thai Son, 82
+Niehues, Jan, 82
+
+Panic, Danko, 47
+Pillias, Clément, 27
+Post, Matt, 62
+Pusse, Florian, 57
+
+Radostev, Vasiliy, 47
+Ramesh, Nikhil, 47
+Ren, Xiang, 72
+Ribeiro, Marco, 97
+Robichaud, Jean-Phillipe, 47
+Rochette, Alexandre, 47
+Roth, Dan, 52
+Roy, Shourya, 77
+Roy, Subhro, 52
+
+Sarikaya, Ruhi, 47
+Sayeed, Asad, 57
+Semwal, Deepali, 77
+Shapiro, Ari, 32
+Sharma, Dipti Misra, 92
+Si, Mei, 72
+Siddique, Farhad Bin, 87
+Singh, Sameer, 97
+Sperber, Matthias, 82
+Srivastava, Manish, 92
+Stromberg, Logan, 47
+Stüker, Sebastian, 82
+Su, Keh-Yih, 67
+
+Tan, Liling, 42
+Tao, Fangbo, 72
+Traum, David, 32
+
+van Genabith, Josef, 42
+Voss, Clare, 72
+
+Waibel, Alex, 82
+Wallace, William, 72
+Wan, Yan, 87
+Wang, Dongang, 72
+Wani, Nehal J, 92
+
+Xiong, Wenting, 6
+Xu, Yong, 27
+
+Yang, Yang, 87
+Yvon, François, 27
+
+Zeldes, Amir, 1
+Zhang, Fan, 37
+Zhang, Tongtao, 72
+
+
+	Program
+	rstWeb - A Browser-based Annotation Interface for Rhetorical Structure Theory and Discourse Relations
+	Instant Feedback for Increasing the Presence of Solutions in Peer Reviews
+	Farasa: A Fast and Furious Segmenter for Arabic
+	iAppraise: A Manual Machine Translation Evaluation Environment Supporting Eye-tracking
+	Linguistica 5: Unsupervised Learning of Linguistic Structure
+	TransRead: Designing a Bilingual Reading Experience with Machine Translation Technologies
+	New Dimensions in Testimony Demonstration
+	ArgRewrite: A Web-based Revision Assistant for Argumentative Writings
+	Scaling Up Word Clustering
+	Task Completion Platform: A self-serve multi-domain goal oriented dialogue platform
+	Illinois Math Solver: Math Reasoning on the Web
+	LingoTurk: managing crowdsourced tasks for psycholinguistics
+	Sentential Paraphrasing as Black-Box Machine Translation
+	A Tag-based English Math Word Problem Solver with Understanding, Reasoning and Explanation
+	Cross-media Event Extraction and Recommendation
+	SODA:Service Oriented Domain Adaptation Architecture for Microblog Categorization
+	Lecture Translator - Speech translation framework for simultaneous lecture translation
+	Zara The Supergirl: An Empathetic Personality Recognition System
+	Kathaa: A Visual Programming Framework for NLP Applications
+	``Why Should I Trust You?'': Explaining the Predictions of Any Classifier
+

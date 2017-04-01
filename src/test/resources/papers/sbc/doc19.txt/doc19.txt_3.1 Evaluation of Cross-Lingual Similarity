@@ -1,0 +1,41 @@
+
+The cross-lingual similarity between two depen-
+dency structures can be automatically evaluated.
+Dependency parsing is conducted on sentences, so
+we take bilingual sentence pairs as the objects for
+evaluation. The calculation of cross-lingual similar-
+ity needs the lexical alignment information between
+two languages, which can be obtained by manual an-
+notation or unsupervised algorithms.
+
+Given a bilingual sentence pair xα and xβ , their
+dependency structures yα and yβ , and the word
+
+502
+
+
+
+alignment probabilities A, the cross-lingual similar-
+ity can be calculated as below:
+
+d(yα, yβ) =
+
+∑
+(i,j)∈yα
+
+∑
+(i′,j′)∈yβ Ai,i′Aj,j′∑
+
+(i,j)∈yα
+∑
+
+i′,j′∈xβ Ai,i′Aj,j′
+(2)
+
+The bracketed word pair indicates a dependency
+edge. The evaluation metric is a real number be-
+tween 0 and 1, indicating the degree of cross-
+lingual consistency between two dependency struc-
+tures. For the cross-lingual similarity between bilin-
+gual paragraphs, we simply define it as the average
+over the similarity between each sentence pairs.

@@ -1,0 +1,38 @@
+
+The test data for this year’s task was selected from
+online sources, as before. We took about 1500 En-
+glish sentences and translated them into the other
+5 languages, and then additional 1500 sentences
+from each of the other languages and translated
+them into English. This gave us test sets of about
+3000 sentences for our English-X language pairs,
+which have been either originally written in En-
+glish and translated into X, or vice versa. The
+composition of the test documents is shown in Ta-
+ble 1.
+
+The stories were translated by professional
+translators, funded by the EU Horizon 2020
+projects CRACKER and QT21 (German, Czech,
+Romanian), by Yandex2, a Russian search engine
+company (Turkish, Russian), and by BAULT, a re-
+search community on building and using language
+technology funded by the University of Helsinki
+(Finnish). For Finnish, a second translation was
+provided as well, but not used in the evaluation.
+All of the translations were done directly, and not
+via an intermediate language.
+
+For Turkish we also released an additional 500
+sentence development set, and for Romanian a
+third of the test set were released as a development
+
+1http://statmt.org/wmt16/results.html
+2http://www.yandex.com/
+
+132
+
+
+
+set instead. For the other languages, test sets from
+previous years are available as development sets.

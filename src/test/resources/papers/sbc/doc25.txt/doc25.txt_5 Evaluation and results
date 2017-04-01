@@ -1,0 +1,52 @@
+
+To evaluate the proposed topological field model,
+we use the same partitioning of TüBa-D/Z and the
+word and tag embeddings as De Kok (2015). For
+training, validation, and evaluation of the parser,
+we use these splits as-is. Since we want to test the
+
+parser with non-gold topological field annotations
+as well, we swapped the training and validation
+data for training our topological field predictor.
+
+The parser was trained using the same hyper-
+parameters and embeddings as in De Kok (2015).
+Our topological field predictor is trained using
+Keras (Chollet, 2015).4 The hyperparameters that
+we use are summarized in Appendix A. The topo-
+logical field predictor uses the same word and tag
+embeddings as the parser.
+
+In Table 5, we show the accuracy of the topo-
+logical field labeler. The use of a bi-directional
+LSTM is clearly justified, since it outperforms the
+stacked unidirectional LSTM by a wide margin.
+
+Parser Accuracy (%)
+LSTM + LSTM 93.33
+Bidirectional LSTM + LSTM 97.24
+
+Table 5: Topological field labeling accuracies.
+The addition of backward flowing information im-
+proves accuracy considerably.
+
+Table 6 shows the labeled attachment scores
+(LAS) for parsing with topological fields. As
+we can see, adding gold topological field annota-
+tions provides a marked improvement over pars-
+ing without topological fields. Although the parser
+does not achieve quite the same performance with
+the output of the LSTM-based sequence labeler,
+it is still a relatively large improvement over the
+parser of De Kok (2015). All differences are sig-
+nificant at p < 0.0001.5
+
+Parser LAS UAS
+De Kok (2015) 89.49 91.88
+Neural net + TFs 90.00 92.36
+Neural net + gold TFs 90.42 92.76
+
+Table 6: Parse results with topological fields and
+gold topological fields. Parsers that use topolog-
+ical field information outperform parsers without
+access to such information.

@@ -1,0 +1,20 @@
+Figure 15 shows the chronological evaluation results of 4 subtasks of ASPEC and 2 subtasks of JPC. The
+Kyoto-U (2016) (Cromieres et al., 2016), ntt (2016) (Sudoh and Nagata, 2016) and naver (2015) (Lee et
+al., 2015) are NMT systems, the NAIST (2015) (Neubig et al., 2015) is a forest-to-string SMT system,
+Kyoto-U (2015) (Richardson et al., 2015) is a dependency tree-to-tree EBMT system and JAPIO (2016)
+(Kinoshita et al., 2016) system is a phrase-based SMT system.
+What we can see is that in ASPEC-JE and EJ, the overall quality is improved from the last year, but
+
+the ratio of grade 5 is decreased. This is because the NMT systems can output much fluent translations
+24http://lotus.kuee.kyoto-u.ac.jp/WAT/evaluation/index.html
+
+12
+
+
+
+but the adequacy is worse. As for ASPEC-JC and CJ, the quality is very much improved. Literatures
+(Junczys-Dowmunt et al., 2016) say that Chinese receives the biggest benefits from NMT.
+The translation quality of JPC-CJ does not so much varied from the last year, but that of JPC-KJ is
+
+much worse. Unfortunately, the best systems participated last year did not participate this year, so it is
+not directly comparable.

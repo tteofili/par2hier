@@ -1,0 +1,68 @@
+
+We carried out a large number of development
+experiments throughout the design of this sys-
+tem, using the data conditions described in Sec-
+tion 2.1, with the WMT 2014 test set as our tuning
+set (dev), and the WMT 2015 test set as our test
+set. We monitored uncased BLEU on a system-
+tokenized version of the test set, reporting the av-
+erage and the best of 5 random tuning replications.
+
+Table 1 provides some selected results from
+these experiments and table 2 shows an example of
+how the different components improve the trans-
+lation quality. The word baseline reflects a sys-
+tem with standard phrase-based features, reorder-
+ing models, sparse features, monolingual language
+models and an uninterpolated phrase table. The
+
+330
+
+
+
+input полиция карраты предъявила 20-летнему мужчине обвинение в
+отказе остановиться и опасном вождении .
+
+reference karratha police have charged a 20-year-old man with failing to stop and
+reckless driving .
+
+word-aligned baseline police charge man in 20-years punching карраты refusing to stop and dan-
+gerous driving .
+
+lemma-aligned baseline police charged карраты 20-years man indicted in refusing to stop and dan-
+gerous driving .
+
++ neural components police charged карраты 20-years man charged with refusing to stop and
+dangerous driving .
+
++ OOV handling karratha police charged a 20-year-old man accused of refusing to stop and
+dangerous driving .
+
++ rescoring karratha police have charged a 20-year-old man accused of refusing to stop
+and dangerous driving .
+
+Table 2: Example that shows significant improvements by using lemma alignments, adding neural com-
+ponents (i.e. 2NNJMs and NNLTM), adding OOV handling (i.e. fallback lemma table and transliteration)
+and rescoring.
+
+alignment for all components in this word baseline
+is based on the surface form of the Russian word.
+We then replace the word alignment for all com-
+ponents with lemma alignment to form the lemma
+baseline. We then add the neural components, the
+fallback lemma table and the transliteration com-
+ponent. The rescoring step is only done on the best
+model as the final step before recasing and detok-
+enizing.
+
+Given such a strong lemma baseline, the biggest
+impact comes from the addition of the first NNJM.
+The next largest jump comes from the fallback
+Russian lemma phrase table, which also improved
+our OOV rate considerably. We were pleas-
+antly surprised to see the transliteration compo-
+nent helping to the extent that it does. These
+sorts of point-wise vocabulary improvements do
+not always have a visible impact on BLEU. We are
+optimistic that its impact will be even more pro-
+nounced in the human evaluation.

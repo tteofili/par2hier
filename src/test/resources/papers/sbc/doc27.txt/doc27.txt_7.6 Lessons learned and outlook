@@ -1,0 +1,2964 @@
+
+The objectives of this pilot APE task were to: i)
+improve and stabilize the evaluation framework in
+view of future rounds, ii) analyze the effect on task
+feasibility of data coming from a narrow domain,
+iii) analyze the effect of post-edits collected from
+professional translators, iv) analyze how humans
+perceive TER/BLEU performance differences be-
+tween different systems, v) measure the progress
+made during one year of research on the APE task.
+
+Concerning the first point, no specific issues
+emerged this year calling for major changes. The
+overall format, starting from the baselines and the
+evaluation metrics adopted, will likely be kept also
+for the next round.
+
+As regards points ii) and iii) the positive effect
+of domain-specific data and professional-quality
+post-edits is evident. Most likely, these favorable
+conditions for automatic post-editing will be kept
+as well, also because they represent a more stan-
+dard translation scenario compared to the generic
+news domain.
+
+Regarding point iv), an interesting finding of
+the manual evaluation is a correlation between hu-
+man judgements and the results obtained with au-
+tomatic metrics. This confirms the reliability of
+popular MT metrics, namely BLEU and TER, for
+APE systems evaluation. Despite the baseline im-
+provements and the significant overall TER/BLEU
+gains, the feedback from human evaluators regard-
+
+184
+
+
+
+ing the quality of the APE MT segments is not
+fully positive yet, showing that there is still room
+for improvement. One explanation for this is prob-
+ably related to the domain specificity of the data
+set used for this year’s APE shared task. Many
+segments contain sets of instructions and com-
+mands that are used in user manuals of the IT do-
+main and were given to annotators without con-
+text. The annotators also pointed out that they con-
+sidered difficult to rank very similar segments, as
+most APE systems do not make substantial modi-
+fications of the MT output, which results in similar
+outputs in terms of quality and leads to challeng-
+ing comparisons for humans. This aspect is em-
+phasized when no translation reference is given to
+the annotators. In this case, only the top-ranked
+system emerges as a source of corrections that are
+significantly better than the baseline (in spite of
+the impressive TER and BLEU gains, respectively
+up to -3.24 and +5.54 points).
+
+In terms of progress over the last year, this was a
+successful follow-up. More participants, some of
+which new, resulted in a larger variety in the sub-
+mitted systems. Those pursuing the phrase-based
+approach that dominated the pilot round managed
+to improve over this common backbone in dif-
+ferent ways. Other teams introduced interesting
+novelties, bringing also into the APE framework
+the popularity of neural approaches. The tangi-
+ble result is represented by the large improvements
+over the (last year unbeaten) baseline achieved by
+most of the systems. Such gains indicate the good
+potential of APE systems to improve MT output
+in black-box conditions and motivate further re-
+search and developments.
+
+Acknowledgments
+
+This work was supported in parts by the
+MosesCore, QT21, QTLeap, EXPERT and
+CRACKER projects funded by the European
+Commission (7th Framework Programme and
+H2020).
+
+The APE task organizers would also like to
+thank Jan Niehues for training the KIT system
+used to produce the MT output, Text&Form for
+producing the manual post-edits, and the annota-
+tors involved in the manual evaluation.
+
+References
+
+Abdelsalam, A., Bojar, O., and El-Beltagy, S.
+(2016). Bilingual Embeddings and Word Align-
+
+ments for Translation Quality Estimation. In
+Proceedings of the First Conference on Ma-
+chine Translation, Berlin, Germany. Associa-
+tion for Computational Linguistics.
+
+Abdi, H. (2007). The bonferroni and šidák correc-
+tions for multiple comparisons. Encyclopedia
+of measurement and statistics, 3:103–107.
+
+Aires, J., Lopes, G., and Gomes, L. (2016).
+English-Portuguese Biomedical Translation
+Task Using a Genuine Phrase-Based Statistical
+Machine Translation Approach. In Proceed-
+ings of the First Conference on Machine
+Translation, Berlin, Germany. Association for
+Computational Linguistics.
+
+Al-Rfou, R., Perozzi, B., and Skiena, S. (2013).
+Polyglot: Distributed Word Representations for
+Multilingual NLP. In Proceedings of the 17th
+Conference on Computational Natural Lan-
+guage Learning, pages 183–192, Sofia, Bul-
+garia.
+
+Allauzen, A., Aufrant, L., Burlot, F., Lacroix, O.,
+Knyazeva, E., Lavergne, T., Wisniewski, G.,
+and Yvon, F. (2016). LIMSI@WMT16: Ma-
+chine Translation of News. In Proceedings
+of the First Conference on Machine Transla-
+tion, Berlin, Germany. Association for Compu-
+tational Linguistics.
+
+Avramidis, E. (2016). DFKI’s system for WMT16
+IT-domain task, including analysis of system-
+atic errors. In Proceedings of the First Confer-
+ence on Machine Translation, Berlin, Germany.
+Association for Computational Linguistics.
+
+Aziz, W., de Sousa, S. C. M., and Specia, L.
+(2012). Pet: a tool for post-editing and as-
+sessing machine translation. In Eighth Interna-
+tional Conference on Language Resources and
+Evaluation, LREC, pages 3982–3987, Instan-
+bul, Turkey.
+
+Bahdanau, D., Cho, K., and Bengio, Y. (2014).
+Neural machine translation by jointly learn-
+ing to align and translate. arXiv preprint
+arXiv:1409.0473.
+
+Béchara, H., Ma, Y., and van Genabith, J. (2011).
+Statistical Post-Editing for a Statistical MT Sys-
+tem. In Proceedings of the 13th Machine Trans-
+lation Summit, pages 308–315, Xiamen, China.
+
+Beck, D., Vlachos, A., Paetzold, G., and Specia,
+L. (2016). SHEF-MIME: Word-level Quality
+
+185
+
+
+
+Estimation Using Imitation Learning. In Pro-
+ceedings of the First Conference on Machine
+Translation, Berlin, Germany. Association for
+Computational Linguistics.
+
+Bektaş, E., Yilmaz, E., Mermer, C., and Dur-
+gar El-Kahlout, . (2016). TÜBTAK SMT Sys-
+tem Submission for WMT2016. In Proceed-
+ings of the First Conference on Machine Trans-
+lation, Berlin, Germany. Association for Com-
+putational Linguistics.
+
+Berard, A., Servan, C., Pietquin, O., and Besacier,
+L. (2016). MultiVec: a Multilingual and Multi-
+level Representation Learning Toolkit for NLP.
+In Proceedings of the Tenth International Con-
+ference on Language Resources and Evaluation
+(LREC 2016).
+
+Biçici, E. and Way, A. (2015). Referential trans-
+lation machines for predicting semantic similar-
+ity. Language Resources and Evaluation, pages
+1–27.
+
+Bicici, E. (2016a). ParFDA for Instance Selection
+for Statistical Machine Translation. In Proceed-
+ings of the First Conference on Machine Trans-
+lation, Berlin, Germany. Association for Com-
+putational Linguistics.
+
+Bicici, E. (2016b). Referential Translation Ma-
+chines for Predicting Translation Performance.
+In Proceedings of the First Conference on Ma-
+chine Translation, Berlin, Germany. Associa-
+tion for Computational Linguistics.
+
+Blain, F., Song, X., and Specia, L. (2016).
+Sheffield Systems for the English-Romanian
+WMT Translation Task. In Proceedings of
+the First Conference on Machine Translation,
+Berlin, Germany. Association for Computa-
+tional Linguistics.
+
+Bojar, O., Buck, C., Callison-Burch, C., Feder-
+mann, C., Haddow, B., Koehn, P., Monz, C.,
+Post, M., Soricut, R., and Specia, L. (2013).
+Findings of the 2013 Workshop on Statistical
+Machine Translation. In Proceedings of the
+Eighth Workshop on Statistical Machine Trans-
+lation, pages 1–44, Sofia, Bulgaria. Association
+for Computational Linguistics.
+
+Bojar, O., Buck, C., Federmann, C., Haddow, B.,
+Koehn, P., Leveling, J., Monz, C., Pecina, P.,
+Post, M., Saint-Amand, H., Soricut, R., Spe-
+cia, L., and Tamchyna, A. (2014). Findings of
+the 2014 workshop on statistical machine trans-
+lation. In Proceedings of the Ninth Workshop
+
+on Statistical Machine Translation, pages 12–
+58, Baltimore, Maryland, USA. Association for
+Computational Linguistics.
+
+Bojar, O., Chatterjee, R., Federmann, C., Had-
+dow, B., Huck, M., Hokamp, C., Koehn, P.,
+Logacheva, V., Monz, C., Negri, M., Post, M.,
+Scarton, C., Specia, L., and Turchi, M. (2015).
+Findings of the 2015 workshop on statistical
+machine translation. In Proceedings of the
+Tenth Workshop on Statistical Machine Transla-
+tion, pages 1–46, Lisbon, Portugal. Association
+for Computational Linguistics.
+
+Bojar, O., Dušek, O., Kocmi, T., Libovický, J.,
+Novák, M., Popel, M., Sudarikov, R., and Variš,
+D. (2016a). CzEng 1.6: Enlarged Czech-
+English Parallel Corpus with Processing Tools
+Dockered. In Text, Speech and Dialogue: 19th
+International Conference, TSD 2016, Brno,
+Czech Republic, September 12-16, 2016, Pro-
+ceedings. Springer Verlag. In press.
+
+Bojar, O., Ercegovčević, M., Popel, M., and
+Zaidan, O. (2011). A grain of salt for the wmt
+manual evaluation. In Proceedings of the Sixth
+Workshop on Statistical Machine Translation,
+pages 1–11, Edinburgh, Scotland. Association
+for Computational Linguistics.
+
+Bojar, O., Graham, Y., , and Stanojević, A. K. M.
+(2016b). Results of the WMT16 Metrics Shared
+Task . In Proceedings of the First Conference on
+Machine Translation, Berlin, Germany. Associ-
+ation for Computational Linguistics.
+
+Bradbury, J. and Socher, R. (2016). MetaMind
+Neural Machine Translation System for WMT
+2016. In Proceedings of the First Conference
+on Machine Translation, Berlin, Germany. As-
+sociation for Computational Linguistics.
+
+Buck, C., Heafield, K., and Van Ooyen, B. (2014).
+N-gram counts and language models from the
+common crawl. LREC, 2:4.
+
+Buck, C. and Koehn, P. (2016). Findings of
+the WMT 2016 Bilingual Document Alignment
+Shared Task. In Proceedings of the First Con-
+ference on Machine Translation, Berlin, Ger-
+many. Association for Computational Linguis-
+tics.
+
+C. de Souza, J. G., Buck, C., Turchi, M., and
+Negri, M. (2013). FBK-UEdin participation to
+the WMT13 Quality Estimation shared-task. In
+Proceedings of the Eighth Workshop on Statis-
+tical Machine Translation, pages 352–358.
+
+186
+
+
+
+C. de Souza, J. G., González-Rubio, J., Buck, C.,
+Turchi, M., and Negri, M. (2014). FBK-UPV-
+UEdin participation in the WMT14 Quality Es-
+timation shared-task. In Proceedings of the
+Ninth Workshop on Statistical Machine Trans-
+lation, Baltimore, MD, USA.
+
+Callison-Burch, C., Fordyce, C. S., Koehn, P.,
+Monz, C., and Schroeder, J. (2007). (Meta-
+) evaluation of machine translation. In Pro-
+ceedings of the Second Workshop on Statistical
+Machine Translation, pages 136–158, Prague,
+Czech Republic. Association for Computational
+Linguistics.
+
+Callison-Burch, C., Fordyce, C. S., Koehn, P.,
+Monz, C., and Schroeder, J. (2008). Further
+meta-evaluation of machine translation. In Pro-
+ceedings of the Third Workshop on Statistical
+Machine Translation, pages 70–106, Columbus,
+Ohio. Association for Computational Linguis-
+tics.
+
+Callison-Burch, C., Koehn, P., Monz, C., Peter-
+son, K., Przybocki, M., and Zaidan, O. (2010).
+Findings of the 2010 joint workshop on statisti-
+cal machine translation and metrics for machine
+translation. In Proceedings of the Joint Fifth
+Workshop on Statistical Machine Translation
+and MetricsMATR, pages 17–53, Uppsala, Swe-
+den. Association for Computational Linguistics.
+
+Callison-Burch, C., Koehn, P., Monz, C., Post, M.,
+Soricut, R., and Specia, L. (2012). Findings of
+the 2012 workshop on statistical machine trans-
+lation. In Proceedings of the Seventh Workshop
+on Statistical Machine Translation, pages 10–
+48, Montreal, Canada. Association for Compu-
+tational Linguistics.
+
+Callison-Burch, C., Koehn, P., Monz, C., and
+Schroeder, J. (2009). Findings of the 2009
+Workshop on Statistical Machine Translation.
+In Proceedings of the Fourth Workshop on
+Statistical Machine Translation, pages 1–28,
+Athens, Greece. Association for Computational
+Linguistics.
+
+Callison-Burch, C., Koehn, P., Monz, C., and
+Zaidan, O. (2011). Findings of the 2011 work-
+shop on statistical machine translation. In Pro-
+ceedings of the Sixth Workshop on Statistical
+Machine Translation, pages 22–64, Edinburgh,
+Scotland. Association for Computational Lin-
+guistics.
+
+Chatterjee, R., C. de Souza, J. G., Negri, M., and
+Turchi, M. (2016). The FBK Participation in
+the WMT 2016 Automatic Post-editing Shared
+Task. In Proceedings of the First Conference on
+Machine Translation, Berlin, Germany. Associ-
+ation for Computational Linguistics.
+
+Chatterjee, R., Turchi, T., and Negri, M. (2015a).
+The FBK Participation in the WMT15 Auto-
+matic Post-editing Shared Task. In Proceed-
+ings of the 10th Workshop on Statistical Ma-
+chine Translation (WMT).
+
+Chatterjee, R., Weller, M., Negri, M., and Turchi,
+M. (2015b). Exploring the Planet of the APEs: a
+Comparative Study of State-of-the-art Methods
+for MT Automatic Post-Editing. In Proceedings
+of the 53rd Annual Meeting of the Association
+for Computational Linguistics), Beijing, China.
+
+Chung, J., Cho, K., and Bengio, Y. (2016). NYU-
+MILA Neural Machine Translation Systems for
+WMT16. In Proceedings of the First Confer-
+ence on Machine Translation, Berlin, Germany.
+Association for Computational Linguistics.
+
+Cohen, J. (1960). A Coefficient of Agreement for
+Nominal Scales. Educational and Psychologi-
+cal Measurement, 20(1):37–46.
+
+Costa-jussà, M. R., España Bonet, C., Mad-
+hyastha, P., Escolano, C., and Fonollosa, J.
+A. R. (2016). The TALP–UPC Spanish–English
+WMT Biomedical Task: Bilingual Embed-
+dings and Char-based Neural Language Model
+Rescoring in a Phrase-based System. In Pro-
+ceedings of the First Conference on Machine
+Translation, Berlin, Germany. Association for
+Computational Linguistics.
+
+Cuong, H., Frank, S., and Sima’an, K. (2016).
+ILLC-UvA Adaptation System (Scorpio) at
+WMT’16 IT-DOMAIN Task. In Proceedings
+of the First Conference on Machine Transla-
+tion, Berlin, Germany. Association for Compu-
+tational Linguistics.
+
+Ding, S., Duh, K., Khayrallah, H., Koehn, P., and
+Post, M. (2016). The JHU Machine Transla-
+tion Systems for WMT 2016. In Proceedings
+of the First Conference on Machine Transla-
+tion, Berlin, Germany. Association for Compu-
+tational Linguistics.
+
+Duma, M.-S. and Menzel, W. (2016). Data Selec-
+tion for IT Texts using Paragraph Vector. In Pro-
+ceedings of the First Conference on Machine
+
+187
+
+
+
+Translation, Berlin, Germany. Association for
+Computational Linguistics.
+
+Durrani, N., Schmid, H., and Fraser, A. (2011). A
+joint sequence translation model with integrated
+reordering. In Proceedings of the 49th Annual
+Meeting of the Association for Computational
+Linguistics: Human Language Technologies-
+Volume 1, pages 1045–1054. Association for
+Computational Linguistics.
+
+Dušek, O., Gomes, L., Novák, M., Popel, M., and
+Rosa, R. (2015). New Language Pairs in Tec-
+toMT. In Proceedings of the Tenth Workshop
+on Statistical Machine Translation, pages 98–
+104, Lisbon, Portugal. Association for Compu-
+tational Linguistics.
+
+Dvorkovich, A., Gubanov, S., and Galinskaya,
+I. (2016). Yandex School of Data Analy-
+sis approach to English-Turkish translation at
+WMT16 News Translation Task. In Proceed-
+ings of the First Conference on Machine Trans-
+lation, Berlin, Germany. Association for Com-
+putational Linguistics.
+
+Esplà-Gomis, M., Sánchez-Martı́nez, F., and For-
+cada, M. (2015). UAlacant word-level machine
+translation quality estimation system at WMT
+2015. In Proceedings of the Tenth Workshop
+on Statistical Machine Translation, pages 309–
+315, Lisbon, Portugal.
+
+Esplà-Gomis, M., Sánchez-Martı́nez, F., and For-
+cada, M. (2016). UAlacant word-level and
+phrase-level machine translation quality estima-
+tion systems at WMT 2016. In Proceedings
+of the First Conference on Machine Transla-
+tion, Berlin, Germany. Association for Compu-
+tational Linguistics.
+
+Federmann, C. (2012). Appraise: an open-source
+toolkit for manual evaluation of mt output. The
+Prague Bulletin of Mathematical Linguistics,
+98:25–35.
+
+Fleiss, J. L. (1971). Measuring nominal scale
+agreement among many raters. Psychological
+bulletin, 76(5):378.
+
+Gao, Q. and Vogel, S. (2008). Parallel Implemen-
+tations of Word Alignment Tool. In Proceedings
+of the ACL 2008 Software Engineering, Testing,
+and Quality Assurance Workshop, pages 49–57,
+Columbus, Ohio.
+
+Gaudio, R., Labaka, G., Agirre, E., Osenova, P.,
+Simov, K., Popel, M., Oele, D., van Noord,
+
+G., Gomes, L., António Rodrigues, J. a., Neale,
+S., Silva, J. a., Querido, A., Rendeiro, N., and
+Branco, A. (2016). SMT and Hybrid systems
+of the QTLeap project in the WMT16 IT-task.
+In Proceedings of the First Conference on Ma-
+chine Translation, Berlin, Germany. Associa-
+tion for Computational Linguistics.
+
+Giménez, J. and Màrquez, L. (2010). Asiya: An
+Open Toolkit for Automatic Machine Transla-
+tion (Meta-)Evaluation. The Prague Bulletin of
+Mathematical Linguistics, (94):77–86.
+
+Graham, Y. (2015). Improving Evaluation of Ma-
+chine Translation Quality Estimation. In 53rd
+Annual Meeting of the Association for Compu-
+tational Linguistics and Seventh International
+Joint Conference on Natural Language Pro-
+cessing of the Asian Federation of Natural Lan-
+guage Processing, pages 1804–1813, Beijing,
+China.
+
+Graham, Y., Baldwin, T., Moffat, A., and Zobel, J.
+(2013). Continuous Measurement Scales in Hu-
+man Evaluation of Machine Translation. In Pro-
+ceedings of the 7th Linguistic Annotation Work-
+shop & Interoperability with Discourse, pages
+33–41, Sofia, Bulgaria. Association for Compu-
+tational Linguistics.
+
+Graham, Y., Baldwin, T., Moffat, A., and Zobel,
+J. (2014). Is machine translation getting better
+over time? In Proceedings of the 14th Confer-
+ence of the European Chapter of the Association
+for Computational Linguistics, pages 443–451,
+Gothenburg, Sweden. Association for Compu-
+tational Linguistics.
+
+Graham, Y., Baldwin, T., Moffat, A., and Zobel,
+J. (2016). Can machine translation systems be
+evaluated by the crowd alone. Natural Lan-
+guage Engineering, pages 1–28.
+
+Grönroos, S.-A., Virpioja, S., and Kurimo, M.
+(2016). Hybrid Morphological Segmentation
+for Phrase-Based Machine Translation. In Pro-
+ceedings of the First Conference on Machine
+Translation, Berlin, Germany. Association for
+Computational Linguistics.
+
+Guillou, L., Hardmeier, C., Nakov, P., Stymne, S.,
+Tiedemann, J., Versley, Y., Cettolo, M., Web-
+ber, B., and Popescu-Belis, A. (2016). Find-
+ings of the 2016 WMT Shared Task on Cross-
+lingual Pronoun Prediction. In Proceedings
+of the First Conference on Machine Transla-
+
+188
+
+
+
+tion, Berlin, Germany. Association for Compu-
+tational Linguistics.
+
+Gwinnup, J., Anderson, T., Erdmann, G., Young,
+K., Kazi, M., Salesky, E., and Thompson, B.
+(2016). The AFRL-MITLL WMT16 News-
+Translation Task Systems. In Proceedings
+of the First Conference on Machine Transla-
+tion, Berlin, Germany. Association for Compu-
+tational Linguistics.
+
+Ha, T.-L., Cho, E., Niehues, J., Mediani, M., Sper-
+ber, M., Allauzen, A., and Waibel, A. (2016).
+The Karlsruhe Institute of Technology Systems
+for the News Translation Task in WMT 2016.
+In Proceedings of the First Conference on Ma-
+chine Translation, Berlin, Germany. Associa-
+tion for Computational Linguistics.
+
+Heafield, K. (2011). KenLM: Faster and Smaller
+Language Model Queries. In Proceedings of
+the EMNLP 2011 Sixth Workshop on Statisti-
+cal Machine Translation, pages 187–197, Ed-
+inburgh, Scotland, United Kingdom.
+
+Herrmann, T., Niehues, J., and Waibel, A. (2013).
+Combining Word Reordering Methods on dif-
+ferent Linguistic Abstraction Levels for Sta-
+tistical Machine Translation. In Proceedings
+of the Seventh Workshop on Syntax, Semantics
+and Structure in Statistical Translation, Altanta,
+Georgia, USA.
+
+Hoang, C. and Sima’an, K. (2014). Latent domain
+translation models in mix-of-domains haystack.
+In Proceedings of COLING 2014, the 25th In-
+ternational Conference on Computational Lin-
+guistics: Technical Papers, pages 1928–1939,
+Dublin, Ireland. Dublin City University and As-
+sociation for Computational Linguistics.
+
+Huck, M., Fraser, A., and Haddow, B. (2016). The
+Edinburgh/LMU Hierarchical Machine Transla-
+tion System for WMT 2016. In Proceedings
+of the First Conference on Machine Transla-
+tion, Berlin, Germany. Association for Compu-
+tational Linguistics.
+
+Ive, J., Max, A., and Yvon, F. (2016). LIMSI’s
+Contribution to the WMT’16 Biomedical Trans-
+lation Task. In Proceedings of the First Confer-
+ence on Machine Translation, Berlin, Germany.
+Association for Computational Linguistics.
+
+Jawaid, B., Kamran, A., Stanojević, M., and ojar,
+O. (2016). Results of the WMT16 Tuning
+Shared Task. In Proceedings of the First Con-
+
+ference on Machine Translation, Berlin, Ger-
+many. Association for Computational Linguis-
+tics.
+
+Junczys-Dowmunt, M., Dwojak, T., and Sennrich,
+R. (2016). The AMU-UEDIN Submission to
+the WMT16 News Translation Task: Attention-
+based NMT Models as Feature Functions in
+Phrase-based SMT. In Proceedings of the First
+Conference on Machine Translation, Berlin,
+Germany. Association for Computational Lin-
+guistics.
+
+Junczys-Dowmunt, M. and Grundkiewicz, R.
+(2016). Log-linear Combinations of Mono-
+lingual and Bilingual Neural Machine Trans-
+lation Models for Automatic Post-Editing. In
+Proceedings of the First Conference on Ma-
+chine Translation. Association for Computa-
+tional Linguistics.
+
+Kim, H. and Lee, J.-H. (2016). Recurrent Neu-
+ral Network based Translation Quality Estima-
+tion. In Proceedings of the First Conference on
+Machine Translation, Berlin, Germany. Associ-
+ation for Computational Linguistics.
+
+Koehn, P. (2002). Europarl: A mul-
+tilingual corpus for evaluation of
+machine translation. Unpublished,
+http://www.isi.edu/∼koehn/europarl/.
+
+Koehn, P. (2004). Statistical Significance Tests
+for Machine Translation Evaluation. In Pro-
+ceedings of EMNLP 2004, pages 388–395,
+Barcelona, Spain.
+
+Koehn, P. and Hoang, H. (2007). Factored
+Translation Models. In EMNLP-CoNLL 2007,
+Proceedings of the 2007 Joint Conference on
+Empirical Methods in Natural Language Pro-
+cessing and Computational Natural Language
+Learning, pages 868–876, Prague, Czech Re-
+public.
+
+Koehn, P., Hoang, H., Birch, A., Callison-Burch,
+C., Federico, M., Bertoldi, N., Cowan, B., Shen,
+W., Moran, C., Zens, R., Dyer, C., Bojar, O.,
+Constantin, A., and Herbst, E. (2007). Moses:
+Open Source Toolkit for Statistical Machine
+Translation. In Proceedings of the 45th Annual
+Meeting of the Association for Computational
+Linguistics Companion Volume Proceedings of
+the Demo and Poster Sessions, pages 177–180,
+Prague, Czech Republic.
+
+Koehn, P. and Monz, C. (2006). Manual and au-
+tomatic evaluation of machine translation be-
+
+189
+
+
+
+tween european languages. In Proceedings on
+the Workshop on Statistical Machine Transla-
+tion, pages 102–121, New York City. Associa-
+tion for Computational Linguistics.
+
+Kozlova, A., Shmatova, M., and Frolov, A. (2016).
+YSDA Participation in the WMT’16 Quality
+Estimation Shared Task. In Proceedings of
+the First Conference on Machine Translation,
+Berlin, Germany. Association for Computa-
+tional Linguistics.
+
+Kreutzer, J., Schamoni, S., and Riezler, S.
+(2015). QUality Estimation from ScraTCH
+(QUETCH): Deep Learning for Word-level
+Translation Quality Estimation. In Proceedings
+of the Tenth Workshop on Statistical Machine
+Translation, pages 297–303, Lisboa, Portugal.
+Association for Computational Linguistics.
+
+Landis, J. R. and Koch, G. G. (1977). The Mea-
+surement of Observer Agreement for Categori-
+cal Data. Biometrics, 33:159–174.
+
+Liang, P., Taskar, B., and Klein, D. (2006). Align-
+ment by agreement. In Proceedings of the
+main conference on Human Language Technol-
+ogy Conference of the North American Chapter
+of the Association of Computational Linguis-
+tics, pages 104–111. Association for Computa-
+tional Linguistics.
+
+Libovický, J., Helcl, J., Tlustý, M., Bojar, O., and
+Pecina, P. (2016). CUNI at Post-editing and
+Multimodal Translation Tasks. In Proceedings
+of the First Conference on Machine Translation.
+Association for Computational Linguistics.
+
+Lo, C.-k., Cherry, C., Foster, G., Stewart, D.,
+Islam, R., Kazantseva, A., and Kuhn, R.
+(2016). NRC Russian-English Machine Trans-
+lation System for WMT 2016. In Proceedings
+of the First Conference on Machine Transla-
+tion, Berlin, Germany. Association for Compu-
+tational Linguistics.
+
+Logacheva, V., , and Specia, L. (2015). Phrase-
+level Quality Estimation for Machine Transla-
+tion. In Proceedings of the 12th International
+Workshop on Spoken Language Translation, Da
+Nang, Vietnam.
+
+Logacheva, V., Blain, F., and Specia, L. (2016a).
+USFD Phrase-level Quality Estimation Sys-
+tems. In Proceedings of the First Conference
+on Machine Translation, Berlin, Germany. As-
+sociation for Computational Linguistics.
+
+Logacheva, V., Hokamp, C., and Specia, L.
+(2016b). MARMOT: A Toolkit for Translation
+Quality Estimation at the Word Level. In Pro-
+ceedings of the 10th edition of the Language Re-
+sources and Evaluation Conference, Portorož,
+Slovenia.
+
+Logacheva, V., Lukasik, M., and Specia, L.
+(2016c). Metrics for Evaluation of Word-Level
+Machine Translation Quality Estimation. In
+Proceedings of the 54th Annual Meeting of
+the Association for Computational Linguistics,
+Berlin, Germany.
+
+Luong, N. Q., Besacier, L., and Lecouteux, B.
+(2014). Lig system for word level qe task at
+wmt14. In Proceedings of the Ninth Workshop
+on Statistical Machine Translation, pages 335–
+341, Baltimore, Maryland, USA. Association
+for Computational Linguistics.
+
+Mareček, D. (2016). Merged bilingual trees based
+on Universal Dependencies in Machine Trans-
+lation. In Proceedings of the First Conference
+on Machine Translation, Berlin, Germany. As-
+sociation for Computational Linguistics.
+
+Martins, A., Almeida, M., and Smith, N. (2013).
+Turning on the turbo: Fast third-order non-
+projective turbo parsers. In Proceedings of
+the 51st Annual Meeting of the Association
+for Computational Linguistics, pages 617–622,
+Sofia, Bulgaria.
+
+Martins, A. F. T., Astudillo, R., Hokamp, C.,
+and Kepler, F. (2016). Unbabel’s Participation
+in the WMT16 Word-Level Translation Qual-
+ity Estimation Shared Task. In Proceedings
+of the First Conference on Machine Transla-
+tion, Berlin, Germany. Association for Compu-
+tational Linguistics.
+
+Mikolov, T., Yih, W.-t., and Zweig, G. (2013).
+Linguistic regularities in continuous space word
+representations. In Proceedings of NAACL
+2013.
+
+Molchanov, A. and Bykov, F. (2016). PROMT
+Translation Systems for WMT 2016 Translation
+Tasks. In Proceedings of the First Conference
+on Machine Translation, Berlin, Germany. As-
+sociation for Computational Linguistics.
+
+Neves, M., Yepes, A. J., and Névéol, A. (2016).
+The Scielo Corpus: a Parallel Corpus of Sci-
+entific Publications for Biomedicine. In Pro-
+ceedings of the Tenth International Conference
+
+190
+
+
+
+on Language Resources and Evaluation (LREC
+2016), Paris, France. European Language Re-
+sources Association (ELRA).
+
+Och, F. J. (2003). Minimum Error Rate Training
+in Statistical Machine Translation. In Proceed-
+ings of the 41st Annual Meeting on Association
+for Computational Linguistics - Volume 1, ACL
+’03, pages 160–167, Sapporo, Japan.
+
+Och, F. J. and Ney, H. (2003). A Systematic Com-
+parison of Various Statistical Alignment Mod-
+els. Comput. Linguist., 29(1):19–51.
+
+Okazaki, N. (2007). CRFsuite: a fast implementa-
+tion of Conditional Random Fields.
+
+Paetzold, G. and Specia, L. (2016). SimpleNets:
+Quality Estimation with Resource-Light Neural
+Networks. In Proceedings of the First Confer-
+ence on Machine Translation, Berlin, Germany.
+Association for Computational Linguistics.
+
+Pahari, K., Kuila, A., Pal, S., Naskar, S. K.,
+Bandyopadhyay, S., and van Genabith, J.
+(2016). JU-USAAR: A Domain Adaptive MT
+System. In Proceedings of the First Conference
+on Machine Translation, Berlin, Germany. As-
+sociation for Computational Linguistics.
+
+Pal, S., Mihaela, V., Naskar, S. K., and van Gen-
+abith, J. (2015). USAAR-SAPE: An English–
+Spanish Statistical Automatic Post-Editing Sys-
+tem. In Proceedings of the 10th Workshop on
+Statistical Machine Translation (WMT), pages
+216–221.
+
+Pal, S., Zampieri, M., and van Genabith, J. (2016).
+USAAR: An Operation Sequential Model for
+Automatic Statistical Post-Editing. In Proceed-
+ings of the First Conference on Machine Trans-
+lation. Association for Computational Linguis-
+tics.
+
+Papineni, K., Roukos, S., Ward, T., and Zhu, W.-
+J. (2002). BLEU: A Method for Automatic
+Evaluation of Machine Translation. In Proceed-
+ings of the 40th Annual Meeting on Association
+for Computational Linguistics, ACL ’02, pages
+311–318.
+
+Patel, R. N. and M, S. (2016). Translation Qual-
+ity Estimation using Recurrent Neural Network.
+In Proceedings of the First Conference on Ma-
+chine Translation, Berlin, Germany. Associa-
+tion for Computational Linguistics.
+
+Pedregosa, F., Varoquaux, G., Gramfort, A.,
+Michel, V., Thirion, B., Grisel, O., Blondel,
+
+M., Prettenhofer, P., Weiss, R., Dubourg, V.,
+Vanderplas, J., Passos, A., Cournapeau, D.,
+Brucher, M., Perrot, M., and Duchesnay, E.
+(2011). Scikit-learn: Machine learning in
+Python. Journal of Machine Learning Research,
+12:2825–2830.
+
+Perez-de Viñaspre, O. and Labaka, G. (2016).
+IXA Biomedical Translation System at WMT16
+Biomedical Translation Task. In Proceedings
+of the First Conference on Machine Transla-
+tion, Berlin, Germany. Association for Compu-
+tational Linguistics.
+
+Peter, J.-T., Alkhouli, T., Guta, A., and Ney,
+H. (2016a). The RWTH Aachen University
+English-Romanian Machine Translation Sys-
+tem for WMT 2016. In Proceedings of the First
+Conference on Machine Translation, Berlin,
+Germany. Association for Computational Lin-
+guistics.
+
+Peter, J.-T., Alkhouli, T., Ney, H., Huck, M.,
+Braune, F., Fraser, A., Tamchyna, A., Bojar,
+O., Haddow, B., Sennrich, R., Blain, F., Spe-
+cia, L., Niehues, J., Waibel, A., Allauzen, A.,
+Aufrant, L., Burlot, F., knyazeva, e., Lavergne,
+T., Yvon, F., Daiber, J., and Pinnis, M. (2016b).
+The QT21/HimL Combined Machine Transla-
+tion System. In Proceedings of the First Confer-
+ence on Machine Translation, Berlin, Germany.
+Association for Computational Linguistics.
+
+Rasmussen, C. E. and Williams, C. K. I. (2006).
+Gaussian Processes for Machine Learning.
+MIT Press, Cambridge, Massachusetts.
+
+Raybaud, S., Langlois, D., and Smali, K. (2011).
+this sentence is wrong. detecting errors in
+machine-translated sentences. Machine Trans-
+lation, 25(1):1–34.
+
+Rosa, R., Sudarikov, R., Novák, M., Popel, M.,
+and Bojar, O. (2016). Dictionary-based Do-
+main Adaptation of MT Systems without Re-
+training. In Proceedings of the First Conference
+on Machine Translation, Berlin, Germany. As-
+sociation for Computational Linguistics.
+
+Sagemo, O. and Stymne, S. (2016). The UU Sub-
+mission to the Machine Translation Quality Es-
+timation Task. In Proceedings of the First Con-
+ference on Machine Translation, Berlin, Ger-
+many. Association for Computational Linguis-
+tics.
+
+Sakaguchi, K., Post, M., and Van Durme, B.
+(2014). Efficient elicitation of annotations for
+
+191
+
+
+
+human evaluation of machine translation. In
+Proceedings of the Ninth Workshop on Statis-
+tical Machine Translation, pages 1–11, Balti-
+more, Maryland, USA. Association for Compu-
+tational Linguistics.
+
+Sánchez-Cartagena, V. M. and Toral, A. (2016).
+Abu-MaTran at WMT 2016 Translation Task:
+Deep Learning, Morphological Segmentation
+and Tuning on Character Sequences. In Pro-
+ceedings of the First Conference on Machine
+Translation, Berlin, Germany. Association for
+Computational Linguistics.
+
+Scarton, C., Beck, D., Shah, K., Sim Smith, K.,
+and Specia, L. (2016). Word embeddings and
+discourse information for Quality Estimation.
+In Proceedings of the First Conference on Ma-
+chine Translation, Berlin, Germany. Associa-
+tion for Computational Linguistics.
+
+Scarton, C. and Specia, L. (2014). Document-
+level translation quality estimation: exploring
+discourse and pseudo-references. In Proceed-
+ings of the 17th Annual Conference of the Eu-
+ropean Association for Machine Translation,
+pages 101–108, Dubrovnik, Croatia.
+
+Scarton, C., Tan, L., and Specia, L. (2015a).
+USHEF and USAAR-USHEF participation in
+the WMT15 QE shared task. In Proceedings
+of the Tenth Workshop on Statistical Machine
+Translation, pages 317–322, Lisboa, Portugal.
+Association for Computational Linguistics.
+
+Scarton, C., Zampieri, M., Vela, M., van Gen-
+abith, J., and Specia, L. (2015b). Searching
+for Context: a Study on Document-Level La-
+bels for Translation Quality Estimation. In Pro-
+ceedings of the 18th Annual Conference of the
+European Association for Machine Translation,
+pages 121–128, Antalya, Turkey.
+
+Seddah, D., Kübler, S., and Tsarfaty, R. (2014).
+Introducing the SPMRL 2014 Shared Task on
+Parsing Morphologically-rich Languages. In
+Proceedings of the First Joint Workshop on
+Statistical Parsing of Morphologically Rich
+Languages and Syntactic Analysis of Non-
+Canonical Languages, pages 103–109, Dublin,
+Ireland.
+
+Sennrich, R., Haddow, B., and Birch, A.
+(2015). Neural machine translation of rare
+words with subword units. arXiv preprint
+arXiv:1508.07909.
+
+Sennrich, R., Haddow, B., and Birch, A. (2016).
+Edinburgh Neural Machine Translation Sys-
+tems for WMT 16. In Proceedings of the First
+Conference on Machine Translation, Berlin,
+Germany. Association for Computational Lin-
+guistics.
+
+Shah, K., Bougares, F., Barrault, L., and Specia,
+L. (2016). SHEF-LIUM-NN: Sentence level
+Quality Estimation with Neural Network Fea-
+tures. In Proceedings of the First Conference
+on Machine Translation, Berlin, Germany. As-
+sociation for Computational Linguistics.
+
+Sim Smith, K., Aziz, W., and Specia, L. (2016).
+Cohere: A Toolkit for Local Coherence. In Pro-
+ceedings of the 10th International Conference
+on Language Resources and Evaluation, Por-
+torož, Slovenia.
+
+Simard, M., Goutte, C., and Isabelle, P. (2007).
+Statistical phrase-based post-editing. In Human
+Language Technologies 2007: The Conference
+of the North American Chapter of the Associ-
+ation for Computational Linguistics; Proceed-
+ings of the Main Conference, pages 508–515,
+Rochester, New York. Association for Compu-
+tational Linguistics.
+
+Snover, M., Dorr, B., Schwartz, R., Micciulla, L.,
+and Makhoul, J. (2006). A Study of Translation
+Edit Rate with Targeted Human Annotation. In
+Proceedings of Association for Machine Trans-
+lation in the Americas, pages 223–231, Cam-
+bridge, Massachusetts, USA.
+
+Specia, L., Frank, S., Sima’an, K., and Elliott,
+D. (2016). A Shared Task on Multimodal Ma-
+chine Translation and Crosslingual Image De-
+scription. In Proceedings of the First Confer-
+ence on Machine Translation, Berlin, Germany.
+Association for Computational Linguistics.
+
+Specia, L., Paetzold, G., and Scarton, C. (2015).
+Multi-level Translation Quality Prediction with
+QuEst++. In 53rd Annual Meeting of the Asso-
+ciation for Computational Linguistics and Sev-
+enth International Joint Conference on Natural
+Language Processing of the Asian Federation of
+Natural Language Processing: System Demon-
+strations, pages 115–120, Beijing, China.
+
+Stahlberg, F., Hasler, E., and Byrne, B. (2016).
+The Edit Distance Transducer in Action: The
+University of Cambridge English-German Sys-
+tem at WMT16. In Proceedings of the First
+Conference on Machine Translation, Berlin,
+
+192
+
+
+
+Germany. Association for Computational Lin-
+guistics.
+
+Sudarikov, R., Popel, M., Bojar, O., Burchardt, A.,
+and Klejch, O. (2016). Using MT-ComparEval.
+In Translation Evaluation: From Fragmented
+Tools and Data Sets to an Integrated Ecosystem,
+pages 76–82.
+
+Tamchyna, A., Sudarikov, R., Bojar, O., and
+Fraser, A. (2016). CUNI-LMU Submissions in
+WMT2016: Chimera Constrained and Beaten.
+In Proceedings of the First Conference on Ma-
+chine Translation, Berlin, Germany. Associa-
+tion for Computational Linguistics.
+
+Tezcan, A., Hoste, V., and Macken, L. (2016).
+UGENT-LT3 SCATE Submission for WMT16
+Shared Task on Quality Estimation. In Proceed-
+ings of the First Conference on Machine Trans-
+lation, Berlin, Germany. Association for Com-
+putational Linguistics.
+
+Tiedemann, J. (2009). News from OPUS - a
+collection of multilingual parallel corpora with
+tools and interfaces. In Proceedings of the Con-
+ference on Recent Advances in Natural Lan-
+guage Processing, pages 237–248. John Ben-
+jamins.
+
+Tiedemann, J., Cap, F., Kanerva, J., Ginter, F.,
+Stymne, S., Östling, R., and Weller-Di Marco,
+M. (2016). Phrase-Based SMT for Finnish
+with More Data, Better Models and Alternative
+Alignment and Translation Tools. In Proceed-
+ings of the First Conference on Machine Trans-
+lation, Berlin, Germany. Association for Com-
+putational Linguistics.
+
+Williams, P., Sennrich, R., Nadejde, M., Huck,
+M., Haddow, B., and Bojar, O. (2016). Ed-
+inburgh’s Statistical Machine Translation Sys-
+tems for WMT16. In Proceedings of the First
+Conference on Machine Translation, Berlin,
+Germany. Association for Computational Lin-
+guistics.
+
+Wołk, K. and Marasek, K. (2016). PJAIT Systems
+for the WMT 2016. In Proceedings of the First
+Conference on Machine Translation, Berlin,
+Germany. Association for Computational Lin-
+guistics.
+
+Yeh, A. (2000). More Accurate Tests for
+the Statistical Significance of Result Differ-
+ences. In Coling-2000: the 18th Conference
+on Computational Linguistics, pages 947–953,
+Saarbrücken, Germany.
+
+193
+
+
+
+A Pairwise System Comparisons by Human Judges
+
+Tables 40–46 show pairwise comparisons between systems for each language pair. The numbers in each
+of the tables’ cells indicate the percentage of times that the system in that column was judged to be better
+than the system in that row, ignoring ties. Bolding indicates the winner of the two systems.
+
+Because there were so many systems and data conditions the significance of each pairwise compar-
+ison needs to be quantified. We applied the Sign Test to measure which comparisons indicate genuine
+differences (rather than differences that are attributable to chance). In the following tables ? indicates sta-
+tistical significance at p ≤ 0.10, † indicates statistical significance at p ≤ 0.05, and ‡ indicates statistical
+significance at p ≤ 0.01, according to the Sign Test.
+
+Each table contains final rows showing how likely a system would win when paired against a randomly
+selected system (the expected win ratio score) and the rank range according bootstrap resampling (p ≤
+0.05). Gray lines separate clusters based on non-overlapping rank ranges.
+
+O
+N
+
+L
+IN
+
+E
+-B
+
+U
+E
+
+D
+IN
+
+-N
+M
+
+T
+
+U
+E
+
+D
+IN
+
+-P
+B
+
+M
+T
+
+U
+E
+
+D
+IN
+
+-S
+Y
+
+N
+TA
+
+X
+
+O
+N
+
+L
+IN
+
+E
+-A
+
+JH
+U
+
+-P
+B
+
+M
+T
+
+L
+IM
+
+S
+I
+
+ONLINE-B – .47? .43‡ .39‡ .39‡ .38‡ .36‡
+UEDIN-NMT .53? – .45‡ .43‡ .41‡ .40‡ .39‡
+
+UEDIN-PBMT .57‡ .55‡ – .46† .45‡ .39‡ .41‡
+UEDIN-SYNTAX .61‡ .57‡ .54† – .49 .44‡ .44‡
+
+ONLINE-A .61‡ .59‡ .55‡ .51 – .47? .47?
+JHU-PBMT .62‡ .60‡ .61‡ .56‡ .53? – .46†
+
+LIMSI .64‡ .61‡ .59‡ .56‡ .53? .54† –
+score .58 .37 .09 -.08 -.18 -.32 -.46
+rank 1-2 1-2 3 4-5 4-6 5-7 6-7
+
+Table 38: Head to head comparison, ignoring ties, for Romanian-English systems
+
+U
+E
+
+D
+IN
+
+-N
+M
+
+T
+
+Q
+T
+
+21
+-H
+
+IM
+L
+
+-S
+Y
+
+S
+C
+
+O
+M
+
+B
+
+K
+IT
+
+U
+E
+
+D
+IN
+
+-P
+B
+
+M
+T
+
+O
+N
+
+L
+IN
+
+E
+-B
+
+U
+E
+
+D
+IN
+
+-L
+M
+
+U
+-H
+
+IE
+R
+
+O
+
+R
+W
+
+T
+H
+
+-S
+Y
+
+S
+C
+
+O
+M
+
+B
+
+L
+IM
+
+S
+I
+
+L
+M
+
+U
+-C
+
+U
+N
+
+I
+
+JH
+U
+
+-P
+B
+
+M
+T
+
+U
+S
+
+F
+D
+
+-R
+E
+
+S
+C
+
+O
+R
+
+IN
+G
+
+O
+N
+
+L
+IN
+
+E
+-A
+
+UEDIN-NMT – .48 .43? .40† .36‡ .42† .38‡ .31‡ .37‡ .34‡ .28‡ .25‡
+QT21-HIML-SYSCOMB .52 – .44 .41† .44 .40† .41† .30‡ .25‡ .28‡ .22‡ .22‡
+
+KIT .57? .56 – .52 .44 .47 .43? .36‡ .35‡ .41† .33‡ .34‡
+UEDIN-PBMT .60† .59† .48 – .49 .47 .57? .39‡ .36‡ .32‡ .32‡ .34‡
+
+ONLINE-B .64‡ .56 .56 .51 – .49 .49 .41† .37‡ .35‡ .28‡ .36‡
+UEDIN-LMU-HIERO .58† .60† .53 .53 .51 – .50 .43? .37‡ .38‡ .30‡ .29‡
+
+RWTH-SYSCOMB .62‡ .59† .57? .43? .51 .50 – .42? .38‡ .42? .34‡ .31‡
+LIMSI .69‡ .70‡ .64‡ .61‡ .59† .57? .58? – .48 .43? .47 .35‡
+
+LMU-CUNI .63‡ .75‡ .65‡ .64‡ .63‡ .63‡ .62‡ .52 – .52 .42† .40†
+JHU-PBMT .66‡ .72‡ .59† .68‡ .65‡ .62‡ .58? .57? .48 – .50 .42†
+
+USFD-RESCORING .72‡ .78‡ .67‡ .68‡ .72‡ .70‡ .66‡ .53 .58† .50 – .39‡
+ONLINE-A .75‡ .78‡ .66‡ .66‡ .64‡ .71‡ .69‡ .65‡ .60† .58† .61‡ –
+
+score .44 .43 .20 .15 .14 .13 .12 -.15 -.22 -.26 -.43 -.56
+rank 1-2 1-2 3-7 3-7 3-7 3-7 3-7 8-10 8-10 8-11 10-12 11-12
+
+Table 39: Head to head comparison, ignoring ties, for English-Romanian systems
+
+194
+
+
+
+U
+E
+
+D
+IN
+
+-N
+M
+
+T
+
+JH
+U
+
+-P
+B
+
+M
+T
+
+O
+N
+
+L
+IN
+
+E
+-B
+
+T
+T-
+
+B
+L
+
+E
+U
+
+-M
+IR
+
+A
+
+T
+T-
+
+A
+F
+
+R
+L
+
+T
+T-
+
+N
+R
+
+C
+-N
+
+N
+B
+
+L
+E
+
+U
+
+T
+T-
+
+N
+R
+
+C
+-M
+
+E
+A
+
+N
+T
+
+T
+T-
+
+B
+E
+
+E
+R
+
+-P
+R
+
+O
+
+P
+JA
+
+T
+K
+
+T
+T-
+
+B
+L
+
+E
+U
+
+-M
+E
+
+R
+T
+
+O
+N
+
+L
+IN
+
+E
+-A
+
+C
+U
+
+-M
+E
+
+R
+G
+
+E
+D
+
+T
+R
+
+E
+E
+
+S
+
+UEDIN-NMT – .42‡ .41‡ .36‡ .36‡ .37‡ .35‡ .35‡ .35‡ .36‡ .33‡ .14‡
+JHU-PBMT .58‡ – .45‡ .45‡ .43‡ .44‡ .42‡ .40‡ .41‡ .40‡ .38‡ .13‡
+ONLINE-B .59‡ .55‡ – .47? .46† .46‡ .45‡ .45‡ .44‡ .42‡ .43‡ .16‡
+
+TT-BLEU-MIRA .64‡ .55‡ .53? – .49 .47† .47† .45‡ .45‡ .42‡ .45‡ .15‡
+TT-AFRL .64‡ .57‡ .54† .51 – .49 .47† .43‡ .46‡ .45‡ .44‡ .16‡
+
+TT-NRC-NNBLEU .63‡ .56‡ .54‡ .53† .51 – .50 .46‡ .47‡ .43‡ .46† .16‡
+TT-NRC-MEANT .65‡ .58‡ .55‡ .53† .53† .50 – .46† .48† .47‡ .45‡ .15‡
+
+TT-BEER-PRO .65‡ .60‡ .55‡ .55‡ .57‡ .54‡ .54† – .49 .49 .47? .17‡
+PJATK .65‡ .59‡ .56‡ .55‡ .54‡ .53‡ .52† .51 – .50 .47? .18‡
+
+TT-BLEU-MERT .64‡ .60‡ .58‡ .58‡ .55‡ .57‡ .53‡ .51 .50 – .48 .19‡
+ONLINE-A .67‡ .62‡ .57‡ .55‡ .56‡ .54† .55‡ .53? .53? .52 – .19‡
+
+CU-MERGEDTREES .86‡ .87‡ .84‡ .85‡ .84‡ .84‡ .85‡ .83‡ .82‡ .81‡ .81‡ –
+score .61 .31 .20 .11 .09 .09 .07 .03 .00 .00 -.07 -.148
+rank 1 2 3 4-6 4-7 4-7 5-8 7-10 8-10 8-10 11 12
+
+Table 40: Head to head comparison, ignoring ties, for Czech-English systems
+
+U
+E
+
+D
+IN
+
+-N
+M
+
+T
+
+N
+Y
+
+U
+-U
+
+M
+O
+
+N
+T
+
+R
+E
+
+A
+L
+
+JH
+U
+
+-P
+B
+
+M
+T
+
+C
+U
+
+-C
+H
+
+IM
+E
+
+R
+A
+
+C
+U
+
+-T
+A
+
+M
+C
+
+H
+Y
+
+N
+A
+
+U
+E
+
+D
+IN
+
+-C
+U
+
+-S
+Y
+
+N
+TA
+
+X
+
+O
+N
+
+L
+IN
+
+E
+-B
+
+T
+T-
+
+B
+L
+
+E
+U
+
+-M
+IR
+
+A
+
+T
+T-
+
+B
+E
+
+E
+R
+
+-P
+R
+
+O
+
+T
+T-
+
+B
+L
+
+E
+U
+
+-M
+E
+
+R
+T
+
+T
+T-
+
+A
+F
+
+R
+L
+
+2
+
+T
+T-
+
+A
+F
+
+R
+L
+
+1
+
+T
+T-
+
+D
+C
+
+U
+
+T
+T-
+
+F
+JF
+
+I
+
+O
+N
+
+L
+IN
+
+E
+-A
+
+C
+U
+
+-T
+E
+
+C
+T
+
+O
+M
+
+T
+
+T
+T-
+
+U
+S
+
+A
+A
+
+R
+-H
+
+M
+M
+
+-M
+E
+
+R
+T
+
+C
+U
+
+-M
+E
+
+R
+G
+
+E
+D
+
+T
+R
+
+E
+E
+
+S
+
+T
+T-
+
+U
+S
+
+A
+A
+
+R
+-H
+
+M
+M
+
+-M
+IR
+
+A
+
+T
+T-
+
+U
+S
+
+A
+A
+
+R
+-H
+
+A
+R
+
+M
+O
+
+N
+IC
+
+UEDIN-NMT – .38‡ .31‡ .33‡ .33‡ .35‡ .31‡ .26‡ .25‡ .27‡ .22‡ .25‡ .28‡ .26‡ .21‡ .20‡ .11‡ .07‡ .00‡ .01‡
+NYU-MONTREAL .62‡ – .43‡ .42‡ .41‡ .37‡ .33‡ .38‡ .36‡ .37‡ .34‡ .36‡ .31‡ .37‡ .30‡ .21‡ .14‡ .09‡ .01‡ .00‡
+
+JHU-PBMT .69‡ .57‡ – .45‡ .47† .47 .38‡ .37‡ .37‡ .38‡ .36‡ .35‡ .35‡ .36‡ .35‡ .28‡ .10‡ .12‡ .01‡ .00‡
+CU-CHIMERA .67‡ .58‡ .55‡ – .49 .46? .43‡ .40‡ .39‡ .40‡ .39‡ .39‡ .40‡ .39‡ .39‡ .30‡ .12‡ .10‡ .01‡ .00‡
+
+CU-TAMCHYNA .67‡ .59‡ .53† .51 – .45† .42‡ .41‡ .41‡ .40‡ .40‡ .39‡ .39‡ .38‡ .39‡ .29‡ .16‡ .11‡ .01‡ .00‡
+UEDIN-CU-SNTX .65‡ .63‡ .53 .54? .54† – .49 .48 .47 .47? .49 .45† .46† .44‡ .40‡ .37‡ .16‡ .14‡ .01‡ .00‡
+
+ONLINE-B .69‡ .67‡ .62‡ .57‡ .58‡ .51 – .48? .46‡ .48† .44‡ .44‡ .48? .46‡ .41‡ .38‡ .15‡ .12‡ .01‡ .00‡
+TT-BLEU-MIRA .74‡ .62‡ .63‡ .60‡ .59‡ .52 .52? – .49 .46? .46† .46† .43‡ .47? .43‡ .39‡ .12‡ .13‡ .01‡ .00‡
+
+TT-BEER-PRO .75‡ .64‡ .63‡ .61‡ .59‡ .53 .54‡ .51 – .51 .47 .47? .46† .47† .46? .40‡ .14‡ .11‡ .01‡ .00‡
+TT-BLEU-MERT .73‡ .63‡ .62‡ .60‡ .60‡ .53? .52† .54? .49 – .48 .48 .48 .48 .44‡ .39‡ .11‡ .14‡ .01‡ .00‡
+
+TT-AFRL2 .78‡ .66‡ .64‡ .61‡ .60‡ .51 .56‡ .54† .53 .52 – .47 .48? .48 .43‡ .42‡ .14‡ .11‡ .00‡ .00‡
+TT-AFRL1 .75‡ .64‡ .65‡ .61‡ .61‡ .55† .56‡ .54† .53? .52 .53 – .48 .49 .45† .42‡ .14‡ .10‡ .00‡ .00‡
+
+TT-DCU .72‡ .69‡ .65‡ .60‡ .61‡ .54† .52? .57‡ .54† .52 .52? .52 – .51 .42‡ .44‡ .12‡ .14‡ .01‡ .00‡
+TT-FJFI .74‡ .63‡ .64‡ .61‡ .62‡ .56‡ .54‡ .53? .53† .52 .52 .51 .49 – .47 .44‡ .13‡ .15‡ .01‡ .00‡
+
+ONLINE-A .79‡ .70‡ .65‡ .61‡ .61‡ .60‡ .59‡ .57‡ .54? .56‡ .57‡ .55† .58‡ .53 – .42‡ .20‡ .15‡ .03‡ .00‡
+CU-TECTOMT .80‡ .79‡ .72‡ .70‡ .71‡ .63‡ .62‡ .61‡ .60‡ .61‡ .58‡ .58‡ .56‡ .56‡ .58‡ – .29‡ .23‡ .02‡ .00‡
+
+TT-US’R-’-MERT .89‡ .86‡ .90‡ .88‡ .84‡ .84‡ .85‡ .88‡ .86‡ .89‡ .86‡ .86‡ .88‡ .87‡ .80‡ .71‡ – .49 .05‡ .01‡
+CU-MTREES .93‡ .91‡ .88‡ .90‡ .89‡ .86‡ .88‡ .87‡ .89‡ .86‡ .89‡ .90‡ .86‡ .85‡ .85‡ .77‡ .51 – .04‡ .00‡
+
+TT-US’R-MIRA .100‡ .99‡ .99‡ .99‡ .99‡ .99‡ .99‡ .99‡ .99‡ .99‡ .100‡ .100‡ .99‡ .99‡ .97‡ .98‡ .95‡ .96‡ – .07‡
+TT-US’R-HARM .99‡ .100‡ .100‡ .100‡ .100‡ .100‡ .100‡ .100‡ .100‡ .100‡ .100‡ .100‡ .100‡ .100‡ .100‡ .100‡ .99‡ .100‡ .93‡ –
+
+score .59 .42 .34 .30 .30 .22 .19 .16 .15 .15 .13 .13 .13 .12 .07 -.02 -.43 -.54 -.113 -.132
+rank 1 2 3 4-5 4-5 6-7 6-7 8-11 8-12 8-13 9-14 9-14 9-14 11-14 15 16 17 18 19 20
+
+Table 41: Head to head comparison, ignoring ties, for English-Czech systems
+
+U
+E
+
+D
+IN
+
+-N
+M
+
+T
+
+O
+N
+
+L
+IN
+
+E
+-B
+
+O
+N
+
+L
+IN
+
+E
+-A
+
+U
+E
+
+D
+IN
+
+-S
+Y
+
+N
+TA
+
+X
+
+K
+IT
+
+U
+E
+
+D
+IN
+
+-P
+B
+
+M
+T
+
+JH
+U
+
+-P
+B
+
+M
+T
+
+O
+N
+
+L
+IN
+
+E
+-G
+
+JH
+U
+
+-S
+Y
+
+N
+TA
+
+X
+
+O
+N
+
+L
+IN
+
+E
+-F
+
+UEDIN-NMT – .38‡ .34‡ .36‡ .34‡ .34‡ .32‡ .31‡ .19‡ .21‡
+ONLINE-B .62‡ – .50 .48 .49 .44† .43‡ .40‡ .30‡ .28‡
+ONLINE-A .66‡ .50 – .52 .48 .44† .44† .44† .32‡ .25‡
+
+UEDIN-SYNTAX .64‡ .52 .48 – .50 .46? .47 .40‡ .29‡ .29‡
+KIT .66‡ .51 .52 .50 – .45† .47 .43‡ .31‡ .27‡
+
+UEDIN-PBMT .66‡ .56† .56† .54? .55† – .48 .44‡ .33‡ .31‡
+JHU-PBMT .68‡ .57‡ .56† .53 .53 .52 – .47 .31‡ .29‡
+ONLINE-G .69‡ .60‡ .56† .60‡ .57‡ .56‡ .53 – .37‡ .34‡
+
+JHU-SYNTAX .81‡ .70‡ .68‡ .71‡ .69‡ .67‡ .69‡ .63‡ – .50
+ONLINE-F .79‡ .72‡ .75‡ .71‡ .73‡ .69‡ .71‡ .66‡ .50 –
+
+score .81 .25 .21 .19 .17 .04 .02 -.12 -.67 -.93
+rank 1 2-5 2-5 2-5 2-6 5-7 6-7 8 9 10
+
+Table 42: Head to head comparison, ignoring ties, for German-English systems
+
+195
+
+
+
+U
+E
+
+D
+IN
+
+-N
+M
+
+T
+
+M
+E
+
+TA
+M
+
+IN
+D
+
+U
+E
+
+D
+IN
+
+-S
+Y
+
+N
+TA
+
+X
+
+N
+Y
+
+U
+-U
+
+M
+O
+
+N
+T
+
+R
+E
+
+A
+L
+
+O
+N
+
+L
+IN
+
+E
+-B
+
+K
+IT
+
+-L
+IM
+
+S
+I
+
+C
+A
+
+M
+B
+
+R
+ID
+
+G
+E
+
+O
+N
+
+L
+IN
+
+E
+-A
+
+P
+R
+
+O
+M
+
+T-
+R
+
+U
+L
+
+E
+-B
+
+A
+S
+
+E
+D
+
+K
+IT
+
+JH
+U
+
+-S
+Y
+
+N
+TA
+
+X
+
+JH
+U
+
+-P
+B
+
+M
+T
+
+U
+E
+
+D
+IN
+
+-P
+B
+
+M
+T
+
+O
+N
+
+L
+IN
+
+E
+-F
+
+O
+N
+
+L
+IN
+
+E
+-G
+
+UEDIN-NMT – .46 .34‡ .41‡ .31‡ .31‡ .31‡ .29‡ .32‡ .27‡ .27‡ .31‡ .28‡ .25‡ .22‡
+METAMIND .54 – .41‡ .40‡ .33‡ .36‡ .35‡ .35‡ .34‡ .33‡ .29‡ .34‡ .30‡ .29‡ .30‡
+
+UEDIN-SYNTAX .66‡ .59‡ – .44† .35‡ .39‡ .35‡ .33‡ .41‡ .38‡ .27‡ .36‡ .25‡ .27‡ .27‡
+NYU-UMONTREAL .59‡ .60‡ .56† – .39‡ .48 .41‡ .45? .41‡ .44† .37‡ .39‡ .38‡ .35‡ .34‡
+
+ONLINE-B .69‡ .67‡ .65‡ .61‡ – .49 .51 .49 .49 .48 .46† .42‡ .38‡ .38‡ .32‡
+KIT-LIMSI .69‡ .64‡ .61‡ .52 .51 – .53 .48 .50 .45 .47 .42‡ .39‡ .42‡ .43†
+CAMBRIDGE .69‡ .65‡ .65‡ .59‡ .49 .47 – .47 .53? .46? .42‡ .48 .39‡ .43‡ .42‡
+
+ONLINE-A .71‡ .65‡ .67‡ .55? .51 .52 .53 – .47 .49 .47? .44‡ .38‡ .37‡ .36‡
+PROMT-RULE-BASED .68‡ .66‡ .59‡ .59‡ .51 .50 .47? .53 – .48 .46† .47? .42‡ .39‡ .41‡
+
+KIT .73‡ .67‡ .62‡ .56† .52 .55 .54? .51 .52 – .46† .44‡ .40‡ .42‡ .41‡
+JHU-SYNTAX .73‡ .71‡ .73‡ .63‡ .54† .53 .58‡ .53? .54† .54† – .48 .42‡ .46? .42‡
+
+JHU-PBMT .69‡ .66‡ .64‡ .61‡ .58‡ .58‡ .52 .56‡ .53? .56‡ .52 – .43‡ .47 .47
+UEDIN-PBMT .72‡ .70‡ .75‡ .62‡ .62‡ .61‡ .61‡ .62‡ .58‡ .60‡ .58‡ .57‡ – .45? .48
+
+ONLINE-F .75‡ .71‡ .73‡ .65‡ .62‡ .58‡ .57‡ .63‡ .61‡ .58‡ .54? .53 .55? – .48
+ONLINE-G .78‡ .70‡ .73‡ .66‡ .68‡ .57† .58‡ .64‡ .59‡ .59‡ .58‡ .53 .52 .52 –
+
+score .49 .39 .28 .16 -.00 -.01 -.02 -.02 -.03 -.04 -.13 -.15 -.25 -.32 -.34
+rank 1 2 3 4 5-10 5-10 5-10 5-10 5-10 6-10 11-12 11-12 13-14 13-15 14-15
+
+Table 43: Head to head comparison, ignoring ties, for English-German systems
+
+U
+E
+
+D
+IN
+
+-P
+B
+
+M
+T
+
+O
+N
+
+L
+IN
+
+E
+-G
+
+O
+N
+
+L
+IN
+
+E
+-B
+
+U
+H
+
+-O
+P
+
+U
+S
+
+P
+R
+
+O
+M
+
+T-
+S
+
+M
+T
+
+U
+H
+
+-F
+A
+
+C
+T
+
+O
+R
+
+E
+D
+
+U
+E
+
+D
+IN
+
+-S
+Y
+
+N
+TA
+
+X
+
+O
+N
+
+L
+IN
+
+E
+-A
+
+JH
+U
+
+-P
+B
+
+M
+T
+
+UEDIN-PBMT – .50 .48 .49 .40‡ .36‡ .38‡ .32‡ .21‡
+ONLINE-G .50 – .51 .47? .39‡ .41‡ .38‡ .30‡ .23‡
+ONLINE-B .52 .49 – .50 .39‡ .36‡ .34‡ .35‡ .22‡
+UH-OPUS .51 .53? .50 – .42‡ .38‡ .38‡ .34‡ .24‡
+
+PROMT-SMT .60‡ .61‡ .61‡ .58‡ – .46† .46† .42‡ .28‡
+UH-FACTORED .64‡ .59‡ .64‡ .62‡ .54† – .50 .47 .28‡
+UEDIN-SYNTAX .62‡ .62‡ .66‡ .62‡ .54† .50 – .46† .29‡
+
+ONLINE-A .68‡ .70‡ .65‡ .66‡ .58‡ .53 .54† – .34‡
+JHU-PBMT .79‡ .77‡ .78‡ .76‡ .72‡ .72‡ .71‡ .66‡ –
+
+score .42 .40 .39 .33 .01 -.11 -.13 -.28 -.102
+rank 1-4 1-4 1-4 1-4 5 6-7 6-7 8 9
+
+Table 44: Head to head comparison, ignoring ties, for Finnish-English systems
+
+196
+
+
+
+O
+N
+
+L
+IN
+
+E
+-G
+
+A
+B
+
+U
+M
+
+A
+T
+
+R
+A
+
+N
+-N
+
+M
+T
+
+O
+N
+
+L
+IN
+
+E
+-B
+
+A
+B
+
+U
+M
+
+A
+T
+
+R
+A
+
+N
+-C
+
+O
+M
+
+B
+O
+
+U
+H
+
+-O
+P
+
+U
+S
+
+A
+B
+
+U
+M
+
+A
+T
+
+R
+A
+
+N
+-P
+
+B
+S
+
+M
+T
+
+N
+Y
+
+U
+-U
+
+M
+O
+
+N
+T
+
+R
+E
+
+A
+L
+
+O
+N
+
+L
+IN
+
+E
+-A
+
+JH
+U
+
+-P
+B
+
+M
+T
+
+U
+H
+
+-F
+A
+
+C
+T
+
+O
+R
+
+E
+D
+
+A
+A
+
+LT
+O
+
+JH
+U
+
+-H
+LT
+
+C
+O
+
+E
+
+U
+U
+
+T
+
+ONLINE-G – .50 .49 .47? .46? .38‡ .43‡ .39‡ .33‡ .34‡ .32‡ .30‡ .33‡
+ABUMATRAN-NMT .50 – .48 .43? .46? .41‡ .43‡ .35‡ .37‡ .38‡ .35‡ .36‡ .34‡
+
+ONLINE-B .51 .52 – .50 .46? .41‡ .40‡ .41‡ .38‡ .35‡ .38‡ .33‡ .31‡
+ABUMATRAN-COMBO .53? .57? .50 – .48 .38‡ .45† .40‡ .38‡ .38‡ .37‡ .37‡ .37‡
+
+UH-OPUS .54? .54? .54? .52 – .45† .47 .45† .42‡ .38‡ .39‡ .39‡ .37‡
+ABUMATRAN-PBSMT .62‡ .59‡ .59‡ .62‡ .55† – .47 .51 .47 .42‡ .41‡ .42‡ .41‡
+NYU-UMONTREAL .57‡ .57‡ .60‡ .55† .53 .53 – .50 .46? .44‡ .44‡ .45† .41‡
+
+ONLINE-A .61‡ .65‡ .59‡ .60‡ .55† .49 .50 – .47 .42‡ .40‡ .37‡ .43‡
+JHU-PBMT .67‡ .63‡ .62‡ .62‡ .58‡ .53 .54? .53 – .47 .46? .43‡ .43‡
+
+UH-FACTORED .66‡ .62‡ .65‡ .62‡ .62‡ .58‡ .56‡ .58‡ .53 – .49 .46? .47
+AALTO .68‡ .65‡ .62‡ .63‡ .61‡ .59‡ .56‡ .60‡ .54? .51 – .51 .46?
+
+JHU-HLTCOE .70‡ .64‡ .67‡ .63‡ .61‡ .58‡ .55† .62‡ .57‡ .54? .49 – .47?
+UUT .67‡ .66‡ .69‡ .63‡ .63‡ .59‡ .59‡ .57‡ .57‡ .53 .54? .53? –
+score .36 .31 .29 .23 .15 -.01 -.01 -.01 -.14 -.22 -.28 -.30 -.35
+rank 1-3 1-4 1-4 3-5 4-5 6-8 6-8 6-8 9-10 9-12 10-13 10-13 11-13
+
+Table 45: Head to head comparison, ignoring ties, for English-Finnish systems
+
+P
+R
+
+O
+M
+
+T-
+R
+
+U
+L
+
+E
+-B
+
+A
+S
+
+E
+D
+
+A
+M
+
+U
+-U
+
+E
+D
+
+IN
+
+O
+N
+
+L
+IN
+
+E
+-B
+
+U
+E
+
+D
+IN
+
+-N
+M
+
+T
+
+O
+N
+
+L
+IN
+
+E
+-G
+
+N
+Y
+
+U
+-U
+
+M
+O
+
+N
+T
+
+R
+E
+
+A
+L
+
+JH
+U
+
+-P
+B
+
+M
+T
+
+L
+IM
+
+S
+I
+
+O
+N
+
+L
+IN
+
+E
+-A
+
+A
+F
+
+R
+L
+
+-M
+IT
+
+L
+L
+
+-P
+H
+
+R
+A
+
+S
+E
+
+A
+F
+
+R
+L
+
+-M
+IT
+
+L
+L
+
+-V
+E
+
+R
+B
+
+-A
+
+O
+N
+
+L
+IN
+
+E
+-F
+
+PROMT-RULE-BASED – .38‡ .34‡ .33‡ .33‡ .31‡ .26‡ .31‡ .20‡ .26‡ .21‡ .07‡
+AMU-UEDIN .62‡ – .44† .51 .46? .45? .33‡ .35‡ .32‡ .31‡ .28‡ .14‡
+
+ONLINE-B .66‡ .56† – .50 .46 .46 .33‡ .37‡ .36‡ .36‡ .26‡ .11‡
+UEDIN-NMT .67‡ .49 .50 – .50 .43‡ .40‡ .36‡ .35‡ .35‡ .30‡ .14‡
+
+ONLINE-G .67‡ .54? .54 .50 – .46? .40‡ .41‡ .39‡ .38‡ .33‡ .13‡
+NYU-UMONTREAL .69‡ .55? .54 .57‡ .54? – .50 .42‡ .43‡ .43‡ .38‡ .16‡
+
+JHU-PBMT .74‡ .67‡ .67‡ .60‡ .60‡ .50 – .43† .46? .40‡ .37‡ .20‡
+LIMSI .69‡ .65‡ .63‡ .64‡ .59‡ .58‡ .57† – .51 .45? .40‡ .20‡
+
+ONLINE-A .80‡ .68‡ .64‡ .65‡ .61‡ .57‡ .54? .49 – .47 .42‡ .17‡
+AFRL-MITLL-PHRASE .74‡ .69‡ .64‡ .65‡ .62‡ .57‡ .60‡ .55? .53 – .41‡ .20‡
+AFRL-MITLL-VERB-A .79‡ .72‡ .74‡ .70‡ .67‡ .62‡ .63‡ .60‡ .58‡ .59‡ – .25‡
+
+ONLINE-F .93‡ .86‡ .89‡ .86‡ .87‡ .84‡ .80‡ .80‡ .83‡ .80‡ .75‡ –
+score .78 .30 .26 .25 .20 .10 -.01 -.07 -.10 -.14 -.31 -.126
+rank 1 2-4 2-5 2-5 3-5 6 7-8 7-10 8-10 9-10 11 12
+
+Table 46: Head to head comparison, ignoring ties, for English-Russian systems
+
+197
+
+
+
+A
+M
+
+U
+-U
+
+E
+D
+
+IN
+
+O
+N
+
+L
+IN
+
+E
+-G
+
+N
+R
+
+C
+
+O
+N
+
+L
+IN
+
+E
+-B
+
+U
+E
+
+D
+IN
+
+-N
+M
+
+T
+
+O
+N
+
+L
+IN
+
+E
+-A
+
+A
+F
+
+R
+L
+
+-M
+IT
+
+L
+L
+
+-P
+H
+
+R
+A
+
+S
+E
+
+A
+F
+
+R
+L
+
+-M
+IT
+
+L
+L
+
+-C
+O
+
+N
+T
+
+R
+A
+
+P
+R
+
+O
+M
+
+T-
+R
+
+U
+L
+
+E
+-B
+
+A
+S
+
+E
+D
+
+O
+N
+
+L
+IN
+
+E
+-F
+
+AMU-UEDIN – .51 .44† .47 .41‡ .37‡ .38‡ .34‡ .35‡ .16‡
+ONLINE-G .49 – .47 .44† .41‡ .38‡ .41‡ .35‡ .36‡ .18‡
+
+NRC .56† .53 – .47 .45† .40‡ .39‡ .38‡ .34‡ .19‡
+ONLINE-B .53 .56† .53 – .49 .44† .42‡ .41‡ .36‡ .22‡
+
+UEDIN-NMT .59‡ .59‡ .55† .51 – .45† .46? .40‡ .44‡ .23‡
+ONLINE-A .63‡ .62‡ .60‡ .56† .55† – .48 .47 .45† .22‡
+
+AFRL-MITLL-PHRASE .62‡ .59‡ .61‡ .58‡ .54? .52 – .45† .46† .25‡
+AFRL-MITLL-CONTRA .66‡ .65‡ .62‡ .59‡ .60‡ .53 .55† – .50 .29‡
+
+PROMT-RULE-BASED .65‡ .64‡ .66‡ .64‡ .56‡ .55† .54† .50 – .23‡
+ONLINE-F .84‡ .82‡ .81‡ .78‡ .77‡ .78‡ .75‡ .71‡ .77‡ –
+
+score .44 .42 .32 .25 .15 .03 .02 -.11 -.16 -.138
+rank 1-2 1-3 2-4 3-5 4-5 6-7 6-7 8-9 8-9 10
+
+Table 47: Head to head comparison, ignoring ties, for Russian-English systems
+
+O
+N
+
+L
+IN
+
+E
+-B
+
+O
+N
+
+L
+IN
+
+E
+-G
+
+O
+N
+
+L
+IN
+
+E
+-A
+
+T
+B
+
+T
+K
+
+-S
+Y
+
+S
+C
+
+O
+M
+
+B
+
+P
+R
+
+O
+M
+
+T-
+S
+
+M
+T
+
+Y
+S
+
+D
+A
+
+JH
+U
+
+-S
+Y
+
+N
+TA
+
+X
+
+JH
+U
+
+-P
+B
+
+M
+T
+
+PA
+R
+
+F
+D
+
+A
+ONLINE-B – .44† .45? .35‡ .32‡ .31‡ .21‡ .20‡ .17‡
+ONLINE-G .56† – .47 .38‡ .36‡ .31‡ .19‡ .19‡ .19‡
+ONLINE-A .55? .53 – .41‡ .40‡ .35‡ .24‡ .15‡ .16‡
+
+TBTK-SYSCOMB .65‡ .62‡ .59‡ – .47 .46 .26‡ .23‡ .23‡
+PROMT-SMT .68‡ .64‡ .60‡ .53 – .46 .30‡ .29‡ .21‡
+
+YSDA .69‡ .69‡ .65‡ .54 .54 – .32‡ .27‡ .26‡
+JHU-SYNTAX .79‡ .81‡ .76‡ .74‡ .70‡ .68‡ – .47 .42?
+
+JHU-PBMT .80‡ .81‡ .85‡ .77‡ .71‡ .73‡ .53 – .44
+PARFDA .83‡ .81‡ .84‡ .77‡ .79‡ .74‡ .58? .56 –
+
+score .82 .65 .56 .21 .12 .00 -.67 -.76 -.93
+rank 1-2 1-3 2-3 4-5 4-6 5-6 7-8 7-9 8-9
+
+Table 48: Head to head comparison, ignoring ties, for Turkish-English systems
+
+O
+N
+
+L
+IN
+
+E
+-G
+
+O
+N
+
+L
+IN
+
+E
+-B
+
+O
+N
+
+L
+IN
+
+E
+-A
+
+Y
+S
+
+D
+A
+
+JH
+U
+
+-H
+LT
+
+C
+O
+
+E
+
+T
+B
+
+T
+K
+
+-M
+O
+
+R
+P
+
+H
+-H
+
+P
+B
+
+C
+M
+
+U
+
+JH
+U
+
+-P
+B
+
+M
+T
+
+PA
+R
+
+F
+D
+
+A
+
+ONLINE-G – .45 .41† .31‡ .26‡ .30‡ .25‡ .23‡ .16‡
+ONLINE-B .55 – .46 .34‡ .29‡ .29‡ .30‡ .22‡ .18‡
+ONLINE-A .59† .54 – .42† .38‡ .40‡ .29‡ .25‡ .25‡
+
+YSDA .69‡ .66‡ .58† – .43† .44† .40‡ .34‡ .31‡
+JHU-HLTCOE .74‡ .71‡ .62‡ .57† – .46 .45 .35‡ .35‡
+
+TBTK-MORPH-HPB .70‡ .71‡ .60‡ .56† .54 – .45? .44† .41‡
+CMU .75‡ .70‡ .71‡ .60‡ .55 .55? – .38‡ .42†
+
+JHU-PBMT .77‡ .78‡ .75‡ .66‡ .65‡ .56† .62‡ – .41†
+PARFDA .84‡ .82‡ .75‡ .69‡ .65‡ .59‡ .58† .59† –
+
+score .76 .61 .37 .05 -.12 -.19 -.29 -.54 -.66
+rank 1-2 1-2 3 4 5-6 5-7 6-7 8-9 8-9
+
+Table 49: Head to head comparison, ignoring ties, for English-Turkish systems
+
+198
+
+

@@ -1,0 +1,3 @@
+The number of test sentences for the JPO adequacy evaluation is 200. The 200 test sentences were
+randomly selected from the 400 test sentences of the pairwise evaluation. The test sentence include the
+input sentence, the submitted system’s translation and the reference translation.

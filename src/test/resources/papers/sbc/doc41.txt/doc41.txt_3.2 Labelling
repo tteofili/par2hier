@@ -1,0 +1,15 @@
+To further guide the model, we apply labelling to distinguish adjuncts from other phrases. We identify
+source adjuncts and adjunct sequences, and label both sides of rules and rule gaps accordingly: with an
+A label for adjuncts; an Ax label for adjunct groups of size x; and a default label for other phrases.
+
+13
+
+
+
+Table 1: Example rules for the example in Figure 1
+
+r1 X→ 〈 X that , dat X 〉
+r2 X→ 〈 those workers A[1] have shown , hebben de medewerkers bewezen A[1] 〉
+r3 A→ 〈 X [1] made the switch A[2] , X [1] overgestapt A[2]〉
+r4 X→ 〈 who have , die zijn 〉
+r5 A→ 〈 to the solar power industry , naar de zonne-energiesector 〉

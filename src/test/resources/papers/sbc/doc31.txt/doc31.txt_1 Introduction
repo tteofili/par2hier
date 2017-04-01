@@ -1,0 +1,110 @@
+
+While translation between English and many other
+European languages (such as Czech and Ger-
+man) has a long tradition in the shared tasks
+at the series of WMT workshops preceding the
+ACL 2016 First Conference on Machine Transla-
+tion, English–Romanian has only been introduced
+this year as a new language pair.1 The English–
+Romanian language pair has received less atten-
+tion by the machine translation scientific commu-
+nity to date. The availability of a novel standard-
+ized evaluation scenario for English–Romanian in
+the framework of WMT facilitates research on that
+specific language pair.
+
+In this work, we utilize the corpora that have
+been provided by the shared task organizers to en-
+gineer a competitive system for statistical machine
+translation (SMT) from English into Romanian.
+We specifically focus on studying machine transla-
+tion into Romanian (rather than the inverse transla-
+tion direction: from Romanian into English), thus
+
+1http://www.statmt.org/wmt16/
+translation-task.html
+
+aiming at making documents originally written in
+English available to a large community of speakers
+in their native language, Romanian. Applications
+are for instance in the health care sector, where, as
+part of the Health in my Language project (HimL),
+several project partners intend to make public
+health information available in a wider variety of
+languages.2 The WMT task provides an inter-
+esting test bed for English→Romanian machine
+translation, though adaptation towards the specific
+domain (consumer health for HimL, rather than
+news) is also an important aspect that has to be
+considered in practice (Huck et al., 2015).
+
+We investigate the effectiveness of hierarchi-
+cal phrase-based translation (Chiang, 2005) for
+English→Romanian, a statistical machine trans-
+lation paradigm that is closely related to phrase-
+based translation, but allows for phrases with gaps.
+Conceptionally, the translation model is formal-
+ized as a synchronous context-free grammar. We
+integrate several non-standard enhancements into
+our hierarchical phrase-based system and empiri-
+cally evaluate their impact on translation quality.
+
+Our system is furthermore one component in
+a combination of systems by members of the
+HimL project and another EU-funded project,
+QT21.3 Measured in BLEU (Papineni et al., 2002),
+the QT21/HimL submission yields top transla-
+tion quality amongst the shared task submissions.4
+
+The QT21/HimL submission highlights the con-
+tinued success of system combinations based on
+the Jane machine translation toolkit (Freitag et
+al., 2014a) in open evaluation campaigns (Freitag
+et al., 2013; Freitag et al., 2014b; Freitag et al.,
+2014c). A description of the QT21/HimL com-
+bined submission is given by Peter et al. (2016).
+
+2http://www.himl.eu
+3http://www.qt21.eu
+4http://matrix.statmt.org/matrix/
+
+systems_list/1843
+
+311
+
+
+
+We proceed by presenting the particularities of
+our hierarchical phrase-based system, with a fo-
+cus of interest on exploring non-standard enhance-
+ments and non-default configuration settings such
+as:
+
+• Individual language models as features,
+rather than a single linearly interpolated lan-
+guage model; and another background lan-
+guage model estimated over concatenated
+corpora.
+
+• Large CommonCrawl language model train-
+ing data.
+
+• Unpruned language models.
+• More hierarchical rules than in default sys-
+
+tems, by means of imposing less strict extrac-
+tion constraints.
+
+• A phrase orientation model for hierarchical
+translation (Huck et al., 2013).
+
+• Lightly-supervised training (Schwenk, 2008;
+Schwenk and Senellart, 2009; Huck et al.,
+2011).
+
+• Larger development data for tuning.
+
+All our experiments are run with the open
+source Moses implementation (Hoang et al.,
+2009) of the hierarchical phrase-based translation
+paradigm.

@@ -1,0 +1,12 @@
+
+This is the first time that we have run the Biomed-
+ical Translation task at WMT. This task aims to
+evaluate systems for the translation of biomedical
+titles and abstracts from scientific publications. In
+this first edition of the challenge, we have focused
+on three language pairs (considering both trans-
+lation directions), namely, English/Portuguese
+(EN/PT), English/Spanish (EN/ES) and En-
+glish/French (EN/FR), and documents in the two
+sub-domains of biological sciences and health sci-
+ences.

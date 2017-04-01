@@ -1,0 +1,80 @@
+
+This task consists in scoring (and ranking) transla-
+tion sentences according to the percentage of their
+words that need to be fixed. HTER (Snover et al.,
+2006) is used as quality score, i.e. the minimum
+edit distance between the machine translation and
+its manually post-edited version in [0,1].
+
+As in previous years, two variants of the results
+could be submitted:
+
+• Scoring: An absolute HTER score for each
+sentence translation, to be interpreted as an
+error metric: lower scores mean better trans-
+lations.
+
+• Ranking: A ranking of sentence translations
+for all source sentences from best to worst.
+For this variant, it does not matter how the
+ranking is produced (from HTER predictions
+or by other means). The reference ranking is
+defined based on the true HTER scores.
+
+Data The data is the same as that used for the
+WMT16 Automatic Post-editing task, collected
+By the QT21 Project19 in the Information Technol-
+ogy (IT) domain.20 Source segments are English
+sentences and target segments are German trans-
+lations produced by a strong SMT system built
+within the QT21 Project. The human post-editions
+
+19http://www.qt21.eu/
+20The source sentences and reference translations were
+
+provided by TAUS (https://www.taus.net/) and come
+from a unique IT vendor.
+
+164
+
+
+
+are a manual revision of the target, done by profes-
+sional translators using the PET post-editing tool
+(Aziz et al., 2012). HTER labels were computed
+using the TERCOM tool21 with default settings (to-
+kenised, case insensitive, exact matching only),
+and scores capped to 1.
+
+As training and development data, we provided
+English-German datasets with 12,000 and 1,000
+source sentences, their machine translations, post-
+editions and HTER scores. As test data, we pro-
+vided an additional set of 2,000 English-German
+source-translations pairs produced by the same
+SMT system used for the training data.
+
+Evaluation Evaluation was performed against
+the true HTER label and/or ranking, using the fol-
+lowing metrics:
+
+• Scoring: Pearson’s r correlation score (pri-
+mary metric, official score for ranking sub-
+missions), Mean Average Error (MAE) and
+Root Mean Squared Error (RMSE).
+
+• Ranking: Spearman’s ρ rank correlation and
+DeltaAvg.
+
+Statistical significance on Pearson r and Spear-
+man rho was computed using the William’s test,
+following the approach suggested in (Graham,
+2015).
+
+Results Table 19 summarises the results for
+Task 1, ranking participating systems best to worst
+using Pearson’s r correlation as primary key.
+Spearman’s ρ correlation scores should be used to
+rank systems according to the ranking variant. We
+note that three systems have not submitted results
+ranking evaluation variant.

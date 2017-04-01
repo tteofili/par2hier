@@ -1,0 +1,56 @@
+
+We employ two neural network joint models,
+or NNJMs (Vaswani et al., 2013; Devlin et al.,
+2014). The NNJM is a feed-forward neural net-
+work language model that assumes access to a
+source sentence f and an aligned source index ai,
+which points to the most influential source word
+for the translation of the target word ei. The
+NNJM calculates the language modeling proba-
+bility p(ei|ei−1i−n+1, fai+mai−m ), which accounts for the
+n−1 preceding target words, and for 2m+1 words
+of source context, centered around fai . Following
+Devlin et al. (2014), we use n = 4 and m = 5, re-
+sulting in 3 words of target context and 11 words
+of source context, effectively a 15-gram language
+model.
+
+Our two models differ only in the rendering of
+their source strings, with one using lemmas, and
+the other using words. The lemma-to-word system
+achieved a development perplexity of 6.04, while
+the word-to-word system reached 6.78. Since
+our decoder’s input is Russian words, the decoder
+needed to map words to lemmas before calculat-
+ing lemma-based NNJM probabilities. This was
+done by running Yandex MyStem on the Russian
+source at test time, in order to build sentence-
+specific position-to-lemma mappings. For both
+models, the source link ai is derived from IBM4
+Russian-lemma to English-word alignments.
+
+NNJM training data is pre-processed to limit
+vocabularies to 96K types for source or target in-
+puts, and 32K types for target outputs. We build
+400 deterministic word clusters for each corpus
+using mkcls. Any word not among the 96K
+/ 32K most frequent words is replaced with its
+cluster. For our feed-forward network architec-
+ture, we used 192 units for source embeddings
+and 512 units for the single hidden layer. We
+train our models with mini-batch stochastic gra-
+dient descent, with a batch size of 128 words, and
+an initial learning rate of 0.3. We check our train-
+ing objective on the development set every 20K
+batches, and if it fails to improve for two consec-
+utive checks, the learning rate is halved. Training
+stops after 5 consecutive failed checks or after 90
+checks. To enable efficient decoding, our models
+are self-normalized with a squared penalty on the
+
+328
+
+
+
+log partition function, weighted with α = 0.1 (De-
+vlin et al., 2014).

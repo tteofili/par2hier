@@ -1,0 +1,48 @@
+
+x 10
+5
+
+−1000
+
+−800
+
+−600
+
+−400
+
+−200
+
+0
+
+Iterations
+
+L
+o
+w
+
+e
+r 
+
+b
+o
+u
+n
+d
+
+(a) (b) (c) (d)
+Figure 3: (a) shows the evolution of the lower bound values for MNIST, (b) for 20NEWS and (c) for BIBTEX. For
+more clear visualization the bounds of the stochastic OVE-SGD have been smoothed using a rolling window of
+400 previous values. (d) shows the evolution of the OVE-SGD lower bound (scaled to correspond to a single data
+point) in the large scale AMAZONCAT-13K dataset. Here, the plotted values have been also smoothed using a
+rolling window of size 4000 and then thinned by a factor of 5.
+
+leads to sparse parameter updates, where the score function parameters of only six classes (the class
+of the current training instance plus the remaining five ones) are updated at each iteration. We used a
+very small learning rate having value 10−8 and we performed five epochs across the full dataset, that
+is we performed in total 5 × 1186239 stochastic gradient updates. After each epoch we halve the
+value of the learning rate before next epoch starts. By taking into account also the sparsity of the input
+vectors each iteration is very fast and full training is completed in just 26 minutes in a stand-alone
+PC. The evolution of the variational lower bound that indicates convergence is shown in Figure 3d.
+Finally, the classification error in test data was 53.11% which is significantly better than random
+guessing or by a method that decides always the most populated class (where in AMAZONCAT-13K
+the most populated class occupies the 19% of the data so the error of that method is around 79%).

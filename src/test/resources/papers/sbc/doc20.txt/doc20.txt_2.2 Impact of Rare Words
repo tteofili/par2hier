@@ -1,0 +1,29 @@
+
+As discussed in the introduction part, rare words cause two
+problems for neural machine translation. First, NTM model
+cannot learn translations for rare words because they are all
+converted to unk in the training data. Second, rare words in-
+crease the ambiguity of the sentence, which increases the dif-
+ficulty to translate and reorder the rest in-vocabulary words in
+the sentence.
+
+To quantitatively check the impact of the two factors, we
+design the following experiment. We extract 5 groups of Chi-
+nese sentences with different number of rare words (0-4) from
+the NIST Chinese to English translation data set. Each group
+contains 50 sentences together with their reference transla-
+tions. In order to rule out the influence of sentence length,
+all the sentences in the 5 groups are between 20 to 30 words.
+We use the same system to translate these sentences and the
+corresponding performances are shown in Figure 1 (red line).
+It is obvious more rare words lead to worse performance. To
+simulate the impact of missing translation for rare words, we
+randomly set 1-4 words to unk in the translation of sentences
+in group 0. The result is shown as blue line. It could be in-
+ferred that the remaining gap between the red line and the hor-
+izontal line (denoting the performance of group 0) is caused
+by the increased ambiguity. According to the figure, when
+there are only one rare word in the sentence, the performance
+drop is mainly caused by missing translations, but when there
+are more rare words, increased ambiguity also contributes a
+lot to the performance drop.

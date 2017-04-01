@@ -1,0 +1,26 @@
+
+In this section, we randomly extract 200 sentences from the experimental data to examine whether the
+identified Japanese functional expressions are correct or not. Table 4 gives the evaluation results of
+identification of Japanese functional expressions.
+
+Correct rate Correctly extracted sentences 171 (85.5%)
+
+Error rate Incorrectly extracted sentences 10 (5%) 29 (14.5%)Japanese functional expressions are not recognized 19 (9.5%)
+Total 200 (100%)
+
+Table 4: Evaluation results of Japanese functional expression identification
+
+3
+
+
+
+According to Table 4, we obtained 85.5% accuracy for identifying Japanese functional expressions.
+Cases of failures of functional expression identification can be viewed from the following three causes.
+First, the lack of discriminative contextual information causes failure. For example, “をめぐる(with
+related to)” in “決算 を めぐる 政策評価 の 問題”, is incorrectly recognized as a literal usage. Here,
+both literal usage and functional usage of this expression share almost the same contexts and cannot be
+distinguished only by the surrounding information used in MeCab. Second is the opposite case where
+a literal usage is recognized as a functional expression. For example, in “青少年 期 から 身 につけ
+て しまう”, “につけて(concerning)” was incorrectly extracted. Third, functional expressions are not
+included in the current “Japanese Functional Expressions List”. For example, a colloquial expression
+“わけじゃない(it does not mean that)” was not recognized as a functional expression.

@@ -1,0 +1,8 @@
+
+The core of the NRC MT system is Portage
+(Larkin et al., 2010). Portage is a conventional
+log-linear phrase-based SMT system. We describe
+the basic features of Portage in this section and the
+
+new features first tested on our Russian-English
+submission in the next section.

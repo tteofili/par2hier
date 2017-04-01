@@ -1,0 +1,16 @@
+
+The Three-headed Chimera, or simply Chimera (Bojar et al., 2013b; Tamchyna et al., 2016), is a com-
+bination of TectoMT and Moses, as in Section 3.7, complemented by a final post-editing step performed
+by Depfix, as in Section 3.5 (see Figure 10). It has been repeatedly confirmed as the best system by both
+automatic and manual evaluations, not only among the ones reported in this paper, but also in general,
+
+12http://www.statmt.org/moses/?n=Advanced.Hybrid
+
+7
+
+
+
+Figure 10: Three-headed Chimera
+
+being the winner of the WMT English-to-Czech translation task in the years 2013, 2014 and 2015 (Bojar
+et al., 2013a; Bojar et al., 2014; Bojar et al., 2015).

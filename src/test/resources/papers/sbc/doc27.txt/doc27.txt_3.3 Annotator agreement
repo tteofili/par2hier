@@ -1,0 +1,142 @@
+
+Each year we calculate annotator agreement
+scores for the human evaluation as a measure of
+the reliability of the rankings. We measured pair-
+wise agreement among annotators using Cohen’s
+kappa coefficient (κ) (Cohen, 1960). If P (A) be
+the proportion of times that the annotators agree,
+and P (E) is the proportion of time that they would
+agree by chance, then Cohen’s kappa is:
+
+κ =
+P (A)− P (E)
+1− P (E)
+
+Note that κ is basically a normalized version of
+P (A), one which takes into account how mean-
+ingful it is for annotators to agree with each other
+by incorporating P (E). The values for κ range
+from 0 to 1, with zero indicating no agreement and
+1 perfect agreement.
+
+We calculate P (A) by examining all pairs of
+
+138
+
+
+
+Language Pair WMT12 WMT13 WMT14 WMT15 WMT16
+Czech→English 0.311 0.244 0.305 0.458 0.244
+English→Czech 0.359 0.168 0.360 0.438 0.381
+German→English 0.385 0.299 0.368 0.423 0.475
+English→German 0.356 0.267 0.427 0.423 0.369
+French→English 0.272 0.275 0.357 0.343 —
+English→French 0.296 0.231 0.302 0.317 —
+Russian→English — 0.278 0.324 0.372 0.339
+English→Russian — 0.243 0.418 0.336 0.340
+Finnish→English — — — 0.388 0.293
+English→Finnish — — — 0.549 0.484
+Romanian→English — — — — 0.379
+English→Romanian — — — — 0.341
+Turkish→English — — — — 0.322
+English→Turkish — — — — 0.319
+Mean 0.330 0.260 0.367 0.405 0.357
+
+Table 4: κ scores measuring inter-annotator agreement for WMT16. See Table 5 for corresponding intra-annotator agreement
+scores. WMT14–WMT16 results are based on researchers’ judgments only, whereas prior years mixed judgments of researchers
+and crowdsourcers.
+
+outputs6 which had been judged by two or more
+judges, and calculating the proportion of time that
+they agreed that A < B, A = B, or A > B. In
+other words, P (A) is the empirical, observed rate
+at which annotators agree, in the context of pair-
+wise comparisons.
+
+As for P (E), it captures the probability that two
+annotators would agree randomly. Therefore:
+
+P (E) = P (A<B)2 + P (A=B)2 + P (A>B)2
+
+Note that each of the three probabilities in P (E)’s
+definition are squared to reflect the fact that we are
+considering the chance that two annotators would
+agree by chance. Each of these probabilities is
+computed empirically, by observing how often an-
+notators actually rank two systems as being tied.
+
+Table 4 shows final κ values for inter-annotator
+agreement for WMT11–WMT16 while Table 5
+details intra-annotator agreement scores. The ex-
+act interpretation of the kappa coefficient is dif-
+ficult, but according to Landis and Koch (1977),
+0–0.2 is slight, 0.2–0.4 is fair, 0.4–0.6 is moder-
+ate, 0.6–0.8 is substantial, and 0.8–1.0 is almost
+perfect.
+
+Compared to last year’s results, inter-annotator
+agreement rates have decreased. Notably, for
+
+6Regardless if they correspond to an individual system
+or to a set of systems (“multi-system”) producing identical
+translations. Thus, when computing annotator agreement
+scores, we effectively treat both individual and multi-systems
+in the same way, as “individual comparison units”. By doing
+so, we avoid artificially inflating our agreement scores based
+on the automatically inferredA = B ties from multi-systems.
+
+Czech→English, we see a drop from 0.458 to
+0.244. English→Czech decreases from 0.438 to
+0.381. Considering that the total number of data
+points collected as well as the number of annota-
+tors for these language pairs have increased sub-
+stantially, the lower agreement score seems plau-
+sible.7 We observe a small increase in agree-
+ment for German→English (from 0.423 to 0.475)
+and a drop for English→German (from 0.434 to
+0.369). Scores for both Russian language pairs
+are similar to what had been measured in WMT15.
+For Finnish, we again see a decrease (from 0.388
+to 0.293 for Finnish→English and from 0.549
+to 0.484 for English→Finnish) and our new lan-
+guages, Romanian and Turkish, end up with fair
+annotator agreement. The average inter-annotator
+agreement across all languages is 0.357, which is
+also fair and comparable to researchers’ agree-
+ment over the last years. Intra-annotator agree-
+ment scores have mostly decreased compared to
+WMT15, except for both Russian language pairs.
+The new languages show moderate agreement ex-
+cept for English→Turkish which achieves a fair
+score. On average we observe an intra-annotator
+agreement which is comparable to researcher-
+based scores from WMT13–WMT15.
+
+7Both Czech→English and English→Czech contain
+tuning-task systems with very similar quality (according to
+both human evaluation and BLEU), which makes the annota-
+tion task more difficult.
+
+139
+
+
+
+Language Pair WMT12 WMT13 WMT14 WMT15 WMT16
+Czech→English 0.454 0.479 0.382 0.694 0.504
+English→Czech 0.390 0.290 0.448 0.584 0.438
+German→English 0.392 0.535 0.344 0.801 0.552
+English→German 0.433 0.498 0.576 0.676 0.529
+French→English 0.360 0.578 0.629 0.510 —
+English→French 0.414 0.495 0.507 0.426 —
+Russian→English — 0.450 0.629 0.506 0.552
+English→Russian — 0.513 0.570 0.492 0.528
+Finnish→English — — — 0.562 0.549
+English→Finnish — — — 0.697 0.617
+Romanian→English — — — — 0.621
+English→Romanian — — — — 0.552
+Turkish→English — — — — 0.559
+English→Turkish — — — — 0.352
+Mean 0.407 0.479 0.522 0.595 0.529
+
+Table 5: κ scores measuring intra-annotator agreement, i.e., self-consistency of judges, across for the past few years of the
+human evaluation campaign. Scores are in line with results from WMT14 and WMT15.

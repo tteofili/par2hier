@@ -1,0 +1,135 @@
+
+We enhanced the attention-based neural machine
+translation by incorporating information in mul-
+tiple modalities. We explored different encoder-
+decoder architectures including the LSTM with
+multiple sequential global/regional visual and tex-
+tual features as states for attention and the parallel
+LSTM threads approach. Our best model achieved
+2.0% improvement in BLEU score and 2.3% in
+METEOR using the visual features of an entire
+image and interesting regional objects within. For
+re-scoring translation candidates, we investigated
+monolingual LSTM language model, bilingual au-
+toencoder, and bilingual dictionary re-scoring. We
+further achieved an additional 1.1% improvements
+in METEOR using a bilingual dictionary. Integra-
+tion of more modalities such as audio would be a
+challenging but interesting next step.
+
+644
+
+
+
+Acknowledgments
+
+This material is based in part on work supported
+by the National Science Foundation (NSF) un-
+der grant number IIS-1638429. Also, this work
+was conducted in part through collaborative par-
+ticipation in the Robotics Consortium sponsored
+by the U.S Army Research Laboratory under the
+Collaborative Technology Alliance Program, Co-
+operative Agreement W911NF-10-2-0016, and in
+part by ONR under MURI grant “Reasoning in
+Reduced Information Spaces” (no. N00014-09-
+1-1052). The views and conclusions contained
+in this document are those of the authors and
+should not be interpreted as representing the of-
+ficial policies, either expressed or implied, of the
+Army Research Laboratory of the U.S. Govern-
+ment. The U.S. Government is authorized to re-
+produce and distribute reprints for Government
+purposes notwithstanding any copyright notation
+herein.
+
+References
+Galen Andrew, Raman Arora, Karen Livescu, and Jeff
+
+Bilmes. 2013. Deep canonical correlation analysis.
+In International Conference on Machine Learning
+(ICML), Atlanta, Georgia.
+
+Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua
+Bengio. 2014. Neural machine translation by
+jointly learning to align and translate. CoRR,
+abs/1409.0473.
+
+D. Elliott, S. Frank, K. Sima’an, and L. Specia. 2016.
+Multi30K: Multilingual English-German Image De-
+scriptions. CoRR, abs/1605.00459.
+
+Ross Girshick, Jeff Donahue, Trevor Darrell, and Jiten-
+dra Malik. 2014. Rich feature hierarchies for accu-
+rate object detection and semantic segmentation. In
+Computer Vision and Pattern Recognition.
+
+David R. Hardoon, Sandor R. Szedmak, and John R.
+Shawe-taylor. 2004. Canonical correlation analysis:
+An overview with application to learning methods.
+Neural Comput., 16(12):2639–2664, December.
+
+Sébastien Jean, Kyunghyun Cho, Roland Memisevic,
+and Yoshua Bengio. 2014. On using very large
+target vocabulary for neural machine translation.
+CoRR, abs/1412.2007.
+
+Nal Kalchbrenner and Phil Blunsom. 2013. Recurrent
+continuous translation models. Seattle, October. As-
+sociation for Computational Linguistics.
+
+Ryan Kiros, Ruslan Salakhutdinov, and Richard S.
+Zemel. 2014. Unifying visual-semantic embed-
+dings with multimodal neural language models.
+CoRR, abs/1411.2539.
+
+Minh-Thang Luong, Hieu Pham, and Christopher D.
+Manning. 2015. Effective approaches to
+attention-based neural machine translation. CoRR,
+abs/1508.04025.
+
+Jiquan Ngiam, Aditya Khosla, Mingyu Kim, Juhan
+Nam, Honglak Lee, and Andrew Y. Ng. 2011. Mul-
+timodal deep learning. In Lise Getoor and Tobias
+Scheffer, editors, ICML, pages 689–696. Omnipress.
+
+Shaoqing Ren, Kaiming He, Ross Girshick, and Jian
+Sun. 2015. Faster R-CNN: Towards real-time ob-
+ject detection with region proposal networks. In
+Advances in Neural Information Processing Systems
+(NIPS).
+
+K. Simonyan and A. Zisserman. 2014. Very deep con-
+volutional networks for large-scale image recogni-
+tion. CoRR, abs/1409.1556.
+
+Nitish Srivastava and Ruslan Salakhutdinov. 2014.
+Multimodal learning with deep boltzmann ma-
+chines. Journal of Machine Learning Research,
+15:2949–2980.
+
+Jinsong Su, Deyi Xiong, Biao Zhang, Yang Liu, Jun-
+feng Yao, and Min Zhang. 2015. Bilingual corre-
+spondence recursive autoencoder for statistical ma-
+chine translation. In Proceedings of the 2015
+Conference on Empirical Methods in Natural Lan-
+guage Processing, EMNLP 2015, Lisbon, Portugal,
+September 17-21, 2015, pages 1248–1258.
+
+Peter Young, Alice Lai, Micah Hodosh, and Julia
+Hockenmaier. 2014. From image descriptions to vi-
+sual denotations: New similarity metrics for seman-
+tic inference over event descriptions. TACL, 2:67–
+78.
+
+Jiajun Zhang, Shujie Liu, Mu Li, Ming Zhou, and
+Chengqing Zong. 2014. Bilingually-constrained
+phrase embeddings for machine translation. In Pro-
+ceedings of the 52nd Annual Meeting of the Asso-
+ciation for Computational Linguistics (Volume 1:
+Long Papers), pages 111–121, Baltimore, Maryland,
+June. Association for Computational Linguistics.
+
+645
+
+

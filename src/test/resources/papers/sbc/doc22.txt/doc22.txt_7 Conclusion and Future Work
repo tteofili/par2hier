@@ -1,0 +1,193 @@
+
+In this paper, we proposed a new method for active
+learning in machine translation that selects syntactic,
+non-redundant phrases using parse trees and semi-
+maximal phrases. We first performed simulation ex-
+periments and obtained improvements in translation
+accuracy with fewer additional words. Further man-
+
+BLEU Score [%]
+Selection Methods Confidence Confidence Confidence
+
+1+ (All) 2+ 3
+sent-by-4gram-freq 9.88 9.92 9.85
+
+4gram-freq 10.48 10.54 10.36
+reduced-struct-freq 10.70 10.72 10.67
+
+Table 7: BLEU score when training on phrases with a certain
+confidence level
+
+ual translation experiments also demonstrated that
+our method allows for greater improvements in ac-
+curacy and translator confidence.
+However, there are still a number of avenues for
+
+improvement. Particularly, as the proposed method
+selected segments that took more time to translate
+due to technical terms, the combination with meth-
+ods to harvest unknown words (Daumé III and Ja-
+garlamudi, 2011) or optimize the selected segments
+based on the time required (Sperber et al., 2014) is
+potentially useful. In addition, softer syntactic con-
+straints that allow annotation of phrases with vari-
+ables (Chiang, 2007) such as “one of the preceding
+X” are another interesting avenue of future work.
+
+Acknowledgments
+
+The authors thank anonymous reviewers for helpful
+suggestions. This research was supported by ATR-
+Trek Co. Ltd. The manual translation work was sup-
+ported by BAOBAB Inc.
+
+References
+Sankaranarayanan Ananthakrishnan, Rohit Prasad, David
+
+Stallard, and Prem Natarajan. 2010. A Semi-
+Supervised Batch-Mode Active Learning Strategy for
+Improved Statistical Machine Translation. In Proc.
+CoNLL, pages 126–134, July.
+
+Michael Bloodgood and Chris Callison-Burch. 2010.
+Bucking the Trend: Large-Scale Cost-Focused Active
+Learning for Statistical Machine Translation. In Proc.
+ACL, pages 854–864, July.
+
+Peter F. Brown, Vincent J.Della Pietra, Stephen A. Della
+Pietra, and Robert L. Mercer. 1993. The Mathematics
+of Statistical Machine Translation: Parameter Estima-
+tion. Computational Linguistics, 19:263–312.
+
+David Chiang. 2007. Hierarchical phrase-based transla-
+tion. 33(2):201–228.
+
+Hal Daumé III and Jagadeesh Jagarlamudi. 2011. Do-
+main adaptation for machine translation by mining un-
+seen words. In Proc. ACL, pages 407–412.
+
+28
+
+
+
+Matthias Eck, Stephan Vogel, and Alex Waibel. 2005.
+Low Cost Portability for Statistical Machine Transla-
+tion based in N-gram Frequency and TF-IDF. In Proc.
+IWSLT, pages 61–67.
+
+Ulrich Germann. 2014. Dynamic phrase tables for
+machine translation in an interactive post-editing sce-
+nario. In Proc. AMTA 2014 Workshop on Interactive
+and Adaptive Machine Translation, pages 20–31.
+
+Jesús González-Rubio, Daniel Ortiz-Martı́nez, and Fran-
+cisco Casacuberta. 2012. Active learning for interac-
+tive machine translation. In Proc. EACL, pages 245–
+254, April.
+
+Spence Green, Sida I. Wang, Jason Chuang, Jeffrey
+Heer, Sebastian Schuster, and Christopher D. Man-
+ning. 2014. Human Effort and Machine Learnabil-
+ity in Computer Aided Translation. In Proc. EMNLP,
+pages 1225–1236, October.
+
+Gholamreza Haffari and Anoop Sarkar. 2009. Active
+Learning for Multilingual Statistical Machine Transla-
+tion. In Proc. ACL, pages 181–189, August.
+
+Gholamreza Haffari, Maxim Roy, and Anoop Sarkar.
+2009. Active Learning for Statistical Phrase-based
+Machine Translation. In Proc. ACL, pages 415–423,
+June.
+
+Kenneth Heafield. 2011. KenLM: Faster and Smaller
+Language Model Queries. In Proc, WMT, July.
+
+Toru Kasai, Gunho Lee, Hiroki Arimura, Setsuo
+Arikawa, and Kunsoo Park. 2001. Linear-Time
+Longest-Common-Prefix Computation in Suffix Ar-
+rays and Its Applications. In Proc. CPM, pages 181–
+192.
+
+Phillip Koehn, Franz Josef Och, and Daniel Marcu. 2003.
+Statistical Phrase-Based Translation. In Proc. NAACL,
+pages 48–54.
+
+Philipp Koehn, Hieu Hoang, Alexandra Birch, Chris
+Callison-Burch, Marcello Federico, Nicola Bertoldi,
+Brooke Cowan, Wade Shen, Christine Moran, Richard
+Zens, Chris Dyer, Ondrej Bojar, Alexandra Con-
+stantin, and Evan Herbst. 2007. Moses: Open Source
+Toolkit for Statistical Machine Translation. pages
+177–180.
+
+Graham Neubig, Yosuke Nakata, and Shinsuke Mori.
+2011. Pointwise Prediction for Robust, Adaptable
+Japanese Morphological Analysis. In Proc. ACL,
+pages 529–533.
+
+Franz Josef Och and Hermann Ney. 2003. A Systematic
+Comparison of Various Statistical Alignment Models.
+Computational Linguistics, 29(1):19–51.
+
+Franz Josef Och. 2003. Minimum Error Rate Training in
+Statistical Machine Translation. In Proc. ACL, pages
+160–167.
+
+Yusuke Oda, Graham Neubig, Sakriani Sakti, Tomoki
+Toda, and Satoshi Nakamura. 2015. Ckylark: A More
+
+Robust PCFG-LA Parser. In Proc. NAACL, pages 41–
+45, June.
+
+Daisuke Okanohara and Jun’ichi Tsujii. 2009. Text Cate-
+gorization with All Substring Features. In Proc. SDM,
+pages 838–846.
+
+Kishore Papineni, Salim Roukos, Todd Ward, and Wei-
+Jing Zhu. 2002. Bleu: a Method for Automatic Eval-
+uation of Machine Translation. In Proc. ACL, pages
+311–318, July.
+
+Philip Resnik and Noah A Smith. 2003. The web
+as a parallel corpus. Computational Linguistics,
+29(3):349–380.
+
+Burr Settles and Mark Craven. 2008. An Analysis of Ac-
+tive Learning Strategies for Sequence Labeling Tasks.
+In Proc. EMNLP, pages 1070–1079, October.
+
+Matthias Sperber, Mirjam Simantzik, Graham Neubig,
+Satoshi Nakamura, and Alex Waibel. 2014. Segmen-
+tation for Efficient Supervised Language Annotation
+with an Explicit Cost-Utility Tradeoff. TACL, 2:169–
+180.
+
+Andreas Stolcke. 2002. SRILM - an extensible language
+modeling toolkit. In Proc. ICSLP, pages 901–904.
+
+Jörg Tiedemann. 2009. News from OPUS-A collection
+of multilingual parallel corpora with tools and inter-
+faces. In Proc. RANLP, volume 5, pages 237–248.
+
+Katrin Tomanek and Udo Hahn. 2009. Semi-Supervised
+Active Learning for Sequence Labeling. In Proc. ACL,
+pages 1039–1047, August.
+
+Marco Turchi, Tijl De Bie, and Nello Cristianini. 2008.
+Learning performance of a machine translation sys-
+tem: a statistical and computational analysis. In Proc.
+WMT, pages 35–43, June.
+
+Katharina Wäschle and Stefan Riezler. 2012. An-
+alyzing Parallelism and Domain Similarities in the
+MAREC Patent Corpus. Multidisciplinary Informa-
+tion Retrieval, pages 12–27.
+
+Omar F Zaidan and Chris Callison-Burch. 2011. Crowd-
+sourcing translation: Professional quality from non-
+professionals. In Proc. ACL, pages 1220–1229.
+
+29
+
+

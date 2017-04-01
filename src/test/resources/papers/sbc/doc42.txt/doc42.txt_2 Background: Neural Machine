@@ -1,0 +1,60 @@
+Translation
+
+Attentional neural machine translation (Bahdanau
+et al., 2015) is the current state of the art for
+
+35
+
+
+
+English→German (Jean et al., 2015b; Luong and
+Manning, 2015). We follow the neural machine
+translation architecture by Bahdanau et al. (2015),
+which we will briefly summarize here. However, our
+approach is not specific to this architecture.
+
+The neural machine translation system is imple-
+mented as an attentional encoder-decoder network.
+The encoder is a bidirectional neural network with
+gated recurrent units (Cho et al., 2014) that reads
+an input sequence x = (x1, ..., xm) and calculates
+a forward sequence of hidden states (
+
+−→
+h1, ...,
+
+−→
+hm),
+
+and a backward sequence (
+←−
+h1, ...,
+
+←−
+hm). The hidden
+
+states
+−→
+hj and
+
+←−
+hj are concatenated to obtain the an-
+
+notation vector hj .
+The decoder is a recurrent neural network that
+
+predicts a target sequence y = (y1, ..., yn). Each
+word yi is predicted based on a recurrent hidden
+state si, the previously predicted word yi−1, and a
+context vector ci. ci is computed as a weighted sum
+of the annotations hj . The weight of each annota-
+tion hj is computed through an alignment model αij ,
+which models the probability that yi is aligned to xj .
+The alignment model is a single-layer feedforward
+neural network that is learned jointly with the rest of
+the network through backpropagation.
+
+A detailed description can be found in (Bahdanau
+et al., 2015). Training is performed on a parallel cor-
+pus with stochastic gradient descent. For translation,
+a beam search with small beam size is employed.

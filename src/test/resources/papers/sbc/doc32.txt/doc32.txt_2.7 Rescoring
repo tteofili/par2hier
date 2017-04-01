@@ -1,0 +1,27 @@
+We rescored 1000-best lists output from the de-
+coder using a rescoring model (Och et al., 2004;
+Foster et al., 2009) consisting of 82 features: 27
+decoder features and 55 additional rescoring fea-
+tures. The rescoring model was tuned using n-
+best MIRA. Of the rescoring features, 51 consisted
+of various IBM features for word- and lemma-
+aligned IBM1, IBM2, IBM4 and HMM models,
+as well as various other standard length, n-gram,
+and n-best features.
+
+The final four features used NNJMs for rescor-
+ing, two Russian-word NNJM rescoring features
+and two Russian-lemma ones. Following Devlin et
+al. (2014), one NNJM feature rescored the 1000-
+best list using a English-to-Russian NNJM, where
+the roles of the source and target languages are
+reversed, while the other used a right-to-left and
+English-to-Russian NNJM, where the Russian tar-
+get side is traversed in reverse order. These NNJM
+variants were trained and self-normalized using
+the same parameters as the NNJMs used for de-
+coding described above in Section 2.5, the only
+difference being to swap source and target and re-
+verse target word order as described above. Dur-
+ing development, rescoring improved our uncased
+BLEU score by 0.4 on newstest2015.

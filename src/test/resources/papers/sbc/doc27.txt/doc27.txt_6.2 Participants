@@ -1,0 +1,376 @@
+Table 18 lists all participating teams submitting
+systems to any of the tasks. Each team was al-
+lowed up to two submissions for each task. In the
+descriptions below, participation in specific tasks
+is denoted by a task identifier.
+
+CDACM (Task 2): The CDACM team partici-
+pated in Task 2 for the word and phrase-level QE.
+They use a Recurrent Neural Network Language
+Model (RNN-LM) architecture for word-level QE.
+To estimate the phrase-level quality, they use the
+output of the word-level QE system. For this task,
+they use a modified RNN-LM with other RNN
+variants like Long Short Term Memory (LSTM),
+deep LSTM and Gated Recurring Units (GRU).
+The modified system predicts a label (OK/BAD)
+rather than predicting the word as in the case of
+standard RNN-LM. The input to the system is a
+word sequence, similar to the standard RNN-LM.
+They also tried bilingual models with RNN-LM
+and found that they perform better than monolin-
+gual models. In the training data, the distribu-
+tion of labels (OK/BAD) is skewed, with signifi-
+cantly more OK labels. To handle this issue, they
+use strategies to replace the OK label with sub-
+labels to balance the distribution. The sub-labels
+are OK B, OK I, OK E, depending on the loca-
+tion of the token in the sentence.
+
+POSTECH (Task 1, Task 2): POSTECH’s sub-
+missions (SENT/RNN for Task 1, WORD/RNN
+for Task 2 and PHR/RNN for Task 2p) are RNN-
+based QE systems consisting of two component:
+two bidirectional RNNs on the source and tar-
+get sentences in the first component and other
+RNNs for predicting the final quality in the sec-
+ond component. The first component is an RNN-
+
+based modified neural MT model which gener-
+ates quality vectors. Quality vectors indicate a
+sequence of vectors about target words’ transla-
+tion quality. The second component using other
+RNNs predicts the quality at sentence level (Task
+1), word level (Task 2), and phrase level (Task 2p).
+POSTECH’s RNN-based systems are entirely neu-
+ral approaches for QE. Due to the small amount of
+data to train the prediction models, each compo-
+nent of the systems is trained separately by using
+different training data. To train the first component
+of the systems, the Europarl v7 English-German
+parallel corpus was used. To train the second com-
+ponent of the systems, WMT16 QE task English-
+German datasets were used.
+
+RTM (Task 1, Task 2, Task 3): Referential trans-
+lation machines (RTMs) (Biçici and Way, 2015)
+are a language-independent approach for predict-
+ing translation quality, as well as for addressing
+other text similarity tasks. They eliminate the need
+to access any task or domain specific information
+or resource. SVR and regression trees are used
+in combination with feature selection and partial
+least squares for the document and sentence-level
+prediction tasks and global linear models with dy-
+namic learning were used for the word and phrase-
+level prediction tasks.
+
+SHEF (Task 1): The SHEF systems exploit
+RNNs and the principle of compositionality to of-
+fer a resource-light solution to sentence-level QE.
+They use only one side of the translation, the
+source (SRC) or the target (TGT). They split the
+sentence in ngrams and train a model that pre-
+dicts the quality of ngrams. To calculate the qual-
+ity of an entire sentence translation, they split its
+source/target side in ngrams, estimate their qual-
+ity individually, then average their quality scores.
+They use word embedding models trained over 7
+billion words as external resource (English and
+German) using word2vec.
+
+SHEF-LIUM (Task 1): The two joint sub-
+missions from the University of Sheffield and
+LIUM use (i) a Continuous Space Language
+Model (CSLM) to extract sentence embeddings
+and cross-entropy scores, (ii) a neural network
+MT (NMT) model, (iii) a set of QuEst++ fea-
+tures (iv) a combination of features produced by
+QuEst++ and the features produced with CSLM
+and NMT. When added to QuEst++ standard fea-
+ture sets for Task 1, the CSLM sentence embed-
+
+161
+
+
+
+ID Participating team
+CDACM Centre for Development of Advanced Computing, India (Patel and M,
+
+2016)
+POSTECH Pohang University of Science and Technology, Republic of Korea (Kim
+
+and Lee, 2016)
+RTM Referential Translation Machines, Turkey (Bicici, 2016b)
+
+SHEF University of Sheffield, UK (Paetzold and Specia, 2016)
+SHEF-LIUM University of Sheffield, UK and Laboratoire d’Informatique de
+
+l’Université du Maine, France (Shah et al., 2016)
+SHEF-MIME University of Sheffield, UK (Beck et al., 2016)
+
+UAlacant University of Alicante, Spain (Esplà-Gomis et al., 2016)
+UFAL Nile University, Egypt & Charles University, Czech Republic (Abdel-
+
+salam et al., 2016)
+UGENT Ghent University, Belgium (Tezcan et al., 2016)
+
+UNBABEL Unbabel, Portugal (Martins et al., 2016)
+USFD University of Sheffield, UK (Logacheva et al., 2016a)
+
+USHEF University of Sheffield, UK (Scarton et al., 2016)
+UU Uppsala University, Sweden (Sagemo and Stymne, 2016)
+
+YSDA Yandex School of Data Analysis, Russia (Kozlova et al., 2016)
+
+Table 18: Participants in the WMT16 Quality Estimation shared task.
+
+ding features along with the cross entropy and
+NMT likelihood led to large improvements in pre-
+diction, and achieved third place in the scoring and
+second place in the ranking task variants according
+to the official evaluation metrics. Neural network
+features alone also performed very well. This is a
+very encouraging finding since for many language
+pairs it is sometime hard to find appropriate re-
+sources to build hand-crafted features, while the
+neural network features used only require (suffi-
+cient) monolingual data to train models, which is
+available in abundance for many languages.
+
+SHEF-MIME (Task 2): The University of
+Sheffield’s submission to the word-level QE task
+is based on imitation learning, an approach that
+treats structured prediction as a sequence of ac-
+tions taken by a binary classifier. This approach
+allows the use of arbitrary information from pre-
+vious tag predictions and has the ability to train
+the classifier using non-decomposable loss func-
+tions over the predicted structure. The submitted
+system uses the baseline features provided by the
+shared task organisers plus additional features re-
+lying on the predicted structure, such as previous
+tag ngrams and the total number of BAD predic-
+tions. It employs an online learning algorithm as
+the underlying classifier and uses a loss function
+based on the official shared task evaluation metric.
+No external data or resources were used for this
+
+submission.
+
+UALacant (Task 2): The submissions of the
+Universitat d’Alacant team focus for Task 2 were
+obtained by applying the approach by Esplà-
+Gomis et al. (2015), which uses any source of
+bilingual information available online in order to
+spot sub-segment correspondences between the
+source segment and the translation hypothesis.
+These sub-segment correspondences are used to
+extract a collection of features that are then used
+by a multilayer perceptron to determine the fi-
+nal word-level QE labels. The probabilities pro-
+vided by this classifier for every word in a phrase
+are then used as new features for a second multi-
+layer perceptron that is able to obtain quality esti-
+mates at the phrase level. Three sources of bilin-
+gual information available online were used by the
+UAlacant submissions: two online MT systems,
+Lucy LT KWIK15 and Google Translate,16 and
+the bilingual concordancer Reverso Context.17
+
+Two systems were submitted, both for word-level
+and phrase-level QE tasks: one using only features
+based on external sources of bilingual information,
+and another combining them with the baseline fea-
+tures provided by the task organisers.
+
+15http://www.lucysoftware.com/catala/
+traduccio-automatica/kwik-translator-/
+
+16http://translate.google.com
+17http://context.reverso.net/translation/
+
+162
+
+
+
+UFAL (Task 1): The submission is based on
+word alignments and bilingual distributed repre-
+sentations to introduce a new set of features for the
+sentence-Level QE task. The features extracted in-
+clude three alignment-based features, three bilin-
+gual embedding-based features, two embedding-
+based features constrained on alignment links, as
+well as a set of 74 bigrams used as boolean fea-
+tures. The set of bigrams represents the most fre-
+quent bigrams in translations that have changed
+after the post-edition, and they are compiled by
+aligning translations to their post-editions pro-
+vided in the WMT QE datasets. To produce
+these features, GIZA++ (Och and Ney, 2003) was
+used for word alignment and Multivec (Berard
+et al., 2016) was used for the bilingual model,
+which jointly learns distributed representations for
+source and target languages using a parallel cor-
+pus. To build the bilingual model, domain-specific
+data compiled from the resources made available
+for the WMT 16 IT-Domain shared task was used.
+As prediction model, a Linear Regression model
+using scikit-learn was built using a combina-
+tion of QuEst++ baseline features and the new fea-
+tures proposed.
+
+UGENT-LT3 (Task 1, Task 2): The submissions
+for the word-level task use 41 features in com-
+bination with the baseline feature set to train bi-
+nary classifiers. The 41 additional features at-
+tempt to capture accuracy errors (concerned with
+the meaning transfer from the source to target sen-
+tences) using word and phrase alignment proba-
+bilities, fluency errors (concerned with the well-
+formedness of target sentence) using language
+models trained on word surface forms and on
+part-of-speech tags, and terminology errors (con-
+cerned with the domain-specific terminology) us-
+ing a bilingual terminology list. Based on the com-
+bined feature set, SCATE-RF uses random forests
+for binary classification, which combines deci-
+sion trees into an ensemble. SCATE-ENS uses
+the same feature set and combines different algo-
+rithms into an ensemble by applying the major-
+ity voting scheme. For the sentence-level task,
+SCATE-SVM1 adds 18 features to the baseline
+feature set to train SVR models using an RBF ker-
+nel. SCATE-SVM2 additionally utilises an extra
+feature, which is based on the percentage of words
+that are labelled as BAD by the best word-level QE
+system (SCATE RF). External language resources
+from the IT domain are used to extract the addi-
+
+tional features for both tasks.
+
+UNBABEL (Task 2): Two systems were
+submitted for the word-level task. UNBA-
+BEL 2 linear is a feature-based linear sequen-
+tial model. It uses the baseline features pro-
+vided by the shared task organisers (with slight
+changes) conjoined with individual labels and
+pairs of consecutive labels. It also uses vari-
+ous syntactic dependency-based features (depen-
+dency relations, heads, and second-order struc-
+tures like siblings and grandparents). The syntac-
+tic dependencies are predicted with TurboParser
+trained on the TIGER German treebank. UN-
+BABEL 2 ensemble uses a stacked architecture,
+inspired by the last year’s QUETCH+ system
+(Kreutzer et al., 2015), which combines three
+neural systems: one feedforward and two re-
+current ones. The predictions of these sys-
+tems are added as additional features in the lin-
+ear system above. The following external re-
+sources were used: part-of-speech tags and extra
+syntactic dependency information obtained with
+TurboTagger and TurboParser (Martins et al.,
+2013), trained on the Penn Treebank (for English)
+and on the version of the German TIGER corpus
+used in the SPMRL shared task (Seddah et al.,
+2014) for German. For the neural models, pre-
+trained word embeddings from Polyglot (Al-
+Rfou et al., 2013) and those produced with a neural
+MT system (Bahdanau et al., 2014) were used.
+
+USFD (Task 2): USFD’s submissions tested two
+different approaches for phrase-level QE. The first
+one (CONTEXT submission) is an enhancement
+of the baseline feature set provided with the con-
+text features. The additional features consist of the
+source and target tokens which precede and fol-
+low the phrase under consideration, part-of-speech
+tags of these tokens, and language model scores
+for ngrams at the borders of the phrase. The
+second approach (W&SLP4PT submission) learns
+phrase-level labels from predictions at other lev-
+els. The models are trained on a set of seven fea-
+tures that are based on (i) the phrase segmentation
+itself (length and ratio to the sentence), (ii) word-
+level predictions (number of predicted OK/BAD
+words in the current phrase and in the sentence),
+and (iii) the predicted quality of the sentence.
+CRFsuite is used to train the prediction models
+in both cases.
+
+163
+
+
+
+USHEF (Task 3): Two different systems were
+submitted for Task 3. The first system (BASE-
+EMB-GP) combines the 17 baseline features with
+word embeddings from the source documents (En-
+glish) using a Gaussian Process (GP) model. The
+word embeddings were learned by using the Con-
+tinuous Bag-of-Words (CBOW) model (Mikolov
+et al., 2013), trained on the Google’s billion-word
+corpus,18 with a vocabulary size of 527K words.
+Document embeddings are extracted by averaging
+word embeddings in the document. The GP model
+was trained with two Rational Quadratic kernels
+(Rasmussen and Williams, 2006): one for the 17
+baseline features and another for the 500 features
+from the embeddings. Since each kernel has its
+own set of hyperparameters, the full model can
+leverage the contributions from the two different
+sets. The second system (GRAPH-DISC) com-
+bines the baseline features with discourse-aware
+features. The discourse aware features are the
+same as the ones used by Scarton et al. (2015a)
+plus Latent Semantic Analysis (LSA) cohesion
+features (Scarton and Specia, 2014), number of
+subtrees and height of the Rhetorical Structure
+Theory (RST) tree and entity graph-based coher-
+ence scores (Sim Smith et al., 2016). Discourse-
+aware and RST tree features were extracted only
+for English (tools are only available for this lan-
+guage), LSA features were extracted for both lan-
+guages, and entity graph-based coherence scores
+were extracted for the target language only (Span-
+ish), as the source documents are expected to be
+coherent. This QE model was trained with an SVR
+algorithm.
+
+UU (Task 1): The UU system uses SVR to pre-
+dict HTER scores based on features extracted with
+QuEst++ plus additional features. The feature
+vector consists of a combination of the 17 base-
+line features and top performing new features pro-
+posed by UU. These new features are related to re-
+ordering and noun translation, grammatical corre-
+spondence and structural integrity, based on parse
+trees and part-of-speech tags. The system submit-
+ted uses Kendall Tau distances in alignments be-
+tween source and target for measuring reordering,
+noun group ratio, verb ratio and probabilistic con-
+text free grammars probabilities.
+
+18https://github.com/ciprian-chelba/
+1-billion-word-language-modeling-benchmark
+
+YSDA (Task 1): The YSDA submission is based
+on a simple idea that the more complex the sen-
+tence is the more difficult it is to translate. For this
+purpose, it uses information provided by syntac-
+tic parsing (information from parsing trees, some
+specific language constructions, etc). Addition-
+ally, it uses features based on pseudo-references,
+back-translation, web-scale language model, word
+alignments (as given by the data for Task 2),
+and combinations of several features. A regres-
+sion model was training to predict BLEU as tar-
+get metric instead HTER. The machine learning
+pipeline uses an SVR with RBF kernel to pre-
+dict BLEU scores, followed by a linear SVR to
+predict HTER scores from BLEU scores. As
+external resources, the system uses a syntac-
+tic parser, pseudo-references and back-translation
+from web-scale MT system, and a web-scale lan-
+guage model.

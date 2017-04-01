@@ -1,0 +1,28 @@
+
+In order to produce a measure of the correctness
+of word order given the structural representations
+produced by dependency parsing, we now need to
+compare the structures. To do this, we use a tree
+edit distance algorithm, as originally put forward
+by Zhang and Shasha (1989). The principle be-
+hind a tree edit distance is to count the number
+of delete, insert and/or match (substitution) oper-
+ations needed to turn one tree into another. In the
+version we use (Demaine et al., 2009), the ‘insert’
+operation, whereby a node is created in one tree X
+to correspond to a node in tree Y , is simply repre-
+sented by a ‘delete’ of the corresponding node in
+tree Y .
+
+The most straightforward way of executing a
+tree edit distance is simply to give equal weight-
+ing to all operations on all nodes. This gives us
+a simple measure of the structural similarity of
+the two trees: two identical trees will have the
+minimum cost, namely one ’match’ operation per
+node, while any sub-optimally placed nodes will
+need to be deleted and inserted elsewhere, cost-
+ing 2 actions each. While other variants of DTED
+are available, this version - labelled ‘Pure’ in sec-
+tion 4 - has been used for both WMT2015 and
+WMT2016.

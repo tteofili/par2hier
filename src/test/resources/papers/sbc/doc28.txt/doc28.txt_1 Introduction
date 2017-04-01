@@ -1,0 +1,98 @@
+
+The field of Neural Machine Translation (NMT),
+which seeks to use end-to-end neural networks to
+translate natural language text, has existed for only
+three years. In that time, researchers have explored
+architectures ranging from convolutional neural
+networks (Kalchbrenner and Blunsom, 2013) to
+recurrent neural networks (Chung et al., 2014) to
+attentional models (Bahdanau et al., 2015; Lu-
+ong et al., 2015) and achieved better performance
+than traditional statistical or syntax-based MT
+techniques on many language pairs. NMT mod-
+els first achieved state-of-the-art performance on
+the WMT English→German news-domain task in
+2015 (Luong et al., 2015) and subsequent im-
+provements have been reported since then (Sen-
+nrich et al., 2015a; Li and Jurafsky, 2016).
+
+The problem of machine translation is fun-
+damentally a sequence-to-sequence transduction
+task, and most approaches have been based on
+an encoder-decoder architecture (Sutskever et al.,
+2014; Cho et al., 2014). This entails coupled neu-
+ral networks that encode the input sentence into
+a vector or set of vectors and decode that vector
+representation into an output sentence in a differ-
+
+ent language respectively. Recently, a third com-
+ponent has been added to many of these models:
+an attention mechanism, whereby the decoder can
+attend directly to localized information from the
+input sentence during the output generation pro-
+cess (Bahdanau et al., 2015; Luong et al., 2015).
+The encoder and decoder in these models typi-
+cally consist of one-layer (Cho et al., 2014) or
+multi-layer recurrent neural networks (RNNs); we
+use four- and five-layer long short-term memory
+(LSTM) RNNs. The attention mechanism in our
+four-layer model is what Luong (2015) describes
+as “Global attention (dot)”; the mechanism in our
+five-layer Y-LSTM model is described in Section
+2.1.
+
+Every NMT system must contend with the prob-
+lem of unbounded output vocabulary: systems that
+restrict possible output words to the most com-
+mon 50,000 or 100,000 that can fit comfortably
+in a softmax classifier will perform poorly due
+to large numbers of “out-of-vocabulary” or “un-
+known” outputs. Even models that can produce
+every word found in the training corpus for the
+target language (Jean et al., 2015) may be un-
+able to output words found only in the test cor-
+pus. There are three main techniques for achiev-
+ing fully open-ended decoder output. Models
+may use computed alignments between source and
+target sentences to directly copy or transform a
+word from the input sentence whose correspond-
+ing translation is not present in the vocabulary
+(Luong et al., 2015) or they may conduct sen-
+tence tokenization at the level of individual char-
+acters (Ling et al., 2015) or subword units such
+as morphemes (Sennrich et al., 2015b). The latter
+techniques allow the decoder to construct words
+it has not previously encountered out of known
+characters or morphemes; we apply the subword
+splitting strategy using Morfessor 2.0, an unsuper-
+vised morpheme segmentation model (Virpioja et
+
+264
+
+
+
+al., 2013).
+Another focus of recent research has been ways
+
+of using monolingual corpus data, available in
+much larger quantities, to augment the limited par-
+allel corpora used to train translation models. One
+way to accomplish this is to train a separate mono-
+lingual language model on a large corpus of the
+target language, then use this language model as
+an additional input to the decoder or for re-ranking
+output translations (Gülçehre et al., 2015). More
+recently, Sennrich (2015b) introduced the concept
+of augmentation through back-translation, where
+an entirely separate translation model is trained
+on a parallel corpus from the target language to
+the source language. This backwards translation
+model is then used to machine-translate a mono-
+lingual corpus from the target language into the
+source language, producing a pseudo-parallel cor-
+pus to augment the original parallel training cor-
+pus. We extend this back-translation method by
+translating a very large monolingual German cor-
+pus into English, then concatenating a unique sub-
+set of this augmentation corpus to the original par-
+allel corpus for each training epoch.

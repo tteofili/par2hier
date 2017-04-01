@@ -1,0 +1,48 @@
+
+In this paper, we take end-to-end learning for our coverage-based NMT model,
+which jointly learns not only the parameters for the “original” RNNsearch (i.e.,
+those for encoding RNN, decoding RNN, and attention model) but also the pa-
+rameters for coverage modeling (i.e., those for annotation and its role in guiding
+the attention) . More specially, we choose to maximize the likelihood of reference
+sentences as most other neural machine translator (see, however(Shen et al.2015))
+
+arg max
+
+N∑
+n=1
+
+logP (yn|xn). (12)
+
+For the coverage model with a clearer linguistic interpretation (Section 3.2), it
+is possible to inject an auxiliary objective function on some intermediate represen-
+tation. More specifically, we have the following objective
+
+arg max
+N∑
+
+n=1
+
+(
+logP (yn|xn)
+
+− λ
+|xn|∑
+j=1
+
+(Φj −
+|yn|∑
+i=1
+
+αi,j)
+2
+)
+
+(13)
+
+where the term
+∑|xn|
+
+j=1(Φj −
+∑|yn|
+
+i=1 αi,j)

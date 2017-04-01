@@ -1,0 +1,274 @@
+
+In this paper, we have argued and shown that
+access to topological field information can im-
+prove the accuracy of transition-based dependency
+parsers. In future, we plan to see how com-
+petitive the bidirectional LSTM-based sequence
+labeling approach is compared to existing ap-
+proaches. Moreover, we plan to evaluate the use
+of topological fields in the architecture proposed
+by Dyer et al., (2015) to see how many of these
+regularities that approach captures.
+
+Acknowledgments
+
+The authors gratefully acknowledge the financial
+support of their research by the German Ministry
+for Education and Research (BMBF) as part of
+the CLARIN-D research infrastructure grant given
+to the University of Tübingen. Furthermore, we
+would like to thank Jianqiang Ma for his extensive
+comments on an early draft of this paper.
+
+6The KOORD field, see Telljohan et al. (2006).
+
+5
+
+
+
+References
+Markus Becker and Anette Frank. 2002. A stochas-
+
+tic topological parser for German. In Proceedings
+of the 19th international conference on Computa-
+tional linguistics-Volume 1, pages 1–7. Association
+for Computational Linguistics.
+
+Danqi Chen and Christopher D Manning. 2014. A fast
+and accurate dependency parser using neural net-
+works. In Proceedings of the 2014 Conference on
+Empirical Methods in Natural Language Processing
+(EMNLP), volume 1, pages 740–750.
+
+Jackie Chi Kit Cheung and Gerald Penn. 2009. Topo-
+logical field parsing of German. In Proceedings of
+the Joint Conference of the 47th Annual Meeting of
+the ACL and the 4th International Joint Conference
+on Natural Language Processing of the AFNLP: Vol-
+ume 1-Volume 1, pages 64–72. Association for Com-
+putational Linguistics.
+
+François Chollet. 2015. Keras. https://github.
+com/fchollet/keras.
+
+Daniël de Kok. 2015. A poor man’s morphology for
+German transition-based dependency parsing. In In-
+ternational Workshop on Treebanks and Linguistic
+Theories (TLT14).
+
+Erich Drach. 1937. Grundgedanken der Deutschen
+Satzlehre. Frankfurt/Main.
+
+Chris Dyer, Miguel Ballesteros, Wang Ling, Austin
+Matthews, and Noah A. Smith. 2015. Transition-
+based dependency parsing with stack long short-
+term memory. In Proceedings of the 53rd Annual
+Meeting of the Association for Computational Lin-
+guistics and the 7th International Joint Conference
+on Natural Language Processing (Volume 1: Long
+Papers), pages 334–343, Beijing, China, July. Asso-
+ciation for Computational Linguistics.
+
+Oskar Erdmann. 1886. Grundzüge der deutschen
+Syntax nach ihrer geschichtlichen Entwicklung
+dargestellt. Stuttgart: Cotta. Erste Abteilung.
+
+Alex Graves and Jürgen Schmidhuber. 2005. Frame-
+wise phoneme classification with bidirectional lstm
+and other neural network architectures. Neural Net-
+works, 18(5):602–610.
+
+Simon Herling. 1821. Über die Topik der deutschen
+Sprache. In Abhandlungen des frankfurterischen
+Gelehrtenvereins für deutsche Sprache, pages 296–
+362, 394. Frankfurt/Main. Drittes Stück.
+
+Sepp Hochreiter and Jürgen Schmidhuber. 1997.
+Long short-term memory. Neural computation,
+9(8):1735–1780.
+
+Tilman Höhle. 1986. Der Begriff ‘Mittelfeld’.
+Anmerkungen über die Theorie der topologischen
+Felder. In A. Schöne, editor, Kontroversen alte
+und neue. Akten des 7. Internationalen Germanis-
+tenkongresses Göttingen, pages 329–340. Tübingen:
+Niemeyer.
+
+Sandra Kübler, Ryan McDonald, and Joakim Nivre.
+2009. Dependency parsing. Synthesis Lectures on
+Human Language Technologies, 1(1):1–127.
+
+Sandra Kübler. 2005. How do treebank annota-
+tion schemes influence parsing results? or how not
+to compare apples and oranges. Proceedings of
+RANLP 2005.
+
+Martina Liepert. 2003. Topological fields chunking for
+German with SVM’s: Optimizing SVM-parameters
+with GA’s. In Proceedings of the International Con-
+ference on Recent Advances in Natural Language
+Processing.
+
+Wolfgang Maier. 2006. Annotation schemes and
+their influence on parsing results. In Proceedings
+of the 21st International Conference on computa-
+tional Linguistics and 44th Annual Meeting of the
+Association for Computational Linguistics: Student
+Research Workshop, pages 19–24. Association for
+Computational Linguistics.
+
+Gereon Müller. 1999. Optimality, markedness, and
+word order in German. Linguistics, 37(5):777–818.
+
+Joakim Nivre. 2003. An efficient algorithm for pro-
+jective dependency parsing. In Proceedings of the
+8th International Workshop on Parsing Technologies
+(IWPT), pages 149–160.
+
+Eric W Noreen. 1989. Computer intensive methods
+for hypothesis testing: An introduction.
+
+Nitish Srivastava, Geoffrey Hinton, Alex Krizhevsky,
+Ilya Sutskever, and Ruslan Salakhutdinov. 2014.
+Dropout: A simple way to prevent neural networks
+from overfitting. The Journal of Machine Learning
+Research, 15(1):1929–1958.
+
+Heike Telljohann, Erhard W Hinrichs, Sandra Kübler,
+Heike Zinsmeister, and Kathrin Beck. 2006. Style-
+book for the tübingen treebank of written German
+(TüBa-D/Z). In Seminar fur Sprachwissenschaft,
+Universität Tubingen, Tübingen, Germany.
+
+Hans Uszkoreit. 1984. Word order and constituent
+structure in German. CSLI Publications.
+
+Jorn Veenstra, Frank Henrik Müller, and Tylman Ule.
+2002. Topological field chunking for German. In
+Proceedings of the 6th Conference on Natural Lan-
+guage Learning - Volume 20, COLING-02, pages 1–
+7, Stroudsburg, PA, USA. Association for Computa-
+tional Linguistics.
+
+Yannick Versley. 2005. Parser evaluation across text
+types. In Proceedings of the Fourth Workshop on
+Treebanks and Linguistic Theories (TLT 2005).
+
+Andrea Weber and Karin Müller. 2004. Word order
+variation in German main clauses: A corpus analy-
+sis. In Proceedings of the 20th International confer-
+ence on Computational Linguistics, pages 71–77.
+
+6
+
+
+
+Yue Zhang and Stephen Clark. 2008. A tale of
+two parsers: investigating and combining graph-
+based and transition-based dependency parsing us-
+ing beam-search. In Proceedings of the Conference
+on Empirical Methods in Natural Language Pro-
+cessing, pages 562–571. Association for Computa-
+tional Linguistics.
+
+A Hyperparameters
+
+The topological field labeler was trained using
+Keras (Chollet, 2015). Here, we provide a short
+overview the hyperparameters that we used:
+
+• Solver: rmsprop, this solver is recommended
+by the Keras documentation for recurrent
+neural networks. The solver is used with its
+default parameters.
+
+• Learning rate: the learning rate was deter-
+mined by the function 0.01(1 + 0.02i)−2,
+where i is the epoch. The intuition was to
+start with some epochs with a high learning
+rate, dropping the learning rate quickly. The
+results were not drastically different when us-
+ing a constant learning rate of 0.001.
+
+• Epochs: The models was trained for 200
+epochs, then we picked the model of the
+epoch with the highest performance on the
+validation data (27 epochs for the unidirec-
+tional LSTM, 124 epochs for the bidirec-
+tional LSTM).
+
+• LSTM layers: all LSTM layers were trained
+with 50 output dimensions. Increasing the
+number of output dimensions did not provide
+an improvement.
+
+• Regularization: 10% dropout (Srivastava et
+al., 2014) was used after each LSTM layer
+for regularization. A stronger dropout did not
+provide better performance.
+
+B Topological field projection algorithm
+
+Algorithm 1 Topological field projection.
+function PROJECT(node,field)
+
+if IS TERMINAL NODE(node) then
+node.field← field
+
+else
+if IS TOPO NODE(node) then
+
+field← node.field
+end if
+for child ∈ node do
+
+PROJECT(child,field)
+end for
+
+end if
+end function
+
+7
+
+
+
+Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics, pages 8–13,
+Berlin, Germany, August 7-12, 2016. c©2016 Association for Computational Linguistics
+
+Scalable Semi-Supervised Query Classification Using Matrix Sketching
+
+Young-Bum Kim† Karl Stratos‡ Ruhi Sarikaya†
+
+†Microsoft Corporation, Redmond, WA
+‡Columbia University, New York, NY
+
+{ybkim, ruhi.sarikaya}@microsoft.com
+stratos@cs.columbia.edu
+
+Abstract
+
+The enormous scale of unlabeled text
+available today necessitates scalable
+schemes for representation learning in
+natural language processing. For instance,
+in this paper we are interested in classi-
+fying the intent of a user query. While
+our labeled data is quite limited, we have
+access to virtually an unlimited amount
+of unlabeled queries, which could be
+used to induce useful representations: for
+instance by principal component analysis
+(PCA). However, it is prohibitive to even
+store the data in memory due to its sheer
+size, let alone apply conventional batch
+algorithms. In this work, we apply the
+recently proposed matrix sketching algo-
+rithm to entirely obviate the problem with
+scalability (Liberty, 2013). This algorithm
+approximates the data within a specified
+memory bound while preserving the
+covariance structure necessary for PCA.
+Using matrix sketching, we significantly
+improve the user intent classification
+accuracy by leveraging large amounts of
+unlabeled queries.

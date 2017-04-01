@@ -1,0 +1,42 @@
+
+Faruqui and Pado (2012) have used a bilingual
+English–German corpus to automatically annotate
+the T-V distinction, and train a classifier to predict
+the address from monolingual English text. Ap-
+plying a source-side classifier is potential future
+work, although we note that the baseline encoder–
+decoder NMT system already has some disam-
+biguating power. Our T-V classification is more
+comprehensive, including more pronoun forms and
+imperative verbs.
+
+38
+
+
+
+Previous research on neural language models has
+proposed including various types of extra infor-
+mation, such as topic, genre or document context
+(Mikolov and Zweig, 2012; Aransa et al., 2015; Ji
+et al., 2015; Wang and Cho, 2015). Our method
+is somewhat similar, with the main novel idea be-
+ing that we can target specific phenomena, such as
+honorifics, via an automatic annotation of the target
+side of a parallel corpus. On the modelling side, our
+method is slightly different in that we pass the extra
+information to the encoder of an encoder–decoder
+network, rather than the (decoder) hidden layer or
+output layer. We found this to be very effective,
+but trying different architectures is potential future
+work.
+
+In rule-based machine translation, user options to
+control the level of politeness have been proposed
+in the 90s (Mima et al., 1997), and were adopted
+by commercial systems (SYSTRAN, 2004, 26). To
+our knowledge, controlling the level of politeness
+has not been explicitly addressed in statistical ma-
+chine translation. While one could use data selec-
+tion or weighting to control the honorifics produced
+by SMT, NMT allows us to very elegantly support
+multiple levels of politeness with a single model.

@@ -1,0 +1,31 @@
+Our system is trained using only permissible Ro-
+manian monolingual and English–Romanian par-
+allel corpora provided by the organizers of the
+WMT16 shared task for machine translation of
+news: Europarl (Koehn, 2005), SETimes2 (Ty-
+ers and Alperen, 2010), News Crawl articles from
+2015 (denoted as news2015 hereafter), and Com-
+monCrawl (Buck et al., 2014).
+
+The target side of the data is preprocessed with
+tokro, LIMSI’s tokenizer for Romanian (Al-
+lauzen et al., 2016).5 The English source side
+is tokenized using the tokenizer.perl script
+from the Moses toolkit. Romanian and English
+sentences are both frequent-cased (with Moses’
+truecase.perl).
+
+5https://perso.limsi.fr/aufrant/
+software/tokro
+
+312
+
+
+
+We split the development set newsdev2016 into
+two halves (newsdev2016_1 with the first 1000
+sentences and newsdev2016_2 with the last 999
+sentences). During the system building pro-
+cess, we measure progress by evaluating on news-
+dev2016_2 as our internal unseen test set, while
+only newsdev2016_1 is utilized for tuning.

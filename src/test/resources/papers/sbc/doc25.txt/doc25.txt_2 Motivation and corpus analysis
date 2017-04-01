@@ -1,0 +1,231 @@
+
+Transition-based dependency parsers (Nivre,
+2003; Kübler et al., 2009) typically use two tran-
+sitions (LEFT ARC and RIGHT ARC) to introduce
+a dependency relation between the token that
+is on top of the processing stack and the next
+token on the buffer of unprocessed tokens. The
+decision to make an attachment, the direction
+of attachment, and the label of the attachment
+is made by a classifier. Consequently, a good
+classifier is tasked to learn syntactic constraints,
+ordering preferences, and selectional preferences.
+
+Since transition-based dependency parsers pro-
+cess sentences in one deterministic linear-time
+left-to-right sweep, the classifier typically has lit-
+tle global information. One popular approach
+for reducing the effect of early attachment er-
+rors is to retain some competition between alter-
+native parses using a globally optimized model
+with beam search (Zhang and Clark, 2008). Beam
+search presents a trade-off between speed (smaller
+beam) and higher accuracy (larger beam). More
+recently, Dyer et al. (2015) have proposed to
+use Long short-term memory networks (LSTMs)
+to maintain (unbounded) representations of the
+buffer of unprocessed words, previous parsing ac-
+
+1
+
+
+
+VF LK MF RK NF
+MC: In Tansania ist das Rad mehr verbreitet als in Uganda
+
+In Tansania is the bike more common than in Uganda
+RC: der fünfmal mehr nach Bremerhaven liefert als Daewoo
+
+who five-times more to Bremerhaven delivers than Daewoo
+
+Table 1: Topological fields of a verb-second clause and a verb-final clause.
+
+tions, and constructed tree fragments.
+We believe that in the case of German, the topo-
+
+logical field model can provide a linguistically-
+motivated approach for providing the parser with
+more global knowledge of the sentence structure.
+More concretely, if we give the transition classi-
+fier access to topological field annotations, it can
+learn regularities with respect to the fields wherein
+the head and dependent of a particular dependency
+relations lie.
+
+In the remainder of this section, we provide a
+short (data-driven) exploration of such regulari-
+ties. Since there is a myriad of possible triples2
+
+consisting of relation, head field, and dependent
+field, we will focus on dependency relations that
+virtually never cross a field and relations that
+nearly always cross a field.
+
+Table 2 lists the five dependency relation that
+cross fields the least often in the TüBa-D/Z tree-
+bank (Telljohann et al., 2006; Versley, 2005) of
+German newspaper text. Using these statistics, a
+classifier could learn hard constraints with regard
+to these dependency relations — they should never
+be used to attach heads and dependents that are in
+different fields.
+
+Dependency label Cross-field (%)
+Particles 0.00
+Determiner 0.03
+Adjective or attr. pronoun 0.04
+Prepositional complement 0.04
+Genetive attribute 0.07
+
+Table 2: The five dependency relations that most
+rarely cross fields in the TüBa-D/Z.
+
+Table 3 lists the five dependency relations that
+cross fields most frequently.3 These relations (vir-
+tually) always cross fields because they are verbal
+attachments and verbs typically form the LK and
+RK. This information is somewhat informative,
+
+2335 in the TüBa-D/Z treebank.
+3Dependency relations that connect two clauses are ex-
+
+cluded.
+
+since a classifier should clearly avoid to attach to-
+kens within the same field using one of these re-
+lations. However, we can gain more interesting
+insights by looking at the dependents’ fields.
+
+Dependency label Cross-field (%)
+Expletive es 100.00
+Separated verb prefix 100.00
+Subject 100.00
+Prepositional object 99.80
+Direct object 99.51
+
+Table 3: The five dependency relations that most
+frequently cross fields in the TüBa-D/Z.
+
+Table 4 enumerates the three (where applicable)
+most frequent head and dependent field combina-
+tions of the five relations that always cross fields.
+As expected, the head is always in the LK or RK.
+Moreover, the dependents are in VF or MF in the
+far majority of cases. The actual distributions pro-
+vides some insights with respect to these depen-
+dency relations. We will discuss the direct object,
+prepositional object, and separated verb prefix re-
+lations in some more detail.
+
+Direct objects In German, direct objects can
+be put in the VF. However, we can see that di-
+rect object fronting only happens very rarely in
+the TüBa-D/Z. This is in line with earlier obser-
+vations in corpus-based studies (c.f. Weber and
+Müller (2004)). Since the probability of having a
+subject in the VF is much higher, the parser should
+attach the head of a noun phrase in the VF as a sub-
+ject, unless there is overwhelming evidence to the
+contrary, such as case markers, verb agreement, or
+other cues (Uszkoreit, 1984; Müller, 1999).
+
+Prepositional objects The dependency annota-
+tion scheme used by the TüBa-D/Z makes a dis-
+tinction between prepositional phrases that are a
+required complement of a verb (prepositional ob-
+jects) and other prepositional phrases. Since a sta-
+tistical dependency parser does not typically have
+access to a valency dictionary, it has difficulty de-
+
+2
+
+
+
+Dependency label Head Dep %
+Expletive es RK MF 44.23
+
+RK VF 32.99
+LK VF 13.43
+
+Separated verb prefix LK RK 99.95
+RK RK 00.05
+
+Subject LK VF 36.40
+LK MF 35.10
+RK MF 20.11
+
+Prepositional object RK MF 51.04
+LK MF 39.81
+LK VF 04.11
+
+Direct object RK MF 54.84
+LK MF 35.64
+RK LK 03.38
+
+Table 4: The three most frequent head-dependent
+field combinations of the five relations that always
+cross fields.
+
+ciding whether a prepositional phrase is a preposi-
+tional object or not. Topological field information
+can complement verb-preposition co-occurrence
+statistics in deciding between these two different
+relations. The prepositional object mainly occurs
+in MF, while a prepositional phrase headed by the
+LK is almost as likely to be in the VF as in the MF
+(42.12% and 55.70% respectively).
+
+Separated verb prefixes Some verbs in German
+have separable prefixes. A complicating factor in
+parsing is that such prefixes are often words that
+can also be used by themselves. For example, in
+(1-a) fest is a separated prefix of bindet (present
+tense third person of festbinden), while in (1-b)
+fest is an optional adverbial modifier of gebunden
+(the past participle of binden).
+
+(1) a. Sie
+She
+
+bindet
+ties
+
+das
+the
+
+Pferd
+horse
+
+fest
+tight
+
+.
+
+.
+b. Das
+
+The
+Buch
+book
+
+ist
+is
+
+fest
+tightly
+
+gebunden
+bound
+
+.
+
+.
+
+Similarly to prepositional objects, a statistical
+parser is handicapped by not having an extensive
+lexicon. Again, topological fields can complement
+co-occurence statistics. In (1-a), fest is in the RK.
+As we can see in Table 4, the separated verb pre-
+fix is always in the RK. In contrast, an adverbial
+modifier as in (1-b) is rarely in the RK (0.35% of
+the adverbs cases in the TüBa-D/Z).

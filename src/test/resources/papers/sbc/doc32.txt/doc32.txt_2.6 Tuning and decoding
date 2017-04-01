@@ -1,0 +1,6 @@
+The parameters of the log-linear model were tuned
+by optimizing BLEU on the development set us-
+ing the batch variant of MIRA (Cherry and Foster,
+2012). Decoding uses the cube-pruning algorithm
+of (Huang and Chiang, 2007) with a 7-word dis-
+tortion limit.

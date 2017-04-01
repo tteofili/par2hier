@@ -1,0 +1,262 @@
+
+The participants were provided with training data
+and were required to submit automatic translations
+
+151
+
+
+
+English→Bulgarian
+# score range system
+1 5.26 1 QTL-MOSES
+2 −5.26 2 QTL-DEEPFMOSES
+
+English→Czech
+# score range system
+1 0.53 1–2 QTL-CHIMERA-PURE
+
+0.43 1–2 ILLC-UVA-DS
+2 0.13 3 QTL-TECTOMT
+3 −0.47 4–5 QTL-CHIMERA-PLUS
+−0.62 4–5 QTL-MOSES
+
+English→German
+# score range system
+1 1.61 1 PROMT-RULE-BASED
+2 −0.04 2–5 UHBS-LMI
+−0.06 2–6 UHDS-DOC2VEC
+−0.06 2–6 QTL-RBMT-SMTMENUS
+−0.09 3–6 RBMT
+−0.10 3–6 QTL-RBMT-MENUS
+
+3 −0.19 7–8 DFKI-SYNTAX
+−0.19 7–8 JU-USAAR
+
+4 −0.38 9 QTL-SELECTION
+5 −0.49 10 QTL-MOSES
+
+English→Spanish
+# score range system
+1 3.53 1 PROMT-HYBRID
+2 −0.80 2–3 QTL-CHIMERA
+−0.81 2–3 QTL-TECTOMT
+
+3 −1.93 4 QTL-MOSES
+
+English→Basque
+# score range system
+1 1.57 1 QTL-TECTOMT
+2 −1.57 2 QTL-MOSES
+
+English→Dutch
+# score range system
+1 1.95 1 ILLC-UVA-SCORPIO
+2 0.36 2 QTL-CHIMERA
+3 0.15 3 QTL-TECTOMT
+4 −2.46 4 QTL-MOSES
+
+English→Portuguese
+# score range system
+1 4.61 1 PROMT-HYBRID
+2 −1.06 2 QTL-TECTOMT
+3 −1.27 3 QTL-CHIMERA
+4 −2.28 4 QTL-MOSES
+
+Table 12: Official results for the WMT16 IT translation task. Systems are ordered by their inferred system means, though
+systems within a cluster are considered tied. Lines between systems indicate clusters according to bootstrap resampling at p-
+level p ≤ .05. Systems with gray background indicate use of resources that fall outside the constraints provided for the shared
+task.
+
+Language pair Systems Comparisons Comparisons/sys Inter-κ Intra-κ
+English→Bulgarian 2 1,769 884.5 0.447 0.627
+English→Czech 5 16,870 3,374.0 0.330 0.463
+English→German 10 38,733 3,873.3 0.385 0.492
+English→Spanish 4 8,538 2,134.5 0.351 0.398
+English→Basque 2 1,485 742.5 0.483 0.610
+English→Dutch 4 7,278 1,819.5 0.258 0.249
+English→Portuguese 4 7,794 1,948.5 0.594 0.705
+Sum 31 82,467
+Mean 2,660.2 0.407 0.506
+
+Table 13: Amount of manual-evaluation pairwise comparisons (after “de-collapsing” multi-system outputs) collected and κ
+scores measuring inter- and intra-annotator agreement in the IT task. Cf. Tables 3, 4 and 5 for the respective News task
+statistics.
+
+152
+
+
+
+for each document in the test set. Details on the
+data, baseline system, automatic evaluation and
+manual validation are described below.
+
+Data
+
+We provided the participants with training data of
+parallel documents for the three language pairs as
+well as monolingual documents for each of the
+four languages, as summarized in Table 14. We
+did not provide any development data and the par-
+ticipants were free to split the training data into a
+training and a development datasets.
+
+The training data consisted mainly of the Sci-
+elo corpus (Neves et al., 2016), a parallel collec-
+tion of scientific publications composed of either
+titles, abstracts or title and abstracts which were
+retrieved from the Scielo database. For the Sci-
+elo corpus, we compiled parallel documents for
+all language pairs in the two sub-domains, except
+for the EN/FR, where only health was considered,
+as there were inadequate parallel documents avail-
+able for biology in that pair. In previous work
+(Neves et al., 2016), the training data was aligned
+using the GMA alignment tool. The quality of
+the alignment was found to be satisfactory so that
+aligned training data could be made available to
+the participants.
+
+The test set consisted of 500 documents (title
+and abstract) for each of the two directions of each
+language pair, i.e., English to Portuguese (en-pt),
+Portuguese to English (pt-en), English to Span-
+ish (en-es), Spanish to English (es-en), English to
+French (en-fr) and French to English (fr-en). None
+of the test documents was included in the training
+data and there is no overlap of documents between
+the test sets for any language pair, translation di-
+rection and sub-domain.
+
+Additionally, we prepared a corpus of paral-
+lel titles from MEDLINE R© for all three language
+pairs. Finally, we also provided monolingual
+documents for the four languages, i.e., English,
+French, Spanish and Portuguese, retrieved from
+the Scielo database. These consist of documents
+in the Scielo database which have no correspond-
+ing document in another language.
+
+Evaluation metric
+
+We computed the BLEU score for each of the runs
+in comparison to the reference translation, i.e., the
+original text made available in the Scielo database,
+as provided by the authors of the publications.
+
+Baseline
+Our baseline system was described in previous
+work (Neves et al., 2016). It consists of the statisti-
+cal MT system Moses 11 trained on both the Scielo
+corpus and on the parallel collection of Medline
+titles. We did not make use of the monolingual
+collection as we did not train a language model.
+
+Manual validation
+We carried out a manual evaluation for 100 ran-
+dom sentences for some selected pairs in the test
+data. We used the 3-way ranking task in the Ap-
+praise tool 12 which typically shows the source and
+the reference translation, and allows the pairwise
+comparison of two translations (A and B).
+
+However, to distance the manual evaluation
+from the automatic BLEU evaluation which com-
+pares automatic runs to the reference translation,
+we treated the reference translation as one of the
+systems and therefore suppressed the reference
+translation in the interface. Evaluators were only
+presented with the source sentence, and two trans-
+lations to rank. Evaluators were blind to the nature
+of the sentences they were evaluating: automatic
+system A vs. system B, reference translation vs.
+system, or system vs. reference translation.
+
+When comparing two translations in the 3-way
+ranking task in Appraise, evaluators were pre-
+sented with four options: (1) A>B, translation A
+is better than translation B; (2) A=B, the quality of
+the two candidate translations is similar; (3) A<B,
+translation B is better than translation A; and (4)
+Flag Error, to indicate that one of the translations
+did not seem to refer to the same source sentence
+or there is some other misalignment. The lat-
+ter situation could happen when the original sen-
+tence pairs were not perfectly aligned. This may
+be due to the fact that the reference translations
+are created by the article authors independently of
+the WMT challenge goals. These authors are not
+professional writers or professional translators, so
+that some of the content may only be present in
+one of the languages, i.e., not every sentence in
+one language has a directly corresponding sen-
+tence in the other language. Thus, when selecting
+the corresponding sentences in the reference trans-
+lation, we do it based on the automatic alignment
+provided by the GMA tool, which performs with
+at least 80% accuracy for our training data (Neves
+
+11http://www.statmt.org/moses/
+12https://github.com/cfedermann/Appraise
+
+153
+
+
+
+Table 14: Statistics on training and test collections for the Biomedical Translation Task. “T” corresponds to percentage of
+titles and “A” to percentage of abstracts, separated by a slash. “Docs” to total number of documents, “Lang” identifies the
+language,“Sents” to total number of sentences and “Tokens” to total number of tokens.
+
+Dataset Train Docs T/A Lang Sents Tokens
+
+Biological
+
+EN/ES 17,672 49.4/97.7 EN 138,073 3,819,190ES 128,894 3,887,818
+
+EN/PT 18,180 31.1/96.1 EN 128,357 3,807,296PT 125,717 3,598,618
+
+Health
+
+EN/ES 75,856 55.6/99.5 EN 628,966 15,978,198ES 606,231 17,168,994
+
+EN/PT 65,659 74.0/92.8 EN 541,272 14,457,939PT 525,721 14,447,017
+
+EN/FR 1,135 64.5/99.7 EN 9,393 250,907FR 9,501 320,132
+Dataset Test Docs T/A Lang Sents Tokens
+
+Biological
+
+en-es 500 100/100 EN 4,344 116,388ES 4,070 125,491
+
+es-en 500 100/100 ES 4,113 124,343EN 4,405 115,045
+
+en-pt 500 100/100 EN 4,333 114,705PT 4,205 120,591
+
+pt-en 500 100/100 PT 4,029 114,970EN 4,164 108,120
+
+Health
+
+en-fr 500 100/100 EN 5,093 137,321FR 5,782 208,795
+
+fr-en 500 100/100 FR 5,784 206,559EN 5,178 137,638
+
+en-es 500 100/100 EN 5,111 127,112ES 5,027 141,473
+
+es-en 500 100/100 ES 5,198 144,666EN 5,276 128,742
+
+en-pt 500 100/100 EN 3,858 99,001PT 3,776 101,991
+
+pt-en 500 100/100 PT 3,826 106,735EN 3,930 102,813
+
+et al., 2016).
+Regarding assigning the second option, i.e.,
+
+A=B, we considered situations in which both
+translations were equally bad or good. In some
+cases, both candidate translations exhibited either
+lexical or grammatical issues, but the evaluator
+could not rank one candidate as definitely better or
+worse than the other. Sometimes, both candidates
+were correct and were acceptable translations of
+the source sentence, even if not identical. Cur-
+rently, this distinction is not captured in the statis-
+tics computed by Appraise.

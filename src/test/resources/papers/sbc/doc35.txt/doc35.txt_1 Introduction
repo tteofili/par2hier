@@ -1,0 +1,280 @@
+
+This paper illustrates the similarity between Thai and Laotian, and between Malay and Indonesian, based
+on the ALT data. The similarity shown in this study suggests a possibility on harmonious annotation and
+processing of the language pairs in our further annotated corpus construction based on the ALT data.
+
+References
+Peter F. Brown, Vincent J. Della Pietra, Stephen A. Della Pietra, and Robert L. Mercer. 1993. The mathematics of
+
+statistical machine translation: Parameter estimation. Computational linguistics, 19(2):263–311.
+
+Stanley F. Chen and Joshua Goodman. 1996. An empirical study of smoothing techniques for language modeling.
+In Proc. of ACL, pages 310–318.
+4The logarithm used in this paper is based on 10.
+5http://www.statmt.org/moses/
+6http://www.speech.sri.com/projects/srilm/
+
+151
+
+
+
+Thai (th) Laotian (lo) Malay (ms) Indonesian (id)
+training 1, 291, 784 1, 245, 748 435, 705 432, 456
+
+development 65, 387 64, 538 23, 143 22, 978
+test 65.014 64, 420 23, 880 23, 392
+
+total 1, 422, 185 1, 374, 706 482, 728 478, 826
+
+Table 1: Number of tokens in the data used in experiment.
+
+DL. th-lo lo-th ms-id id-ms
+0 32.2 / .745 37.0 / .753 31.5 / .867 31.0 / .869
+3 32.2 / .743 36.8 / .753 31.3 / .867 31.2 / .869
+6 31.4 / .737 37.1 / .754 31.4 / .866 31.2 / .869
+9 32.2 / .744 37.0 / .753 31.3 / .866 31.1 / .869
+
+Table 2: BLEU / RIBES for source-target language pairs.
+
+Chenchen Ding, Ye Kyaw Thu, Masao Utiyama, Andrew Finch, and Eiichiro Sumita. 2014. Empirical
+dependency-based head finalization for statistical chinese-, english-, and french-to-myanmar (burmese) ma-
+chine translation. In Proc. of IWSLT, pages 184–191.
+
+Chenchen Ding, Masao Utiyama, and Eiichiro Sumita. 2015. NICT at WAT 2015. In Proc. of WAT, pages 42–47.
+
+Hideki Isozaki, Tsutomu Hirao, Kevin Duh, Katsuhito Sudoh, and Hajime Tsukada. 2010. Automatic evaluation
+of translation quality for distant language pairs. In Proc. of EMNLP, pages 944–952.
+
+Hideki Isozaki, Katsuhito Sudoh, Hajime Tsukada, and Kevin Duh. 2012. Hpsg-based preprocessing for english-
+to-japanese translation. ACM TALIP, 11(3):8.
+
+Philipp Koehn, Hieu Hoang, Alexandra Birch, Chris Callison-Burch, Marcello Federico, Nicola Bertoldi, Brooke
+Cowan, Wade Shen, Christine Moran, Richard Zens, Chris Dyer, Ondřej Bojar, Alexandra Constantin, and Evan
+Herbst. 2007. Moses: Open source toolkit for statistical machine translation. In Proc. of ACL (Demo and
+Poster Sessions), pages 177–180.
+
+Toshiaki Nakazawa, Hideya Mino, Isao Goto, Graham Neubig, Sadao Kurohashi, and Eiichiro Sumita. 2015.
+Overview of the 2nd Workshop on Asian Translation. In Proc. of WAT2015, pages 1–28.
+
+Franz Josef Och and Hermann Ney. 2003. A systematic comparison of various statistical alignment models.
+Computational linguistics, 29(1):19–51.
+
+Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing Zhu. 2002. BLEU: a method for automatic evaluation
+of machine translation. In Proc. of ACL, pages 311–318.
+
+Hammam Riza, Michael Purwoadi, Gunarso, Teduh Uliniansyah, Aw Ai Ti, Sharifah Mahani Aljunied, Luong Chi
+Mai, Vu Tat Thang, Nguyen Phuong Thai, Vichet Chea, Rapid Sun, Sethserey Sam, Sopheap Seng, Khin Mar
+Soe, Khin Thandar Nwet, Masao Utiyama, and Chenchen Ding. 2016. Introduction of the asian language
+treebank. In Proc. of Oriental COCOSDA (to apprear).
+
+Masao Utiyama and Eiichiro Sumita. 2015. Open collaboration for developing and using asian language treebank
+(ALT). ASEAN IVO Forum.
+
+David Vilar, Jan-T Peter, and Hermann Ney. 2007. Can we translate letters? In Proc. of WMT, pages 33–39.
+
+152
+
+
+
+0.00
+
+0.05
+
+0.10
+
+0.15
+
+0.20
+
+0.25
+
+-0
+.9
+
+-0
+.8
+
+-0
+.7
+
+-0
+.6
+
+-0
+.5
+
+-0
+.4
+
+-0
+.3
+
+-0
+.2
+
+-0
+.1
+
+0
+.0
+
+0
+.1
+
+0
+.2
+
+0
+.3
+
+0
+.4
+
+0
+.5
+
+0
+.6
+
+0
+.7
+
+0
+.8
+
+0
+.9
+
+1
+.0
+
+th-lo lo-th
+
+Figure 2: Distribution of Kendall’s τ on Thai-to-Laotian (th-lo) and Laotian-to-Thai (lo-th).
+
+0.000
+
+0.200
+
+0.400
+
+0.600
+
+0.800
+
+1.000
+
+-0
+.9
+
+-0
+.8
+
+-0
+.7
+
+-0
+.6
+
+-0
+.5
+
+-0
+.4
+
+-0
+.3
+
+-0
+.2
+
+-0
+.1
+
+0
+.0
+
+0
+.1
+
+0
+.2
+
+0
+.3
+
+0
+.4
+
+0
+.5
+
+0
+.6
+
+0
+.7
+
+0
+.8
+
+0
+.9
+
+1
+.0
+
+ms-id id-ms
+
+Figure 3: Distribution of Kendall’s τ on Malay-to-Indonesian (ms-id) and Indonesian-to-Malay (id-ms).
+
+153
+
+
+
+0.000
+
+0.200
+
+0.400
+
+0.600
+
+0.800
+
+1.000
+
+1.200
+
+1.400
+
+1.600
+
+1.800
+
+-7.000 -6.000 -5.000 -4.000 -3.000 -2.000 -1.000 0.000
+
+Figure 4: Scatter plot of Thai tokens. X-axis is the logarithmic probability of tokens; Y-axis is the entropy
+on corresponding Laotian tokens.
+
+0.000
+
+0.200
+
+0.400
+
+0.600
+
+0.800
+
+1.000
+
+1.200
+
+1.400
+
+1.600
+
+1.800
+
+-7.000 -6.000 -5.000 -4.000 -3.000 -2.000 -1.000 0.00

@@ -1,0 +1,7 @@
+
+IIT Bombay English-Hindi corpus contains English-Hindi parallel corpus (IITB-EH) as well as mono-
+lingual Hindi corpus collected from a variety of existing sources and corpora developed at the Center
+for Indian Language Technology, IIT Bombay over the years. This corpus was used for mixed domain
+subtasks H↔E. Furthermore, mixed domain subtasks H↔J were added as a pivot language task with a
+parallel corpus created using openly available corpora (IITB-JH) 6. Most sentence pairs in IITB-JH come
+from the Bible corpus. The statistics for each corpus are described in Table4.

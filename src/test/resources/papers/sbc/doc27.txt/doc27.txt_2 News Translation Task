@@ -1,0 +1,10 @@
+
+The recurring WMT task examines translation be-
+tween English and other languages in the news do-
+main. As in the previous years, we include Ger-
+man, Czech, Russian, and Finnish. New languages
+this years are Romanian and Turkish.
+
+We created a test set for each language pair by
+translating newspaper articles and provided train-
+ing data.

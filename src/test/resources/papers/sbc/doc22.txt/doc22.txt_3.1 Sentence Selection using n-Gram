@@ -1,0 +1,21 @@
+Frequency
+
+The first traditional method that we cover is a
+sentence selection method. Specifically, it selects
+the sentence including the most frequent uncovered
+phrase with a length of up to n words in the source
+language data. This method enables us to effec-
+tively cover the most frequent n-gram phrases and
+improve accuracy with fewer sentences than random
+selection. Bloodgood and Callison-Burch (2010)
+demonstrate results of a simulation showing that this
+method required less than 80% of the data required
+by randomly selected sentences to obtain the same
+accuracy.
+However, as mentioned in the introduction, the se-
+
+lected full sentences include many phrases already
+covered in the parallel data. This may cause an addi-
+tional cost for words in redundant segments, a prob-
+lem resolved by the phrase selection approach de-
+tailed in the following section.

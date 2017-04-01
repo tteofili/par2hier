@@ -1,0 +1,12 @@
+
+The final decision D is defined as follows using S =
+∑
+
+ji:
+
+D =
+
+
+win (S ≥ 2)
+loss (S ≤ −2)
+tie (otherwise)

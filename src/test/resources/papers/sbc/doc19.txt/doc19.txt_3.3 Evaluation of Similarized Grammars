@@ -1,0 +1,81 @@
+
+The real performance of a cross-lingually similar-
+ized grammar is hard to directly measured. The ac-
+curacy on the standard testing sets no longer reflects
+the actrual accuracy, since cross-lingual similariza-
+tion leads to grammars with annotation styles differ-
+ent from those of the original treebanks. We adopt
+the transfer learning strategy to automatically adapt
+the divergence between different annotation styles,
+and design a transfer classifier to transform the de-
+pendency regularities from one annotation style to
+another.
+
+The training procedure of the transfer classifier is
+analogous to the training of a normal classifier ex-
+cept for the features. The transfer classifier adopts
+guiding features where a guiding signal is attached
+to the tail of each normal feature. The guiding sig-
+nal is the dependency path between the pair of words
+in the source annotations, as shown in Figure 2.
+Thus, the transfer classifier learns the statistical reg-
+ularity of the transformation from the annotations of
+the cross-lingually similarized grammar to the an-
+notations of the original treebank. Figure 1 shows
+
+503
+
+
+
+Algorithm 1 Cooperative cross-lingual similarization.
+1: function BISIMILARIZE(Gα, Gβ , λ, C) . C includes a set of sentence pairs (xα, xβ)
+2: repeat
+3: Tα,Tβ ← BIANNOTATE(Gα,Gβ, λ,C) . it invokes BIPARSE to parse each (xα, xβ)
+4: Gα ← GRAMMARTRAIN(Tα)
+5: Gβ ← GRAMMARTRAIN(Tβ)
+6: until SIMILARITY(Gα,Gβ) converges . according to formula 2, averaged across C
+7: return Gα, Gβ
+8: function BIPARSE(Gα, Gβ , λ, xα, xβ , A)
+9: yα ← argmaxy(1− λ)Sα(y) + λSβ(y) . according to formula 4
+
+10: yβ ← argmaxy(1− λ)Sβ(y) + λSα(y)
+11: return yα, yβ
+
+source corpus
+
+train with
+normal features
+
+source classifier
+
+train with
+guiding features
+
+transfer classifier
+
+target corpus transformed
+target corpus
+
+Figure 1: The training procedure of the transfer classifier.
+
+the training pipeline for the transfer classifier, where
+source corpus and target corpus indicate the cross-
+lingually similarized treebank and the manually an-
+notated treebank, respectively.
+
+In decoding, a sentence is first parsed by
+the cross-lingually similarized grammar, and then
+parsed by the transfer classifier with the result of
+the similarized grammar as guiding signals to obtain
+the final parsing results. The improvement achieved
+by the transfer classifier against a normal classifier
+trained only on the original treebank reflects the
+promotion effect of the cross-lingually similarized
+grammar. The accuracy of the transfer classifier,
+therefore, roughly indicates the real performance of
+the cross-lingually similarized grammar.
+
+Figure 2: The guiding signal for dependency parsing, where
+path(i, j) denotes the dependency path between i and j. In this
+
+example, j is a son of the great-grandfather of i.

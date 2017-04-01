@@ -1,0 +1,8 @@
+
+The pairwise evaluation is the same as the last year, but not using the crowdsourcing this year. We asked
+professional translation company to do pairwise evaluation. The cost of pairwise evaluation per sentence
+is almost the same to that of last year.
+We randomly chose 400 sentences from the Test set for the pairwise evaluation. We used the same
+
+sentences as the last year for the continuous subtasks. Each submission is compared with the baseline
+translation (Phrase-based SMT, described in Section 3) and given a Pairwise score21.

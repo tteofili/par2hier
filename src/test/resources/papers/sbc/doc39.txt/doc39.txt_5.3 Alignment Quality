@@ -1,0 +1,63 @@
+
+In this section, we investigate the quality of different alignments on the Chinese-
+English language pair data. We carried out experiments on the evaluation dataset
+from (Liu and Sun2015), which contains 900 manually aligned sentence pairs. We
+evaluate alignments in terms of AER:
+
+AER(S, P,A) = 1− |A ∩ S|+ |A ∩ P |
+|A|+ |S|
+
+where S is a set of sure links in a hand-aligned reference alignment, P is a set of
+possible links in the reference alignment, and A is a candidate alignment. Note
+that S is a subset of P : S ⊆ P .
+
+Given that AER is designed specifically for binary alignments in SMT, we
+design a variant of AER for soft alignments in NMT, naming SAER:
+
+SAER(S, P,A) = 1− |MA ×MS |+ |MA ×MP |
+|MA|+ |MS |
+
+where M denotes alignment matrix, and for both MS and MP we assign the links
+in S and P with probabilities 1.0 while assign the other links with probabilities
+0.0. In this way, we are able to better evaluate the quality of the soft alignments
+produced by attentional NMT.
+
+We follow Luong et al. (2015) to “force” decode NMT models to produce
+translations that match references. We extract both (1) one-to-one alignments by
+
+13
+
+
+
+Figure 6: Example alignments of NMT and (linguistically) coverage-based NMT.
+
+selecting the source word with the highest alignment probability for each target
+word, and (2) alignment matrices that consist of alignment probabilities from all
+source words for each target word. We measure their qualities with AER and SAER
+respectively, as shown in Table 2.4
+
+We find that coverage information improves attention model as expected by
+maintain an annotation summarizing the log of previous attention on each source
+word. More specifically, linguistic coverage with fertility significantly reduces
+alignment errors under both metrics, in which fertility plays an important role.
+
+4Our results are basically consistent with Cheng et al. (2015) on the same evaluation data. The
+overall error rates in Table 2 are around 2 points higher than theirs for two reasons: (1) the size of our
+training data is half as much as theirs, and (2) we don’t implement the technique in (Jean et al.2015)
+to address unknown words while they did.
+
+14
+
+
+
+Figure 7: Performance of the generated translations on the test set with respect to
+the lengths of the input sentences. The results are on the full test data by merg-
+ing the three test sets. Coverage-based NMT alleviates the problem of under-
+translation by producing longer translations on long sentences, leading to better
+translation performances.
+
+Figure 6 shows example alignment matrices, which shows linguistic coverages sig-
+nificantly improves the alignment accuracy. NN-based coverages, however, only
+slightly reduces alignment errors, which is consistent with the performance on the
+translation task. It reconfirms our claim that linguistic coverages provide more
+explicit signals to the attention model, which is the key to the success.

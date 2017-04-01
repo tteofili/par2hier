@@ -1,0 +1,171 @@
+
+Machine translation should not only produce seman-
+tically accurate translations, but should also consider
+pragmatic aspects, such as producing socially appro-
+priate forms of address. We show that by annotating
+the T-V distinction in the target text, and integrating
+the annotation as an additional input during train-
+ing of a neural translation model, we can apply side
+constraints at test time to control the production of
+honorifics in NMT.
+
+We currently assume that the desired level of po-
+liteness is specified by the user. Future work could
+aim to automatically predict it from the English
+source text based on textual features such as titles
+and names, or meta-textual information about the
+discourse participants.
+
+While this paper focuses on controlling polite-
+ness, side constraints could be applied to a wide
+range of phenomena. It is a general problem in
+translation that, depending on the language pair, the
+translator needs to specify features in the target text
+
+that cannot be predicted from the source text. Apart
+from from the T-V distinction, this includes gram-
+matical features such as clusivity, tense, and gender
+and number of the discourse participants, and more
+generally, features such as the desired dialect (e.g.
+when translating into Arabic) and text register. Side
+constraints can be applied to control these features.
+All that is required is that the feature can be anno-
+tated reliably, either using target-side information or
+metatextual information, at training time.
+
+Acknowledgments
+
+The research presented in this publication was con-
+ducted in cooperation with Samsung Electronics
+Polska sp. z o.o. - Samsung R&D Institute Poland.
+This project has received funding from the European
+Union’s Horizon 2020 research and innovation pro-
+gramme under grant agreement 644402 (HimL).
+
+References
+Walid Aransa, Holger Schwenk, and Loïc Barrault. 2015.
+
+Improving Continuous Space Language Models using
+Auxiliary Features. In Proceedings of the 12th Inter-
+national Workshop on Spoken Language Translation,
+pages 151–158, Da Nang, Vietnam.
+
+Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Ben-
+gio. 2015. Neural Machine Translation by Jointly
+Learning to Align and Translate. In Proceedings of
+the International Conference on Learning Representa-
+tions (ICLR).
+
+Roger Brown and A. Gilman. 1960. The pronouns of
+power and solidarity. In T. Sebeok, editor, Style in
+Language. The M.I.T. Press, Cambridge, MA.
+
+Kyunghyun Cho, Bart van Merrienboer, Caglar Gulcehre,
+Dzmitry Bahdanau, Fethi Bougares, Holger Schwenk,
+and Yoshua Bengio. 2014. Learning Phrase Repre-
+sentations using RNN Encoder–Decoder for Statistical
+Machine Translation. In Proceedings of the 2014 Con-
+ference on Empirical Methods in Natural Language
+Processing (EMNLP), pages 1724–1734, Doha, Qatar.
+Association for Computational Linguistics.
+
+Thierry Etchegoyhen, Lindsay Bywood, Mark Fishel,
+Panayota Georgakopoulou, Jie Jiang, Gerard Van
+Loenhout, Arantza Del Pozo, Mirjam Sepesy Maucec,
+Anja Turner, and Martin Volk. 2014. Machine Trans-
+lation for Subtitling: A Large-Scale Evaluation. In
+Proceedings of the Ninth International Conference
+on Language Resources and Evaluation (LREC’14),
+Reykjavik, Iceland. European Language Resources
+Association (ELRA).
+
+39
+
+
+
+Manaal Faruqui and Sebastian Pado. 2012. Towards a
+model of formal and informal address in English. In
+Proceedings of the 13th Conference of the European
+Chapter of the Association for Computational Linguis-
+tics, pages 623–633, Avignon, France. Association for
+Computational Linguistics.
+
+Sébastien Jean, Kyunghyun Cho, Roland Memisevic, and
+Yoshua Bengio. 2015a. On Using Very Large Target
+Vocabulary for Neural Machine Translation. In Pro-
+ceedings of the 53rd Annual Meeting of the Associa-
+tion for Computational Linguistics and the 7th Inter-
+national Joint Conference on Natural Language Pro-
+cessing (Volume 1: Long Papers), pages 1–10, Beijing,
+China. Association for Computational Linguistics.
+
+Sébastien Jean, Orhan Firat, Kyunghyun Cho, Roland
+Memisevic, and Yoshua Bengio. 2015b. Montreal
+Neural Machine Translation Systems for WMT’15 . In
+Proceedings of the Tenth Workshop on Statistical Ma-
+chine Translation, pages 134–140, Lisbon, Portugal.
+Association for Computational Linguistics.
+
+Yangfeng Ji, Trevor Cohn, Lingpeng Kong, Chris Dyer,
+and Jacob Eisenstein. 2015. Document Context Lan-
+guage Models. ArXiv e-prints, November.
+
+Minh-Thang Luong and Christopher D. Manning. 2015.
+Stanford Neural Machine Translation Systems for
+Spoken Language Domains. In Proceedings of the
+International Workshop on Spoken Language Trans-
+lation 2015, Da Nang, Vietnam.
+
+Tomas Mikolov and Geoffrey Zweig. 2012. Context
+dependent recurrent neural network language model.
+In 2012 IEEE Spoken Language Technology Workshop
+(SLT), pages 234–239, Miami, FL, USA.
+
+Hideki Mima, Osamu Furuse, and Hitoshi Iida. 1997.
+Improving Performance of Transfer-driven Machine
+Translation with Extra-linguistic Information from
+Context, Situation and Environment. In Proceedings
+of the Fifteenth International Joint Conference on Ar-
+tifical Intelligence - Volume 2, IJCAI’97, pages 983–
+988, San Francisco, CA, USA. Morgan Kaufmann
+Publishers Inc.
+
+Shigeko Nariyama, Hiromi Nakaiwa, and Melanie Siegel.
+2005. Annotating Honorifics Denoting Social Rank-
+ing of Referents. In Proceedings of the 6th Interna-
+tional Workshop on Linguistically Interpreted Corpora
+(LINC-2005).
+
+Doris Schüpbach, John Hajek, Jane Warren, Michael
+Clyne, Heinz-L. Kretzenbacher, and Catrin Norrby.
+2006. A cross-linguistic comparison of address pro-
+noun use in four European languages: Intralingual and
+interlingual dimensions . In Annual Meeting of the
+Australian Linguistic Society, Brisbane, Australia.
+
+Rico Sennrich, Martin Volk, and Gerold Schneider. 2013.
+Exploiting Synergies Between Open Resources for
+
+German Dependency Parsing, POS-tagging, and Mor-
+phological Analysis. In Proceedings of the Interna-
+tional Conference Recent Advances in Natural Lan-
+guage Processing 2013, pages 601–609, Hissar, Bul-
+garia.
+
+Rico Sennrich, Barry Haddow, and Alexandra Birch.
+2015. Neural Machine Translation of Rare Words with
+Subword Units. CoRR, abs/1508.07909.
+
+SYSTRAN, 2004. SYSTRAN 5.0 User Guide.
+Jörg Tiedemann. 2012. Parallel Data, Tools and Inter-
+
+faces in OPUS. In Proceedings of the Eight Interna-
+tional Conference on Language Resources and Evalu-
+ation (LREC’12), Istanbul, Turkey.
+
+Tian Wang and Kyunghyun Cho. 2015. Larger-Context
+Language Modelling. ArXiv e-prints, November.
+
+40
+
+

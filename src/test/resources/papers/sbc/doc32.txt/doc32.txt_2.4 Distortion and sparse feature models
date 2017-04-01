@@ -1,0 +1,9 @@
+Similar to the translation model, our hierarchi-
+cal distortion model and sparse feature model are
+based on Russian words but are built on the lem-
+matized alignment. The sparse feature model con-
+sists of the standard sparse features proposed in
+
+Hopkins and May (2011) and sparse hierarchi-
+cal distortion model features proposed in Cherry
+(2013).

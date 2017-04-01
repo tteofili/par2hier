@@ -1,0 +1,55 @@
+
+In the TectoMoses experiment of Popel (2013), which is depicted in Figure 2, the transfer step of Tec-
+toMT is substituted with Moses. This means that after the analysis to t-layer, each source-language
+t-tree is linearized into a sequence of lemmas and formemes (either as two factors, or interleaved). This
+linearized sequence is translated by Moses (trained on such data) into a target-language sequence of lem-
+mas and formemes. Afterwards, dependencies are projected (using Moses alignment) from the source
+t-tree to the target sequence to reconstruct the target t-tree. Grammatemes and other attributes are also
+projected along the alignment. Finally, target-language synthesis is performed (as usual in TectoMT).
+
+TectoMT’s main transfer is isomorphic, which means translating one t-node to one t-node and keeping
+the dependency structure of the t-tree unchanged. This is much more powerful that surface word-to-
+word translation because t-nodes can represent e.g. complex verb forms (“have been done” is translated
+as “bylo uděláno”). However, there are still many cases which cannot be translated isomorphically on
+the t-layer. One of the advantages of TectoMoses is that it allows non-isomorphic transfer on t-layer, e.g.
+
+3
+
+
+
+System BLEU Reference
+
+TectoMT
+
+14.2 Bojar et al. (2013a)
+14.7 Bojar et al. (2013b)
+14.7 Galuščáková et al. (2013)
+15.4 Bojar et al. (2014)
+13.9 Bojar et al. (2015)
+12.4 Popel (2015)
+14.7 Bojar et al. (2016)
+
+Moses
+
+14.2 Bojar and Kos (2010)
+16.0 Mareček et al. (2011)
+15.4 Rosa et al. (2012)
+16.4 Rosa (2013)
+19.5 Bojar et al. (2013b)
+17.6 Bojar et al. (2015)
+22.6 Bojar and Tamchyna (2015)
+19.5 Bojar et al. (2016)
+19.1 Tamchyna et al. (2016)
+23.3 Rosa et al. (2016)
+
+Google Translate 5.3 Majliš (2009)
+Joshua 8.6 Zeman (2010)
+
+Table 2: Base systems.
+
+Figure 3: PhraseFix
+
+translating one t-node with two or more t-nodes or deleting some t-nodes.8 It also uses MERT tuning and
+it should scale with more training data. In the experiments with two factors (Popel, 2013), two language
+models were used: one for lemmas and one for formemes. Unfortunately, the TectoMoses experiment
+brought negative results, presumably due to additional noise introduced by the added transformations.

@@ -1,0 +1,24 @@
+
+We compare our best system (the one with bilingual similar-
+ity) to the baseline without any replacement, and the system
+proposed in [Luong et al., 2015b], which only annotate target
+unk as unk-k, in which k indicates which source word trans-
+lates into current unknown word. In particular, if ej in the
+target sentence is a rare word and it’s aligned to source word
+ci, then k will be i-j. The performance of Moses [Koehn et
+al., 2007] with 4-gram language model trained on the target
+side of the bilingual data is also shown for reference.
+
+The results in Table 1 shows that our method significantly
+outperform the baseline by 4.15 BLEU points on average. It
+also surpasses the system proposed in [Luong et al., 2015b]
+by 2.85 BLEU points. It’s also worth to mention that the im-
+provement given by their method is lower than the reported
+one on the French to English translation task. A possible
+reason is that there are much more reorderings in Chinese
+English language pair, so it’s much harder to correctly pre-
+dict which source word generate current target unknown word
+during translation. On the contrast, our model replaces rare
+words with similar words and keeps the completeness of the
+sentence, so that it is much easier for the translation model to
+learn correspondence between source and target words.

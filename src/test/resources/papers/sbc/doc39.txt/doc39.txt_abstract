@@ -1,0 +1,21 @@
+
+Coverage-based Neural Machine Translation
+
+Zhaopeng Tu†∗ Zhengdong Lu† Yang Liu‡
+
+Xiaohua Liu† Hang Li†
+
+†Huawei Noah’s Ark Lab, Hong Kong
+‡Department of Computer Science and Technology, Tsinghua University, Beijing
+
+Abstract
+
+Attention mechanism advanced state-of-the-art neural machine translation
+(NMT) by jointly learning to align and translate. However, attentional NMT
+ignores past alignment information, which leads to over-translation and under-
+translation problems. In response to this problem, we maintain a coverage
+vector to keep track of the attention history. The coverage vector is fed to
+the attention model to help adjust the future attention, which guides NMT to
+pay more attention to the untranslated source words. Experiments show that
+coverage-based NMT significantly improves both alignment and translation
+quality over NMT without coverage.

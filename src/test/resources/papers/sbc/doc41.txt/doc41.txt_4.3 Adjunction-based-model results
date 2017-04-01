@@ -1,0 +1,112 @@
+Results for English-Chinese, with a small training set
+Table 4 presents test results on the smaller English-Chinese training set (500k sentence pairs). These
+tests compare the adjunction-based models, with and without labelling or features, to a Hiero baseline.
+We also tested the effect of relaxing the decoding span on Hiero. We use the following identifiers
+for the models: H-100 is a Hiero model with a relaxed decoding span, adj uses adjunction-based
+constraints, but no labels or adjunction features; adj-F also uses the long-distance and adjunct-crossing
+features; adj-L uses labels (including adjunct-sequence labels); adj-FL uses both features and labels;
+adj-L2F replaces the adjunct-sequence labels by their corresponding feature.
+
+Table 4: Experimental results for English-Chinese; training set size=500ka
+
+Hiero H-100 adj adj-F adj-L adj-FL adj-L2F
+
+BLEU 21.8 21.7 21.5∗ 22.0 22.1∗ 22.3∗ 22.3∗
+
+BEER 11.2 11.2 11.1 11.3 11.4∗ 11.4∗ 11.4∗
+
+TER 63.8 64.4∗ 64.1∗ 64.1∗ 64.3∗ 63.9 64.3∗
+
+LENGTH 99.8 100.1∗ 98.1∗ 99.5∗ 100.0∗ 99.7 99.8
+LR-KB1b 0.265 0.262 0.258 0.260 0.261 0.263 0.261
+
+a We mark significance levels of p = 0.05; each model was tuned and decoded three times.
+b The LR-KB1 scores were computed giving equal weight to BLEU-1 and Kendall’s tau
+
+(α = 0.5)
+
+While extending extraction spans with the adj model decreases performance, both labelling and the
+base adjunction features allow to guide decoding in the adjunct-driven models, and outperform Hiero,
+both in terms of BLEU and BEER (Stanojević and Sima’an, 2014). The highest improvements are
+obtained for the models employing both labelling and features, with little or no difference between the
+full-label model adj-FL and the label-to-feature model adj-L2F. The lack of improvement in LR
+score (Birch and Osborne, 2011) suggest that the adjunct-driven models improve lexical selection rather
+than reordering.
+
+Effect of training set size
+Table 5 presents results for the larger English-Chinese data set (2M training sentence pairs). With a larger
+data set, relaxing the decoding span for Hiero (H-100) is beneficial for English-Chinese–locally learned
+rules are useful when applied to larger spans. As before, extending extraction spans alone decreases
+performance, but labels and features allow to guide the model and improve performance; the adj-L2F
+model outperforms Hiero by 0.6 BLEU point.
+
+Table 5: Experimental results for English-Chinese; training set size=2M
+
+Hiero H-100 adj adj-L2F
+
+BLEU 23.2 23.5∗ 23.0 23.8∗
+
+BEER 12.5 12.6 12.5 12.8
+TER 61.9 62.0 61.4∗ 62.1
+LENGTH 98.9 98.7 96.9∗ 99.1
+LR-KB1 0.272 0.268 0.268 0.270
+
+a Results are based on two tuning runs
+
+16
+
+
+
+Tests on other language pairs
+Table 6 presents results for English-French and English-Dutch for training sets of 500k sentence pairs.
+We find that the adjunction-driven model performs similarly to Hiero for both these language pairs.
+
+Table 6: Experimental results for English-Dutch and English-French; training size=500k
+
+en-nl en-fr
+
+Hiero H-100 adj adj-L2F Hiero H-100 adj adj-L2F
+
+BLEU 27.5 27.5 27.5 27.4 32.9 32.8 33.0 32.7
+BEER 16.4 16.3 16.4 16.3 23.6 23.6 23.6 23.5
+TER 59.5 59.6 59.5 59.6 53.9 54.3 53.9 54.1
+LENGTH 99.9 100.3 99.8 99.7 99.1 99.3 99.3 99.3
+LR-KB1 0.307 0.307 0.306 0.305 0.390 0.388 0.390 0.389
+
+a Results are based on a single tuning round
+
+Inspection of output translations shows several cases of improved lexical selection for French. For
+instance, the adj-L2F model is able to capture the dependency between ‘enthusiasm’ and ‘wane’ in
+the first example in Table 7, and to translate both words appropriately. One also can find examples of
+improved reordering, as in the second example in the table. While both Hiero and the adj-L2F model
+wrongly reorder the translations of ‘geopolitical’ and ‘geographical’, making them appear as dependents
+of ‘outpost’ and ‘population’ respectively, the adj-L2F model is able, unlike Hiero, to preserve the
+dependency between ‘outpost’ and ‘of europe’.
+
+Table 7: Example translations
+Improved lexical selection
+src the problem is that , if you set a date , there is a danger that the enthusiasm for reform in these countries will
+
+wane .
+Hiero le problème est que , si vous wane fixer une date , il y a un risque que l’ enthousiasme de réforme dans ces pays .
+adj-L2F le problème est que , si vous fixer une date , il y a un risque que l’ enthousiasme de réforme dans ces pays
+
+diminue .
+
+Limited reordering improvement
+src because of its geopolitical position as the last outpost of europe , at the crossroads with the middle east and north
+
+africa , the importance of malta goes far beyond its geographical size and its small population.
+Hiero en raison de sa position en tant que dernier retranchement géopolitique , au carrefour avec le moyen-orient et l’
+
+afrique du nord , l’ importance de malte va bien au-delà de sa taille et sa petite population géographique de l’
+europe .
+
+adj-L2F en raison de sa position en tant que dernier retranchement géopolitique de l’ europe , à la croisée des chemins
+avec le moyen-orient et l’ afrique du nord , l’ importance de malte va bien au-delà de sa taille et sa petite
+population géographique .
+
+Adjunct factorization model
+Table 8 presents preliminary results for the adjunct factorization model of section 3.2 (adj-Opt). While
+this model does not use adjunction or features, the gap in performance with regard to Hiero appears bigger
+than for the adj model.

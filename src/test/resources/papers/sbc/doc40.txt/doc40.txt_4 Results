@@ -1,0 +1,8 @@
+
+Tables 3 and 4 present the official results for the
+Multimodal Machine Translation and Crosslingual
+Image Description tasks. We evaluated the sub-
+missions based on Meteor (Denkowski and Lavie,
+2014) (primary), BLEU (Papineni et al., 2002)
+and TER (Snover et al., 2006) using MultEval
+(Clark et al., 2011)11 with default parameters.

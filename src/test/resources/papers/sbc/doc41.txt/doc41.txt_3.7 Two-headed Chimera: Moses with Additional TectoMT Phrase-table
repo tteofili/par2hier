@@ -1,0 +1,12 @@
+
+The Two-headed Chimera or AddToTrain (Bojar et al., 2013b; Bojar and Tamchyna, 2015)is a combina-
+tion of full TectoMT with full Moses (see Figure 9). First, the input is translated by TectoMT. TectoMT
+translations are then joined with the input to create a small synthetic parallel corpus, from which a sec-
+ondary phrase table is extracted. This is then used together with the primary phrase table, extracted from
+the large training data, to train Moses. Finally, the input is translated by the resulting Moses system.
+
+This setup enables Moses to use parts of the TectoMT translation that it considers good, while still
+having the base large phrase table at its disposal. This has been shown to have a positive effect, e.g., in
+choosing the correct inflection of a word when the language model encounters an unknown context, or
+in generating a translation for a word that constitutes an out-of-vocabulary item for Moses (as TectoMT
+can abstract from word forms to lemmas and beyond, which Moses cannot).

@@ -1,0 +1,97 @@
+One of the findings of the first pilot task was that
+the origin and the domain of the data pose specific
+challenges to the participating systems. In particu-
+lar, our analysis highlighted the strong dependence
+of system results on data repetitiveness, which
+tends to be higher within restricted domains and
+with coherent post-edits. On one side, restricted
+domains are more likely to feature smaller vocabu-
+laries and to be more repetitive (or, in other terms,
+less sparse). This situation, in turn, will likely de-
+termine a higher applicability of the learned error
+correction patterns. On the other side, coherent
+post-edits (like those produced within controlled
+professional environments) will result in a lower
+variability in the correction of specific errors and,
+in turn, in favorable conditions to learn and gather
+reliable statistics. These considerations motivate
+some of the major changes of this year’s round
+of the APE task, namely those concerning the do-
+main (a specific one as opposed to news) and the
+origin of the post-edits (from professional transla-
+tors instead of crowdsourced).
+
+The data used this year was released by the
+QT21 Project. This material was obtained by
+
+175
+
+
+
+randomly sampling from a collection of English-
+German (source, target, human post-edit) triplets
+drawn from the Information Technology (IT)
+domain.27 Also this year, the main reason for ran-
+dom sampling was to induce a higher data homo-
+geneity and, in turn, to increase the chances that
+correction patterns learned from the training set
+can be applied also to the test set. The down-
+side of losing information yielded by text coher-
+ence (an aspect that some APE systems might take
+into consideration) has hence been accepted in ex-
+change for a higher error repetitiveness across the
+three data sets.
+
+The training and development sets respectively
+consist of 12, 000 and 1, 000 instances. In each
+instance:
+
+• The source (SRC) is a tokenized English sen-
+tence whose length ranges between 3 and 30
+tokens;
+
+• The target (TGT) is a tokenized German
+translation of the source. Translations were
+obtained with a statistical MT system.28 This
+information, however, was unknown to par-
+ticipants, for which the MT system was a
+black-box.
+
+• The human post-edit (PE) is a manually-
+revised version of the target, done by profes-
+sional translators.29
+
+Test data (2, 000 instances) consists of (source,
+target) pairs having similar characteristics of those
+in the training set. Human post-edits of the test
+target instances were left apart to measure system
+performance.
+
+Table 31 provides some basic statistics about
+the data. As discussed in Section 7.3, the differ-
+ences in the domain and the origin of this year’s
+data can contribute to explain the large improve-
+ments over the baseline, which in the first pilot
+round unfortunately remained unbeaten. These
+differences are highlighted by the Repetition Rate
+
+27The source sentences (together with their reference
+translations which were not used for the task) were provided
+by TAUS (https://www.taus.net/) and originally come
+from a unique IT vendor.
+
+28It consists of a phrase-based machine translation system
+leveraging generic and in-domain parallel training data and
+using a pre-reordering technique (Herrmann et al., 2013). It
+takes also advantages of POS and word class-based language
+models.
+
+29German native speakers working at Text&Form https:
+//www.textform.com/.
+
+(RR30) scores reported in Table 32. Values are in-
+deed very close to those observed in the IT-related
+corpus (the Autodesk Post-Editing Data corpus31)
+that was used last year as a term of comparison to
+motivate the high difficulty of dealing with news
+data.

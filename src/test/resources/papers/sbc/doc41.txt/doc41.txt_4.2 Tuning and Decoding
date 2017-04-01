@@ -1,0 +1,10 @@
+All models use an extended set of dense features (not counting adjunction features), following Maillette
+de Buy Wenniger and Sima’an (2013). Feature weights are tuned with MIRA (Cherry and Foster, 2012),
+for 20 iterations.
+
+15
+
+
+
+Decoding is performed with Joshua (Li et al., 2009), with a relaxation of the decoding span to 100
+tokens. This allows hierarchical rules to span an entire sentence in the case of the extended models.

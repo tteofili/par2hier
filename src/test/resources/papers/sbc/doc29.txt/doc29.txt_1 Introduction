@@ -1,0 +1,50 @@
+
+Word-level modelling with explicit segmentation
+has been a standard approach in statistical machine
+translation systems. This is mainly due to the issue
+of data sparsity, caused by the, exponential growth
+of the state space as the length of sequences grows
+larger. This becomes much more severe when a
+sequence is represented with characters. In addi-
+tion to the data sparsity issue, in linguistics, words
+or their segmented-out lexemes are usually con-
+sidered as basic units of meaning, which makes
+words to be more suitable when solving natural
+language processing tasks.
+
+There are however two pressing issues here.
+The first issue is the absence of a perfect segmen-
+tation algorithm for any single language. A perfect
+
+This system description paper summarizes and details
+the experimental procedure described in Chung et al. (2016)
+
+segmentation algorithm should be able to segment
+given unsegmented sentence into a sequence of
+lexemes and morphemes. The other issue, which
+is specific to neural network approaches, is that
+neural machine translation systems suffers from
+increased complexity due to the large vocabulary
+size (Jean et al., 2015; Luong et al., 2015), which
+does not happen with character-level modelling.
+
+Most issues of word-level modelling can be ad-
+dressed to certain extent by switching into finer to-
+kens, e.g., characters. In fact, to neural networks,
+each and every token in the vocabulary is treated as
+an independent entity, and the semantics of tokens
+are simply learned to maximize the objective func-
+tion (Chung et al., 2016). This property allows a
+lot of freedom to the neural machine translation
+system in the choice of tokens.
+
+The NYU-MILA neural machine translation
+system is built on the idea of directly generating
+characters, instead of words, that can possibly un-
+link a machine translation system from the need
+of explicit segmentation as a preprocessing step,
+which is often suboptimal in solving translation
+tasks. We focus on representing the target sen-
+tence as a sequence of characters, and the source
+sentence as a sequence of subwords (Sennrich et
+al., 2015).

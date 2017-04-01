@@ -1,0 +1,87 @@
+
+In this section, we describe the details of the ex-
+perimental settings for our system.
+
+Corpora and Preprocessing We use all avail-
+able training parallel corpora for four language
+pairs from WMT’16: En-Cs, En-De, En-Ru and
+En-Fi. They consist of 63.5M, 4.5M, 2.3M and
+2M sentence pairs, respectively. We do not use
+any monolingual corpus. We only use the sentence
+pairs, when the source side is up to 50 subword
+symbols long and the target side is up to 500 char-
+acters. For all the pairs other than En-Fi, we use
+newstest-2013 as a development set, and for En-
+Fi, we use newsdev-2015 as a development set.
+
+All of the source corpora were preprocessed us-
+ing BPE (Sennrich et al., 2015), and for the tar-
+get corpora, no additional preprocessing step is
+required. For the target vocabulary, we use 300
+characters and two additional tokens reserved for
+〈EOS〉 and 〈UNK〉. For the source vocabulary we
+constrain the size of BPE symbols up to 30, 000.
+
+Models and Training We use gated recurrent
+units (Cho et al., 2014) (GRUs) for the recurrent
+neural networks. The encoder has 512 hidden
+units for each direction (forward and reverse), and
+the decoder has two hidden layer with 1024 units
+each. The embedding layers of both source and
+target sides have dimensionality of 512 without
+any non-linearity. Both fout and fscore are feedfor-
+ward neural networks with an intermediate hidden
+layer with 512 tanh units.
+
+We train the model using stochastic gradient de-
+scent with Adam (Kingma and Ba, 2014) using the
+default parameters introduced in the paper. Each
+update is computed using a minibatch of 128 sen-
+tence pairs. The norm of the gradient is rescaled
+with a threshold set to 1 (Pascanu et al., 2013). We
+set the initial learning rate of 0.0001.
+
+269
+
+
+
+Language Pair BLEU-c TER
+Ranking
+
+BLEU-c cons. BLEU-c uncons. Human
+En-Cs 23.6 0.639 2/12 2/12 2/8
+En-De 30.8 0.583 3/12 3/12 4/11
+En-Fi 15.1 0.771 3/12 4/13 4/11
+En-Ru 23.1 0.677 6/7 6/8 4/8
+
+Table 1: Empirical results of the NYU-MILA systems on WMT’16 test sets. All of our submitted
+systems are constrained. For ranking by BLEU-c scores, when there are multiple submissions from a
+single system, we count it as one system. Some of the systems that showed in BLEU-c case do not show
+in the human evaluation, hence the total number of systems does not match. We present the ranking in
+both constrained setting (cons.) and unconstrained setting (uncons.) on the table.
+
+Decoding and Evaluation We use beamsearch
+to approximately find the most likely translation
+given a source sentence. We use a beam width
+of 15 to find the model with best translation qual-
+ity. The translation quality is evaluated by using
+BLEU.1 For the WMT’16 test sets, we use the
+same beam width.
+
+Ensembles We build an ensemble model us-
+ing eight independent neural machine translation
+models initialized with different parameters. We
+decode from an ensemble by taking the average of
+the output probabilities at each step.
+
+Decoding Speed of the Character-Level De-
+coder We evaluate the decoding speed of the
+character-level decoder and compare with a
+subword-level decoder on newstest-2013 corpus
+(En-De) with a single Titan X GPU. The subword-
+level decoder generates 31.9 words per second,
+and the character-level decoder generates 27.5
+words per second. Note that this is evaluated in an
+online setting, where only one sentence is trans-
+lated at a time, and translating in a batch setting
+could differ from these results.

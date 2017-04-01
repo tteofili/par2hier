@@ -1,0 +1,41 @@
+
+We created a new dataset for the shared task by ex-
+tending the Flickr30K dataset (Young et al., 2014)
+into another language. The Multi30K dataset (El-
+liott et al., 2016) contains two types of multilin-
+gual data: a corpus of English sentences translated
+into German (used for Task 1), and a corpus of
+independently collected English and German sen-
+tences (used for Task 2). For the translation cor-
+pus, one sentence (of five) was chosen for pro-
+fessional translation such that the final dataset is
+a combination of short, medium, and long length
+sentences. The second corpus consists of crowd-
+sourced descriptions gathered from Crowdflower,2
+
+where each worker generated an independent de-
+scription of the image. We used a translation of
+the original instructions used to gather the En-
+glish sentences, in order to ensure as much sim-
+ilarity across the German and English descriptions
+as possible. Table 1 presents an overview of the
+data available for each task.
+
+The images are publicly available3 but to en-
+
+2http://www.crowdflower.com
+3http://illinois.edu/fb/sec/229675
+
+courage participation we released two types of fea-
+tures extracted from the images. The use of such
+features was not mandatory, and participants could
+also extract image features from the original im-
+ages in the Flickr30K dataset using their own al-
+gorithms. We released features extracted from the
+VGG-19 Convolutional Neural Network (CNN),
+as described in (Simonyan and Zisserman, 2015),
+from the FC7 (relu7) and CONV5,4 layers. We
+extracted these image features using Caffe RC24
+
+with the matlab features reference code
+from NeuralTalk.5

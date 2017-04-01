@@ -1,0 +1,35 @@
+The standalone nature of the second phase of Me-
+teor’s pipeline means that we can use it in isolation
+and consider it an existing metric for word order.
+We have thus modified Meteor trivially to ignore
+the initial harmonic mean and produce only a frag-
+mentation score; results for both this and the off-
+the-shelf system are reported in section 4.
+
+Talbot et al. (2011) use a similar technique to
+Meteor-Frag, basing its results on the number of
+chunks of contiguous words aligned by a human
+annotator. Birch et al. (2010) provide a different
+approach to the problem, representing word order
+as mathematical permutations and counting indi-
+
+492
+
+
+
+vidual disagreements in order, and transformations
+required to convert one sentence into another, in a
+number of ways. They ignore all features of a text
+other than word order of aligned nodes, to produce
+a mathematically pure model, but sacrifice some
+of the less vital – but still useful – information
+represented by unaligned nodes and inter-word se-
+mantic relationships.
+
+Contrary to the above metrics’ focus on word
+order in isolation, two tools have been designed
+to provide a simple approximation of several error
+categories at once. Both Addicter (Zeman et al.,
+2011) and Hjerson (Popović, 2011) use compar-
+isons of aligned words to provide a quick analysis
+of missing, unexpected and moved nodes.

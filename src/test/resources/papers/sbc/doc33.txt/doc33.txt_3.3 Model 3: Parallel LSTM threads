@@ -1,0 +1,50 @@
+
+To further alleviate the assumption that regional
+objects share some pre-defined order, we further
+propose a parallel structure as shown in Figure 4.
+The encoder of NMT is composed of multiple en-
+coding threads where all the LSTM parameters are
+shared. In each thread, a (regional) visual fea-
+ture is followed by the text sequence. This par-
+allel structure would associate the text to the most
+relevant objects in the encoding phase and distin-
+guish them when computing attention during de-
+coding. Intuitively, the text sequence follows a
+regional object would be interpreted as encoding
+the visual information with the textual description
+(i.e., encoding captions as well as visual features
+for that object). An encoder hidden state for at-
+tention can be interpreted as the “word” imprinted
+by the semantics features of some regional object.
+The decoder can therefore distinctively attend to
+
+641
+
+
+
+Figure 4: Model 3: Parallel LSTM threads with multiple additional regional visual features.
+
+words that describe different visual objects in mul-
+tiple threads.
+
+In the encoding phase, parameters in LSTM are
+shared over threads. All possible hidden states
+over multiple threads are recorded for attention.
+At the end of encoding phase, the outputs of differ-
+ent encoding threads are fused together to generate
+the final embedding of the whole sentence as well
+as all the image objects. In the decoding phase,
+candidates of global attention are all the text hid-
+den states over multiple threads. For example, at
+time t, the decoder may choose to attend to ‘bear’
+at the second thread (which sees a teddy bear im-
+age at the beginning) as well as the ’bear’ in the
+global image thread. At time t + 1, the decoder
+may switch to another thread and focus on “the
+man” with the person image.
+
+For implementation simplicity for batch train-
+ing, we limit the number of regional objects to 4
+and add one global image thread. We also choose
+an average pooling in the encoder fusion process
+and back-propagate accordingly.

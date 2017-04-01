@@ -1,0 +1,50 @@
+visual features
+
+In addition to adding only one global visual fea-
+ture, we extend the original NMT model by in-
+corporating multiple regional features in the hope
+
+640
+
+
+
+Figure 2: Model 1: Attention-based NMT with single additional global visual feature. Decoder may
+attend to both text and image steps of encoding. For clarity, the possible attention path is hidden here.
+
+Figure 3: Model 2: Attention-based NMT with multiple additional regional visual features.
+
+that those regional visual attributes would assist
+LSTM to generate better and more accurate repre-
+sentations. The illustration of the proposed model
+is depicted in 3. We will first explain how to deter-
+mine multiple regions from one image and explain
+how these visual features are extracted and sorted.
+
+Intuitively, objects in an image are most likely
+to appear in both source and target sentences.
+Therefore. we utilize the region proposal network
+(RPN) in the region-based convolutional neural
+network (Ren et al., 2015) (R-CNN) to identify
+objects and their bounding boxes in an image and
+then extract visual feature from those regions. In
+order to integrate these images to the original se-
+quence in the LSTM model, we design a heuris-
+tic approach to sort those visual features. The
+regional features are fed in the ascending order
+of the size of the bounding boxes; followed by
+the original global visual feature and the text se-
+quence. Visual features are sequentially fed in
+such order since important features are designed
+to be closer to the encoded representation. Heuris-
+tically, larger objects may be more noticeable and
+essential in an image described by both the source
+and target language contexts.
+
+In the implementation, we choose top 4 regional
+
+objects plus the whole image and then extracted
+their fc7 with VGG-19 to form the visual se-
+quence followed by the text sequence. If there are
+less than 4 objects recognized in the original im-
+age, zero vectors are padded instead for the batch
+process during training.

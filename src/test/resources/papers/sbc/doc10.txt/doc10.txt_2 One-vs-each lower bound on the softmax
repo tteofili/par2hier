@@ -1,0 +1,7 @@
+
+Here, we derive the new bound on the softmax (Section 2.1) and we prove its optimality property when
+performing approximate maximum likelihood estimation (Section 2.2). Such a property holds for the
+non-parametric case, where we estimate probabilities of the form p(y = k), without conditioning
+on some x, so that the score functions fk(x;w) reduce to unrestricted parameters fk; see Eq. (2)
+below. Finally, we also analyze the related bound derived by Bouchard [5] and we compare it with
+our approach (Section 2.3).

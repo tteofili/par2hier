@@ -1,0 +1,51 @@
+
+Based on the softmax representation, the probability of a variable y to take the value k ∈ {1, . . . ,K},
+where K is the number of categorical symbols or classes, is modeled by
+
+p(y = k|x) = e
+fk(x;w)∑K
+
+m=1 e
+fm(x;w)
+
+, (1)
+
+where each fk(x;w) is often referred to as the score function and it is a real-valued function indexed
+by an input vector x and parameterized by w. The score function measures the compatibility of input
+x with symbol y = k so that the higher the score is the more compatible x becomes with y = k. The
+most common application of softmax is multiclass classification where x is an observed input vector
+and fk(x;w) is often chosen to be a linear function or more generally a non-linear function such as a
+neural network [3, 8]. Several other applications of softmax arise, for instance, in neural language
+modeling for learning word vector embeddings [15, 14, 18] and also in collaborating filtering for
+representing probabilities of (user, item) pairs [17]. In such applications the number of symbols
+K could often be very large, e.g. of the order of tens of thousands or millions, which makes the
+computation of softmax probabilities very expensive due to the large sum in the normalizing constant
+of Eq. (1). Thus, exact training procedures based on maximum likelihood or Bayesian approaches
+are computationally prohibitive and approximations are needed. While some rigorous bound-based
+approximations to the softmax exists [5], they are not so accurate or scalable and therefore it would
+be highly desirable to develop accurate and computationally efficient approximations.
+
+In this paper we introduce a new efficient approximation to softmax probabilities which takes the
+form of a lower bound on the probability of Eq. (1). This bound draws an interesting connection
+between the exact softmax probability and all its one-vs-each pairwise probabilities, and it has several
+desirable properties. Firstly, for the non-parametric estimation case it leads to an approximation of the
+
+30th Conference on Neural Information Processing Systems (NIPS 2016), Barcelona, Spain.
+
+
+
+likelihood that shares the same global optimum with exact maximum likelihood, and thus estimation
+based on the approximation is a perfect surrogate for the initial estimation problem. Secondly, the
+bound allows for scalable learning through stochastic optimization where data subsampling can be
+combined with subsampling categorical symbols. Thirdly, whenever the initial exact softmax cost
+function is convex the bound remains also convex.
+
+Regarding related work, there exist several other methods that try to deal with the high cost of softmax
+such as methods that attempt to perform the exact computations [9, 19], methods that change the
+model based on hierarchical or stick-breaking constructions [16, 13] and sampling-based methods
+[1, 14, 7, 11]. Our method is a lower bound based approach that follows the variational inference
+framework. Other rigorous variational lower bounds on the softmax have been used before [4, 5],
+however they are not easily scalable since they require optimizing data-specific variational parameters.
+In contrast, the bound we introduce in this paper does not contain any variational parameter, which
+greatly facilitates stochastic minibatch training. At the same time it can be much tighter than previous
+bounds [5] as we will demonstrate empirically in several classification datasets.

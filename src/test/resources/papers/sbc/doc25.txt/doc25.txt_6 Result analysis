@@ -1,0 +1,78 @@
+
+1
+2
+
+3
+4
+
+5
+
+Head−dependent distance
+
+∆
+ A
+
+cc
+ur
+
+ac
+y
+
+Figure 1: The improvement in labeled attachment
+score as a result of adding gold topological fields
+to the parser by dependency length.
+
+Since the introduction of topological fields has
+very little impact on short-distance relations, the
+differences in the attachment of relations that vir-
+tually never cross fields (Table 2) turn out to be
+negligable. However, for the relations that cross
+fields frequently, we see a marked improvements
+(Table 7) for every relation except the preposi-
+tional object. In hindsight, this difference should
+not be surprising — the relations that never cross
+fields are usually very local, while those that al-
+most always cross fields tend to have longer dis-
+tances and/or are subject to relatively free order-
+ing.
+
+Dependency label LAS ∆
+Expletive es 2.71
+Separated verb prefix 1.64
+Subject 1.22
+Prepositional object -0.29
+Direct object 1.59
+
+Table 7: The LAS ∆ of the parser with access to
+gold standard topological fields compared to the
+De Kok (2015) parser for the relations of Table 4.
+
+Dependency label LAS ∆
+Coordinating conjunction (clausal) 11.48
+Parenthesis 8.31
+Dependent clause 3.49
+Conjunct 3.38
+Sentence root7 2.92
+Expletive es 2.71
+Sentence 2.64
+Comparative 1.87
+Separated verb prefix 1.64
+Direct object 1.59
+
+Table 8: The ten dependency relations with the
+highest LAS ∆ of the parser with access to gold
+topological fields compared to the (de Kok, 2015)
+parser.
+
+The ten dependency relations with the highest
+overall improvement in LAS are shown in Table 8.
+Many of these relations are special when it comes
+to topological field structure and were not dis-
+cussed in Section 2. The relations parenthesis, de-
+pendent clause, and sentence link two clauses; the
+sentence root marks the root of the dependency
+tree; and the coordinating conjunction (clausal)
+relation attaches a token that is always in its own
+field.6 This confirms that the addition of topologi-
+cal fields also improves the analysis of the overall
+clausal structure.

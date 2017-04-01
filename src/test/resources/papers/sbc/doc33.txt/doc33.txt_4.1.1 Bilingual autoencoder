@@ -1,0 +1,28 @@
+
+A good translation would also recognize the sen-
+tence in the source language. We utilize bilin-
+gual autoencoder (Ngiam et al., 2011) depicted as
+in Fig.5 to reconstruct source language given the
+source language. Bilingual autoencoder only uses
+single modality (here we used source language or
+target language) and re-constructs the both modal-
+ities. We project bilingual information into the
+joint space (the bottleneck layer); if the two target
+and source sentences have similar representation,
+the model is able to reconstruct both sentences.
+Moreover, if the similarity of values of bottleneck
+layer is high, it may indicate that the source sen-
+tence and the translated sentence are similar in
+concepts; therefore, the quality of the translation
+would be better. The inputs of the autoencoder are
+the last LSTM encoder states trained on monolin-
+gual image captions dataset. The dimension of the
+input layer is 256, and 200 for the middle, and 128
+for the joint layer.
+
+642
+
+
+
+Figure 5: Bilingual auto-encoder to re-construct
+both English and German using only one of them.

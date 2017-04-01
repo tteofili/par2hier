@@ -1,0 +1,39 @@
+We performed experiments on three language pairs: English-Chinese, English-Dutch and English-
+French. For all experiments, word alignments were obtained using GIZA++ with ‘grow-diag-final-and’
+symmetrization (Och and Ney, 2003). The English side of the data were parsed using the Turbo parser,
+and converted to adjunct parses following the criteria of section 2. We used a 4-gram language model,
+trained with KenLM (Heafield et al., 2013).
+
+The English-Chinese data were taken from the MultiUN corpus (Eisele and Chen, 2010), limited to
+sentences of up to 40 tokens. We first extracted an in-domain development and test set by randomly
+drawing 4000 sentences without replacement from the corpus (after having removed English-side dupli-
+cates), and splitting the resulting set in two. Word alignments were trained on the rest of the corpus (ca.
+5.6M sentence pairs). The language model was trained on the Xinhua section of the Chinese Gigaword
+corpus (LDC2003T09).
+
+The English-Dutch data were taken from the Europarl corpus (v7). We extracted a development and
+test set of 2000 sentence pairs each following the same method as for the English-Chinese data. The
+language model was trained on the target side of the training corpus.
+
+The English-French data were taken from the Europarl corpus (v7), limited to sentences of up to 40
+tokens. We used the Europarl 2006 development and test sets, and trained the language model on the
+target side of the corpus.
+
+For English-Chinese, we used training sets of two different sizes. Table 3 summarizes the sizes and
+average sentence length of the different data sets.
+
+Table 3: Data-set sizes
+
+train dev test
+
+fr
+sentences 500k 2k 2k
+avg. tokens 20.6 29.0 29.7
+
+nl
+sentences 500k 2k 2k
+avg. tokens 27.4 27.6 27.1
+
+zh
+sentences 500k 2M 2k 2k
+avg. tokens 22.5 22.5 22.7 22.6

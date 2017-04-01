@@ -1,0 +1,7 @@
+
+Rare Words
+
+In this section, we first give a brief introduction to neural ma-
+chine translation and explain why NMT model could not em-
+ploy large vocabulary. Then we quantitatively analyze how
+rare words impact the performance of NMT.

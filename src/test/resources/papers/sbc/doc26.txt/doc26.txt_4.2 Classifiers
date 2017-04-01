@@ -1,0 +1,17 @@
+
+We now present several classifier systems, explor-
+ing the two important properties of the classifica-
+tion framework – the ability to train without super-
+
+
+
+Parallel data Performance
+P R F0.5
+
+CoNLL-train 43.34 11.81 28.25
+Lang-8 66.15 15.11 39.48
+CoNLL-2014 top 1 39.71 30.10 37.33
+
+Table 9: MT systems trained in this work.
+
+vision and system flexibility (see Table 4).

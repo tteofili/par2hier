@@ -1,0 +1,19 @@
+
+While we have implemented a number of variants
+of DTED, for WMT 2015 and WMT 2016 we use
+only the ‘Pure’ version which processes only the
+structure of the sentences while ignoring other in-
+formation such as word alignments. DTED has
+been run on two types of input. First, we have run
+each version on normal dependency trees, leverag-
+ing the full structural information available. For
+comparison, we have also run each on flattened
+trees from which the structural information has
+been removed. This is done in a preprocessing
+step by artificially forcing each node to be the only
+child of its predecessor. This version is intended to
+nullify the structural advantage given by the rest of
+the system, to provide a baseline for comparison.
+
+With the ‘pure’ version of DTED, the modifica-
+tions shown in Table 2 are calculated.

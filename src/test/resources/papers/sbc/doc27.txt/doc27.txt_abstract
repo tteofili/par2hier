@@ -1,0 +1,95 @@
+
+Proceedings of the First Conference on Machine Translation, Volume 2: Shared Task Papers, pages 131–198,
+Berlin, Germany, August 11-12, 2016. c©2016 Association for Computational Linguistics
+
+Findings of the 2016 Conference on Machine Translation (WMT16)
+Ondřej Bojar
+
+Charles University
+Rajen Chatterjee
+
+FBK
+Christian Federmann
+
+Microsoft Research
+Yvette Graham
+
+Dublin City University
+
+Barry Haddow
+Univ. of Edinburgh
+
+Matthias Huck
+LMU Munich
+
+Antonio Jimeno Yepes
+IBM Research Australia
+
+Philipp Koehn
+JHU / Edinburgh
+
+Varvara Logacheva
+Univ. of Sheffield
+
+Christof Monz
+Univ. of Amsterdam
+
+Matteo Negri
+FBK
+
+Aurélie Névéol
+LIMSI-CNRS
+
+Mariana Neves
+HPI/Potsdam
+
+Martin Popel
+Charles University
+
+Matt Post
+Johns Hopkins Univ.
+
+Raphael Rubino
+Saarland University
+
+Carolina Scarton
+Univ. of Sheffield
+
+Lucia Specia
+Univ. of Sheffield
+
+Marco Turchi
+FBK
+
+Karin Verspoor
+Univ. of Melbourne
+
+Marcos Zampieri
+Saarland University
+
+Abstract
+
+This paper presents the results of the
+WMT16 shared tasks, which included five
+machine translation (MT) tasks (standard
+news, IT-domain, biomedical, multimodal,
+pronoun), three evaluation tasks (metrics,
+tuning, run-time estimation of MT qual-
+ity), and an automatic post-editing task
+and bilingual document alignment task.
+This year, 102 MT systems from 24 in-
+stitutions (plus 36 anonymized online sys-
+tems) were submitted to the 12 translation
+directions in the news translation task. The
+IT-domain task received 31 submissions
+from 12 institutions in 7 directions and the
+Biomedical task received 15 submissions
+systems from 5 institutions. Evaluation
+was both automatic and manual (relative
+ranking and 100-point scale assessments).
+
+The quality estimation task had three sub-
+tasks, with a total of 14 teams, submitting
+39 entries. The automatic post-editing task
+had a total of 6 teams, submitting 11 en-
+tries.

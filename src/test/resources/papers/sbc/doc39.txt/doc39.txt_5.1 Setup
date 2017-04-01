@@ -1,0 +1,54 @@
+
+Dataset and Evaluation Metrics Our training data consists of 1.25M sentence
+pairs extracted from LDC corpora1, with 27.9M Chinese words and 34.5M English
+words respectively. We choose NIST 2002 (MT02) dataset as our development set,
+and the NIST 2005 (MT05), 2006 (MT06) and 2008 (MT08) datasets as our test
+sets. We use the case-insensitive 4-gram NIST BLEU score (Papineni et al.2002)
+as our evaluation metric, and sign-test (Collins et al.2005) as statistical signifi-
+cance test. In addition to BLEU score to evaluate the translation quality, we also
+specifically check the alignment quality with alignment error rate (AER) (Och and
+Ney2003).
+
+Training Neural Networks In training of the neural networks, we limit the source
+and target vocabularies to the most frequent 16K words in Chinese and English,
+covering approximately 95.8% and 98.3% of the two corpora respectively. All the
+out-of-vocabulary words are mapped to a special token UNK. We train each model
+with the sentences of length up to 50 words in training data. The word embedding
+dimension is 620 and the size of a hidden layer is 1000. We set the dimension
+of coverage d = 1 for both NN-based2 and linguistic coverage models and set
+
+1The corpora include LDC2002E18, LDC2003E07, LDC2003E14, Hansards portion of
+LDC2004T07, LDC2004T08 and LDC2005T06.
+
+2In a pilot study, increasing the dimension of NN-based coverage did not improve the translation
+performance.
+
+11
+
+
+
+System MT05 MT06 MT08 Ave.
+Moses 31.37 30.85 23.01 28.41
+RNNSearch 28.63 28.92 21.04 26.20
++ NN-based coverage w/o gating 29.77 29.20 21.53 26.83
++ NN-based coverage w/ gating 29.89 29.38 22.15 27.14
++ Linguistic coverage w/o fertility 29.41 29.78 23.03 27.41
++ Linguistic coverage w/ fertility 30.11 30.08 22.91 27.70
+
+Table 1: Evaluation of translation quality.
+
+N = 2 for the fertility model. We train our models until the BLEU score on the
+development set stopped improving.
+
+We compare our method with two state-of-the-art SMT and NMT3 models:
+
+• Moses (Koehn et al.2007): an open source phrase-based translation system
+with default configuration and a 4-gram language model trained on the target
+portion of training data;
+
+• RNNsearch (Bahdanau et al.2015): an attentional NMT model with default
+setting.
+
+We use the RNNsearch as the NMT baseline, for it represents the state-of-the-art
+neural machine translation methods with a small vocabulary and modest parameter
+size (30M∼50M).

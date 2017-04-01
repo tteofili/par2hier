@@ -1,0 +1,24 @@
+
+While the above metrics all apply to n-grams or
+other unstructured representations of data, a num-
+ber of proposals exist of metrics which use de-
+pendency parsing to represent sentence structure.
+Liu and Gildea (2005) improved on the base con-
+cept behind BLEU to calculate headword chain
+precision for unlabelled dependency trees, while
+Owczarzak et al. (2007) extend this to use labelled
+dependencies.
+
+Habash and Elkholy (2008) use a different ap-
+proach to dependency trees, merging n-gram pre-
+cision subscores calculated similarly to BLEU
+with ‘span-extended structural bigram precision
+subscores’, using two methods to compare similar-
+ities between surface (flat) distances for different
+pairs of adjacent nodes. Yu et al. (2014) use a dif-
+ferent approach again, considering only the refer-
+ence trees’ structural elements and observing, for
+a variety of structural segments which they con-
+sider most relevant, whether the hypothesis sen-
+tences contain the same words as those segments
+in the same order.

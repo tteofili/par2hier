@@ -1,0 +1,30 @@
+
+In addition to the NNJM feature described above,
+we also implemented the neural network lexical
+translation model (NNLTM) from (Devlin et al.,
+2014). The NNLTM is identical in structure to the
+NNJM except that it does not use target context.
+It is complementary to the NNJM because it ac-
+counts for all source words: for each source word
+fj in the current sentence, it models p(ēaj |f j+mj−m ),
+where ēaj is the sequence of zero or more words
+aligned to fj . Following Devlin et al. (2014), we
+set m = 5, and used 192 units for source embed-
+dings and 512 units for the hidden layer.
+
+We used a single NNLTM trained on source
+lemmas with source and target vocabulary sizes
+of 128K and 64K, and backoff to source classes
+as described above for the NNJM. On the tar-
+get side, sequences of words ēaj that were not
+among the most frequent 64K sequences were
+mapped to classes that depended on the mkcls
+class of their first word and their length, up
+to a maximum length of 2. For example, un-
+known word sequences A, A_B, and A_B_C get
+mapped to classes mkcls(A):1, mkcls(A):2, and
+mkcls(A):2 respectively.
+
+Training and self-normalization details were
+identical to those for the NNJM. Perpexity on the
+development set was 10.41.

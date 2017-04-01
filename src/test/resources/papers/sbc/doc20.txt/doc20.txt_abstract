@@ -1,0 +1,47 @@
+
+Towards Zero Unknown Word in Neural Machine Translation
+
+Xiaoqing Li,
+
+†
+Jiajun Zhang,
+
+†
+Chengqing Zong
+
+†‡
+
+† National Laboratory of Pattern Recognition, Institute of Automation,
+Chinese Academy of Sciences
+
+‡ CAS Center for Excellence in Brain Science and Intelligence Technology
+{xqli,jjzhang,cqzong}@nlpr.ia.ac.cn
+
+Abstract
+
+Neural Machine translation has shown promising
+results in recent years. In order to control the com-
+putational complexity, NMT has to employ a small
+vocabulary, and massive rare words outside the vo-
+cabulary are all replaced with a single unk symbol.
+Besides the inability to translate rare words, this
+kind of simple approach leads to much increased
+ambiguity of the sentences since meaningless unks
+break the structure of sentences, and thus hurts
+the translation and reordering of the in-vocabulary
+words. To tackle this problem, we propose a novel
+substitution-translation-restoration method. In sub-
+stitution step, the rare words in a testing sen-
+tence are replaced with similar in-vocabulary words
+based on a similarity model learnt from monolin-
+gual data. In translation and restoration steps, the
+sentence will be translated with a model trained
+on new bilingual data with rare words replaced,
+and finally the translations of the replaced words
+will be substituted by that of original ones. Exper-
+iments on Chinese-to-English translation demon-
+strate that our proposed method can achieve more
+than 4 BLEU points over the attention-based NMT.
+When compared to the recently proposed method
+handling rare words in NMT, our method can also
+obtain an improvement by nearly 3 BLEU points.

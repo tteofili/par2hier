@@ -1,0 +1,59 @@
+
+Text simplification, defined narrowly, is the process of reducing the linguistic complexity of a text,
+while retaining the original information contents and meaning (Siddharthan, 2014). Watananabe and
+Kawamura (2013) introduced a Japanese simplification system with the use of a “Simple Japanese
+Replacement List”. Kaneniwa and Kawamura (2013) used the same list to rewrite difficult vocabulary
+automatically for Japanese learners who have non-kanji backgrounds. Kajiwara and Yamamoto (2015),
+constructed an evaluation dataset for Japanese lexical simplification. They extracted 2330 sentences
+from a newswire corpus and simplified only one difficult word using several Japanese lexical
+paraphrasing databases. Kodaira et al. (2016) built a controlled and balanced dataset for Japanese
+lexical simplification. They extracted 2010 sentences with only one difficult word in each sentence
+from a balanced corpus and collected simplification candidates using crowdsourcing techniques.
+Different from the previous research mentioned above, we used a large scale Japanese balanced
+
+corpus to extract simplification candidates for difficult words and through manual selection we
+constructed a “Simple Japanese Replacement List” for Chinese-speaking Japanese language learners.
+For the levels of word difficulty, we consider levels 3-5 of the new JLPT as easy level, and levels 1-2
+as difficult level according to the vocabulary list of the new JLPT, which consists of about 16,000
+words. Besides, we consider the words which are not included in the vocabulary list of the new JLPT
+as difficult words. Since a large number of Kanji characters are used both in Japanese and in Chinese,
+Chinese-speaking learners can easily understand the Japanese words of Chinese origin (Japanese-
+Chinese homographs), such as “安全(safety)”, “学習(study)”, “擁立(support)”, or easily guess the
+meaning of many Japanese original words with the help of Kanji characters, such as “壊す(break)”,
+“打つ (hit)”, “取り消す (cancel)”. Kanji characters in these Japanese words are also included in
+Chinese dictionary and have the same or similar meaning with Chinese words. Therefore, we consider
+these words as easy words for Chinese-speaking learners, although some of these words are difficult
+words in the vocabulary list of the new JLPT.
+We obtain a list of similar words associated with each difficult word which we are going to use for
+
+replacement, using Word2vec (https://code.google.com/p/word2vec/). As the training data for the
+Word2vec model, we use the Balanced Corpus of Contemporary Written Japanese (Maekawa, 2008),
+which consists of about 5,800,000 sentences in various domains. Based on the list of similar words, we
+choose easy words which are included in the vocabulary list of new JLPT as simplified words. If there
+is no appropriate easy word in the vocabulary list of the new JLPT, we use Japanese-Chinese
+homographs whose meaning is the same, or similar to Chinese words based on Japanese dictionaries
+(Bunrui goihyo zouhokaiteiban, 2004; Kadokawa ruigo shin jiten, 2002; Kojien 5th Editon, 1998).
+Japanese-Chinese homographs for simplification are specific for Chinese-natives. Therefore, our
+“Simple Japanese Replacement List” differs from previous research mentioned above on this aspect.
+
+2
+
+
+
+For simplification of Japanese functional expressions, we rewrite some difficult Japanese functional
+expressions using easy Japanese functional expressions or easy words in the vocabulary list of the new
+JLPT based on a Japanese sentence pattern dictionary (Group Jamasi, Xu. 2001).
+
+Original words Difficulty Level Part of speech Simplified words Difficulty Level
+合鍵 (duplicate key) N1 Noun 鍵 (key) N5
+負け戦 (defeat) N0 Noun 敗戦 (defeat) N0
+出会う(meet) N0 Verb 会う (meet) N5
+
+胸苦しい (tough) N1 Adjective 苦しい (tough) N3
+が早いか (when) N1 Functional Expression と (when) N5
+の際には (when) N2 Functional Expression の時 (when) N5/N5
+
+Table 2: Examples of the Simple Japanese Replacement List
+
+Finally, we created a “Simple Japanese Replacement List,” which consists of words and functional
+expressions. Table 2 shows some examples in the list.

@@ -1,0 +1,11 @@
+
+We first introduce the dependency parsing itself,
+then describe the cross-lingual similarization, and
+finally show the application of cross-lingually simi-
+larized grammars in tree-based machine translation.
+For convenience of description, a grammar trained
+by the conventional dependency model is named
+as original grammar, a grammar after cross-lingual
+similarization is named as similarized grammar, and
+the transferred version for a similarized grammar is
+named as adapted grammar.

@@ -1,0 +1,652 @@
+
+This paper has presented a pilot approach for the
+detection of partial cognates in multilingual word
+lists. Although the results are very promising at
+this stage, we can think of many points where
+improvement is needed, and further studies are
+needed to fully assess the potential of the cur-
+rent approach. First, it should be tested on addi-
+tional datasets, and ideally also on language fami-
+lies other than Sino-Tibetan. Second, since our ap-
+proach is very general, it can easily be adjusted to
+employ different string similarity measures or dif-
+ferent partitioning algorithms, and it would be in-
+teresting to see whether alternative measures can
+improve upon our current version.
+
+Acknowledgments
+This research was supported by the DFG research
+fellowship grant 261553824 Vertical and lateral
+aspects of Chinese dialect history (JML). EB is
+supported by by the ERC under the European
+Community's Seventh Framework Programme,
+FP7/2007-2013 Grant Agreement # 615274.
+
+Supplementary Material
+The Sup. Material contains results, benchmark
+datasets, and code, downloadable at: https://
+zenodo.org/record/51328.
+
+603
+
+
+
+References
+
+David Alvarez-Ponce, Philippe Lopez, Eric
+Bapteste, and James O. McInerney. 2013.
+Gene similarity networks provide tools for
+understanding eukaryote origins and evolu-
+tion. Proceedings of the National Academy
+of Sciences of the United States of America
+110(17):E1594--1603.
+
+Quentin D. Atkinson and Russell D. Gray. 2006.
+How old is the Indo-European language family?
+Illumination or more moths to the flame? In
+Peter Forster and Colin Renfrew, editors, Phy-
+logenetic methods and the prehistory of lan-
+guages, McDonald Institute for Archaeological
+Research, Cambridge, pages 91--109.
+
+Amit Bagga and Breck Baldwin. 1998. Entity-
+based cross-document coreferencing using the
+vector space model. In Proceedings of the 36th
+Annual Meeting of the ACL. pages 79--85.
+
+Mahe Ben Hamed and Feng Wang. 2006. Stuck in
+the forest: Trees, networks and Chinese dialects.
+Diachronica 23:29--60.
+
+Běijīng Dàxué 北京大学, editor. 1964. Hànyǔ
+fāngyán cíhuì 汉语方言词汇[Chinese dialect
+vocabularies]. Wénzì Gǎigé文字改革, Běijing
+北京.
+
+Eduardo Corel, Philippe Lopez, Raphaël Méheust,
+and Eric Bapteste. 2016. Network-thinking:
+Graphs to analyze microbial complexity and
+evolution. TrendsMicrobiology 24(3):224--237.
+
+Gábor Csárdi and Tamás Nepusz. 2006. The
+igraph software package for complex network
+research. InterJournal Complex Systems page
+1695.
+
+Brendan J. Frey and Delbert Dueck. 2007. Clus-
+tering by passing messages between data points.
+Science 315:972--976.
+
+Leanne S. Haggerty, Pierre-Alain A. Jachiet,
+William P. Hanage, David A. Fitzpatrick,
+Philippe Lopez, Mary J. O'Connell, Davide
+Pisani, Mark Wilkinson, Eric Bapteste, and
+James O. McInerney. 2014. A pluralistic ac-
+count of homology: adapting the models to the
+data. Mol. Biol. Evol. 31(3):501--516.
+
+Harald Hammarström, Robert Forkel, Martin
+Haspelmath, and Sebastian Bank. 2015. Glot-
+tolog. Max Planck Institute for Evolutionary
+Anthropology, Leipzig.
+
+BradleyHauer andGrzegorzKondrak. 2011. Clus-
+tering semantically equivalent words into cog-
+nate sets in multilingual lists. In Proceedings
+of the 5th International Joint NLP conference.
+pages 865--873.
+
+Hóu, Jīngyī侯精一, editor. 2004. Xiàndài Hànyǔ
+fāngyán yīnkù现代汉语方言音库[Phonological
+database of Chinese dialects]. Shànghǎi Jiàoyù
+上海教育, Shànghǎi上海.
+
+Gerhard Jäger. 2013. Phylogenetic inference from
+word lists using weighted alignment with empir-
+ical determined weights. Language Dynamics
+and Change 3(2):245--291.
+
+Johann-Mattis List. 2012a. Lexstat. automatic de-
+tection of cognates in multilingual wordlists. In
+Proceedings of the EACL 2012 Joint Workshop
+of LINGVIS and UNCLH . Stroudsburg, pages
+117--125.
+
+Johann-Mattis List. 2012b. SCA. phonetic align-
+ment based on sound classes. In Marija
+Slavkovik and Dan Lassiter, editors, New di-
+rections in logic, language, and computation,
+Springer, Berlin and Heidelberg, pages 32--51.
+
+Johann-Mattis List. 2014a. Investigating the im-
+pact of sample size on cognate detection. Jour-
+nal of Language Relationship 11:91--101.
+
+Johann-Mattis List. 2014b. Sequence compari-
+son in historical linguistics. Düsseldorf Uni-
+versity Press, Düsseldorf. URL: http://
+sequencecomparison.github.io.
+
+Johann-Mattis List. 2016. Beyond cognacy: His-
+torical relations between words and their impli-
+cation for phylogenetic reconstruction. Journal
+of Language Evolution 1(2). Published online
+before print.
+
+Johann-Mattis List, Michael Cysouw, and Robert
+Forkel. 2016a. Concepticon: A resource for the
+linking of concept lists. Max Planck Institute for
+the Science of Human History, Jena. Version:
+1.0, URL: http://concepticon.clld.org.
+
+Johann-Mattis List and Robert Forkel. 2016.
+LingPy. A Python library for historical linguis-
+tics. Max Planck Institute for the Science of Hu-
+man History, Jena. Version 2.5. URL: http:
+//lingpy.org. With contributions by Steven
+Moran, Peter Bouda, Johannes Dellert, Taraka
+Rama, Frank Nagel, and Simon Greenhill.
+
+Johann-Mattis List, Simon Greenhill, and Russell
+Gray. 2016b. The potential of automatic cognate
+
+604
+
+
+
+detection for historical linguistics. Manuscript
+in preparation.
+
+Philippe Lopez, Johann-Mattis List, and Eric
+Bapteste. 2013. A preliminary case for ex-
+ploratory networks in biology and linguistics.
+In Heiner Fangerau, Hans Geisler, Thorsten
+Halling, and William Martin, editors, Classifi-
+cation and evolution in biology, linguistics and
+the history of science, Franz Steiner Verlag,
+Stuttgart, pages 181--196.
+
+Wilhelm Meyer-Lübke. 1911. Romanisches ety-
+mologisches Wörterbuch. Winter, Heidelberg.
+
+Raphaël Méheust, Ehud Zelzion, Debashish Bhat-
+tacharya, Philippe Lopez, and Eric Bapteste.
+2016. Protein networks identify novel symbio-
+genetic genes resulting from plastid endosym-
+biosis. Proceedings of the National Academy of
+Sciences of the United States of America 113(3):
+3579--3584.
+
+M. E. J. Newman and M. Girvan. 2004. Find-
+ing and evaluating community structure in net-
+works. Physical Review E 69(2):026113+.
+
+Martin Rosvall and Carl T. Bergstrom. 2008. Maps
+of random walks on complex networks reveal
+community structure. Proceedings of the Na-
+tional Academy of Sciences of the United States
+of America 105(4):1118--1123.
+
+Damian Satterthwaite-Phillips. 2011. Phyloge-
+netic inference of the Tibeto-Burman languages.
+PhD Thesis, Stanford University, Stanford.
+
+Robert. R. Sokal and Charles. D. Michener. 1958.
+A statistical method for evaluating systematic
+relationships. University of Kansas Scientific
+Bulletin 28:1409--1438.
+
+George S. Starostin. 2013a. Annotated Swadesh
+wordlists for the Tujia group. In George
+Starostin, editor, The Global Lexicostatistical
+Database, RGGU, Moscow. URL: http://
+starling.rinet.ru/new100/tuj.xls.
+
+George S. Starostin. 2013b. Lexicostatistics as
+a basis for language classification. In Heiner
+Fangerau, Hans Geisler, Thorsten Halling, and
+WilliamMartin, editors, Classification and evo-
+lution in biology, linguistics and the history of
+science, Franz Steiner Verlag, Stuttgart, pages
+125--146.
+
+Robert L. Trask. 2000. The dictionary of historical
+and comparative linguistics. Edinburgh Univer-
+sity Press, Edinburgh.
+
+Peter Turchin, Ilja Peiros, and Murray Gell-Mann.
+2010. Analyzing genetic connections between
+languages by matching consonant classes. Jour-
+nal of Language Relationship 3:117--126.
+
+Stijn M. van Dongen. 2000. Graph clustering
+by flow simulation. PhD Thesis, University of
+Utrecht.
+
+James Vlasblom and Shoshana J. Wodak. 2009.
+Markov clustering versus affinity propagation
+for the partitioning of protein interaction graphs.
+BMC Bioinformatics 10:99.
+
+Feng Wang. 2006. Comparison of languages in
+contact. Academia Sinica, Taipei.
+
+605
+
+
+
+
+
+Author Index
+
+Adler, Meni, 474
+Agić, Željko, 561
+Alonso, Miguel A., 425
+Antetomaso, Stephanie, 59
+Araki, Jun, 506
+Arora, Raman, 14
+Aziz, Wilker, 169
+
+Baldwin, Timothy, 344
+Bánréti, Zoltán, 181
+Bapteste, Eric, 599
+Barbu, Eduard, 287
+Baroni, Marco, 213
+Barrett, Maria, 579
+Batmanghelich, Kayhan, 537
+Beigman Klebanov, Beata, 101
+Benton, Adrian, 14
+Bilu, Yonatan, 525
+Bingel, Joachim, 337, 579
+Biran, Or, 243
+Bontcheva, Kalina, 393
+Bouillon, Pierrette, 162
+Brooke, Julian, 344
+Byrne, Bill, 299
+
+Callison-Burch, Chris, 143
+Carlini, Roberto, 499
+Carpuat, Marine, 362
+Chang, Ming-Wei, 201
+Chen, Hsin-Hsi, 20
+Chen, Huan-Yuan, 20
+Cheung, Jackie Chi Kit, 112
+Chidlovskii, Boris, 26, 326
+Clark, Stephen, 188
+Clinchant, Stephane, 26, 326
+Cohen, William, 269
+Cohn, Trevor, 393
+Collobert, Ronan, 573
+Cordeiro, Silvio, 156
+Costa-jussà, Marta R., 357
+Croijmans, Ilja, 306
+Cross, James, 32
+Csurka, Gabriela, 26, 326
+
+Dagan, Ido, 249, 474
+
+Dakwale, Praveen, 38
+de Kok, Daniël, 1
+Dhingra, Bhuwan, 269
+Dredze, Mark, 14, 149
+Dubey, Kumar, 467
+Duh, Kevin, 531
+Dušek, Ondřej, 45
+
+Ebling, Sarah, 162
+Eger, Steffen, 52
+Elgohary, Ahmed, 362
+Elsner, Micha, 59
+Espinosa Anke, Luis, 499
+
+Fang, Yimai, 479
+Feldman, Naomi, 59
+Feng, Xiaocheng, 66
+Fern, Xiaoli, 369
+Ficler, Jessica, 72
+Fitzpatrick, Dylan, 269
+Flekova, Lucie, 313
+Flor, Michael, 101
+Fomicheva, Marina, 77
+Fonollosa, José A. R., 357
+Fukui, Kazuki, 493
+
+Gerlach, Johanna, 162
+Gershman, Sam, 537
+Gfeller, Beat, 83
+Ghaeini, Reza, 369
+Ghosh, Debanjan, 549
+Gkatzia, Dimitra, 264
+Gliozzo, Alfio, 243
+Goldberg, Yoav, 72, 231, 412
+Gómez-Rodríguez, Carlos, 425
+Gosztolya, Gábor, 181
+Gu, Yanhui, 89
+Guo, Weiwei, 107
+Gutierrez, E. Dario, 101
+Guzmán, Francisco, 460
+
+Hajishirzi, Hannaneh, 118
+Hall, Keith, 83
+Hammond, Adam, 344
+Han, Yubo, 549
+
+607
+
+
+
+Hao, Hongwei, 207
+Hasler, Eva, 299
+Hayashi, Katsuhiko, 95
+Hendrickx, Iris, 306
+Hinrichs, Erhard, 1
+Hoffmann, Ildikó, 181
+Hovy, Dirk, 351, 591
+Hu, Weihua, 380
+Huang, Liang, 32, 369
+Huang, Lifu, 66
+
+Idiart, Marco, 156, 419
+Ittycheriah, Abe, 124
+
+Jalili Sabet, Masoud, 287
+Ji, Heng, 66
+Ji, Yangfeng, 118
+Jin, Zhi, 130
+Johannsen, Anders, 561
+Jurcicek, Filip, 45
+
+Kálmán, János, 181
+Kann, Katharina, 555
+Keller, Frank, 579
+Khanam, Aquila, 549
+Kiela, Douwe, 188
+Kim, Young-Bum, 8
+Klakow, Dietrich, 175
+Komura, Taku, 531
+Köper, Maximilian, 256
+Korhonen, Anna, 518
+Kozareva, Zornitsa, 107, 332
+Kumar, Abhishek, 506
+
+Lai, K. Robert, 225
+Lazaridou, Angeliki, 213
+Lefever, Els, 306
+Legrand, Joël, 573
+Lemon, Oliver, 264
+Leong, Chee Wee, 101
+Levy, Omer, 249
+Li, Bingchen, 207
+Li, Boyang, 118
+Li, Ge, 130
+Li, Liangyou, 275
+Li, Qi, 107
+Li, Yi, 195
+Ling, Shaoshi, 387
+List, Johann-Mattis, 599
+Liu, Huan, 543
+Liu, Qun, 275
+Liu, Ting, 66
+Liu, Yang, 195
+
+Logacheva, Varvara, 585
+Long, Teng, 112
+Lopez, Philippe, 599
+Lowe, Ryan, 112
+Luan, Yi, 118
+Lukasik, Michal, 393, 585
+Luo, Zhiyuan, 374
+
+Majid, Asifa, 306
+Màrquez, Lluís, 460
+Matsumoto, Yuji, 531
+McKeown, Kathleen, 243
+Meek, Chris, 201
+Mehler, Alexander, 52
+Men, Rui, 130
+Mi, Haitao, 124
+Mihalcea, Rada, 320
+Mihaylov, Todor, 399
+Moens, Marie-Francine, 188
+Monz, Christof, 38
+Mori, Shinsuke, 236
+Morstatter, Fred, 543
+Mou, Lili, 130
+Muehl, Michael, 269
+Muresan, Smaranda, 549
+
+Nagata, Masaaki, 95, 406
+Nakov, Preslav, 399, 460
+Narasimhan, Karthik, 537
+Naskar, Sudip Kumar, 281
+Negri, Matteo, 287
+Ney, Hermann, 293
+Nguyen, Kim Anh, 454
+Ninomiya, Takashi, 236
+Nishino, Masaaki, 406
+Nothman, Joel, 432
+
+Onrust, Louis, 137
+Oshikiri, Takamasa, 493
+
+Pákáski, Magdolna, 181
+Pal, Santanu, 281
+Pavlick, Ellie, 143
+Peng, Nanyun, 149
+Peter, Jan-Thorsten, 293
+Pham, Nghia The, 213
+Plank, Barbara, 412
+Precup, Doina, 112
+Preoţiuc-Pietro, Daniel, 313
+
+Qi, Zhenyu, 207
+Qin, Bing, 66
+Qu, Weiguang, 89
+
+
+
+Ramisch, Carlos, 156
+Rayner, Manny, 162
+Reitter, David, 443
+Richardson, Matthew, 201
+Rieser, Verena, 264
+Rodríguez-Fernández, Sara, 499
+Roth, Dan, 387
+Rothe, Sascha, 512
+Ruan, Xianzhi, 320
+
+Sachan, Mrinmaya, 467, 486
+Saeedi, Ardavan, 537
+Saldanha, Gavin, 243
+Salle, Alexandre, 419
+Sarikaya, Ruhi, 8
+Schogol, Vlad, 83
+Schulte im Walde, Sabine, 256, 454
+Schulz, Philip, 169
+Schütze, Hinrich, 512, 555
+Søgaard, Anders, 231, 337, 412, 561, 579
+Shi, Wei, 207
+Shi, Xingtian, 89
+Shimodaira, Hidetoshi, 493
+Shutova, Ekaterina, 101
+Sima’an, Khalil, 169
+Slonim, Noam, 525
+Song, Yangqiu, 387
+Specia, Lucia, 77, 585
+Spruit, Shannon L., 591
+Srijith, P. K., 393
+Stahlberg, Felix, 299
+Stanovsky, Gabriel, 474
+Strasly, Irene, 162
+Stratos, Karl, 8
+Suh, Jina, 201
+Sun, Xu, 567
+Suzuki, Jun, 406
+Szatlóczki, Gréta, 181
+
+Tadepalli, Prasad, 369
+Tang, Duyu, 66
+Teufel, Simone, 479
+Tian, Jun, 207
+Tomori, Suzushi, 236
+Tóth, László, 181
+Tsourakis, Nikos, 162
+Tsujii, Jun’ichi, 380
+Turchi, Marco, 287
+
+Ungar, Lyle, 313
+
+van den Bosch, Antal, 137, 306
+van Genabith, Josef, 281
+
+Van hamme, Hugo, 137
+Varjokallio, Matti, 175
+Vela, Mihaela, 281
+Veyhe, Bartal, 374
+Vilares, David, 425
+Villavicencio, Aline, 156, 419
+Vincze, Veronika, 181
+Vo, Duy Tin, 219
+Vu, Duy, 393
+Vu, Ngoc Thang, 454
+Vulić, Ivan, 188, 518
+
+Waite, Aurelien, 299
+Wan, Xiaojun, 449
+Wang, Jin, 225
+Wang, Weiyue, 293
+Wang, Zhiguo, 124
+Wanner, Leo, 499
+Way, Andy, 275
+Webster, Kellie, 432
+Wei, Jinmao, 89
+Wei, Zhongyu, 195
+Wilson, Steven, 320
+Woods, Aubrie, 438
+
+Xing, Eric, 467, 486
+Xu, Bo, 207
+Xu, Jingjing, 567
+Xu, Yan, 130
+Xu, Yang, 443
+
+Yamada, Makoto, 332
+Yan, Rui, 130
+Yang, Zhenglu, 89
+Yih, Wen-tau, 201
+Yu, Liang-Chih, 225
+Yu, Yang, 449
+Yung, Frances, 531
+
+Zhai, Ke, 107
+Zhang, Lu, 130
+Zhang, Xuejie, 225
+Zhang, Yue, 219
+Zhou, Junsheng, 89
+Zhou, Peng, 207
+Zhou, Xinjie, 449
+Zhou, Zhong, 269
+Zilio, Leonardo, 156
+Zubiaga, Arkaitz, 393
+Zukov Gregoric, Andrej, 374
+
+
+	Program
+	Transition-based dependency parsing with topological fields
+	Scalable Semi-Supervised Query Classification Using Matrix Sketching
+	Learning Multiview Embeddings of Twitter Users
+	Implicit Polarity and Implicit Aspect Recognition in Opinion Mining
+	A Domain Adaptation Regularization for Denoising Autoencoders
+	Incremental Parsing with Minimal Features Using Bi-Directional LSTM
+	Improving Statistical Machine Translation Performance by Oracle-BLEU Model Re-estimation
+	Sequence-to-Sequence Generation for Spoken Dialogue via Deep Syntax Trees and Strings
+	On the Linearity of Semantic Change: Investigating Meaning Variation via Dynamic Graph Models
+	Joint Word Segmentation and Phonetic Category Induction
+	A Language-Independent Neural Network for Event Detection
+	Improved Parsing for Argument-Clusters Coordination
+	Reference Bias in Monolingual Machine Translation Evaluation
+	Cross-lingual projection for class-based language models
+	A Fast Approach for Semantic Similar Short Texts Retrieval
+	Empty element recovery by spinal parser operations
+	Semantic classifications for detection of verb metaphors
+	Recognizing Salient Entities in Shopping Queries
+	Leveraging Lexical Resources for Learning Entity Embeddings in Multi-Relational Data
+	Multiplicative Representations for Unsupervised Semantic Role Induction
+	Vocabulary Manipulation for Neural Machine Translation
+	Natural Language Inference by Tree-Based Convolution and Heuristic Matching
+	Improving cross-domain n-gram language modelling with skipgrams
+	Simple PPDB: A Paraphrase Database for Simplification
+	Improving Named Entity Recognition for Chinese Social Media with Word Segmentation Representation Learning
+	How Naked is the Naked Truth? A Multilingual Lexicon of Nominal Compound Compositionality
+	An Open Web Platform for Rule-Based Speech-to-Sign Translation
+	Word Alignment without NULL Words
+	Unsupervised morph segmentation and statistical language models for vocabulary expansion
+	Detecting Mild Cognitive Impairment by Exploiting Linguistic Information from Transcripts
+	Multi-Modal Representations for Improved Bilingual Lexicon Learning
+	Is This Post Persuasive? Ranking Argumentative Comments in Online Forum
+	The Value of Semantic Parse Labeling for Knowledge Base Question Answering
+	Attention-Based Bidirectional Long Short-Term Memory Networks for Relation Classification
+	The red one!: On learning to refer to things based on discriminative properties
+	Don't Count, Predict! An Automatic Approach to Learning Sentiment Lexicons for Short Text
+	Dimensional Sentiment Analysis Using a Regional CNN-LSTM Model
+	Deep multi-task learning with low level tasks supervised at lower layers
+	Domain Specific Named Entity Recognition Referring to the Real World by Deep Neural Networks
+	An Entity-Focused Approach to Generating Company Descriptions
+	Annotating Relation Inference in Context via Question Answering
+	Automatic Semantic Classification of German Preposition Types: Comparing Hard and Soft Clustering Approaches across Features
+	Natural Language Generation enhances human decision-making with uncertain information
+	Tweet2Vec: Character-Based Distributed Representations for Social Media
+	Phrase-Level Combination of SMT and TM Using Constrained Word Lattice
+	A Neural Network based Approach to Automatic Post-Editing
+	An Unsupervised Method for Automatic Translation Memory Cleaning
+	Exponentially Decaying Bag-of-Words Input Features for Feed-Forward Neural Network in Statistical Machine Translation
+	Syntactically Guided Neural Machine Translation
+	Very quaffable and great fun: Applying NLP to wine reviews
+	Exploring Stylistic Variation with Age and Income on Twitter
+	Finding Optimists and Pessimists on Twitter
+	Transductive Adaptation of Black Box Predictions
+	Which Tumblr Post Should I Read Next?
+	Text Simplification as Tree Labeling
+	Bootstrapped Text-level Named Entity Recognition for Literature
+	The Enemy in Your Own Camp: How Well Can We Detect Statistically-Generated Fake Reviews -- An Adversarial Study
+	Character-based Neural Machine Translation
+	Learning Monolingual Compositional Representations via Bilingual Supervision
+	Event Nugget Detection with Forward-Backward Recurrent Neural Networks
+	IBC-C: A Dataset for Armed Conflict Analysis
+	A Latent Concept Topic Model for Robust Topic Inference Using Word Embeddings
+	Word Embeddings with Limited Memory
+	Hawkes Processes for Continuous Time Sequence Classification: an Application to Rumour Stance Classification in Twitter
+	Hunting for Troll Comments in News Community Forums
+	Phrase Table Pruning via Submodular Function Maximization
+	Multilingual Part-of-Speech Tagging with Bidirectional Long Short-Term Memory Models and Auxiliary Loss
+	Matrix Factorization using Window Sampling and Negative Sampling for Improved Word Representations
+	One model, two languages: training bilingual parsers with harmonized treebanks
+	Using mention accessibility to improve coreference resolution
+	Exploiting Linguistic Features for Sentence Completion
+	Convergence of Syntactic Complexity in Conversation
+	User Embedding for Scholarly Microblog Recommendation
+	Integrating Distributional Lexical Contrast into Word Embeddings for Antonym-Synonym Distinction
+	Machine Translation Evaluation Meets Community Question Answering
+	Science Question Answering using Instructional Materials
+	Specifying and Annotating Reduced Argument Span Via QA-SRL
+	Improving Argument Overlap for Proposition-Based Summarisation
+	Machine Comprehension using Rich Semantic Representations
+	Cross-Lingual Word Representations via Spectral Graph Embeddings
+	Semantics-Driven Recognition of Collocations Using Word Embeddings
+	Incorporating Relational Knowledge into Word Representations using Subspace Regularization
+	Word Embedding Calculus in Meaningful Ultradense Subspaces
+	Is "Universal Syntax" Universally Useful for Learning Distributed Word Representations?
+	Claim Synthesis via Predicate Recycling
+	Modelling the Interpretation of Discourse Connectives by Bayesian Pragmatics
+	Nonparametric Spherical Topic Modeling with Word Embeddings
+	A Novel Measure for Coherence in Statistical Topic Models
+	Coarse-grained Argumentation Features for Scoring Persuasive Essays
+	Single-Model Encoder-Decoder with Explicit Morphological Representation for Reinflection
+	Joint part-of-speech and dependency projection from multiple sources
+	Dependency-based Gated Recursive Neural Network for Chinese Word Segmentation
+	Deep Neural Networks for Syntactic Parsing of Morphologically Rich Languages
+	Weakly Supervised Part-of-speech Tagging Using Eye-tracking Data
+	Metrics for Evaluation of Word-level Machine Translation Quality Estimation
+	The Social Impact of Natural Language Processing
+	Using Sequence Similarity Networks to Identify Partial Cognates in Multilingual Wordlists
+

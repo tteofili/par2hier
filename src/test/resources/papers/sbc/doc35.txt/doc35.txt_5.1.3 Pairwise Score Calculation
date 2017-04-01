@@ -1,0 +1,16 @@
+Suppose thatW is the number of wins compared to the baseline, L is the number of losses and T is the
+number of ties. The Pairwise score can be calculated by the following formula:
+
+Pairwise = 100× W − L
+W + L+ T
+
+From the definition, the Pairwise score ranges between -100 and 100.
+20http://lotus.kuee.kyoto-u.ac.jp/WAT/registration/index.html
+21It was called HUMAN score in WAT2014 and Crowd score in WAT2015.
+
+9
+
+
+
+5 All important information is transmitted correctly.
+(100%)

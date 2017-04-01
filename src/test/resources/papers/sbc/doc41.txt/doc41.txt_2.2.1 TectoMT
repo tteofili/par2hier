@@ -1,0 +1,11 @@
+The main application of Treex is TectoMT3 (Žabokrtský et al., 2008; Dušek et al., 2015), a linguistically
+motivated hybrid machine translation system. Its pipieline consists of three main steps: analysis of each
+source sentence up to t-layer (a deep syntactic representation of the sentence in a labelled dependency
+t-tree), transfer of the source t-tree to the target t-tree (i.e., the translation per se), and generation of the
+target sentence from the target t-tree (see Figure 1).
+
+The transfer is performed by copying the t-tree structure and grammatemes4 (attributes describing
+grammatical meaning) from source, and predicting target lemmas and formemes5 (deep morphosyntactic
+attributes (Dušek et al., 2012)) using a set of machine-learned translation models. In the current transfer
+implementation, TectoMT translates t-tree nodes one-to-one; however, as function words are abstracted
+from, a one-to-one correspondence between t-trees in different languages is present in most cases.

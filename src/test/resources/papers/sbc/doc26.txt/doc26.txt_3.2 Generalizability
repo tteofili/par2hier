@@ -1,0 +1,117 @@
+
+Because MT systems extract error/correction pairs
+from phrase-translation tables, they can only iden-
+tify erroneous surface forms observed in training
+and propose corrections that occurred with the cor-
+responding surface forms. Crucially, in a standard
+MT scenario, any resulting translation consists of
+“matches” mined from the translation tables, so
+a standard MT model lacks lexical abstractions
+that might help generalize, thus out-of-vocabulary
+words is a well-known problem in MT (Daume
+and Jagarlamudi, 2011). While more advanced
+MT models can abstract by adding higher-level
+
+Error AMU (MT) CUUI (Classif.)
+type P R F0.5 P R F0.5
+Orthog./punc. (Mec) 61.6 16.3 39.6 53.3 8.7 26.4
+Article (ArtOrDet) 38.0 10.9 25.4 31.8 47.9 34.0
+Preposition (Prep) 54.9 10.4 29.5 31.7 8.8 20.9
+Noun number (Nn) 49.6 43.2 48.2 42.5 46.2 43.2
+Verb tense (Vt) 30.2 9.3 20.8 61.1 5.4 19.9
+Subj.-verb agr. (SVA) 48.3 14.9 33.3 57.7 57.7 57.7
+Verb form (Vform) 40.5 16.8 31.8 69.2 15.1 40.3
+Word form (Wform) 59.0 36.6 52.6 60.0 13.5 35.6
+
+Table 6: Performance of MT and classifier sys-
+tems from CoNLL-2014 on common errors.
+
+features such as POS, previous attempt yielded
+only marginal improvements (Mizumoto and Mat-
+sumoto, 2016), since one typically needs different
+types of abstractions depending on the error type,
+as we show below.
+
+With classifiers, it is easy to generalize using
+higher-level information that goes beyond surface
+form and to adjust the abstraction to the error type.
+Many grammatical errors may benefit from gener-
+alizations based on POS or parse information; we
+can thus expect that classifiers will do better on
+errors that require linguistic abstractions.
+
+To validate this hypothesis, we evaluate type-
+based performance of two systems: a top-3 MT-
+based AMU system and a top-2 classifier-based
+CUUI; we do not include the top-1 system, since
+it is a hybrid system that also uses rules.
+
+Unlike recall, estimating type-based precision
+requires knowing the type of the correction sup-
+plied by the system, which is not specified in the
+output. We thus manually analyze the output of
+the AMU and CUUI systems for seven common
+error categories and assign to each correction an
+appropriate type to estimate precision and F0.5
+(Table 6). The CUUI system addresses all of these
+errors, with the exception of mechanical (Mec), of
+which it handles a small subset. The AMU sys-
+tem does better on mechanical, preposition, word
+form, and noun number. CUUI does better on ar-
+ticles, verb agreement, and verb form.
+
+We now consider examples of errors that are
+corrected by the classifier-based CUUI system in
+these three categories but are missed by the MT-
+based AMU system (Table 7). Examples (1) and
+
+
+
+Long-distance dependencies: verb agreement
+
+(1) As a result , in the case that when one of the members *happen/happens to feel uncomfortable or abnormal , he or sheshould be aware that . . .
+
+(2) A study of New York University in 2010 shown that patients with family members around generally *recovers/recover2-4 days faster than those taken care by professional nurses .
+Confusions not found in training: verb agreement and verb form
+
+(3) Hence , the social media sites *serves/serve as a platform for the connection .
+(4) After *came/coming back from the hospital , the man told his parents that the problem was that he carried . . .
+(5) social media is the only resource they can approach to know everything *happened/happening in their country . . .
+
+Superfluous words: articles
+(6) For *an/∅ example , if exercising is helpful, we can always look for more chances for the family to go exercise .
+(7) . . . as soon a person is made aware of his or her genetic profile , he or she has *a/∅ knowledge about others .
+
+Omissions: articles
+(8) In this case , if one of the family members or close relatives is found to carry *∅/a genetic risk . . .
+
+Table 7: Generalizing beyond surface form: Examples of mistakes that classifiers successfully address.
+Output of the classifier-based CUUI system.
+
+(2) illustrate verb errors with long-distance sub-
+jects (“one” and “patients”). This is handled in
+the classification approach via syntactic features.
+An MT system misses these errors because it is
+limited to edits within short spans. Examples (3),
+(4), and (5) illustrate verb mistakes for which the
+correct replacements were not observed in train-
+ing but that are nonetheless corrected by general-
+izing beyond surface form. Finally, (6) and (7)
+illustrate omission and insertion errors, a major-
+ity of article mistakes. The MT system is espe-
+cially bad at correcting such mistakes. Notably,
+the classifier-based CUUI system correctly identi-
+fied twice as many omitted articles and more than
+20 times more superfluous articles than the MT-
+based AMU system. This happens because an MT
+system is restricted to suggesting deletions and in-
+sertions in those contexts that were observed in
+training, whereas a classifier uses shallow parse in-
+formation, which allows it to insert or delete an ar-
+ticle in front of every eligible noun phrase. These
+examples demonstrate that the ability of a system
+to generalize beyond the surface forms is indeed
+beneficial for long-distance dependencies, for ab-
+stracting away from surface forms when formu-
+lating confusion sets, and for mistakes involving
+omitting or inserting a word.

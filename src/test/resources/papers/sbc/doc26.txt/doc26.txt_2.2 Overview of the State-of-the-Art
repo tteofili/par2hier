@@ -1,0 +1,195 @@
+
+The statistical machine translation approach is
+based on the noisy-channel model. The best trans-
+lation for a foreign sentence f is:
+
+e∗ = argmax
+e
+
+p(e)p(f |e)
+
+
+
+Error type Rel. freq. (%) Examples
+
+Article (ArtOrDet) 19.93 *∅/The government should help encourage *the/∅ breakthroughs as wellas *a/∅ complete medication system .
+
+Wrong collocation (Wci) 12.51 Some people started to *think/wonder if electronic products can replacehuman beings for better performances .
+
+Noun number (Nn) 11.44 There are many reports around the internet and on newspaper stating thatsome users ’ *iPhone/iPhones exploded .
+Preposition (Prep) 8.98 I do not agree *on/with this argument...
+
+Word form (Wform) 6.56 ...the application of surveillance technology serves as a warning to the*murders/murderers and they might not commit more murder .
+
+Orthography/punctuation (Mec) 5.75 Even British Prime Minister , Gordon Brown *∅/, has urged that all carsin *britain/Britain to be green by 2020 .
+
+Verb tense (Vt) 4.56 Through the thousands of years , most Chinese scholars *are/{havebeen} greatly affected by Confucianism .
+Linking words/phrases (Trans) 4.10 *However/Although , video surveillance may be a great help .
+
+Local redundancy (Rloc-) 3.70 Some solutions *{as examples}/∅ would be to design plants/fertilizersthat give higher yield ...
+Subject-verb agreement (SVA) 3.58 However , tracking people *are/is different from tracking goods .
+Verb form (Vform) 3.52 Travelers survive in desert thanks to GPS *guide/guiding them .
+
+Table 2: Example errors. In the parentheses, the error codes used in the shared task are shown. Errors
+exemplifying the relevant phenomena are marked; the sentences may contain other mistakes.
+
+Rank System F0.5 Approach External training data External
+name Native data Learner data error modules
+
+1 CAMB 37.33 Rules and MT Microsoft Web LM Cambridge Corpus, Eng.Vocab Profile
+Cambridge “Write
+and Improve”
+
+2 CUUI 36.79 Classif.; patterns Web1T
+3 AMU 35.01 MT Wikipedia, CommonCrawl Lang-8
+4 POST 30.88 LM and rules Web1T PyEnchant Spell
+
+5 NTHU 29.92 Rules, MT, clas-sif.
+Web1T, Gigaword, BNC,
+Google Books
+
+Spellcheckers: As-
+pell, GingerIt
+
+Table 3: The top 5 systems in CoNLL-2014. The last column lists external proofing tools used. LM
+stands for language models.
+
+The model consists of two components: a lan-
+guage model assigning a probability p(e) for any
+target sentence e, and a translation model that as-
+signs a conditional probability p(f |e). The lan-
+guage model is learned using a monolingual cor-
+pus in the target language. The parameters of
+the translation model are estimated from a par-
+allel corpus, i.e. the set of foreign sentences
+and their corresponding translations into the tar-
+get language. In error correction, the task is cast
+as translating from erroneous learner writing into
+corrected well-formed English. The MT approach
+relies on the availability of a parallel corpus for
+learning the translation model. In case of error
+correction, a set of learner sentences and their cor-
+rections functions as a parallel corpus.
+
+State-of-the-art MT systems are phrase-based,
+i.e. parallel data is used to derive a phrase-based
+lexicon (Koehn et al., 2003). The resulting lexicon
+consists of a list of pairs (seqf , seqe) where seqf
+is a sequence of one or more foreign words, seqe
+is a predicted translation. Each pair comes with
+an associated score. At decoding time, all phrases
+from sentence f are collected with their corre-
+sponding translations observed in training. These
+
+are scored together with the language modeling
+scores and may include other features. The phrase-
+based approach by Koehn et al. (2003) uses a log-
+linear model (Och and Ney, 2002), and the best
+correction maximizes the following:
+
+e∗ = argmax
+e
+
+P (e|f) (1)
+
+= argmax
+e
+
+exp(
+
+M∑
+m=1
+
+λmhm(e, f))
+
+where hm is a feature function, such as lan-
+guage model score and translation scores, and λm
+corresponds to a feature weight.
+The classifier approach is based on the context-
+sensitive spelling correction methodology (Gold-
+ing and Roth, 1996; Golding and Roth, 1999;
+Banko and Brill, 2001; Carlson et al., 2001; Carl-
+son and Fette, 2007) and goes back to earlier ap-
+proaches to article and preposition error correction
+(Izumi et al., 2003; Han et al., 2006; Gamon et
+al., 2008; Felice and Pulman, 2008; Tetreault et
+al., 2010; Gamon, 2010; Dahlmeier and Ng, 2011;
+Dahlmeier and Ng, 2012). The classifier approach
+to error correction has been prominent for a long
+time before MT, since building a classifier does not
+require having annotated learner data.
+
+
+
+Property MT Classifier
+(1a) Error coverage: ability to address a wide
+variety of error phenomena
+
++All errors occurring in the train-
+ing data are automatically covered
+
+-Only errors covered by the classi-
+fiers; new errors need to be added
+explicitly
+
+(1b) Error complexity: ability to handle com-
+plex and interacting mistakes that go beyond
+word boundaries
+
++Automatically through parallel
+data, via phrase-based lexicons
+
+-Need to develop via specific ap-
+proaches
+
+(2) Generalizability: going beyond the error
+confusions observed in training
+
+-Only confusions observed in
+training can be corrected
+
++Easily generalizable via confu-
+sion sets and features
+
+(3) Supervision/Annotation: role of learner
+data in training the system -Required +Not required
+
+(4) System flexibility: adapting knowledge
+sources per error phenomena
+
+-Not easy to integrate error-
+specific knowledge resources
+
++Flexible; phenomenon-specific
+knowledge sources
+
+Table 4: Summary of the key properties of the MT and the classifier-based approaches. We use +
+and − to indicate a positive or a negative value with respect to each factor.
+
+Classifiers are trained individually for a specific
+error type. Because an error type needs to be de-
+fined, typically only well-defined mistakes can be
+addressed in a straightforward way. Given an error
+type, a confusion set is specified and includes a list
+of confusable words. For some errors, confusion
+sets are constructed using a closed list (e.g. prepo-
+sitions). For other error types, NLP tools are re-
+quired. To identify locations where an article was
+likely omitted incorrectly, for example, a phrase
+chunker is used. Each occurrence of a confusable
+word in text is represented as a vector of features
+derived from a context window around the target.
+The problem is cast as a multi-class classification
+task.
+
+In the classifier paradigm, there are various al-
+gorithms – generative (Gamon, 2010; Park and
+Levy, 2011), discriminative (Han et al., 2006;
+Gamon et al., 2008; Felice and Pulman, 2008;
+Tetreault et al., 2010), and joint approaches
+(Dahlmeier and Ng, 2012; Rozovskaya and Roth,
+2013). Earlier works trained on native data (due
+to lack of annotation). Later approaches incorpo-
+rated learner data in training in various ways (Han
+et al., 2010; Gamon, 2010; Rozovskaya and Roth,
+2010a; Dahlmeier and Ng, 2011).

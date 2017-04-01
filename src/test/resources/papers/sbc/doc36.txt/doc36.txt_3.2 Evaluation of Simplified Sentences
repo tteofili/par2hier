@@ -1,0 +1,35 @@
+
+In this section, we evaluate the simplified sentences from the following two aspects, fluency and
+readability. From the 200 example sentences that include functional expressions, we removed 36
+sentences which are easy sentences since they include no difficult words. We do not need to simplify
+such sentences. We then used the remaining 164 sentences for evaluation.
+For the evaluation of fluency, we invited three Japanese natives to check the simplified sentences
+
+whether they are natural Japanese sentences. Meanwhile, for readability of the simplified sentences,
+we invited three Chinese-speaking learners who are all beginners of Japanese language. To compare
+the readability, we provided them with the Chinese translation of the original sentences and simplified
+sentences using an online translation software “Google translation” (translate.google.cn). We asked
+them to read and judge which sentence is easier to understand. Tables 5 and 6 show the evaluation
+results of fluency and readability respectively.
+
+Natural sentences 142 (86.6%)
+Unnatural sentences 22 (13.4%)
+Total 164 (100%)
+
+Table 5: Evaluation results of fluency of the simplified sentences
+
+Easy to understand 132 (80.5%)
+Difficult to understand 32 (19.5%)
+Total 164 (100%)
+
+Table 6: Evaluation results of readability of the simplified sentences
+
+According to the evaluation results in Table 6, 80.5% sentences are simplified appropriately and
+become easier to understand. Two cases are identified in simplification failure. One is lack of
+appropriate simplified rules. For example, “請求しうる ” contains a functional expression “うる
+(possible)” with the difficulty level 2. However, no corresponding simplified word for the functional
+expression “うる” is found in the current “Simple Japanese Replacement List”. This case cannot be
+coped with by lexical simplification. The other is the usage of inappropriate words, which is the main
+reason for generation of unnatural simplified sentences. For example, “市内の青果物商を片っ端か
+ら尋ねて回った。” was rewritten as “市内の野菜と果物商を一つ一つから尋ねて回った。”,
+which is an unnatural sentence that produces unnatural connections for words.
