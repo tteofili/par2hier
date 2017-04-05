@@ -59,12 +59,16 @@ public class Par2HierTest {
   @Parameterized.Parameters
   public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][] {
+        {Par2HierUtils.Method.CLUSTER, 5},
         {Par2HierUtils.Method.CLUSTER, 4},
         {Par2HierUtils.Method.CLUSTER, 3},
         {Par2HierUtils.Method.CLUSTER, 2},
+        {Par2HierUtils.Method.CLUSTER, 1},
+        {Par2HierUtils.Method.SUM, 5},
         {Par2HierUtils.Method.SUM, 4},
         {Par2HierUtils.Method.SUM, 3},
         {Par2HierUtils.Method.SUM, 2},
+        {Par2HierUtils.Method.SUM, 1},
     });
   }
 
@@ -86,27 +90,8 @@ public class Par2HierTest {
     Map<String, INDArray> hvs = new TreeMap<>();
     Map<String, INDArray> pvs = new TreeMap<>();
 
-    // paragraph vectors training configuration
-    double learningRate = 0.05;
-    int iterations = 1;
-    int windowSize = 5;
-    int layerSize = 30;
-    int numEpochs = 5;
-    int minWordFrequency = 2;
-    double minLearningRate = 0.001;
-    int batchSize = 5;
-
     paragraphVectors = new ParagraphVectors.Builder()
-        .epochs(numEpochs)
-        .iterations(iterations)
-        .windowSize(windowSize)
-        .layerSize(layerSize)
-        .minWordFrequency(minWordFrequency)
-        .minLearningRate(minLearningRate)
-        .batchSize(batchSize)
-        .learningRate(learningRate)
         .iterate(iterator)
-        .trainWordVectors(true)
         .tokenizerFactory(tokenizerFactory)
         .build();
 
@@ -207,7 +192,11 @@ public class Par2HierTest {
     for (Map.Entry<String, INDArray> entry : pvs.entrySet()) {
       String key = entry.getKey();
       String depth = String.valueOf(key.split("\\.").length - 1);
-      String doc = String.valueOf(key.charAt(3));
+      String c = String.valueOf(key.charAt(3));
+      if (Character.isDigit(key.charAt(4))) {
+        c += key.charAt(4);
+      }
+      String doc = String.valueOf(c);
       builder.append(doc).append(',').append(depth).append(", ").append(entry.toString().replace("=[", ",").replace("]", ","));
       String s = hvs.get(key).toString();
       builder.append(s.replace("[", "").replace("]", "")).append("\n");

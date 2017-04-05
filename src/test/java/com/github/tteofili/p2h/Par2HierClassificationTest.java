@@ -69,28 +69,7 @@ public class Par2HierClassificationTest {
     tokenizerFactory = new DefaultTokenizerFactory();
     tokenizerFactory.setTokenPreProcessor(new CommonPreprocessor());
 
-    // ParagraphVectors training configuration
-    double learningRate = 0.05;
-    int iterations = 1;
-    int windowSize = 5;
-    int layerSize = 30;
-    int numEpochs = 1;
-    int minWordFrequency = 1;
-    double minLearningRate = 0.001;
-    int batchSize = 1;
-
     paragraphVectors = new ParagraphVectors.Builder()
-        .minWordFrequency(minWordFrequency)
-        .iterations(iterations)
-        .epochs(numEpochs)
-        .layerSize(layerSize)
-        .minLearningRate(minLearningRate)
-        .batchSize(batchSize)
-        .learningRate(learningRate)
-        .windowSize(windowSize)
-        .iterate(iterator)
-        .trainWordVectors(true)
-        .tokenizerFactory(tokenizerFactory)
         .build();
 
     // fit model
