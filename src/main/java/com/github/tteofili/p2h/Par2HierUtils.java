@@ -105,7 +105,7 @@ class Par2HierUtils {
 
   /**
    * base case: on a leaf hv = pv
-   * on a non-leaf node with n childs: hv = pv + k centroids of the n hv
+   * on a non-leaf node with n children: hv = pv + k centroids of the n hv
    */
   private static INDArray getPar2HierVector(WeightLookupTable<VocabWord> lookupTable, PatriciaTrie<String> trie, String node,
                                             int k, Map<String, INDArray> hvs, Method method) {
