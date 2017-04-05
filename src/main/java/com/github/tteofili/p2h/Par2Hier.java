@@ -300,7 +300,7 @@ public class Par2Hier extends Word2Vec {
       }
     }
 
-    Collections.sort(result, new BasicModelUtils.SimilarityComparator());
+    result.sort(new BasicModelUtils.SimilarityComparator());
 
     return BasicModelUtils.getLabels(result, topN);
   }
@@ -530,14 +530,14 @@ public class Par2Hier extends Word2Vec {
                 */
 
         if (docIter instanceof LabelAwareDocumentIterator) {
-          this.labelAwareIterator = new DocumentIteratorConverter((LabelAwareDocumentIterator) docIter, labelsSource);
+          this.labelAwareIterator = new DocumentIteratorConverter(docIter, labelsSource);
         } else {
           this.labelAwareIterator = new DocumentIteratorConverter(docIter, labelsSource);
         }
       } else if (sentenceIterator != null) {
         // we have SentenceIterator. Mechanics will be the same, as above
         if (sentenceIterator instanceof LabelAwareSentenceIterator) {
-          this.labelAwareIterator = new SentenceIteratorConverter((LabelAwareSentenceIterator) sentenceIterator, labelsSource);
+          this.labelAwareIterator = new SentenceIteratorConverter(sentenceIterator, labelsSource);
         } else {
           this.labelAwareIterator = new SentenceIteratorConverter(sentenceIterator, labelsSource);
         }
