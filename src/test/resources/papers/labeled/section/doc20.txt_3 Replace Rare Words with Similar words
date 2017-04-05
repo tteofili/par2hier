@@ -1,0 +1,78 @@
+
+The analysis in the above section shows the importance of
+keeping the sentence structure complete. So we propose
+
+2853
+
+
+
+biligual
+
+mono-
+lingual
+
+similarity
+model
+
+lexical
+table
+
+aligned
+bilingual
+
+replaced
+bilingual
+
+NMT
+model
+
+input
+
+similarity
+model
+
+lexical
+table
+
+replaced
+input output
+
+NMT
+model
+
+Restored
+output
+
+Training Testing
+
+Figure 2: Data processing diagram for training and testing
+
+to replace rare words in training and testing data with in-
+vocabulary words similar to them. The data processing di-
+agram is shown in Figure 2.
+
+In the training phase, we first learn a similarity model from
+a monolingual corpus, which is used to evaluate the similarity
+between words. We also need to learn word level alignment
+for sentence pairs in the bilingual corpus. As a byproduct, a
+lexical translation table can be derived from the aligned bilin-
+gual corpus. In our experiments, we only reserve the trans-
+lation with the highest probability for each word in the table.
+Then the aligned word pairs which contain rare words will be
+replaced with in-vocabulary words similar to them. Finally, a
+NMT model will be learned from the new bilingual corpus.
+
+In the testing phase, the rare words in testing sentence
+will be first replaced with similar in-vocabulary words. Then
+the sentence after replacement will be translated by the
+NMT�model obtained in the training phase. With the help
+of the lexical translation model, the translation of those rare
+words will be substituted back into the generated target sen-
+tence to obtain the final result.
+
+There are three issues not explained in detail in the dia-
+gram, including i) which words in the bilingual corpus will
+be replaced? ii) how to evaluate similarity between words?
+iii) How to recover the translation for rare words during test-
+ing? The following parts in this section will answer these
+questions.

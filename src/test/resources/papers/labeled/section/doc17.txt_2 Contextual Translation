@@ -1,0 +1,43 @@
+
+MuTUAL starts from the observation that the same source sentence should be translated as different tar-
+get sentences depending on its location within the functional elements of the document. Let us consider
+this example Japanese sentence from a procedural technical manual: ‘文書を印刷する/bunsho o insatsu
+suru’. This sentence can appear as a task title in a section heading or as a step description in an itemi-
+sation, and should be translated, respectively, as ‘To print a document’ or ‘Print the document’. That is,
+the translation depends on the item’s functional role within the document.
+This work is licensed under a Creative Commons Attribution 4.0 International Licence. Licence details: http://
+creativecommons.org/licenses/by/4.0/
+
+1http://www.acrolinx.com/
+2http://www.smartny.com/maxit.html/
+
+35
+
+
+
+DITA element in Body (default) Specified functional element
+Prereq information the user needs to know before
+
+starting
+Personal condition
+Event condition
+Item condition
+
+Context background information Explanation (Summary, Purpose, Expiration
+of validity, Penalty, Related concept)
+
+Steps main content: a series of steps Necessary items to bring
+Place to go
+Form(s) to complete
+
+Result expected outcome Result (Period for procedure, Items to be is-
+sued, Contact from local government)
+
+Postreq steps to do after completion of current task Guidance to other procedures
+
+Table 1: Instantiation of the DITA Task topic
+
+To realise contextual translation using MT, we (1) formulated a document structure for municipal
+procedures based on the Darwin Information Typing Architecture (DITA) framework (OASIS, 2010), and
+(2) defined context-dependent CL rules in both source and target languages according to the functional
+document elements, in combination with ST transformation rules.

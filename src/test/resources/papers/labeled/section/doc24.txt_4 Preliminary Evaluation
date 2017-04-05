@@ -1,0 +1,66 @@
+
+In Spring 2015, SWoRD with instant-feedback was
+deployed in 9 high-school Advanced Placement
+(AP) classes. We conducted preliminary evalua-
+tions to answer two research questions: (1) How
+precisely does the system predict peer review solu-
+tion and trigger the instant feedback? (2) How does
+the instant feedback impact review revisions? We
+collected peer review submissions which were inter-
+vened by Instant-feedback SWoRD (i.e., triggered
+instant feedback), and their immediately subsequent
+resubmissions (if any), then had an expert manu-
+ally code the collected comments for their feed-
+back types: solution, problem-only, non-criticism
+(double-coded data had inter-rater κ 0.87).
+
+Only intervened reviews were used to evaluate
+model performance because subsequent resubmis-
+sions were not predicted. In our deployment, 134
+of 1428 reviews were intervened, containing 891
+comments: 223 Solution, 340 Problem-only, and
+328 Non-criticism. Table 1 shows that our deployed
+model outperforms a Bag-of-Words (BoW) base-
+line6 in 3-way classification. Given that the AP data
+was never used for model training, the obtained per-
+formance is promising and encourages us to improve
+the model with more data.
+
+Regarding instant feedback precision, we calcu-
+lated the true S-RATIO for each intervened review
+(using gold standard labels). Table 2 shows that
+given the 0.7 threshold used for this deployment,
+Instant-feedback SWoRD incorrectly triggered in-
+stant feedback for 24 submissions (column 3) out
+of 134, yielding a precision 0.82. Because Instant-
+feedback SWoRD does not let student reviewers
+know the S-RATIO threshold, students should only
+think that the instant feedback was incorrect when
+
+6Used 1,2,3-grams as features.
+
+True S-RATIO ≤ 1.0 > 0.7 = 1.0
+#intervened 134 24 (18%) 16 (12%)
+
+Table 2: True S-RATIO of intervened submission
+
+they provided solutions for all mentioned problems
+(true S-RATIO = 1). From this student perspective,
+Instant-feedback SWoRD had 16 incorrect triggers
+(column 4), achieving a precision 0.88.
+
+Finally, to evaluate the impact of instant feedback
+on review revision, we considered the 74 subsequent
+resubmissions. We collected comments that were re-
+vised or newly-added to the resubmissions (no com-
+ment was deleted), and obtained 115 comments.
+Pairing 111 revised comments with their original
+versions, we observed that 73 (66%) comments
+were fixed from problem-only to solution, 3 (3%)
+from non-criticism to solution, only 1 comment
+(0.9%) was edited from solution to non-criticism,
+and none from solution to problem-only. All of
+the 4 newly-added comments mentioned problems
+and provided solutions. These results suggest that
+Instant-feedback SWoRD does indeed help review-
+ers revise their comments to include more solutions.

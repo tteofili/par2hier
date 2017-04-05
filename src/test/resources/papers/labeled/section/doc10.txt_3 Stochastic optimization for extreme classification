@@ -1,0 +1,107 @@
+Here, we return to the general form of the softmax probabilities as defined by Eq. (1) where the
+score functions are indexed by input x and parameterized by w. We consider a classification task
+where given a training set {xn, yn}Nn=1, where yn ∈ {1, . . . ,K}, we wish to fit the parameters w by
+maximizing the log likelihood,
+
+L = log
+N∏
+n=1
+
+efyn (xn;w)∑K
+m=1 e
+
+fm(xn;w)
+. (14)
+
+When the number of training instances is very large, the above maximization can be carried out by
+applying stochastic gradient descent (by minimizing−L) where we cycle over minibatches. However,
+this stochastic optimization procedure cannot deal with large values of K because the normalizing
+constant in the softmax couples all scores functions so that the log likelihood cannot be expressed as
+a sum across class labels. To overcome this, we can use the one-vs-each lower bound on the softmax
+probability from Eq. (4) and obtain the following lower bound on the previous log likelihood,
+
+F = log
+N∏
+n=1
+
+∏
+m6=yn
+
+1
+
+1 + e−[fyn (xn;w)−fm(xn;w)]
+= −
+
+N∑
+n=1
+
+∑
+m 6=yn
+
+log
+(
+
+1 + e−[fyn (xn;w)−fm(xn;w)]
+)
+
+(15)
+which now consists of a sum over both data points and labels. Interestingly, the sum over the
+labels,
+
+∑
+m6=yn , runs over all remaining classes that are different from the label yn assigned to xn.
+
+Each term in the sum is a logistic regression cost, that depends on the pairwise score difference
+fyn(xn;w)−fm(xn;w), and encourages the n-th data point to get separated from them-th remaining
+class. The above lower bound can be optimized by stochastic gradient descent by subsampling terms
+in the double sum in Eq. (15), thus resulting in a doubly stochastic approximation scheme. Next we
+further discuss the stochasticity associated with subsampling remaining classes.
+
+The gradient for the cost associated with a single training instance (xn, yn) is
+
+∇Fn =
+∑
+m6=yn
+
+σ (fm(xn;w)− fyn(xn;w)) [∇wfyn(xn;w)−∇wfm(xn;w)] . (16)
+
+This gradient consists of a weighted sum where the sigmoidal weights σ (fm(xn;w)− fyn(xn;w))
+quantify the contribution of the remaining classes to the whole gradient; the more a remaining
+class overlaps with yn (given xn) the higher its contribution is. A simple way to get an unbiased
+stochastic estimate of (16) is to randomly subsample a small subset of remaining classes from the set
+{m|m 6= yn}. More advanced schemes could be based on importance sampling where we introduce
+
+5
+
+
+
+a proposal distribution pn(m) defined on the set {m|m 6= yn} that could favor selecting classes with
+large sigmoidal weights. While such more advanced schemes could reduce variance, they require
+prior knowledge (or on-the-fly learning) about how classes overlap with one another. Thus, in Section
+4 we shall experiment only with the simple random subsampling approach and leave the above
+advanced schemes for future work.
+
+To illustrate the above stochastic gradient descent algorithm we simulated a two-dimensional data set
+of 200 instances, shown in Figure 1b, that belong to five classes. We consider a linear classification
+model where the score functions take the form fk(xn,w) = wTk xn and where the full set of
+parameters is w = (w1, . . . ,wK). We consider minibatches of size ten to approximate the sum
+
+∑
+n
+
+and subsets of remaining classes of size one to approximate
+∑
+m 6=yn . Figure 1c shows the stochastic
+
+evolution of the approximate log likelihood (dashed red line), i.e. the unbiased subsampling based
+approximation of (15), together with the maximized exact softmax log likelihood (blue line), the
+non-stochastically maximized approximate lower bound from (15) (red solid line) and Bouchard’s
+method (green line). To apply Bouchard’s method we construct a lower bound on the log likelihood
+by replacing each softmax probability with the bound from (12) where we also need to optimize a
+separate variational parameter αn for each data point. As shown in Figure 1c our method provides a
+tighter lower bound than Bouchard’s method despite the fact that it does not contain any variational
+parameters. Also, Bouchard’s method can become very slow when combined with stochastic gradient
+descent since it requires tuning a separate variational parameter αn for each training instance. Figure
+1b also shows the decision boundaries discovered by the exact softmax, one-vs-each bound and
+Bouchard’s bound. Finally, the actual parameters values found by maximizing the one-vs-each bound
+were remarkably close (although not identical) to the parameters found by the exact softmax.

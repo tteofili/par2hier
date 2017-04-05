@@ -1,0 +1,8 @@
+best configuration of classifiers with supervision.
+Both systems also outperform the top CoNLL sys-
+tem, by 1 and 6 points, respectively. The result of
+43.11 by the best classifier configuration substan-
+tially outperforms the existing state-of-the-art: a
+combination of two MT systems and two classi-
+fier systems, and MT with re-ranking (Susanto et
+al., 2014; Mizumoto and Matsumoto, 2016).

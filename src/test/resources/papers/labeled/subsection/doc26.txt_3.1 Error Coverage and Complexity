@@ -1,0 +1,64 @@
+Error coverage To understand how systems differ
+with respect to error coverage, we consider recall
+of each system per error type. Error-type recall
+can be easily computed using error tags and is re-
+ported in the CoNLL overview paper.
+
+The recall numbers show substantial variations
+among the systems. If we consider error cat-
+egories that have non-negligible recall numbers
+(higher than 10%), classifier-based approaches
+have a much lower proportion of error types for
+which 10% recall was achieved. Among the 28 er-
+ror types, the top classifier systems – Columbia
+University-University of Illinois (CUUI, top-2)
+and National Tsing Hua University (NTHU, top-
+5) – have a recall higher than 10% for 8 and 9
+error types, respectively. In contrast, the two MT-
+based systems – Cambridge University (CAMB,
+
+1Outputs are available on the CoNLL-2014 website.
+
+
+
+(1) It is a concern that will be with us *{during our whole life}/{for our entire life} .
+(2) The decision to inform relatives of *{such genetic disorder}/{such genetic disorders} will be dependent . . .
+(3) .. we need to respect it and we have no right *{in saying}/{to say} that he must tell his relatives about it .
+(4) ...and his family might be a *{genetically risked}/{genetic risk} family .
+(5) ...he was *diagnosis/{diagnosed with} a kind of genetic disease which is very serious .
+(6) The situation may become *worst/worse if the child has diseases like cancer or heart disease . . .
+
+Table 5: Complex and interacting mistakes that MT successfully addresses. Output of the MT-based
+AMU system.
+
+top-1) and the Adam Mickiewicz University sys-
+tem (AMU, top-3) – have 15 and 17 error types,
+respectively, for which the recall is at least 10%.
+
+These recall discrepancies indicate that the MT
+approach has a better overall coverage, which is
+intuitive given that all types of confusions are au-
+tomatically added through phrase-based transla-
+tion tables in MT, while classifiers must explicitly
+model each error type. Note, however, that these
+numbers do not necessarily indicate good type-
+based performance, since high recall may corre-
+spond to low precision.
+Error complexity In the MT approach, error con-
+fusions are learned automatically via the phrase
+translation tables extracted from the parallel train-
+ing data. Thus, an MT system can easily handle in-
+teracting and complex errors where replacements
+involve a sequence of words. Table 5 illustrates
+complex and interacting mistakes that the MT ap-
+proach is able to handle. Example (1) contains a
+phrase-level correction that includes both a prepo-
+sition replacement and an adjective change. (2) is
+an instance of an interacting mistake where there
+is a dependency between the article and the noun
+number, and a mistake can be corrected by chang-
+ing one of the properties but not both. (3), (4) and
+(5) require multiple simultaneous corrections on
+various words in a phrase. (6) is an example of an
+incorrect adjectival form, an error that is typically
+not modeled with standard classifiers.

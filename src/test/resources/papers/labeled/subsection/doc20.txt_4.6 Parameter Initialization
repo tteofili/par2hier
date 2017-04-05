@@ -1,0 +1,10 @@
+
+It is well known that parameter initialization has a big im-
+pact on the performance of neural networks. In this paper,
+we tried two ways to initialize the parameters of the sys-
+tem on replaced data. One is randomized initialization, the
+other is initializing with the parameter learned by the base-
+line model. According to our experience, the latter is robust
+and performs better than the former for our method. But for
+the approach proposed in [Luong et al., 2015b], the latter ini-
+tialization strategy does not bring any benefit.

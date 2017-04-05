@@ -1,0 +1,29 @@
+
+It is also interesting to check how replacement affect the
+translation process in detail. Figure 4 shows the translations
+for the same sentence by different systems. The figure on the
+left corresponds to the baseline model without replacement.
+Because the third word ’�’ (call) in the source sentence is
+outside the vocabulary, the baseline model cannot generate
+proper translation for it. What’s more, wrong attention to
+this rare word results in bad translation for the common word
+
+’é˝’ (America). The baseline model add an extra word
+’north’ before ’america’, which is not a translation of any
+word in the source sentence. And the last source word ’˘
+›’(dialogue) is hardly attended by any target word, leading
+to missing translation for this word, although it is also a com-
+mon word. On the contrary, our system find a similar word
+’|�’ to the source rare word, which is in fact a synonym
+to it. Given this complete sentence without any rare word,
+our system is able to generate a nearly perfect translation for
+the source sentence, in which all source words are properly
+attended and translated. Since the rare word ’�’ is not seen
+in the bilingual training corpus, the lexical translation table
+does not contain the translation for this word. So we keep
+the translation of the alternative word in the output. Last, the
+approach of [Luong et al., 2015b] generated a similar trans-
+lation as the baseline system (not shown in the figure). And
+even if a target unk is generated and aligned correctly to the
+source rare word, the translation of the rare word still cannot
+be restored because it’s not in the lexical translation table.

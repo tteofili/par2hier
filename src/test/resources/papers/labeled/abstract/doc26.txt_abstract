@@ -1,0 +1,51 @@
+
+ACL’16
+
+Grammatical Error Correction: Machine Translation and Classifiers
+
+Alla Rozovskaya
+Department of Computer Science
+
+Virginia Tech
+Blacksburg, VA 24060
+
+alla@vt.edu
+
+Dan Roth
+Department of Computer Science
+
+University of Illinois
+Urbana, IL 61820
+
+danr@illinois.edu
+
+Abstract
+
+We focus on two leading state-of-the-art
+approaches to grammatical error correc-
+tion – machine learning classification and
+machine translation. Based on the com-
+parative study of the two learning frame-
+works and through error analysis of the
+output of the state-of-the-art systems, we
+identify key strengths and weaknesses of
+each of these approaches and demonstrate
+their complementarity. In particular, the
+machine translation method learns from
+parallel data without requiring further lin-
+guistic input and is better at correcting
+complex mistakes. The classification ap-
+proach possesses other desirable charac-
+teristics, such as the ability to easily gener-
+alize beyond what was seen in training, the
+ability to train without human-annotated
+data, and the flexibility to adjust knowl-
+edge sources for individual error types.
+
+Based on this analysis, we develop an
+algorithmic approach that combines the
+strengths of both methods. We present
+several systems based on resources used
+in previous work with a relative improve-
+ment of over 20% (and 7.4 F score points)
+over the previous state-of-the-art.

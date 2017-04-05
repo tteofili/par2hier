@@ -1,0 +1,47 @@
+
+Target-bidirectional transduction techniques were
+pioneered in the field of machine translation (Watan-
+abe and Sumita, 2002; Finch and Sumita, 2009;
+Zhang et al., 2013). They used the techniques for
+traditional SMT models, under the IBM framework
+(Watanabe and Sumita, 2002) or the feature-driven
+linear models (Finch and Sumita, 2009; Zhang et al.,
+2013). However, the target-bidirectional techniques
+
+7We did not run NMT-l2r-10 and NMT-r2l-10, because it
+is too time-consuming to train 10 NMT models on both target
+directions and especially NMT-r2l-10 is not necessarily better
+than NMT-r2l-5 as shown in Table 2.
+
+414
+
+
+
+we have developed for the unified neural network
+framework, target a pressing need directly motivated
+by a fundamental issue suffered by recurrent neural
+networks.
+
+Target-directional neural network models have
+also been successfully employed in (Devlin et al.,
+2014). However, their approach was concerned with
+feedforward networks, which can not make full use
+of rich contextual information. As a result, their
+models could only be used as features (i.e. submod-
+els) to augment traditional translation techniques in
+contrast to the end-to-end neural network framework
+for machine translation in our proposal.
+
+Our approach is related to that in (Bengio et al.,
+2015) in some sense. Both approaches can allevi-
+ate the mismatch between the training and testing
+stages: the history predictions are always correct in
+training while may be incorrect in testing. Bengio
+et al. (2015) introduce noise into history predictions
+in training to balance the mistmatch, while we try to
+make the history predictions in testing as accurate as
+those in training by using of two directional models.
+Therefore, theirs focuses on this problem from the
+view of training instead of both modeling and train-
+ing as ours, but it is possible and promising to apply
+their approach to optimize our joint model.

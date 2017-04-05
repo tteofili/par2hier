@@ -1,0 +1,74 @@
+0
+
+0.5
+
+1
+
+1.5
+
+2
+
+2.5
+
+3
+
+3.5
+
+x 10
+−4
+
+Values
+
+E
+s
+ti
+m
+
+a
+te
+
+d
+ P
+
+ro
+b
+
+a
+b
+
+ili
+ty
+
+0 0.5 1 1.5 2
+
+x 10
+5
+
+0
+
+0.1
+
+0.2
+
+0.3
+
+0.4
+
+0.5
+
+0.6
+
+0.7
+
+Iterations
+
+E
+rr
+
+o
+r
+
+(a) (b) (c)
+Figure 2: (a) shows the optimally estimated probabilities which have been sorted for visualizations purposes. (b)
+shows the corresponding probabilities estimated by stochastic optimization. (c) shows the absolute norm for the
+vector of differences between exact estimates and stochastic estimates.

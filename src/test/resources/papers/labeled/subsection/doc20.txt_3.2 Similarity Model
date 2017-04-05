@@ -1,0 +1,102 @@
+
+Distributed word representation has been shown powerful to
+capture syntactic and semantic information about words, and
+it is widely applied in various tasks [Turian et al., 2010]. We
+adopt it here to find the most similar word for a given word w
+as follows,
+
+w
+
+⇤
+= arg max
+
+w02IV
+sim(w,w
+
+0
+)
+
+in which IV denotes the set of in-vocabulary words, and
+the function sim is the cosine similarity between two word
+vectors.
+
+sim(w,w
+
+0
+) = cos(vec(w), vec(w
+
+0
+))
+
+However, since the word vectors and the lexical transla-
+tion table are learned automatically from data, they may lead
+to inappropriate alternative for original translation pairs. For
+example, the most similar word to the rare word ’Ñ>’ (do-
+nation) at the end of the following sentence is ’yfl’ (raise),
+which is in fact a synonym to the second to last word ’fl∆’.
+As a result, this sentence will be ungrammatical after replace-
+ment because it will has two neighbouring predicates with the
+same meaning.
+
+-˝¢AW⇢:∞Ü~:fl∆Ñ>
+
+China Red-Cross for Xinjiang disaster-area raise
+donation
+
+As another example, the similarity model find a synonym
+word ’�å’ to the rare word ’1å’ (discord) in the follow-
+ing sentence, but the lexical translation table gives it a wrong
+translation ’divorce’.
+
+2854
+
+
+
+e‘⇢˛˙∞¿»ÑÖË1åÓò
+IOC once appeared severe inner discord problem
+
+To alleviate this problem, we propose to use multiple can-
+didates provided by the similarity model, and choose one
+from them by checking whether it is fit for the bilingual con-
+text. Bi-directional ngram language model is adopted here for
+this purpose. For an aligned word pair (ci, ej), the score to
+replace them with alternative (c0i, ej)0 is calculated as follows,
+
+score = p(c
+
+0
+i|ci�1, ci�2) + p(c0i|ci+1, ci+2)+
+
+p(e
+
+0
+j |ej�1, ej�2) + p(e0j |ej+1, ej+2)
+
+The method to find the most appropriate alternative pair is
+described as follows. First, top N most similar words will be
+find for the source rare word. Then each of the source alterna-
+tive together with its translation will be added to the candidate
+list. Finally, the bi-directional language model is used to rank
+these candidates and the best is adopted to replace the original
+translation pair.
+
+As an alternative method to rerank the candidate pairs, we
+can also jointly consider bilingual word similarity. The sim-
+ilarity between the two translation pairs (c0i, e0j) and (ci, ej)
+will be calculated as follows,
+
+score =
+
+cos(vec(c
+
+0
+i), vec(ci)) + cos(vec(e
+
+0
+j), vec(ej))
+
+2
+
+According to this measurement, only the translation pair
+which is similar to the original pair in both source and target
+side will be selected.

@@ -1,0 +1,63 @@
+
+We now explore another advantage of the
+classifier-based approach, that of allowing for a
+flexible architecture where we can tailor knowl-
+edge sources for individual phenomena. In Sec-
+tion 4.2.1, we already took advantage of the fact
+that in the classifier framework it is easy to in-
+corporate features suited to individual error types.
+We now show that by adding supervision in a way
+tailored toward specific errors we can further im-
+prove the classifier-based approach.
+Adding Supervision in a Tailored Way There is
+a trade-off between training on native and learner
+
+
+
+Training Performance
+data P R F0.5
+
+(1) Learner 32.15 17.96 27.76
+(2) Native 38.41 23.05 33.89
+(3) Tailored 57.07 14.74 36.26
+
+Table 11: Classifiers: supervision in a tailored
+way. Trained on (1) learner data (CoNLL-train);
+(2) native data (Web1T); (3) data sources tailored
+per error type.
+
+data. The advantage of training on native data is
+clearly the size, which is important for estimating
+context parameters. Learner data provides addi-
+tional information, such as learner error patterns
+and the manner of non-native writing.
+
+Instead of choosing to train on one data type,
+the classifier framework allows one to combine
+the two data sources in various ways: voting (Ro-
+zovskaya et al., 2014), alternating structure op-
+timization (Dahlmeier and Ng, 2011), training a
+meta-classifier (Gamon, 2010), and extracting er-
+ror patterns (Rozovskaya and Roth, 2011). We
+compare two approaches of adding supervision:
+(1) Learner error patterns: Error patterns are ex-
+tracted from learner data and “injected” into mod-
+els trained on native data (Rozovskaya and Roth,
+2011). Learner data is used to estimate mistake pa-
+rameters; contextual cues are based on native data.
+(2) Learner error patterns+native predictions:
+Classifiers are trained on native data. Classifier
+predictions are used as features in models trained
+on learner data. Learner data thus contributes both
+the specific manner of learner writing and the mis-
+take parameters. The native data contributes con-
+textual information.
+
+We found that (2) is superior to (1) for arti-
+cle, agreement, and preposition errors; (1) works
+better on verb form and word form errors; and
+noun number errors perform best when a classifier
+is trained on native data. (Learner error patterns
+were found not to be beneficial for correcting noun
+number errors (Rozovskaya and Roth, 2014)). Tai-
+lored supervision yields an improvement of almost

@@ -1,0 +1,151 @@
+
+In this paper, we systematically studied how rare words im-
+pact the performance of NMT systems. And we proposed
+an effective approach of replacing rare words with similar
+in-vocabulary words. This approach not only enables the
+translation of rare words, but also reduces the ambiguity of
+the whole sentence, which is quite important for parameter
+estimation during training and in-vocabulary words transla-
+tion during testing. Experiment results on Chinese to En-
+glish translation tasks demonstrate the power of our meth-
+ods. Our best replacement method outperforms the baseline
+by more than 4 BLEU points, which is also much better than
+the method proposed by previous work.
+
+Acknowledgments
+
+The research work has been partially funded by the Natural
+Science Foundation of China under Grant No. 61333018 and
+91520204 as well, and it is also supported by the Strategic Pri-
+ority Research Program of the CAS (Grant XDB02070007).
+
+2857
+
+
+
+References
+
+[Bahdanau et al., 2015] Dzmitry Bahdanau, Kyunghyun
+Cho, and Yoshua Bengio. Neural machine translation
+by jointly learning to align and translate. In ICLR 2015,
+2015.
+
+[Cho et al., 2014] Kyunghyun Cho, Bart van Merrienboer,
+Caglar Gulcehre, Dzmitry Bahdanau, Fethi Bougares,
+Holger Schwenk, and Yoshua Bengio. Learning phrase
+representations using rnn encoder–decoder for statistical
+machine translation. In Proceedings of the 2014 Confer-
+ence on Empirical Methods in Natural Language Process-
+ing (EMNLP), pages 1724–1734, Doha, Qatar, October
+2014.
+
+[Fung and Cheung, 2004] Pascale Fung and Percy Cheung.
+Mining very-non-parallel corpora: Parallel sentence and
+lexicon extraction via bootstrapping and e. In EMNLP,
+pages 57–63. Citeseer, 2004.
+
+[Heafield et al., 2013] Kenneth Heafield, Ivan Pouzyrevsky,
+Jonathan H. Clark, and Philipp Koehn. Scalable modified
+kneser-ney language model estimation. In Proceedings of
+the 51st Annual Meeting of the Association for Computa-
+tional Linguistics (Volume 2: Short Papers), pages 690–
+696, Sofia, Bulgaria, August 2013.
+
+[Jean et al., 2015] Sébastien Jean, Kyunghyun Cho, Roland
+Memisevic, and Yoshua Bengio. On using very large target
+vocabulary for neural machine translation. In Proceedings
+of the 53rd Annual Meeting of the Association for Compu-
+tational Linguistics and the 7th International Joint Con-
+ference on Natural Language Processing (Volume 1: Long
+Papers), pages 1–10, Beijing, China, July 2015.
+
+[Jiang et al., 2007] Long Jiang, Ming Zhou, Lee-Feng
+Chien, and Cheng Niu. Named entity translation with
+web mining and transliteration. In IJCAI, volume 7, pages
+1629–1634, 2007.
+
+[Kalchbrenner and Blunsom, 2013] Nal Kalchbrenner and
+Phil Blunsom. Recurrent continuous translation models. In
+Proceedings of the 2013 Conference on Empirical Meth-
+ods in Natural Language Processing, pages 1700–1709,
+Seattle, Washington, USA, October 2013.
+
+[Koehn et al., 2007] Philipp Koehn, Hieu Hoang, Alexandra
+Birch, Chris Callison-Burch, Marcello Federico, Nicola
+Bertoldi, Brooke Cowan, Wade Shen, Christine Moran,
+Richard Zens, et al. Moses: Open source toolkit for statis-
+tical machine translation. In Proceedings of the 45th an-
+nual meeting of the ACL on interactive poster and demon-
+stration sessions, pages 177–180, 2007.
+
+[Liang et al., 2006] Percy Liang, Ben Taskar, and Dan Klein.
+Alignment by agreement. In Proceedings of the Human
+Language Technology Conference of the NAACL, Main
+Conference, pages 104–111, New York City, USA, June
+2006.
+
+[Luong et al., 2015a] Thang Luong, Hieu Pham, and
+Christopher D. Manning. Effective approaches to
+attention-based neural machine translation. In Proceed-
+ings of the 2015 Conference on Empirical Methods in
+
+Natural Language Processing, pages 1412–1421, Lisbon,
+Portugal, September 2015.
+
+[Luong et al., 2015b] Thang Luong, Ilya Sutskever, Quoc
+Le, Oriol Vinyals, and Wojciech Zaremba. Addressing the
+rare word problem in neural machine translation. In Pro-
+ceedings of the 53rd Annual Meeting of the Association for
+Computational Linguistics and the 7th International Joint
+Conference on Natural Language Processing (Volume 1:
+Long Papers), pages 11–19, Beijing, China, July 2015.
+
+[Marton et al., 2009] Yuval Marton, Chris Callison-Burch,
+and Philip Resnik. Improved statistical machine trans-
+lation using monolingually-derived paraphrases. In Pro-
+ceedings of the 2009 Conference on Empirical Methods in
+Natural Language Processing, pages 381–390, Singapore,
+August 2009.
+
+[Mikolov et al., 2013] Tomas Mikolov, Ilya Sutskever, Kai
+Chen, Greg S Corrado, and Jeff Dean. Distributed repre-
+sentations of words and phrases and their compositional-
+ity. In Advances in neural information processing systems,
+pages 3111–3119, 2013.
+
+[Papineni et al., 2002] Kishore Papineni, Salim Roukos,
+Todd Ward, and Wei-Jing Zhu. Bleu: a method for au-
+tomatic evaluation of machine translation. In Proceedings
+of 40th Annual Meeting of the Association for Computa-
+tional Linguistics, pages 311–318, Philadelphia, Pennsyl-
+vania, USA, July 2002.
+
+[Sutskever et al., 2014] Ilya Sutskever, Oriol Vinyals, and
+Quoc VV Le. Sequence to sequence learning with neural
+networks. In Advances in neural information processing
+systems, pages 3104–3112, 2014.
+
+[Turian et al., 2010] Joseph Turian, Lev Ratinov, and Yoshua
+Bengio. Word representations: a simple and general
+method for semi-supervised learning. In Proceedings of
+the 48th annual meeting of the association for computa-
+tional linguistics, pages 384–394, 2010.
+
+[Zhang et al., 2012] Jiajun Zhang, Feifei Zhai, and
+Chengqing Zong. Handling unknown words in sta-
+tistical machine translation from a new perspective. In
+Natural Language Processing and Chinese Computing,
+pages 176–187. Springer, 2012.
+
+[Zhang et al., 2013] Jia-Jun Zhang, Fei-Fei Zhai, and
+Cheng-Qing Zong. A substitution-translation-restoration
+framework for handling unknown words in statistical ma-
+chine translation. Journal of Computer Science and Tech-
+nology, 28(5):907–918, 2013.
+
+[Zipf, 1949] George Kingsley Zipf. Human behavior and the
+principle of least effort. 1949.
+
+2858
+
+

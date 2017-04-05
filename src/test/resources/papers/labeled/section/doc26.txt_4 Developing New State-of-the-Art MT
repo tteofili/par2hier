@@ -1,0 +1,35 @@
+and Classifier Systems
+
+In this section, we explore the advantages of each
+learning approach, as identified in the previous
+section, within each learning framework. To this
+end, drawing on the strengths of each framework,
+we develop new state-of-the-art MT and classifier
+systems.2 In the next section, we will use these
+
+2Implementation details can be found at cogcomp.cs.
+illinois.edu/page/publication view/793
+
+System Learner Native
+CoNLL-
+
+train
+Lang-8 Eng.
+
+Wiki.
+Web1T
+
+1.2M 48M 2B 1T
+MT X X X -
+
+Classif. X - - X
+
+Table 8: Data used in the experiments. Corpora
+sizes are in the number of words.
+
+MT and classifier components and show how to
+exploit the strengths of each framework in combi-
+nation. Table 8 summarizes the data used. Results
+are reported with respect to all errors in the test
+data. This is different from performance for indi-
+vidual errors in Table 6.

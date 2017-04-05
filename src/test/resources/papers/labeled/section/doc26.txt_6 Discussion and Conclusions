@@ -1,0 +1,263 @@
+
+A recent surge in GEC research has produced
+two leading state-of-the-art approaches – machine
+learning classification and machine translation.
+Based on the analysis of the methods and an er-
+ror analysis on the outputs of state-of-the-art sys-
+tems that adopt these approaches, we explained
+the differences and the key advantages of each.
+With respect to error phenomena, we showed that
+while MT is better at handling complex mistakes,
+classifiers are better at correcting mistakes that re-
+quire abstracting beyond lexical context. We fur-
+ther showed that the key strengths of the classifi-
+cation framework are its flexibility and the ability
+to train without supervision.
+
+We built several systems that draw on the
+strengths of each approach individually and in
+a pipeline. The best classifier system and the
+pipelines outperform reported best results on the
+task, often by a large margin.
+
+The purpose of this work is to gain a better
+understanding of the advantages offered by each
+learning method in order to make further progress
+on the GEC task. We showed that the values pro-
+vided by each method can be exploited within each
+approach and in combination, depending on the re-
+sources available, such as annotated learner data
+(MT), and additional linguistic resources (clas-
+sifiers). As a result, we built robust systems
+and showed substantial improvement over existing
+state-of-the-art.
+
+For future work, we intend to study the problem
+in the context of other languages. However, it is
+important to realize that the problem is far from
+being solved even in English, and the current work
+makes very significant progress on it.
+
+Acknowledgments
+The authors thank Michael Flor for his help with running the
+spelling system on the data and John Wieting for sharing the
+English Wikipedia corpus. The authors are also grateful to
+Mark Sammons, Peter Chew, and the anonymous reviewers
+for the insightful comments on the paper. The work of Dan
+Roth on this project was supported by DARPA under agree-
+ment number FA8750-13-2-0008. Any opinions, findings,
+conclusions or recommendations are those of the authors and
+do not necessarily reflect the view of the agencies.
+
+References
+M. Banko and E. Brill. 2001. Scaling to very very large cor-
+
+pora for natural language disambiguation. In Proceedings
+
+
+
+of 39th Annual Meeting of the Association for Computa-
+tional Linguistics, pages 26–33, Toulouse, France, July.
+
+T. Brants and A. Franz. 2006. Web 1T 5-gram Version 1.
+Linguistic Data Consortium.
+
+A. Carlson and I. Fette. 2007. Memory-based context-
+sensitive spelling correction at web scale. In Proceedings
+of the IEEE International Conference on Machine Learn-
+ing and Applications (ICMLA).
+
+A. J. Carlson, J. Rosen, and D. Roth. 2001. Scaling up con-
+text sensitive text correction. In IAAI.
+
+D. Dahlmeier and H. T. Ng. 2011. Grammatical error correc-
+tion with alternating structure optimization. In Proceed-
+ings of ACL.
+
+D. Dahlmeier and H.T Ng. 2012. A beam-search decoder for
+grammatical error correction. In Proceedings of EMNLP-
+CoNLL.
+
+D. Dahlmeier, H.T. Ng, and S.M. Wu. 2013. Building a large
+annotated corpus of learner English: The NUS corpus of
+learner English. In Proceedings of the NAACL Workshop
+on Innovative Use of NLP for Building Educational Appli-
+cations.
+
+R. Dale and A. Kilgarriff. 2011. Helping Our Own: The
+HOO 2011 pilot shared task. In Proceedings of the 13th
+European Workshop on Natural Language Generation.
+
+R. Dale, I. Anisimoff, and G. Narroway. 2012. A report
+on the preposition and determiner error correction shared
+task. In Proceedings of the NAACL Workshop on Innova-
+tive Use of NLP for Building Educational Applications.
+
+H. Daume and J. Jagarlamudi. 2011. Domain adaptation for
+machine translation by mining unseen words. In ACL.
+
+Y. Even-Zohar and D. Roth. 2001. A sequential model for
+multi class classification. In Proceedings of EMNLP.
+
+R. De Felice and S. Pulman. 2008. A classifier-based ap-
+proach to preposition and determiner error correction in
+L2 English. In Proceedings of the 22nd International
+Conference on Computational Linguistics (Coling 2008),
+pages 169–176, Manchester, UK, August.
+
+M. Felice, Z. Yuan, Ø. Andersen, H. Yannakoudakis, and
+E. Kochmar. 2014. Grammatical error correction using
+hybrid systems and type filtering. In Proceedings of the
+Eighteenth Conference on Computational Natural Lan-
+guage Learning: Shared Task.
+
+M. Flor and Y. Futagi. 2012. On using context for auto-
+matic correction of non-word misspellings in student es-
+says. In Proceedings of the 7th Workshop on Innovative
+Use of NLP for Building Educational Applications. Asso-
+ciation for Computational Linguistics.
+
+M. Flor. 2012. Four types of context for automatic spelling
+correction. Traitement Automatique des Langues (TAL).
+(Special Issue: Managing noise in the signal: error han-
+dling in natural language processing), 3(53):61–99.
+
+M. Gamon, J. Gao, C. Brockett, A. Klementiev, W. Dolan,
+D. Belenko, and L. Vanderwende. 2008. Using contextual
+speller techniques and language modeling for ESL error
+correction. In Proceedings of IJCNLP.
+
+M. Gamon. 2010. Using mostly native data to correct errors
+in learners’ writing. In Proceedings of NAACL.
+
+A. R. Golding and D. Roth. 1996. Applying Winnow to
+context-sensitive spelling correction. In ICML.
+
+A. R. Golding and D. Roth. 1999. A Winnow based ap-
+proach to context-sensitive spelling correction. Machine
+Learning.
+
+N. Han, M. Chodorow, and C. Leacock. 2006. Detecting er-
+rors in English article usage by non-native speakers. Jour-
+nal of Natural Language Engineering, 12(2):115–129.
+
+N. Han, J. Tetreault, S. Lee, and J. Ha. 2010. Using an error-
+annotated learner corpus to develop and ESL/EFL error
+correction system. In Proceedings of LREC.
+
+K. Heafield, G. Hanneman, and A. Lavie. 2009. Machine
+translation system combination with flexible word order-
+ing. In Proceedings of the Fourth Workshop on Statistical
+Machine Translation. Association for Computational Lin-
+guistics.
+
+K. Heafield, I. Pouzyrevsky, J. H. Clark, and P. Koehn. 2013.
+Scalable modified Kneser-Ney language model estima-
+tion. In ACL.
+
+E. Izumi, K. Uchimoto, T. Saiga, T. Supnithi, and H. Isahara.
+2003. Automatic error detection in the Japanese learners’
+English spoken data. In Proceedings of ACL.
+
+M. Junczys-Dowmunt and R. Grundkiewicz. 2014. The
+AMU system in the CoNLL-2014 shared task: Grammati-
+cal error correction by data-intensive and feature-rich sta-
+tistical machine translation. In Proceedings of the Eigh-
+teenth Conference on Computational Natural Language
+Learning: Shared Task.
+
+D. Klein and C. D. Manning. 2003. Fast exact inference
+with a factored model for natural language parsing. In
+Proceedings of NIPS.
+
+P. Koehn, F. J. Och, and D. Marcu. 2003. Statistical phrase-
+based translation. In ACL.
+
+P. Koehn, H. Hoang, A. Birch, C. Callison-Burch, M. Fed-
+erico, N. Bertoldi, B. Cowan, W. Shen, C. Moran, R. Zens,
+C. Dyer, O. Bojar, A. Constantin, and E. Herbst. 2007.
+Moses: Open source toolkit for statistical machine trans-
+lation. In ACL.
+
+J. Lee and S. Seneff. 2008. An analysis of grammatical errors
+in non-native speech in English. In Proceedings of the
+2008 Spoken Language Technology Workshop.
+
+M. Marneffe, B. MacCartney, and Ch. Manning. 2006. Gen-
+erating typed dependency parses from phrase structure
+parses. In Proceedings of LREC.
+
+T. Mizumoto and Y. Matsumoto. 2016. Discriminative
+reranking for grammatical error correction with statistical
+machine translation. In NAACL. To appear.
+
+T. Mizumoto, M. Komachi, M. Nagata, and Y. Matsumoto.
+2011. Mining revision log of language learning SNS for
+automated japanese error correction of second language
+learners. In IJCNLP.
+
+H. T. Ng, S. M. Wu, Y. Wu, Ch. Hadiwinoto, and J. Tetreault.
+2013. The CoNLL-2013 shared task on grammatical error
+correction. In Proceedings of CoNLL: Shared Task.
+
+
+
+H. T. Ng, S. M. Wu, T. Briscoe, C. Hadiwinoto, R. H. Su-
+santo, and C. Bryant. 2014. The CoNLL-2014 shared
+task on grammatical error correction. In Proceedings of
+CoNLL: Shared Task.
+
+F. J. Och and H. Ney. 2002. Discriminative training and
+maximum entropy models for statistical machine transla-
+tion. In ACL.
+
+A. Park and R. Levy. 2011. Automated whole sentence
+grammar correction using a noisy channel model. In ACL,
+Portland, Oregon, USA, June. Association for Computa-
+tional Linguistics.
+
+V. Punyakanok and D. Roth. 2001. The use of classifiers in
+sequential inference. In Proceedings of NIPS.
+
+N. Rizzolo and D. Roth. 2010. Learning Based Java for
+Rapid Development of NLP Systems. In Proceedings of
+LREC.
+
+A. Rozovskaya and D. Roth. 2010a. Generating confusion
+sets for context-sensitive error correction. In Proceedings
+of EMNLP.
+
+A. Rozovskaya and D. Roth. 2010b. Training paradigms for
+correcting errors in grammar and usage. In Proceedings
+of NAACL.
+
+A. Rozovskaya and D. Roth. 2011. Algorithm selection and
+model adaptation for ESL correction tasks. In Proceed-
+ings of ACL.
+
+A. Rozovskaya and D. Roth. 2013. Joint learning and infer-
+ence for grammatical error correction. In Proceedings of
+EMNLP.
+
+A. Rozovskaya and D. Roth. 2014. Building a State-of-the-
+Art Grammatical Error Correction System. In Transac-
+tions of ACL.
+
+A. Rozovskaya, M. Sammons, J. Gioja, and D. Roth. 2011.
+University of Illinois system in HOO text correction
+shared task. In Proceedings of the European Workshop
+on Natural Language Generation (ENLG).
+
+A. Rozovskaya, K.-W. Chang, M. Sammons, D. Roth, and
+N. Habash. 2014. The University of Illinois and
+Columbia system in the CoNLL-2014 shared task. In Pro-
+ceedings of CoNLL Shared Task.
+
+R. H. Susanto, P. Phandi, and H. T. Ng. 2014. System com-
+bination for grammatical error correction. In EMNLP.
+
+J. Tetreault, J. Foster, and M. Chodorow. 2010. Using parse
+features for preposition selection and error detection. In
+Proceedings of ACL.
+
+

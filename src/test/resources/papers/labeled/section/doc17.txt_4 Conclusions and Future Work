@@ -1,0 +1,71 @@
+
+We have presented a web-based support system for authoring municipal procedural documents. The prin-
+cipal novel feature of the system is that it makes use of document structuring based on the DITA frame-
+work, which affords a basis for fine-grained context-dependent CL rules coupled with pre-translation
+processing. It consequently enables MT to generate outputs appropriate to their functional context with-
+out degrading the quality of the source.
+
+MuTUAL is currently operational online, focusing on the Task topic for creating municipal procedural
+documents in Japanese and English. The implemented CL rules were shown to be effective in triggering
+more appropriate outputs from our SMT system (Miyata et al., 2015). Also, a preliminary user evaluation
+revealed that the controlled authoring assistant module helped reduce time correcting CL-violations by
+more than 30%. As a future evaluation plan, while previous work has tended to focus on sentence-
+level text quality, we intend to evaluate the document-level quality of the system products by adopting
+task-based methods (Colineau et al., 2002). We will eventually make the system available to municipal
+departments and assess its usability in actual work scenarios.
+
+4TexTra is a state-of-the-art SMT system particularly intended for Japanese as source language, and provides free API.
+https://mt-auto-minhon-mlt.ucri.jgn-x.jp
+
+5The MuTUAL Project, http://www.mutual-project.com
+
+38
+
+
+
+Acknowledgements
+
+This work was supported by JSPS KAKENHI Grant Number 16J11185 and by the Research Grant
+Program of KDDI Foundation, Japan.
+
+References
+ASD. 2013. ASD Simplified Technical English. Specification ASD-STE100, Issue 6. http://www.asd-ste100.org.
+
+Laura Bellamy, Michelle Carey, and Jenifer Schlotfeldt. 2012. DITA Best Practices: A Roadmap for Writing,
+Editing, and Architecting in DITA. IBM Press.
+
+Arendse Bernth and Claudia Gdaniec. 2001. MTranslatability. Machine Translation, 16(3):175–218.
+
+Nathalie Colineau, Cécile Paris, and Keith Vander Linden. 2002. An evaluation of procedural instructional text.
+In Proceedings of the International Natural Language Generation Conference, pages 128–135, New York.
+
+Anthony Hartley and Cécile Paris. 2001. Translation, controlled languages, generation. In Erich Steiner and Colin
+Yallop, editors, Exploring Translation and Multilingual Text production, pages 307–325. Mouton, Berlin.
+
+Richard Kittredge. 2003. Sublanguages and controlled languages. In Ruslan Mitkov, editor, Oxford Handbook of
+Computational Linguistics, pages 430–437. Oxford University Press, Oxford.
+
+Tobias Kuhn. 2014. A survey and classification of controlled natural languages. Computational Linguistics,
+40(1):121–170.
+
+Teruko Mitamura, Kathryn Baker, Eric Nyberg, and David Svoboda. 2003. Diagnostics for interactive controlled
+language checking. In Proceedings of the 4th Workshop on Controlled Language Applications (CLAW 2003),
+pages 237–244, Dublin, Ireland.
+
+Rei Miyata, Anthony Hartley, Cécile Paris, Midori Tatsumi, and Kyo Kageura. 2015. Japanese controlled language
+rules to improve machine translatability of municipal documents. In Proceedings of the Machine Translation
+Summit XV, pages 90–103, Miami, USA.
+
+Rei Miyata, Anthony Hartley, Cécile Paris, and Kyo Kageura. 2016. Evaluating and implementing a controlled
+language checker. In Proceedings of the 6th International Workshop on Controlled Language Applications
+(CLAW 2016), pages 30–35, Portoroz̆, Slovenia.
+
+OASIS. 2010. Darwin Information Typing Architecture (DITA) Version 1.2. http://docs.oasis-
+open.org/dita/v1.2/os/spec/DITA1.2-spec.html.
+
+Sharon O’Brien and Johann Roturier. 2007. How portable are controlled language rules? In Proceedings of the
+Machine Translation Summit XI, pages 345–352, Copenhagen, DK.
+
+39
+
+

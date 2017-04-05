@@ -1,0 +1,147 @@
+
+Efficiency results: Figure 5 shows the evalua-
+tion scores of SMT systems trained using varying
+amounts of collected phrases. In the left graph, we
+see the proposed method based on parse trees and
+phrase semi-maximality rapidly improves BLEU
+score, and requires fewer additional words than the
+conventional methods. Because the cost paid for
+translation often is decided by the number of words,
+this indicates that the proposed method has better
+cost performance in these situations. The right graph
+shows improvement by the amount of translation
+time. These results here are different, showing the
+4-gram-freq baseline slightly superior. As discussed
+in Table 3, the methods based on parse trees select
+more uncovered 1-grams, namely unknown words,
+and specifically the proposed method selected more
+
+Selection Methods Total WorkingTime [Hours]
+
+Average
+Confidence Level
+
+(3 Levels)
+sent-by-4gram-freq 25.22 2.689
+
+4gram-freq 32.70 2.601
+reduced-struct-freq 59.97 2.771
+
+Table 4: Total working time and average confidence level
+
+technical terms that took a longer time to translate.
+Working time and confidence: We show the
+
+total time to collect the translations of 10k source
+words and average confidence level for each method
+in Table 4. The total working time for the proposed
+method is nearly double that of other methods, as
+seen in the right graph of Figure 5. On the other
+hand, the segments selected by the proposed method
+were given the highest confidence level, receiving
+the maximum value of 3 for about 79% of phrase
+pairs, indicating that the generated parallel data is of
+high quality. To some extent, this corroborates our
+hypothesis that the more syntactic phrases selected
+by the proposed method are easier to translate.
+We can also examine the tendency of working
+
+time for segments of different lengths in Table 5. In-
+terestingly, single words consistently have a longer
+average translation time than phrases of length 2-4,
+likely because they tend to be technical terms that re-
+quire looking up in a dictionary. We show the aver-
+age confidence levels corresponding to phrase length
+in Table 6. The confidence level of single words
+in the proposed method is lower than in the base-
+line method, likely because the baseline selected
+a smaller amount of single words, and those se-
+
+27
+
+
+
+Average Working Time [Seconds]
+
+Selection Method
+1
+
+Word
+
+2
+Word
+Phrase
+
+3
+Word
+Phrase
+
+4
+Word
+Phrase
+
+5+
+Word
+Phrase
+
+sent-by-4gram-freq - - - - 160.64
+4gram-freq 30.14 24.76 21.77 21.12 -
+
+reduced-struct-freq 35.61 25.23 21.72 28.13 22.82
+
+Table 5: Average working time of manual translation corre-
+sponding to phrase length
+
+Average Confidence Level (3 Levels)
+
+Selection Method
+1
+
+Word
+
+2
+Word
+Phrase
+
+3
+Word
+Phrase
+
+4
+Word
+Phrase
+
+5+
+Word
+Phrase
+
+sent-by-4gram-freq - - - - 2.689
+4gram-freq 2.885 2.585 2.422 2.300 -
+
+reduced-struct-freq 2.802 2.796 2.778 2.708 2.737
+
+Table 6: Average confidence level of manual translation corre-
+sponding to phrase length
+
+lected were less likely to be technical terms. On the
+other hand, we can confirm that the confidence level
+for longer phrases in the baseline method decreases
+drastically, while it is stably high in our method,
+confirming the effectiveness of selecting syntacti-
+cally coherent phrases.
+Translation accuracy by confidence level: Fi-
+
+nally, we show the accuracy of the SMT system
+trained by all the collected data in each method in
+Table 7. To utilize the confidence level annota-
+tion, we tested SMT systems trained by phrase pairs
+with confidence levels higher than 2 or 3. From the
+results, the accuracy of every method is improved
+when phrases pairs with confidence level 1 were fil-
+tered out. In contrast, the accuracy is conversely
+degraded if we use only phrase pairs with confi-
+dence level 3. The translation accuracy of 9.37%
+BLEU with the base SMT system without additional
+data became 10.72% after adding phrase pairs hav-
+ing confidence level 2 or higher, allowing for a rela-
+tively large gain of 1.35 BLEU points.

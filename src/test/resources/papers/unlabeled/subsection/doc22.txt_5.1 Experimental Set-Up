@@ -1,0 +1,125 @@
+
+To investigate the effects of the phrase selection
+methods proposed in Section 4, we first performed
+a simulation experiment in which we incrementally
+retrain translation models and evaluate the accuracy
+after each step of data selection. In this experi-
+ment, we chose English as a source language and
+French and Japanese as target languages. To sim-
+ulate a realistic active learning scenario, we started
+from given parallel data in the general domain and
+sequentially added additional source language data
+in a specific target domain. For the English-French
+translation task, we adopted the Europarl corpus
+
+2The method does not distinguish between equivalent word
+sequences even if they have different tree structures
+
+23
+
+
+
+Lang Pair Domain Dataset Amount
+
+En-Fr
+
+1.89M Sent.
+General (Base) Train En: 47.6M Words
+
+Fr: 49.4M Words
+15.5M Sent.
+
+Medical Train En: 393M Words
+Fr: 418M Words
+
+(Target) Test 1000 Sent.
+Dev 500 Sent.
+
+En-Ja
+
+414k Sent.
+General (Base) Train En: 6.72M Words
+
+Ja: 9.69M Words
+1.87M Sent.
+
+Scientific Train En: 46.4M Words
+Ja: 57.6M Words
+
+(Target) Test 1790 Sent.
+Dev 1790 Sent.
+
+Table 1: Details of parallel data
+
+from WMT20143 as a base parallel data source
+and EMEA (Tiedemann, 2009), PatTR (Wäschle
+and Riezler, 2012), and Wikipedia titles, used in
+the medical translation task, as the target domain
+data. For the English-Japanese translation task, we
+adopted the broad-coverage example sentence cor-
+pus provided with the Eijiro dictionary4 as general
+domain data, and the ASPEC5 scientific paper ab-
+stract corpus as the target domain data. For pre-
+processing, we tokenized Japanese corpora using the
+KyTea word segmenter (Neubig et al., 2011) and fil-
+tered out the lines of length over 60 from all the
+training parallel data to ensure accuracy of parsing
+and alignment. We show the details of the parallel
+dataset after pre-processing in Table 1.
+For the machine translation framework, we used
+
+phrase-based SMT (Koehn et al., 2003) with the
+Moses toolkit (Koehn et al., 2007) as a decoder.
+To efficiently re-train the models with new data,
+we adopted inc-giza-pp,6 a specialized version of
+GIZA++ word aligner (Och and Ney, 2003) support-
+ing incremental training, and the memory-mapped
+dynamic suffix array phrase tables (MMSAPT) fea-
+ture of Moses (Germann, 2014) for on-memory con-
+struction of phrase tables. We train 5-gram models
+over the target side of all the general domain and
+target domain data using KenLM (Heafield, 2011).
+
+3http://statmt.org/wmt14/
+4http://eijiro.jp
+5http://lotus.kuee.kyoto-u.ac.jp/ASPEC/
+6https://github.com/akivajp/inc-giza-pp
+
+For the tuning of decoding parameters, since it is not
+realistic to run MERT (Och, 2003) at each retrain-
+ing step, we tuned the parameters to maximize the
+BLEU score (Papineni et al., 2002) for the baseline
+system, and re-used the parameters thereafter. We
+compare the following 8 segment selection meth-
+ods, including 2 random selection methods, 2 con-
+ventional methods and 4 proposed methods:
+
+sent-rand: Select sentences randomly.
+4gram-rand: Select n-gram strings of length of up to 4
+
+in random order.
+sent-by-4gram-freq: Select the sentence including the
+
+most frequent uncovered phrase with length of up
+to 4 words (baseline 1, §3.1).
+
+4gram-freq: Select the most frequent uncovered phrase
+with length of up to 4 words (baseline 2, §3.2).
+
+maxsubst-freq: Select the most frequent uncovered
+maximal phrase (proposed, §4.1)
+
+reduced-maxsubst-freq: Select the most frequent un-
+covered semi-maximal phrase (proposed, §4.1)
+
+struct-freq: Select the most frequent uncovered phrase
+extracted from the subtrees (proposed, §4.2).
+
+reduced-struct-freq: Select the most frequent uncov-
+ered semi-maximal phrase extracted from the sub-
+trees (proposed, §4.1 and §4.2).
+
+To generate oracle translations, we used an SMT
+system trained on all of the data in both the general
+and target-domain corpora. To generate parse trees,
+we used the Ckylark parser (Oda et al., 2015).

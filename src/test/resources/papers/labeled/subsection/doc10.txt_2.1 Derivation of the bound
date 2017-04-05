@@ -1,0 +1,143 @@
+
+Consider a discrete random variable y ∈ {1, . . . ,K} that takes the value k with probability,
+
+p(y = k) = Softmaxk(f1, . . . , fK) =
+efk∑K
+
+m=1 e
+fm
+, (2)
+
+where each fk is a free real-valued scalar parameter. We wish to express a lower bound on p(y = k)
+and the key step of our derivation is to re-write p(y = k) as
+
+p(y = k) =
+1
+
+1 +
+∑
+m 6=k e
+
+−(fk−fm)
+. (3)
+
+Then, by exploiting the fact that for any non-negative numbers α1 and α2 it holds 1 + α1 + α2 ≤
+1 + α1 + α2 + α1α2 = (1 + α1)(1 + α2), and more generally it holds (1 +
+
+∑
+i αi) ≤
+
+∏
+i(1 + αi)
+
+where each αi ≥ 0, we obtain the following lower bound on the above probability,
+
+p(y = k) ≥
+∏
+m6=k
+
+1
+
+1 + e−(fk−fm)
+=
+∏
+m6=k
+
+efk
+
+efk + efm
+=
+∏
+m 6=k
+
+σ(fk − fm). (4)
+
+where σ(·) denotes the sigmoid function. Clearly, the terms in the product are pairwise probabilities
+each corresponding to the event y = k conditional on the union of pairs of events, i.e. y ∈ {k,m}
+where m is one of the remaining values. We will refer to this bound as one-vs-each bound on the
+softmax probability, since it involves K − 1 comparisons of a specific event y = k versus each of the
+K − 1 remaining events. Furthermore, the above result can be stated more generally to define bounds
+on arbitrary probabilities as the following statement shows.
+Proposition 1. Assume a probability model with state space Ω and probability measure P (·). For
+any event A ⊂ Ω and an associated countable set of disjoint events {Bi} such that ∪iBi = Ω \A, it
+holds
+
+P (A) ≥
+∏
+i
+
+P (A|A ∪Bi). (5)
+
+Proof. Given that P (A) = P (A)P (Ω) =
+P (A)
+
+P (A)+
+∑
+i P (Bi)
+
+, the result follows by applying the inequality
+(1 +
+
+∑
+i αi) ≤
+
+∏
+i(1 + αi) exactly as done above for the softmax parameterization.
+
+2
+
+
+
+Remark. If the set {Bi} consists of a single event B then by definition B = Ω \A and the bound is
+exact since in such case P (A|A ∪B) = P (A).
+Furthermore, based on the above construction we can express a full class of hierarchically ordered
+bounds. For instance, if we merge two events Bi and Bj into a single one, then the term P (A|A ∪
+Bi)P (A|A ∪ Bj) in the initial bound is replaced with P (A|A ∪ Bi ∪ Bj) and the associated new
+bound, obtained after this merge, can only become tighter. To see a more specific example in the
+softmax probabilistic model, assume a small subset of categorical symbols Ck, that does not include
+k, and denote the remaining symbols excluding k as C̄k so that k ∪ Ck ∪ C̄k = {1, . . . ,K}. Then, a
+tighter bound, that exists higher in the hierarchy, than the one-vs-each bound (see Eq. 4) takes the
+form,
+
+p(y = k) ≥ Softmaxk(fk, fCk)×Softmaxk(fk, fC̄k) ≥ Softmaxk(fk, fCk)×
+∏
+m∈C̄k
+
+σ(fk−fm), (6)
+
+where Softmaxk(fk, fCk) =
+efk
+
+efk+
+∑
+m∈Ck
+
+efm
+and Softmaxk(fk, fC̄k) =
+
+efk
+
+efk+
+∑
+m∈C̄k
+
+efm
+. For sim-
+
+plicity of our presentation in the remaining of the paper we do not discuss further these more general
+bounds and we focus only on the one-vs-each bound.
+
+The computationally useful aspect of the bound in Eq. (4) is that it factorizes into a product, where
+each factor depends only on a pair of parameters (fk, fm). Crucially, this avoids the evaluation of the
+normalizing constant associated with the global probability in Eq. (2) and, as discussed in Section 3, it
+leads to scalable training using stochastic optimization that can deal with very large K. Furthermore,
+approximate maximum likelihood estimation based on the bound can be very accurate and, as shown
+in the next section, it is exact for the non-parametric estimation case.
+
+The fact that the one-vs-each bound in (4) is a product of pairwise probabilities suggests that there
+is a connection with Bradley-Terry (BT) models [6, 10] for learning individual skills from paired
+comparisons and the associated multiclass classification systems obtained by combining binary
+classifiers, such as one-vs-rest and one-vs-one approaches [10]. Our method differs from BT models,
+since we do not combine binary probabilistic models to a posteriori form a multiclass model. Instead,
+we wish to develop scalable approximate algorithms that can surrogate the training of multiclass
+softmax-based models by maximizing lower bounds on the exact likelihoods of these models.

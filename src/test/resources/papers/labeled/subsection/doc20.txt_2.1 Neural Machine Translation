@@ -1,0 +1,13 @@
+
+Figure 1: Impact of missing translations and increased ambi-
+guity
+red line: performances (BLEU) of sentence groups with dif-
+ferent number of rare words
+blue line: performances after setting different number of
+words to unk in translations of the sentence group without
+rare words
+
+train a NMT model on a large corpus with a vocabulary size
+of 30k to 80k, training with the whole target vocabulary is ob-
+viously infeasible. So addressing the problem for rare words
+is quite necessary for neural machine translation.

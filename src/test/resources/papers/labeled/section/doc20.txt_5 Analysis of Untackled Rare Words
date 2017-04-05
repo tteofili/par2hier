@@ -1,0 +1,297 @@
+
+Although our method can handle more than 90 percent rare
+words in the data, there are still some remain untackled,
+which can be divided into two categories as follows.
+
+One is related with complex alignments. As described in
+section 3.1, we only handle one to one and one to zero (zero to
+one) mapping in this paper. there are also some one to many
+(many to one) and many to many alignments in the data. Here
+is an example,
+
+ÿÅ⌥��€y∆á˜
+and indicating the import ratification number
+
+the rare word ’á˜’ (document number) at the end of
+the source sentence aligns to two target word ’ratification’
+and ’number’, and the target word ’ratification’ also aligns
+to the second to last word ’y∆’ (ratification). If we focus
+
+2856
+
+
+
+WÈ
+
+y
+
+�(unk)
+
+é˝
+
+�
+
+⌫È
+
+˘›
+
+s
+
+o
+
+u
+
+t
+
+h
+
+k
+
+o
+
+r
+
+e
+
+a
+
+n
+
+e
+
+n
+
+v
+
+o
+
+y
+
+t
+
+o
+
+n
+
+o
+
+r
+
+t
+
+h
+
+a
+
+m
+
+e
+
+r
+
+i
+
+c
+
+a
+
+a
+
+n
+
+d
+
+n
+
+o
+
+r
+
+t
+
+h
+
+k
+
+o
+
+r
+
+e
+
+a
+
+WÈ
+
+y
+
+|�
+
+é˝
+
+�
+
+⌫È
+
+˘›
+
+s
+
+o
+
+u
+
+t
+
+h
+
+k
+
+o
+
+r
+
+e
+
+a
+
+n
+
+e
+
+n
+
+v
+
+o
+
+y
+
+c
+
+a
+
+l
+
+l
+
+s
+
+f
+
+o
+
+r
+
+d
+
+i
+
+a
+
+l
+
+o
+
+g
+
+u
+
+e
+
+b
+
+e
+
+t
+
+w
+
+e
+
+e
+
+n
+
+t
+
+h
+
+e
+
+u
+
+n
+
+i
+
+t
+
+e
+
+d
+
+s
+
+t
+
+a
+
+t
+
+e
+
+s
+
+a
+
+n
+
+d
+
+n
+
+o
+
+r
+
+t
+
+h
+
+k
+
+o
+
+r
+
+e
+
+a
+
+.
+
+Figure 4: Better attention after replacement. Darker block denotes larger attention weight. Left: translation by baseline model;
+Right: translation by our model.
+
+on word level replacement, then replacing both ’ratification’
+and ’number’ with the translation of a word similar to ’á˜’
+will make the source word ’y∆’ unaligned. So it’s better
+to do the replacement at phrase level. But how to find alter-
+natives for phases remains a problem and it will be leaved as
+our future work.
+
+The other class of untackled rare words are related with the
+similarity model. According to Zipf’s law [Zipf, 1949], it’s
+impossible to contain all words from a language in a corpus
+with limited size. And for speed and quality3 considerations,
+we also don’t train word vectors for words which appear less
+than 5 times in the mono-lingual data. So for those really
+rare words which are not seen or only seen a few times in the
+mono-lingual data, we cannot find words similar to them. Ac-
+cording to our investigation, most of these really rare words
+belong to named entities, including number, person names,
+location names and organization names. With an extra named
+entity recognizer, we can replace these rare named entities
+with their type labels instead of similar words. And this will
+also be leaved as our feature work.

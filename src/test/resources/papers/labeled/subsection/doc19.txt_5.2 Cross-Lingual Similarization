@@ -1,0 +1,201 @@
+
+50
+
+60
+
+70
+
+80
+
+90
+lambda = 0.9
+
+35
+
+40
+
+45
+
+50
+
+55
+
+60
+
+65
+
+Figure 4: The developing curves of cross-lingual similarization with projective searching on both languages. X-axis: training
+iteration; Left Y-axis: parsing accuracy; Right Y-axis: cross-lingual similarity. Thin dash-dotted line (gray): accuracy of the
+
+baseline grammar; Thin dashed line (green): direct accuracy of cross-lingually similarized grammars; Thin solid line (red): adaptive
+
+accuracy of cross-lingually similarized grammars; Thick sold line (blue): the cross-lingual similarity of grammars.
+
+0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9
+
+50
+
+60
+
+70
+
+80
+
+90
+proj : fixed
+
+35
+
+40
+
+45
+
+50
+
+55
+
+60
+
+65
+
+0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9
+
+50
+
+60
+
+70
+
+80
+
+90
+proj : proj
+
+35
+
+40
+
+45
+
+50
+
+55
+
+60
+
+65
+
+0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9
+
+50
+
+60
+
+70
+
+80
+
+90
+proj : nonproj
+
+35
+
+40
+
+45
+
+50
+
+55
+
+60
+
+65
+
+0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9
+
+50
+
+60
+
+70
+
+80
+
+90
+nonproj : fixed
+
+35
+
+40
+
+45
+
+50
+
+55
+
+60
+
+65
+
+0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9
+
+50
+
+60
+
+70
+
+80
+
+90
+nonproj : proj
+
+35
+
+40
+
+45
+
+50
+
+55
+
+60
+
+65
+
+0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9
+
+50
+
+60
+
+70
+
+80
+
+90
+nonproj : nonproj
+
+35
+
+40
+
+45
+
+50
+
+55
+
+60
+
+65
+
+Figure 5: The developing curves of cross-lingual similarization with all searching configurations. X-axis: coefficient λ; Left
+Y-axis: parsing accuracy; Right Y-axis: cross-lingual similarity. The lines indicate the same as in Figure 4.
+
+506
+
+

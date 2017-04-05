@@ -1,0 +1,30 @@
+
+In the second baseline approach, we directly select
+and translate n-gram phrases that are the most fre-
+quent in the source language data but not yet cov-
+ered in the translated data (Bloodgood and Callison-
+Burch, 2010). This method allows for improvement
+of coverage with fewer additional words than sen-
+tence selection, achieving higher efficiency by re-
+ducing the amount of data unnecessarily annotated.
+Bloodgood and Callison-Burch (2010) showed that
+by translating the phrases selected by this method
+using a crowdsourcing website, it was possible to
+achieve a large improvement of BLEU score, out-
+performing similar sentence-based methods.
+
+However, as mentioned in the introduction, this
+method has several issues. First, because it uses
+short phrases, it often selects phrases that are not
+linguistically well-formed, potentially making them
+difficult to translate concisely. Second, it also has
+problems with redundancy, with no device to pre-
+vent multiple overlapping phrases being selected
+and translated. Finally, the previous work limits the
+maximum phrase length to n = 4, precluding the
+use of longer phrases. However, using a larger limit
+such as n = 5 is not likely to be a fundamental solu-
+tion, as it increases the number of potentially over-
+lapping phrases, and also computational burden. In
+the next section we cover our proposed solutions to
+these problems in detail.

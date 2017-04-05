@@ -1,0 +1,65 @@
+The fundamental decisions for graph-based depen-
+dency parsing are to evaluate the candidate depen-
+dency edges. The cross-lingual similarization for
+fundamental decisions can be defined as some kinds
+of blending calculation on two evaluation scores,
+of which the one is directly given by the grammar
+of the current language (current grammar), and the
+other is bilingually projected from the grammar of
+the reference language (reference grammar).
+
+For the words i and j in the sentence xα in the
+current language, their evaluated score given by the
+current grammar is Sα(i, j), which can be calculated
+according to formula 1. The score bilingually pro-
+jected from the reference grammar, Sβ(i, j), can be
+obtained according to the translation sentence xβ in
+the reference language and the word alignment be-
+tween two sentences:
+
+Sβ(i, j) =
+∑
+
+i′,j′∈xβ
+Ai,i′Aj,j′Sβ(i′, j′) (3)
+
+where i′ and j′ are the corresponding words of i and
+j in the reference sentence xβ , Ai,j indicates the
+probability that i aligns to j, and Sβ(i′, j′) is the
+evaluated score of the candidate edge (i′, j′) given
+by the reference grammar.
+
+Given the two evaluated scores, we simply adopt
+the linear weighted summation:
+
+Sβα(i, j) = (1− λ)Sα(i, j) + λSβ(i, j) (4)
+
+where λ is the relative weight to control the degree
+of cross-lingual similarization, indicating to which
+degree we consider the decisions of the reference
+
+grammar when adjusting the decisions of the current
+grammar. We have to choose a value for λ to achieve
+an appropriate speed for effective cross-lingual sim-
+ilarization, in order to obtain similarized grammars
+with high cross-lingual similarity while maintaining
+the non-triviality of the grammars.
+
+In the re-evaluated full-connected graph, the de-
+coding algorithm searches for the cross-lingually
+similarized dependency structures, which are used
+to re-train the dependency grammars. Based on the
+cross-lingual similarization strategy, iterative coop-
+erative learning simultaneously similarizes the sen-
+tences in the current and reference languages, and
+gradually improves the cross-lingual similarity be-
+tween two grammars while maintaining the non-
+triviality of each monolingual grammar. The whole
+training algorithm is shown in Algorithm 1. To
+reduce the computation complexity, we choose the
+same λ for the cross-lingual similarization for both
+the current and the reference grammars. Another
+hyper-parameter for the iterative cooperative learn-
+ing algorithm is the maximum training iteration,
+which can be determined according to the perfor-
+mance on the development sets.

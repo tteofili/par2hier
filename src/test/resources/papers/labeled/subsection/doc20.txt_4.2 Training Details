@@ -1,0 +1,12 @@
+
+The hyperparameters used in our network are described as
+follows. We limit both the source and target vocabulary to
+30k in our experiments. This number of hidden units is 1,000
+for both the encoder and decoder. And the word embedding
+dimension is 500 for all source and target words. The param-
+eters in the network are updated with the adadelta algorithm.
+
+To train the word vectors on monolingual data, we set the
+embedding dimension to 100 and the window size to 5. And
+we use top 10 most similar words in the similarity model con-
+sidering bilingual context in section 3.2.

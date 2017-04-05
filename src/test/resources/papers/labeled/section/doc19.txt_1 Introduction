@@ -1,0 +1,78 @@
+
+Due to the inherent syntactic regularity of each
+language and the discrepancy between annotation
+guidelines of linguists, there is not necessarily struc-
+tural isomorphism between grammars of different
+languages. For many cross-lingual scenarios such
+as information retrieval and machine translation, re-
+lationships between linguistic units are expected to
+be (at least roughly) consistent across languages
+(Hwa et al., 2002; Smith and Eisner, 2009). For
+cross-lingual applications, syntactic structures with
+high cross-lingual similarity facilitates knowledge
+extraction, feature representation and classification
+
+decision. The structural isomorphism between lan-
+guages, therefore, is an important aspect for the per-
+formance of cross-lingual applications such as ma-
+chine translation.
+
+To achieve effective cross-lingual similarization
+for two grammars in different languages, an ad-
+equate algorithm should both improve the cross-
+lingual similarity between two grammars and main-
+tain the non-triviality of each grammar, where non-
+triviality indicates that the resulted grammars should
+not give flat or single-branched outputs. Differ-
+ent from constituency structures, dependency struc-
+tures are lexicalized without specialized hierarchical
+structures. Such concise structures depict the syn-
+tactic or semantic relationships between words, and
+thus have advantage on many cross-lingual scenar-
+ios. It is worth to perform cross-lingual similariza-
+tion for dependency grammars, but the special prop-
+erty of dependency grammars makes it hard to di-
+rectly adopt the conventional structure transforma-
+tion methods resorting to hand-crafted rules or tem-
+plates.
+
+Both graph-based models (McDonald et al.,
+2005) and transition-based models (Nivre et al.,
+2006) factorize dependency parsing into fundamen-
+tal classification decisions, that is, the relation-
+ships between words or the actions applied to cur-
+rent states. We assume that cross-lingual simi-
+larization can also be factorized into fundamen-
+tal classification decisions, and propose an au-
+tomatic cross-lingual similarization algorithm for
+dependency grammars according to this assump-
+tion. The algorithm conducts cross-lingual sim-
+ilarization on the level of classification decisions
+
+501
+
+
+
+with simple blending operations rather than on the
+level of syntactic structures with complicated hand-
+crafted rules or templates, and adopts iterative cross-
+lingual collaborative learning to gradually improve
+the cross-lingual similarity while maintaining the
+non-triviality of grammars.
+
+We design an evaluation metric for the cross-
+lingual similarity of dependency grammars, which
+calculates the consistency degree of dependency re-
+lationships across languages. We also propose an
+effective method to measure the real performance of
+the cross-lingually similarized grammars based on
+the transfer learning methodology (Pan and Yang,
+2010). We validate the method on the dependency
+grammar induction of Chinese and English, where
+significant increment of cross-lingual similarity is
+achieved without losing non-triviality of the gram-
+mars. As applications, the cross-lingually simi-
+larized grammars gain significant performance im-
+provement for the dependency tree-based machine
+translation by simply replacing the parser of the
+translator.

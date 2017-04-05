@@ -1,0 +1,41 @@
+
+Proceedings of NAACL-HLT 2016, pages 20–29,
+San Diego, California, June 12-17, 2016. c©2016 Association for Computational Linguistics
+
+Selecting Syntactic, Non-redundant Segments
+in Active Learning for Machine Translation
+
+Akiva Miura†, Graham Neubig†, Michael Paul‡, Satoshi Nakamura†
+† Nara Institute of Science and Technology, Japan
+
+‡ ATR-Trek Co. Ltd., Japan
+miura.akiba.lr9@is.naist.jp neubig@is.naist.jp
+michael.paul@atr-trek.co.jp s-nakamura@is.naist.jp
+
+Abstract
+
+Active learning is a framework that makes it
+possible to efficiently train statistical models
+by selecting informative examples from a pool
+of unlabeled data. Previous work has found
+this framework effective for machine trans-
+lation (MT), making it possible to train bet-
+ter translation models with less effort, partic-
+ularly when annotators translate short phrases
+instead of full sentences. However, previous
+methods for phrase-based active learning in
+MT fail to consider whether the selected units
+are coherent and easy for human translators
+to translate, and also have problems with se-
+lecting redundant phrases with similar con-
+tent. In this paper, we tackle these problems
+by proposing two new methods for selecting
+more syntactically coherent and less redun-
+dant segments in active learning for MT. Ex-
+periments using both simulation and extensive
+manual translation by professional translators
+find the proposed method effective, achiev-
+ing both greater gain of BLEU score for the
+same number of translated words, and allow-
+ing translators to be more confident in their
+translations1.

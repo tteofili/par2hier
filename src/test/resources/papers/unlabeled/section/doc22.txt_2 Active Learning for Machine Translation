@@ -1,0 +1,53 @@
+
+In this section, we first provide an outline of the ac-
+tive learning procedure to select phrases for SMT
+data. In this paper, we regard a “phrase” as a
+word sequence with arbitrary length, which indi-
+cates that full sentences and single words both qual-
+ify as phrases. In Algorithm 1, we show the general
+procedure of incrementally selecting the next candi-
+date for translation from the source language corpus,
+requesting and collecting the translation in the target
+language, and retraining the models.
+
+Algorithm 1 Active learning for MT
+1: Init:
+2: SrcPool ← source language data including candidates for translation
+3: Translated ← translated parallel data
+4: Oracle ← oracle giving the correct translation for an input phrase
+5: Loop Until StopCondition:
+6: TM ← TrainTranslationModel(Translated)
+7: NewSrc ← SelectNextPhrase(SrcPool, Translated, TM)
+8: NewTrg ← GetTranslation(Oracle, NewSrc)
+9: Translated ← Translated ∪ {⟨NewSrc, NewTrg⟩}
+In lines 1-4, we define the datasets and initialize
+
+them. SrcPool is a set with each sentence in source
+language corpus as an element. Translated indi-
+cates a set with source and target language phrase
+pairs. Translated may be empty, but in most cases
+will consist of a seed corpus upon which we would
+like to improve. Oracle is an oracle (e.g. a human
+translator), that we can query for a correct transla-
+tion for an arbitrary input phrase.
+In lines 5-9, we train models incrementally.
+
+StopCondition in line 5 is an arbitrary timing when
+to stop the loop, such as when we reach an accu-
+racy goal or when we expend our translation bud-
+
+21
+
+
+
+get. In line 6, we train the translation model using
+Translated, the available parallel data at this point.
+We evaluate the accuracy after training the transla-
+tion model for each step in the experiments. In line
+7, we select the next candidate for translation using
+features of SrcPool, Translated and TM to make
+the decision.
+In the following sections, we discuss existing
+
+methods (§3), and our proposed methods (§4) to im-
+plement the selection criterion in line 7.

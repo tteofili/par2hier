@@ -1,0 +1,60 @@
+
+Suppose x = 〈x1, x2, · · · , xm〉 denotes a source
+sentence, y = 〈y1, y2, · · · , yn〉 denotes a target sen-
+tence. In addition, let x<t = 〈x1, x2, · · · , xt−1〉
+denote a prefix of x. Neural Machine Translation
+(NMT) directly maps a source sentence into a tar-
+get within a probabilistic framework. Formally, it
+defines a conditional probability over a pair of se-
+quences x and y via a recurrent neural network as
+follows:
+
+p(y | x; θ) =
+n∏
+
+t=1
+
+p(yt | y<t,x; θ)
+
+=
+n∏
+
+t=1
+
+softmax
+(
+g(ht)
+
+)
+[yt]
+
+(1)
+
+where θ is the set of model parameters; ht denotes
+a hidden state (i.e. a vector) of y at timestep t; g
+is a transformation function from a hidden state to a
+vector with dimension of the target-side vocabulary
+size; softmax is the softmax function, and [i] de-
+notes the ith component in a vector.2 Furthermore,
+
+1The absolute gains of our model can be expected to be fur-
+ther increased by applying the well-known techniques in (Jean
+et al., 2015; Luong et al., 2015) that address the problems pre-
+sented by unknown words, but these techniques are beyond the
+scope of this paper.
+
+2In that sense, yt in Eq.(1) also denotes the index of this
+word in its vocabulary.
+
+ht = f(ht−1, c(x, y<t)) is defined by a recurrent
+function over both the previous hidden state ht−1
+and the context c(x, y<t). 3 Note that both ht and
+c(x, y<t) have dimension d for all t.
+
+In this paper, we develop our model on top of the
+neural machine translation approach of (Bahdanau
+et al., 2014), and we refer the reader this paper for a
+complete description of the model, for example, the
+definitons of f and c. The proposed method could
+just as easily been implemented on top of any other
+RNN models such as that in (Sutskever et al., 2014).

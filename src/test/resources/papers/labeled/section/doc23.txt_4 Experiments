@@ -1,0 +1,70 @@
+
+We conducted experiments on two challenging
+translation tasks: Japanese-to-English (JP-EN) and
+Chinese-to-English (CH-EN), using case-insensitive
+BLEU for evaluation.
+
+For the JP-EN task, we use the data from NTCIR-
+9 (Goto et al., 2011): the training data consisted
+of 2.0M sentence pairs, The development and test
+sets contained 2K sentences with a single referece,
+respectively. For the CH-EN task, we used the
+data from the NIST2008 Open Machine Translation
+Campaign: the training data consisted of 1.8M sen-
+tence pairs, the development set was nist02 (878 sen-
+tences), and the test sets are were nist05 (1082 sen-
+tences), nist06 (1664 sentences) and nist08 (1357
+sentences).
+
+Four baselines were used. The first two were
+the conventional state-of-the-art translation systems,
+phrase-based and hierarchical phrase-based systems,
+which are from the latest version of well-known
+Moses (Koehn et al., 2007) and are respectively de-
+noted as Moses and Moses-hier. The other two were
+neural machine translation systems implemented us-
+ing the open source NMT toolkit (Bahdanau et al.,
+2014):4 left-to-right NMT (NMT-l2r) and right-to-
+left NMT (NMT-r2l). The proposed joint model
+
+4See https://github.com/lisa-groundhog/GroundHog/tree/
+master/experiments/nmt.
+
+Systems Prefix Suffix
+NMT-l2r 29.4 25.4
+NMT-r2l 26.2 26.7
+NMT-J 29.5 28.6
+
+Table 1: Quality of 5-word prefixes and suffices of translations
+in the JP-EN test set, evaluated using partial BLEU.
+
+(NMT-J) was also implemented using NMT (Bah-
+danau et al., 2014).
+
+We followed the standard pipeline to train and
+run Moses. GIZA++ (Och and Ney, 2000) with
+grow-diag-final-and was used to build the translation
+model. We trained 5-gram target language models
+using the training set for JP-EN and the Gigaword
+corpus for CH-EN, and used a lexicalized distortion
+model. All experiments were run with the default
+settings except for a distortion-limit of 12 in the JP-
+EN experiment, as suggested by (Goto et al., 2013).5
+
+To alleviate the negative effects of randomness, the
+final reported results are averaged over five runs of
+MERT.
+
+To ensure a fair comparison, we employed the
+same settings for all NMT systems. Specifically,
+except for the maximum sequence length (seqlen,
+which was to 80), and the stopping iteration which
+was selected using development data, we used the
+default settings set out in (Bahdanau et al., 2014) for
+all NMT-based systems: the dimension of word em-
+bedding was 620, the dimension of hidden units was
+1000, the batch size was 80, the source and target
+side vocabulary sizes were 30000, and the beam size
+for decoding was 12. Training was conducted on a
+single Tesla K80 GPU, and it took about 6 days to
+train a single NMT system on our large-scale data.

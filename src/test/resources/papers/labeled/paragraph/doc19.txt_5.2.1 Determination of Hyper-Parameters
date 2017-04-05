@@ -1,0 +1,35 @@
+We select a subset of 40,000 sentence pairs out
+
+of the FBIS dataset, and use it as the smaller bilin-
+gual corpus to tune the hyper-parameters. For the
+coefficient λ we try from 0.1 to 0.9 with step 0.1;
+and for the iterative learning we simply set the max-
+imum iteration as 10. The developing procedure
+results in a series of grammars. For the configura-
+tion with projective searching modes on both sides,
+a total of 90 pairs of Chinese and English gram-
+mars are generated. We use three indicators to vali-
+date each similarized grammar generated in the de-
+veloping procedure, including the performance on
+the similarized grammar itself (direct accuracy), the
+performance of the corresponding adapted grammar
+(adaptive accuracy), and the cross-lingual similar-
+ity between the similarized grammar and its English
+counterpart. Figure 4 shows the developing curves
+for the configuration with projective searching on
+both sides. With the fixed maximum iteration 10,
+we draw the developing curves for the other search-
+ing configurations with respect to the weight coeffi-
+cient, as shown in Figure 5.
+
+We find that the optimal performance is also
+achieved at 0.6 in most situations. In all configu-
+rations, the training procedures increase the cross-
+lingual similarity of grammars. Along with the in-
+crement of cross-lingual similarity, the direct accu-
+racy of the similarized grammars on the develop-
+ment set decreases, but the adaptive accuracy given
+by the corresponding adapted grammars approach to
+that of the original grammars. Note that the projec-
+tive searching mode is adopted for the evaluation of
+the adapted grammar.

@@ -1,0 +1,37 @@
+
+Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing, pages 501–510,
+Austin, Texas, November 1-5, 2016. c©2016 Association for Computational Linguistics
+
+Automatic Cross-Lingual Similarization of Dependency Grammars
+for Tree-based Machine Translation
+
+Wenbin Jiang 1 and Wen Zhang 1 and Jinan Xu 2 and Rangjia Cai 3
+1Key Laboratory of Intelligent Information Processing
+
+Institute of Computing Technology, Chinese Academy of Sciences, China
+2School of Computer and Information Technology, Beijing Jiaotong University, China
+
+3Research Center of Tibetan Information, Qinghai Normal University, China
+jiangwenbin@ict.ac.cn
+
+Abstract
+
+Structural isomorphism between languages
+benefits the performance of cross-lingual ap-
+plications. We propose an automatic al-
+gorithm for cross-lingual similarization of
+dependency grammars, which automatically
+learns grammars with high cross-lingual sim-
+ilarity. The algorithm similarizes the an-
+notation styles of the dependency grammars
+for two languages in the level of classifica-
+tion decisions, and gradually improves the
+cross-lingual similarity without losing linguis-
+tic knowledge resorting to iterative cross-
+lingual cooperative learning. The dependency
+grammars given by cross-lingual similariza-
+tion have much higher cross-lingual similar-
+ity while maintaining non-triviality. As appli-
+cations, the cross-lingually similarized gram-
+mars significantly improve the performance of
+dependency tree-based machine translation.

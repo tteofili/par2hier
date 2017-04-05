@@ -1,0 +1,96 @@
+
+For the majority of English speakers today, En-
+glish is not the first language. These writers make
+a variety of grammar and usage mistakes that are
+not addressed by standard proofing tools. Re-
+cently, there has been a spike in research on gram-
+matical error correction (GEC), correcting writing
+mistakes made by learners of English as a Sec-
+ond Language, including four shared tasks: HOO
+(Dale and Kilgarriff, 2011; Dale et al., 2012) and
+
+System Method Performance
+P R F0.5
+
+CoNLL-2014 top 3 MT 41.62 21.40 35.01
+CoNLL-2014 top 2 Classif. 41.78 24.88 36.79
+CoNLL-2014 top 1 MT, rules 39.71 30.10 37.33
+Susanto et al. (2014) MT, classif. 53.55 19.14 39.39
+Miz. & Mats. (2016) MT 45.80 26.60 40.00
+This work MT, classif. 60.17 25.64 47.40
+
+Table 1: (Lack of) progress in GEC over the last
+few years.
+
+CoNLL (Ng et al., 2013; Ng et al., 2014). These
+shared tasks facilitated progress on the problem
+within the framework of two leading methods –
+machine learning classification and statistical ma-
+chine translation (MT).
+
+The top CoNLL system combined a rule-based
+module with MT (Felice et al., 2014). The second
+system that scored almost as highly used machine
+learning classification (Rozovskaya et al., 2014),
+and the third system used MT (Junczys-Dowmunt
+and Grundkiewicz, 2014). Furthermore, Susanto
+et al. (2014) showed that a combination of the two
+methods is beneficial, but the advantages of each
+method have not been fully exploited.
+
+Despite success of various methods and the
+growing interest in the task, the key differences be-
+tween the leading approaches have not been iden-
+tified or made explicit, which could explain the
+lack of progress on the task. Table 1 shows ex-
+isting state-of-the-art since CoNLL-2014. The top
+results are close, suggesting that several groups
+have competitive systems. Two improvements (of
+<3 points) were published since then (Susanto et
+al., 2014; Mizumoto and Matsumoto, 2016).
+
+The purpose of this work is to gain a better un-
+derstanding of the values offered by each method
+and to facilitate progress on the task, building on
+the advantages of each approach. Through bet-
+ter understanding of the methods, we exploit the
+strengths of each technique and, building on exist-
+ing architecture, develop superior systems within
+
+
+
+each framework. Further combination of these
+systems yields even more significant improve-
+ments over existing state-of-the-art. We make the
+following contributions:
+• We examine two state-of-the-art approaches
+
+to GEC and identify strengths and weaknesses of
+the respective learning frameworks.
+•We perform an error analysis of the output of
+
+two state-of-the-art systems, and demonstrate how
+the methods differ with respect to the types of lan-
+guage misuse handled by each.
+• We exploit the strengths of each framework:
+
+with classifiers, we explore the ability to learn
+from native data, i.e. without supervision, and the
+flexibility to adjust knowledge sources to specific
+error types; with MT, we leverage the ability to
+learn without further linguistic input and to bet-
+ter identify complex mistakes that cannot be easily
+defined in a classifier framework.
+•As a result, we build several systems that com-
+
+bine the strengths of both frameworks and demon-
+strate substantial progress on the task. Specif-
+ically, the best system outperforms the previous
+best result by 7.4 F score points.
+
+Section 2 describes related work. Section 3
+presents error analysis. In Section 4, we develop
+classifier and MT systems that make use of the
+strengths of each framework. Section 5 shows how
+to combine the two approaches. Section 6 con-
+cludes.

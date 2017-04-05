@@ -1,0 +1,34 @@
+
+Proceedings of NAACL-HLT 2016, pages 411–416,
+San Diego, California, June 12-17, 2016. c©2016 Association for Computational Linguistics
+
+Agreement on Target-bidirectional Neural Machine Translation
+
+Lemao Liu, Masao Utiyama, Andrew Finch, Eiichiro Sumita
+National Institute of Information and Communications Technology (NICT)
+
+3-5 Hikari-dai, Seika-cho, Soraku-gun, Kyoto, Japan
+{lmliu,first.last}@nict.go.jp
+
+Abstract
+
+Neural machine translation (NMT) with re-
+current neural networks, has proven to be an
+effective technique for end-to-end machine
+translation. However, in spite of its promis-
+ing advances over traditional translation meth-
+ods, it typically suffers from an issue of unbal-
+anced outputs, that arise from both the nature
+of recurrent neural networks themselves, and
+the challenges inherent in machine translation.
+To overcome this issue, we propose an agree-
+ment model for neural machine translation and
+show its effectiveness on large-scale Japanese-
+to-English and Chinese-to-English translation
+tasks. Our results show the model can achieve
+improvements of up to 1.4 BLEU over the
+strongest baseline NMT system. With the help
+of an ensemble technique, this new end-to-end
+NMT approach finally outperformed phrase-
+based and hierarchical phrase-based Moses
+baselines by up to 5.6 BLEU points.

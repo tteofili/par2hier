@@ -1,0 +1,79 @@
+
+Our large-scale bilingual corpus for machine
+translation consists of 1.5M sentence pairs from
+LDC data, including LDC2002E18, LDC2003E07,
+LDC2003E14, Hansards portion of LDC2004T07,
+LDC2004T08 and LDC2005T06. The source sen-
+tences are parsed by the original grammar and the
+selected cross-lingually similarized grammar. The
+alignments are obtained by running GIZA++ on the
+corpus in both directions and applying grow-diag-
+and refinement (Koehn et al., 2003). The English
+language model is trained on the Xinhua portion of
+the Gigaword corpus with the SRILM toolkit (Stol-
+
+507
+
+
+
+Grammar Similarity (%) Dep. P (%) Ada. P (%) BLEU-4 (%)
+baseline 34.2 84.5 84.5 24.6
+proj : fixed 46.3 54.1 82.3 25.8 (+1.2)
+proj : proj 63.2 72.2 84.6 26.1 (+1.5)
+proj : nonproj 64.3 74.6 84.7 26.2 (+1.6)
+nonproj : fixed 48.4 56.1 82.6 20.1 (−4.5)
+nonproj : proj 63.6 71.4 84.4 22.9 (−1.7)
+nonproj : nonproj 64.1 73.9 84.9 20.7 (−3.9)
+
+Table 2: The performance of cross-lingually similarized Chinese dependency grammars with different configurations.
+
+System NIST 04 NIST 05
+(Liu et al., 2006) 34.55 31.94
+(Chiang, 2007) 35.29 33.22
+(Xie et al., 2011) 35.82 33.62
+
+Original Grammar 35.44 33.08
+Similarized Grammar 36.78 35.12
+
+Table 3: The performance of the cross-lingually similarized
+grammar on dependency tree-based translation, compared with
+
+related work.
+
+cke and Andreas, 2002). We use NIST 02 as the
+development set, and NIST 04 and NIST 05 as the
+testing sets. The quality of translations is evaluated
+by the case insensitive NIST BLEU-4 metric.
+
+Table 3 shows the performance of the cross-
+lingually similarized grammar on dependency tree-
+based translation, compared with previous work
+(Xie et al., 2011). We also give the performance of
+constituency tree-based translation (Liu et al., 2006)
+and formal syntax-based translation (Chiang, 2007).
+The original grammar performs slightly worse than
+the previous work in dependency tree-based trans-
+lation, this can ascribed to the difference between
+the implementation of the original grammar and the
+dependency parser used in the previous work. How-
+ever, the similarized grammar achieves very signif-
+icant improvement based on the original grammar,
+and also significant surpass the previous work. Note
+that there is no other modification on the translation
+model besides the replacement of the source parser.
+
+From the perspective of performance improve-
+ment, tree-to-tree translation would be a better sce-
+nario to verify the effectiveness of cross-lingual
+similarization. This is because tree-to-tree transla-
+tion suffers from more serious non-isomorphism be-
+tween the source and the target syntax structures,
+
+and our method for cross-lingual similarization can
+simultaneously similarize both the source and the
+target grammars. For dependency-based translation,
+however, there are no available tree-to-tree models
+for us to verify this assumption. In the future, we
+want to propose a specific tree-to-tree translation
+method to better utilize the isomorphism between
+cross-lingually similarized grammars.

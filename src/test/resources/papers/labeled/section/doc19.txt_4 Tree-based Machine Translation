@@ -1,0 +1,35 @@
+
+Syntax-based machine translation investigates the
+hierarchical structures of natural languages, includ-
+ing formal structures (Chiang, 2005), constituency
+structures (Galley et al., 2006; Liu et al., 2006;
+Huang et al., 2006; Mi et al., 2008) and dependency
+structures (Lin, 2004; Quirk et al., 2005; Ding and
+Palmer, 2005; Xiong et al., 2007; Shen et al., 2008;
+Xie et al., 2011), so the performance is restricted to
+the quality and suitability of the parsers. Since the
+trees for training follow an annotation style not nec-
+essarily isomorphic to that of the target language, it
+would be not appropriate for syntax-based transla-
+tion to directly use the parsers trained on the origi-
+nal treebanks. The cross-lingually similarized gram-
+mars, although performing poorly on a standard test-
+ing set, may be well suitable for syntax-based ma-
+chine translation. In this work, we use the cross-
+lingually similarized dependency grammars in de-
+pendency tree-to-string machine translation (Xie et
+al., 2011), a state-of-the-art translation model resort-
+ing to dependency trees on the source side.
+
+504
+
+
+
+Treebank Train Develop Test
+1-270
+
+CTB 400-931 301-325 271-300
+1001-1151
+
+WSJ 02-21 22 23
+Table 1: Data partitioning for CTB and WSJ, in unit of section.

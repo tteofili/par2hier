@@ -1,0 +1,43 @@
+
+The MuTUAL system comprises modules for document structuring, controlled writing, and multilin-
+gualisation (see Figure 2). The following modules realise the contextual translation we have outlined:
+
+• Topic template is the core interface for authoring self-contained topics in a structured manner.
+The left pane in Figure 3 provides the basic DITA Task topic structure for composing municipal
+procedural documents.
+
+• CL authoring assistant analyses each sentence in the text box and highlights any segment that vio-
+lates a local CL rule or controlled terminology, together with diagnostic comments and suggestions
+for rewriting (shown at bottom centre in Figure 3) (Miyata et al., 2016). In addition, we have imple-
+mented a preliminary rewriting support function with several of the features advocated by Mitamura
+et al. (2003). For a particular CL-noncompliant segment, the function offers alternative expressions;
+clicking one of the suggestions automatically replaces the offending segment in the text box above.
+
+• Pre-translation processing automatically modifies source segments in the background following
+transformation rules defined for each functional element, and then MT produces the translation and
+back-translation at the same time.
+
+3We used a Japanese morphological analyser MeCab. http://taku910.github.io/mecab/
+
+37
+
+
+
+DITA task topic
+
+CL authoring assistant
+
+MT and back translation
+
+Figure 3: Task topic template for authoring municipal procedures
+
+The key mechanism for enhancing authoring and translation is to invoke the CL authoring assistant
+tuned to the current functional element. For example, only for the Steps elements of the template, it
+implements the rule ‘use declarative form shimasu at the end of the sentence’. Then the pre-translation
+processing for Steps transforms the declarative ‘shimasu’ into an imperative ‘shiro’ for our MT system
+to produce the desired imperative form ‘do’ on the target side.
+
+The modules above are implemented in PHP and JavaScript, and can be accessed through the usual
+web browsers. The topic template seamlessly connects with our SMT system, TexTra,4 the dictionary of
+which is customised by municipal terminology we maintain. We plan to publish an open-source version
+of the system through our project website.5

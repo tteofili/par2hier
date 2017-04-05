@@ -1,0 +1,204 @@
+
+We propose an automatic cross-lingual similariza-
+tion algorithm for dependency grammars, design an
+automatic evaluation metric to measure the cross-
+lingual similarity between grammars, and use the
+similarized grammars to improve dependency tree-
+based machine translation. Experiments show the
+efficacy of this method. The cross-lingual similar-
+ization in this paper is still soft similarization, it is
+worth to investigate the hard similarization, where
+the syntactic structures are totally isomorphic be-
+tween two languages. Of course, in such syntactic
+structures, the syntactic nodes should be super-node,
+that is, a graph containing one or more basic syntac-
+tic nodes. Hard similarization could be more suit-
+able for cross-lingual applications, and we leave this
+aspect for future research.
+
+Acknowledgments
+
+The authors are supported by National Natural Sci-
+ence Foundation of China (Contract 61379086 and
+61370130). Jiang is also supported by Open-end
+Fund of the Platform of Research Database and In-
+formation Standard of China (No. qhkj2015-01).
+We sincerely thank the anonymous reviewers for
+their insightful comments.
+
+References
+Vamshi Ambati and Alon Lavie. 2008. Improving syntax
+
+driven translation models by re-structuring divergent
+and non-isomorphic parse tree structures. In Proceed-
+ings of Student Research Workshop of AMTA.
+
+David Burkett and Dan Klein. 2012. Transforming trees
+to improve syntactic convergence. In Proceedings of
+EMNLP-CNLL.
+
+David Chiang. 2005. A hierarchical phrase-based model
+for statistical machine translation. In Proceedings of
+the ACL.
+
+David Chiang. 2007. Hierarchical phrase-based transla-
+tion. Computational Linguistics, pages 201–228.
+
+Koby Crammer, Ofer Dekel, Shai Shalev-Shwartz, and
+Yoram Singer. 2003. Online passive aggressive algo-
+rithms. In Proceedings of NIPS.
+
+Yuan Ding and Martha Palmer. 2005. Machine trans-
+lation using probabilistic synchronous dependency in-
+sertion grammars. In Proceedings of the ACL.
+
+Jason M. Eisner. 1996. Three new probabilistic models
+for dependency parsing: An exploration. In Proceed-
+ings of COLING, pages 340–345.
+
+Michel Galley, Jonathan Graehl, Kevin Knight, and
+Daniel Marcu. 2006. Scalable inference and training
+of context-rich syntactic translation models. In Pro-
+ceedings of the COLING-ACL.
+
+Bryant Huang and Kevin Knight. 2006. Relabeling syn-
+tax trees to improve syntax-based machine translation
+quality. In Proceedings of NAACL.
+
+Liang Huang, Kevin Knight, and Aravind Joshi. 2006.
+Statistical syntax-directed translation with extended
+domain of locality. In Proceedings of the AMTA.
+
+Rebecca Hwa, Philip Resnik, Amy Weinberg, and Okan
+Kolak. 2002. Evaluating translational correspondence
+using annotation projection. In Proceedings of the
+ACL.
+
+Philipp Koehn, Franz Och, and Daniel Marcu. 2003.
+Statistical phrase-based translation. In Proceedings of
+NAACL.
+
+Dekang Lin. 2004. A path-based transfer model for ma-
+chine translation. In Proceedings of the COLING.
+
+Yang Liu, Qun Liu, and Shouxun Lin. 2006. Tree-to-
+string alignment template for statistical machine trans-
+lation. In Proceedings of the ACL.
+
+Shujie Liu, Chi-Ho Li, Mu Li, and Ming Zhou. 2012.
+Re-training monolingual parser bilingually for syntac-
+tic smt. In Proceedings of EMNLP-CNLL.
+
+Mitchell P. Marcus, Beatrice Santorini, and Mary Ann
+Marcinkiewicz. 1993. Building a large annotated cor-
+pus of english: The penn treebank. In Computational
+Linguistics.
+
+Ryan McDonald, Koby Crammer, and Fernando Pereira.
+2005. Online large-margin training of dependency
+parsers. In Proceedings of ACL, pages 91–98.
+
+Ryan McDonald, Joakim Nivre, Yvonne Quirmbach-
+Brundagez, Yoav Goldberg, Dipanjan Das, Kuzman
+Ganchev, Keith Hall, Slav Petrov, Hao Zhang, Oscar
+Täckström, Claudia Bedini, Nuria Bertomeu Castello,
+and Jungmee Leez. 2013. Universal dependency an-
+notation for multilingual parsing. In Proceedings of
+ACL.
+
+Haitao Mi, Liang Huang, and Qun Liu. 2008. Forest-
+based translation. In Proceedings of the ACL.
+
+Makoto Morishita, Koichi Akabe, Yuto Hatakoshi, Gra-
+ham Neubig, Koichiro Yoshino, and Satoshi Naka-
+mura. 2015. Parser self-training for syntax-based ma-
+chine translation. In Proceedings of IWSLT.
+
+509
+
+
+
+Hwee Tou Ng and Jin Kiat Low. 2004. Chinese part-of-
+speech tagging: One-at-a-time or all-at-once? word-
+based or character-based? In Proceedings of EMNLP.
+
+Joakim Nivre, Johan Hall, Jens Nilsson, Gulsen Eryigit,
+and Svetoslav Marinov. 2006. Labeled pseudoprojec-
+tive dependency parsing with support vector machines.
+In Proceedings of CoNLL, pages 221–225.
+
+Franz Och and Hermann Ney. 2003. A systematic com-
+parison of various statistical alignment models. Com-
+putational Linguistics.
+
+Sinno Jialin Pan and Qiang Yang. 2010. A survey on
+transfer learning. IEEE TKDE.
+
+Kishore Papineni, Salim Roukos, Todd Ward, and Wei-
+jing Zhu. 2002. Bleu: a method for automatic eval-
+uation of machine translation. In Proceedings of the
+ACL.
+
+Slav Petrov, Dipanjan Das, and Ryan McDonald. 2012.
+A universal part-of-speech tagset. Proceedings of
+LREC.
+
+Chris Quirk, Arul Menezes, and Colin Cherry. 2005. De-
+pendency treelet translation: Syntactically informed
+phrasal smt. In Proceedings of the ACL.
+
+Ratnaparkhi and Adwait. 1996. A maximum entropy
+part-of-speech tagger. In Proceedings of the Empirical
+Methods in Natural Language Processing Conference.
+
+Libin Shen, Jinxi Xu, and Ralph Weischedel. 2008. A
+new string-to-dependency machine translation algo-
+rithm with a target dependency language model. In
+Proceedings of ACL.
+
+David Smith and Jason Eisner. 2009. Parser adaptation
+and projection with quasi-synchronous grammar fea-
+tures. In Proceedings of EMNLP.
+
+Stolcke and Andreas. 2002. Srilm - an extensible lan-
+guage modeling toolkit. In Proceedings of the Inter-
+national Conference on Spoken Language Processing,
+pages 311–318.
+
+Wei Wang, Jonathan May, Kevin Knight, and Daniel
+Marcu. 2010. Re-structuring, re-labeling, and re-
+alignment for syntax-based machine translation. Com-
+putational Linguistics.
+
+Jun Xie, Haitao Mi, and Qun Liu. 2011. A novel
+dependency-to-string model for statistical machine
+translation. In Proceedings of EMNLP.
+
+Deyi Xiong, Qun Liu, and Shouxun Lin. 2007. A depen-
+dency treelet string correspondence model for statisti-
+cal machine translation. In Proceedings of Workshop
+on SMT.
+
+Nianwen Xue, Fei Xia, Fu-Dong Chiou, and Martha
+Palmer. 2005. The penn chinese treebank: Phrase
+structure annotation of a large corpus. In Natural Lan-
+guage Engineering.
+
+H Yamada and Y Matsumoto. 2003. Statistical depen-
+dency analysis using support vector machines. In Pro-
+ceedings of IWPT.
+
+Daniel Zeman, David Mareček, Martin Popel, Lo-
+ganathan Ramasamy, Jan Štěpánek, Jan Hajič, and
+Zdeněk Žabokrtský. 2012. Hamledt: To parse or not
+to parse?
+
+Daniel Zeman, Ondřej Dušek, David Mareček, Martin
+Popel, Loganathan Ramasamy, Jan Štěpánek, Zdeněk
+Žabokrtský, and Jan Hajič. 2014. Hamledt: Harmo-
+nized multi-language dependency treebank. Language
+Resources & Evaluation.
+
+510
+
+

@@ -1,0 +1,4 @@
+
+We evaluate our method on the Chinese to English translation
+task. Translation quality is measured by the BLEU metric
+[Papineni et al., 2002].
