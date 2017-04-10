@@ -21,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -59,16 +60,10 @@ public class Par2HierTest {
   @Parameterized.Parameters
   public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][] {
-        {Par2HierUtils.Method.CLUSTER, 5},
-        {Par2HierUtils.Method.CLUSTER, 4},
         {Par2HierUtils.Method.CLUSTER, 3},
         {Par2HierUtils.Method.CLUSTER, 2},
-        {Par2HierUtils.Method.CLUSTER, 1},
-        {Par2HierUtils.Method.SUM, 5},
-        {Par2HierUtils.Method.SUM, 4},
         {Par2HierUtils.Method.SUM, 3},
         {Par2HierUtils.Method.SUM, 2},
-        {Par2HierUtils.Method.SUM, 1},
     });
   }
 
@@ -128,6 +123,30 @@ public class Par2HierTest {
     double[] depthSimilarity = getDepthSimilarity(comparison);
     System.out.println("ds(" + k + "," + method + "):" + Arrays.toString(depthSimilarity));
 
+    // classification
+    Map<Integer, Map<Integer, Long>> pvCounts = new HashMap<>();
+    Map<Integer, Map<Integer, Long>> p2hCounts = new HashMap<>();
+    for (String label : labels) {
+
+      INDArray vector = lookupTable.vector(label);
+      int topN = 1;
+      Collection<String> strings = paragraphVectors.nearestLabels(vector, topN);
+      Collection<String> hstrings = par2Hier.nearestLabels(vector, topN);
+      int labelDepth = label.split("\\.").length - 1;
+
+      int stringDepth = getClass(strings);
+      int hstringDepth = getClass(hstrings);
+
+      updateCM(pvCounts, labelDepth, stringDepth);
+      updateCM(p2hCounts, labelDepth, hstringDepth);
+    }
+
+    ConfusionMatrix pvCM = new ConfusionMatrix(pvCounts);
+    ConfusionMatrix p2hCM = new ConfusionMatrix(p2hCounts);
+
+    System.out.println("mf1("+k+","+method+"):"+pvCM.getF1Measure()+","+p2hCM.getF1Measure());
+    System.out.println("acc("+k+","+method+"):"+pvCM.getAccuracy()+","+p2hCM.getAccuracy());
+
     // create a CSV with a raw comparison
     File pvFile = Files.createFile(Paths.get("target/comparison-" + k + "-" + method + ".csv")).toFile();
     FileOutputStream pvOutputStream = new FileOutputStream(pvFile);
@@ -141,38 +160,28 @@ public class Par2HierTest {
       pvOutputStream.flush();
       pvOutputStream.close();
     }
-
-    // classification
-    double cpv = 0;
-    double cp2h = 0;
-    for (String label : labels) {
-      INDArray vector = lookupTable.vector(label);
-      pvs.put(label, vector);
-      Collection<String> strings = paragraphVectors.nearestLabels(vector, 3);
-      Collection<String> hstrings = par2Hier.nearestLabels(vector, 3);
-
-      int labelDepth = label.split("\\.").length;
-
-      int stringDepth = getDepth(strings);
-      int hstringDepth = getDepth(hstrings);
-
-      if (labelDepth == stringDepth) {
-        cpv++;
-      }
-      if (labelDepth == hstringDepth) {
-        cp2h++;
-      }
-
-    }
-    cp2h /= (double) labels.size();
-    cpv /= (double) labels.size();
-    System.out.println("acc(" + k + "," + method + "):" + cpv + "," + cp2h);
   }
 
-  private int getDepth(Collection<String> strings) {
+  private void updateCM(Map<Integer, Map<Integer, Long>> pvCounts, int labelDepth, int stringDepth) {
+    Map<Integer, Long> stringLongMap = pvCounts.get(labelDepth);
+    if (stringLongMap != null) {
+      Long aLong = stringLongMap.get(stringDepth);
+      if (aLong != null) {
+        stringLongMap.put(stringDepth, aLong + 1);
+      } else {
+        stringLongMap.put(stringDepth, 1L);
+      }
+    } else {
+      stringLongMap = new HashMap<>();
+      stringLongMap.put(stringDepth, 1L);
+      pvCounts.put(labelDepth, stringLongMap);
+    }
+  }
+
+  private int getClass(Collection<String> strings) {
     Map<Integer, Integer> m = new HashMap<>();
     for (String s : strings) {
-      int depth = s.split("\\.").length;
+      int depth = s.split("\\.").length - 1;
       m.put(depth, m.containsKey(depth) ? m.get(depth) + 1 : 1);
     }
     int max = 0;
@@ -248,4 +257,153 @@ public class Par2HierTest {
     return new double[] {pvSimilarity, hvSimilarity};
   }
 
+  static class ConfusionMatrix {
+
+    private final Map<Integer, Map<Integer, Long>> linearizedMatrix;
+    private double accuracy = -1d;
+
+    private ConfusionMatrix(Map<Integer, Map<Integer, Long>> linearizedMatrix) {
+      this.linearizedMatrix = linearizedMatrix;
+    }
+
+    /**
+     * get the linearized confusion matrix as a {@link Map}
+     *
+     * @return a {@link Map} whose keys are the correct classification answers and whose values are the actual answers'
+     * counts
+     */
+    public Map<Integer, Map<Integer, Long>> getLinearizedMatrix() {
+      return Collections.unmodifiableMap(linearizedMatrix);
+    }
+
+    /**
+     * calculate precision on the given class
+     *
+     * @param klass the class to calculate the precision for
+     * @return the precision for the given class
+     */
+    public double getPrecision(Integer klass) {
+      Map<Integer, Long> classifications = linearizedMatrix.get(klass);
+      double tp = 0;
+      double den = 0; // tp + fp
+      if (classifications != null) {
+        for (Map.Entry<Integer, Long> entry : classifications.entrySet()) {
+          if (klass.equals(entry.getKey())) {
+            tp += entry.getValue();
+          }
+        }
+        for (Map<Integer, Long> values : linearizedMatrix.values()) {
+          if (values.containsKey(klass)) {
+            den += values.get(klass);
+          }
+        }
+      }
+      return tp > 0 ? tp / den : 0;
+    }
+
+    /**
+     * calculate recall on the given class
+     *
+     * @param klass the class to calculate the recall for
+     * @return the recall for the given class
+     */
+    public double getRecall(Integer klass) {
+      Map<Integer, Long> classifications = linearizedMatrix.get(klass);
+      double tp = 0;
+      double fn = 0;
+      if (classifications != null) {
+        for (Map.Entry<Integer, Long> entry : classifications.entrySet()) {
+          if (klass.equals(entry.getKey())) {
+            tp += entry.getValue();
+          } else {
+            fn += entry.getValue();
+          }
+        }
+      }
+      return tp + fn > 0 ? tp / (tp + fn) : 0;
+    }
+
+    /**
+     * get the F-1 measure on this confusion matrix
+     *
+     * @return the F-1 measure
+     */
+    public double getF1Measure() {
+      double recall = getRecall();
+      double precision = getPrecision();
+      return precision > 0 && recall > 0 ? 2 * precision * recall / (precision + recall) : 0;
+    }
+
+    /**
+     * Calculate accuracy on this confusion matrix using the formula:
+     * {@literal accuracy = correctly-classified / (correctly-classified + wrongly-classified)}
+     *
+     * @return the accuracy
+     */
+    public double getAccuracy() {
+      if (this.accuracy == -1) {
+        double tp = 0d;
+        double tn = 0d;
+        double tfp = 0d; // tp + fp
+        double fn = 0d;
+        for (Map.Entry<Integer, Map<Integer, Long>> classification : linearizedMatrix.entrySet()) {
+          Integer klass = classification.getKey();
+          for (Map.Entry<Integer, Long> entry : classification.getValue().entrySet()) {
+            if (klass.equals(entry.getKey())) {
+              tp += entry.getValue();
+            } else {
+              fn += entry.getValue();
+            }
+          }
+          for (Map<Integer, Long> values : linearizedMatrix.values()) {
+            if (values.containsKey(klass)) {
+              tfp += values.get(klass);
+            } else {
+              tn++;
+            }
+          }
+
+        }
+        this.accuracy = (tp + tn) / (tfp + fn + tn);
+      }
+      return this.accuracy;
+    }
+
+    /**
+     * get the macro averaged precision (see {@link #getPrecision(Integer)}) over all the classes.
+     *
+     * @return the macro averaged precision as computed from the confusion matrix
+     */
+    public double getPrecision() {
+      double p = 0;
+      for (Map.Entry<Integer, Map<Integer, Long>> classification : linearizedMatrix.entrySet()) {
+        Integer klass = classification.getKey();
+        p += getPrecision(klass);
+      }
+
+      return p / linearizedMatrix.size();
+    }
+
+    /**
+     * get the macro averaged recall (see {@link #getRecall(Integer)}) over all the classes
+     *
+     * @return the recall as computed from the confusion matrix
+     */
+    public double getRecall() {
+      double r = 0;
+      for (Map.Entry<Integer, Map<Integer, Long>> classification : linearizedMatrix.entrySet()) {
+        Integer klass = classification.getKey();
+        r += getRecall(klass);
+      }
+
+      return r / linearizedMatrix.size();
+    }
+
+    @Override
+    public String toString() {
+      return "ConfusionMatrix{" +
+          "linearizedMatrix=" + linearizedMatrix +
+          '}';
+    }
+  }
 }
