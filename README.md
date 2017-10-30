@@ -1,6 +1,6 @@
 # par2hier
 
-sample code and tests for the [ICCS17](http://www.iccs-meeting.org/iccs2017/) paper
+sample code and tests for the [ICCS17](http://www.iccs-meeting.org/iccs2017/) [paper](http://www.sciencedirect.com/science/article/pii/S1877050917306154)
 
 **par2hier : Towards vector representation for hierarchical content**
 
