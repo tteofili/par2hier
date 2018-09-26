@@ -1,0 +1,57 @@
+A recurrent neural network (RNN) is a neural net-
+work that consists of a hidden state h and an
+optional output y which operates on a variable-
+length sequence x = (x1, . . . , xT ). At each time
+step t, the hidden state h〈t〉 of the RNN is updated
+by
+
+h〈t〉 = f
+(
+h〈t−1〉, xt
+
+)
+, (1)
+
+where f is a non-linear activation func-
+tion. f may be as simple as an element-
+wise logistic sigmoid function and as com-
+plex as a long short-term memory (LSTM)
+unit (Hochreiter and Schmidhuber, 1997).
+
+An RNN can learn a probability distribution
+over a sequence by being trained to predict the
+next symbol in a sequence. In that case, the output
+at each timestep t is the conditional distribution
+p(xt | xt−1, . . . , x1). For example, a multinomial
+distribution (1-of-K coding) can be output using a
+softmax activation function
+
+p(xt,j = 1 | xt−1, . . . , x1) =
+exp
+
+(
+wjh〈t〉
+
+)∑K
+j′=1 exp
+
+(
+wj′h〈t〉
+
+) ,
+(2)
+
+for all possible symbols j = 1, . . . ,K, where wj
+are the rows of a weight matrix W. By combining
+these probabilities, we can compute the probabil-
+ity of the sequence x using
+
+p(x) =
+T∏
+t=1
+
+p(xt | xt−1, . . . , x1). (3)
+
+From this learned distribution, it is straightfor-
+ward to sample a new sequence by iteratively sam-
+pling a symbol at each time step.

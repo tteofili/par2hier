@@ -1,0 +1,92 @@
+
+Deep neural networks have shown great success in
+various applications such as objection recognition
+(see, e.g., (Krizhevsky et al., 2012)) and speech
+recognition (see, e.g., (Dahl et al., 2012)). Fur-
+thermore, many recent works showed that neu-
+ral networks can be successfully used in a num-
+ber of tasks in natural language processing (NLP).
+These include, but are not limited to, language
+modeling (Bengio et al., 2003), paraphrase detec-
+tion (Socher et al., 2011) and word embedding ex-
+traction (Mikolov et al., 2013). In the field of sta-
+tistical machine translation (SMT), deep neural
+networks have begun to show promising results.
+(Schwenk, 2012) summarizes a successful usage
+of feedforward neural networks in the framework
+of phrase-based SMT system.
+
+Along this line of research on using neural net-
+works for SMT, this paper focuses on a novel neu-
+ral network architecture that can be used as a part
+of the conventional phrase-based SMT system.
+The proposed neural network architecture, which
+we will refer to as an RNN Encoder–Decoder, con-
+sists of two recurrent neural networks (RNN) that
+act as an encoder and a decoder pair. The en-
+coder maps a variable-length source sequence to a
+fixed-length vector, and the decoder maps the vec-
+tor representation back to a variable-length target
+sequence. The two networks are trained jointly to
+maximize the conditional probability of the target
+sequence given a source sequence. Additionally,
+we propose to use a rather sophisticated hidden
+unit in order to improve both the memory capacity
+and the ease of training.
+
+The proposed RNN Encoder–Decoder with a
+novel hidden unit is empirically evaluated on the
+task of translating from English to French. We
+train the model to learn the translation probabil-
+ity of an English phrase to a corresponding French
+phrase. The model is then used as a part of a stan-
+dard phrase-based SMT system by scoring each
+phrase pair in the phrase table. The empirical eval-
+uation reveals that this approach of scoring phrase
+pairs with an RNN Encoder–Decoder improves
+the translation performance.
+
+We qualitatively analyze the trained RNN
+Encoder–Decoder by comparing its phrase scores
+with those given by the existing translation model.
+The qualitative analysis shows that the RNN
+Encoder–Decoder is better at capturing the lin-
+guistic regularities in the phrase table, indirectly
+explaining the quantitative improvements in the
+overall translation performance. The further anal-
+ysis of the model reveals that the RNN Encoder–
+Decoder learns a continuous space representation
+of a phrase that preserves both the semantic and
+syntactic structure of the phrase.
+
+ar
+X
+
+iv
+:1
+
+40
+6.
+
+10
+78
+
+v3
+  [
+
+cs
+.C
+
+L
+]
+
+ 3
+ S
+
+ep
+ 2
+
+01
+4
+
+

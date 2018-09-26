@@ -60,10 +60,14 @@ public class Par2HierTest {
   @Parameterized.Parameters
   public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][] {
+        {Par2HierUtils.Method.CLUSTER, 4},
         {Par2HierUtils.Method.CLUSTER, 3},
         {Par2HierUtils.Method.CLUSTER, 2},
+        {Par2HierUtils.Method.CLUSTER, 1},
+        {Par2HierUtils.Method.SUM, 4},
         {Par2HierUtils.Method.SUM, 3},
         {Par2HierUtils.Method.SUM, 2},
+        {Par2HierUtils.Method.SUM, 1},
     });
   }
 
@@ -88,6 +92,9 @@ public class Par2HierTest {
     paragraphVectors = new ParagraphVectors.Builder()
         .iterate(iterator)
         .tokenizerFactory(tokenizerFactory)
+//        .epochs(3)
+//        .layerSize(200)
+//        .batchSize(10)
         .build();
 
     // fit model
@@ -100,19 +107,24 @@ public class Par2HierTest {
 
     Map<String, String[]> comparison = new TreeMap<>();
 
-    // extract paragraph vectors similarities
+    // extract similarities
     WeightLookupTable<VocabWord> lookupTable = paragraphVectors.getLookupTable();
+    WeightLookupTable p2hlt = par2Hier.getLookupTable();
+
     List<String> labels = paragraphVectors.getLabelsSource().getLabels();
+
     for (String label : labels) {
       INDArray vector = lookupTable.vector(label);
-      pvs.put(label, vector);
+      INDArray hvector = p2hlt.vector(label);
+      pvs.put(label, vector.dup());
+      hvs.put(label, hvector.dup());
+
       Collection<String> strings = paragraphVectors.nearestLabels(vector, 2);
-      Collection<String> hstrings = par2Hier.nearestLabels(vector, 2);
+      Collection<String> hstrings = par2Hier.nearestLabels(hvector, 2);
       String[] stringsArray = new String[2];
       stringsArray[0] = new LinkedList<>(strings).get(1);
       stringsArray[1] = new LinkedList<>(hstrings).get(1);
       comparison.put(label, stringsArray);
-      hvs.put(label, par2Hier.getLookupTable().vector(label));
     }
 
     System.out.println("--->func(args):pv,p2h");
@@ -126,12 +138,12 @@ public class Par2HierTest {
     // classification
     Map<Integer, Map<Integer, Long>> pvCounts = new HashMap<>();
     Map<Integer, Map<Integer, Long>> p2hCounts = new HashMap<>();
+    int topK = 6;
     for (String label : labels) {
 
       INDArray vector = lookupTable.vector(label);
-      int topN = 1;
-      Collection<String> strings = paragraphVectors.nearestLabels(vector, topN);
-      Collection<String> hstrings = par2Hier.nearestLabels(vector, topN);
+      Collection<String> strings = paragraphVectors.nearestLabels(vector, topK);
+      Collection<String> hstrings = par2Hier.nearestLabels(vector, topK);
       int labelDepth = label.split("\\.").length - 1;
 
       int stringDepth = getClass(strings);
@@ -144,11 +156,11 @@ public class Par2HierTest {
     ConfusionMatrix pvCM = new ConfusionMatrix(pvCounts);
     ConfusionMatrix p2hCM = new ConfusionMatrix(p2hCounts);
 
-    System.out.println("mf1("+k+","+method+"):"+pvCM.getF1Measure()+","+p2hCM.getF1Measure());
-    System.out.println("acc("+k+","+method+"):"+pvCM.getAccuracy()+","+p2hCM.getAccuracy());
+    System.out.println("mf1(" + k + "," + method + "):" + pvCM.getF1Measure() + "," + p2hCM.getF1Measure());
+    System.out.println("acc(" + k + "," + method + "):" + pvCM.getAccuracy() + "," + p2hCM.getAccuracy());
 
     // create a CSV with a raw comparison
-    File pvFile = Files.createFile(Paths.get("target/comparison-" + k + "-" + method + ".csv")).toFile();
+    File pvFile = Files.createFile(Paths.get("target/comparison-" + System.currentTimeMillis() + "-" + k + "-" + method + ".csv")).toFile();
     FileOutputStream pvOutputStream = new FileOutputStream(pvFile);
 
     try {

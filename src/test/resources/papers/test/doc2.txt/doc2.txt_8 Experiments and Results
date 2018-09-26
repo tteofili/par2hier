@@ -1,0 +1,21 @@
+In this section, we present our experimental results on two publicly available corpora used extensively as
+benchmarks for Neural Machine Translation systems: WMT’14 English-to-French (WMT En→Fr) and
+English-to-German (WMT En→De). On these two datasets, we benchmark GNMT models with word-based,
+character-based, and wordpiece-based vocabularies. We also present the improved accuracy of our models
+after fine-tuning with RL and model ensembling. Our main objective with these datasets is to show the
+contributions of various components in our implementation, in particular the wordpiece model, RL model
+refinement, and model ensembling.
+
+In addition to testing on publicly available corpora, we also test GNMT on Google’s translation production
+corpora, which are two to three decimal orders of magnitudes bigger than the WMT corpora for a given
+language pair. We compare the accuracy of our model against human accuracy and the best Phrase-Based
+Machine Translation (PBMT) production system for Google Translate.
+
+In all experiments, our models consist of 8 encoder layers and 8 decoder layers. (Since the bottom encoder
+layer is actually bi-directional, in total there are 9 logically distinct LSTM passes in the encoder.) The
+attention network is a simple feedforward network with one hidden layer with 1024 nodes. All of the models
+use 1024 LSTM nodes per encoder and decoder layers.
+
+13
+
+

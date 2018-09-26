@@ -1,0 +1,82 @@
+
+Before presenting the empirical results, we discuss
+a number of recent works that have proposed to
+use neural networks in the context of SMT.
+
+Schwenk in (Schwenk, 2012) proposed a simi-
+lar approach of scoring phrase pairs. Instead of the
+RNN-based neural network, he used a feedforward
+neural network that has fixed-size inputs (7 words
+in his case, with zero-padding for shorter phrases)
+and fixed-size outputs (7 words in the target lan-
+guage). When it is used specifically for scoring
+phrases for the SMT system, the maximum phrase
+length is often chosen to be small. However, as the
+length of phrases increases or as we apply neural
+networks to other variable-length sequence data,
+it is important that the neural network can han-
+dle variable-length input and output. The pro-
+posed RNN Encoder–Decoder is well-suited for
+these applications.
+
+Similar to (Schwenk, 2012), Devlin et al.
+(Devlin et al., 2014) proposed to use a feedfor-
+ward neural network to model a translation model,
+however, by predicting one word in a target phrase
+at a time. They reported an impressive improve-
+ment, but their approach still requires the maxi-
+mum length of the input phrase (or context words)
+to be fixed a priori.
+
+
+
+Although it is not exactly a neural network they
+train, the authors of (Zou et al., 2013) proposed
+to learn a bilingual embedding of words/phrases.
+They use the learned embedding to compute the
+distance between a pair of phrases which is used
+as an additional score of the phrase pair in an SMT
+system.
+
+In (Chandar et al., 2014), a feedforward neural
+network was trained to learn a mapping from a
+bag-of-words representation of an input phrase to
+an output phrase. This is closely related to both the
+proposed RNN Encoder–Decoder and the model
+proposed in (Schwenk, 2012), except that their in-
+put representation of a phrase is a bag-of-words.
+A similar approach of using bag-of-words repre-
+sentations was proposed in (Gao et al., 2013) as
+well. Earlier, a similar encoder–decoder model us-
+ing two recursive neural networks was proposed
+in (Socher et al., 2011), but their model was re-
+stricted to a monolingual setting, i.e. the model
+reconstructs an input sentence. More recently, an-
+other encoder–decoder model using an RNN was
+proposed in (Auli et al., 2013), where the de-
+coder is conditioned on a representation of either
+a source sentence or a source context.
+
+One important difference between the pro-
+posed RNN Encoder–Decoder and the approaches
+in (Zou et al., 2013) and (Chandar et al., 2014) is
+that the order of the words in source and tar-
+get phrases is taken into account. The RNN
+Encoder–Decoder naturally distinguishes between
+sequences that have the same words but in a differ-
+ent order, whereas the aforementioned approaches
+effectively ignore order information.
+
+The closest approach related to the proposed
+RNN Encoder–Decoder is the Recurrent Contin-
+uous Translation Model (Model 2) proposed in
+(Kalchbrenner and Blunsom, 2013). In their pa-
+per, they proposed a similar model that consists
+of an encoder and decoder. The difference with
+our model is that they used a convolutional n-gram
+model (CGM) for the encoder and the hybrid of
+an inverse CGM and a recurrent neural network
+for the decoder. They, however, evaluated their
+model on rescoring the n-best list proposed by the
+conventional SMT system and computing the per-
+plexity of the gold standard translations.
